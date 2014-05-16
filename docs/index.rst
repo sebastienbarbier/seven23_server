@@ -1,0 +1,1 @@
+I promise documentation is coming quite soon. Just give me few days to start working on the projet ;)
