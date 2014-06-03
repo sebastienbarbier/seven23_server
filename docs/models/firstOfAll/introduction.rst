@@ -1,0 +1,9 @@
+.. _introduction:
+
+Introduction
+============
+
+
+Short, but intense, introduction about this project and his purposes. Why did I create it, and for who ? So much questions to answer, they'll be soon *don't worry and be happy*.
+
+Read next step : :ref:`install`

@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//django_723e/api/v1/accounts/views.py=utf-8
+encoding//django_723e/models/accounts/models.py=utf-8
+encoding//django_723e/models/accounts/tests.py=utf-8
+encoding//django_723e/models/currency/models.py=utf-8
+encoding//django_723e/models/currency/tests.py=utf-8
+encoding//django_723e/models/models.py=utf-8
+encoding//django_723e/models/transactions/models.py=utf-8
+encoding//django_723e/models/transactions/tests.py=utf-8
+encoding//django_723e/models/transactions/utils.py=utf-8

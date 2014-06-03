@@ -1,0 +1,22 @@
+.. _accounts:
+
+User, profile, and bank accounts
+================================
+
+User
+----
+
+Each user of this projet is identified by is nickname, password, and email.
+A user is link to a list of profile object which might in a quite soon future contains additionnary content.
+
+Profile
+-------
+
+This profile object is the main reference as a unique set of data.
+It allow access data from different user account, like husband and wife would wants.
+
+Bank accounts
+-------------
+
+A profile contains multiple account objects, wich symbolise a formal bank account, anything from a current bank account to a specific credit line.
+
