@@ -22,21 +22,6 @@ require.config({
 		// Views
 		loginView: 'views/LoginView',
 		dashboardView: 'views/DashboardView',
-		// Library
-		'eve': 'libs/eve',
-		'raphael-core': 'libs/raphael.core',
-		'raphael-svg': 'libs/raphael.svg',
-		'raphael-vml': 'libs/raphael.vml',
-		'raphael': 'libs/raphael.amd',
-		'livicons': 'libs/livicons-1.3.min'
-	},
-	shim: {
-		'raphael': {
-			exports: "Raphael"
-		},
-		'livicons': {
-			deps: ['raphael']
-		}
 	}
 });
 
@@ -44,5 +29,4 @@ require(['app'], function(App) {
 	// We first intialize our apllication.
 	App.initialize();
 
-	require(['livicons']);
 });

@@ -27,7 +27,7 @@ define("app", ["jquery", "router", "ws", "userModel"], function($, Router, ws, U
 				window.location.hash = "/login?next=" + hash;
 			} else {
 				// TODO : Need to add a user.
-
+				window.location.hash = "#/dashboard";
 			}
 		}).fail(function() {
 			window.location.hash = "/error";
