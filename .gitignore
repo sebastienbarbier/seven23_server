@@ -7,4 +7,4 @@ local_settings.py
 723e_web/dist
 723e_web/.tmp
 723e_web/app/bower_components
-723e_web/app/styles/main.css
+723e_web/app/styles/css/main.css
