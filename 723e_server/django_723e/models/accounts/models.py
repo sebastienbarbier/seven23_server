@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 
 from django_723e.models.currency.models import Currency
-
+from django.core import serializers
 
 import datetime
 
@@ -18,7 +18,7 @@ class Account(models.Model):
     create   = models.DateField(_(u'Creation date'), auto_now=True, editable=False)
     currency = models.ForeignKey(Currency, related_name='accounts')
     archived = models.BooleanField(_(u'Is archived'), default=False)
-    
+
     class Meta:
         ordering = ('user', 'create', 'name')
         verbose_name = _(u'Account')

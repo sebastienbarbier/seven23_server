@@ -1,18 +1,21 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
+from rest_framework import routers
 
-from django.contrib import admin
+from django_723e.api.v1.accounts.views import api_accounts, api_users
+from django_723e.api.v1.currencies.views import api_currencies
 
-from django_723e.api.v1.accounts.views import api_login
-from django_723e.api.v1.transactions.views import api_transactions
 
-admin.autodiscover()
+router = routers.DefaultRouter()
+router.register(r'accounts', api_accounts)
+router.register(r'currencies', api_currencies)
+router.register(r'users', api_users)
 
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'django_723e.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+    # url(r'^blog/', include('blog.urls')),api_user
+    # url(r'accounts/$', api_accounts, name='api.accounts'),
 
-    url(r'login/$', api_login, name='api.v1.login'),
-    url(r'transactions/?$', api_transactions.as_view(), name='my_crud_view'),
+	url(r'^', include(router.urls)),
 
 )

@@ -1,0 +1,54 @@
+Description:
+  Generate a Twitter Bootstrap project with LESS
+
+Example:
+  yeoman init bootstrap-less
+
+  This will create:
+    .
+    |-- app
+    |   |-- components
+    |   |   |-- backbone
+    |   |   |-- bootstrap
+    |   |   |-- jquery
+    |   |   |-- require-jade
+    |   |   |-- requirejs
+    |   |   |-- underscore
+    |   |
+    |   |-- images
+    |   |
+    |   |-- javascripts
+    |   |   |-- collections
+    |   |   |-- models
+    |   |   |-- templates
+    |   |   |-- views
+    |   |   |-- app.js
+    |   |   |-- main.js
+    |   |
+    |   |-- less
+    |   |   |-- customization
+    |   |   |   |-- // bootstrap overrides
+    |   |   |   |-- ...
+    |   |   |
+    |   |   |-- app.less
+    |   |   |-- bootstrap.less // @import bootstrap from components
+    |   |
+    |   |-- stylesheets
+    |   |   |-- app.css
+    |   |
+    |   |-- .htaccess
+    |   |-- 404.html
+    |   |-- favicon.ico
+    |   |-- index.html
+    |   |-- robots.txt
+    |
+    |-- test (mocha)
+    |   |-- ...
+    |
+    |-- .editorconfig
+    |-- .gitattributes
+    |-- .gitignore
+    |-- .jshintrc
+    |-- component.json
+    |-- Gruntfile.js
+    |-- package.json

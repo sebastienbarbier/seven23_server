@@ -1,0 +1,16 @@
+//- template.jade
+.container(style='margin-top:50px')
+  .hero-unit
+    h1 Wotcha!
+    p You now have
+    ul
+      each item in locals
+        li #{item.name}
+      //- li HTML5 Boilerplate
+      //- li Twitter Bootstrap
+      //- li RequireJS
+      //- li Backbone.js
+      //- li Underscore.js
+      //- li and require-jade
+    p installed.
+    h3 Enjoy coding! - Yeoman

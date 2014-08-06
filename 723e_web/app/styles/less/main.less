@@ -1,0 +1,64 @@
+@import (inline) "../../bower_components/normalize-css/normalize.css";
+// Bootstrap
+@import (inline) "../../bower_components/bootstrap/dist/css/bootstrap.css";
+
+@import "variables.less";
+
+body{
+	background: @greywhite;
+}
+
+#navbar{
+	background: @deepblue;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	color: @texteBlue;
+	h1{
+		float: left;
+		font-size: 30px;
+		margin: 4px 10px;
+	}
+	a{
+		color: @texteBlue;
+		text-decoration: none;
+		&:hover{
+			color: white;
+		}
+	}
+
+	ul{
+		li{
+			float: left;
+			list-style: none;
+			padding: 12px 15px 0px 15px;
+			text-transform: uppercase;
+		}
+		&:first-child{
+			text-align: center;
+			float: left;
+			position: absolute;
+			left: 50%;
+			margin-left: -280px;
+			li:first-child{
+				a{
+					color: white;
+				}
+			}
+		}
+		&:last-child{
+			float: right;
+			li{
+				text-transform: capitalize;
+			}
+		}
+	}
+}
+
+.livicon {
+  display: inline-block;
+  line-height: inherit;
+  vertical-align: middle;
+  height: 18px!important;
+}

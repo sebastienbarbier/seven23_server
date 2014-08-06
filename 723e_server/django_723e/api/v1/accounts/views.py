@@ -1,37 +1,30 @@
 # -*- coding: utf-8 -*-
 
-from django.utils import simplejson
-from django.http import HttpResponse
+import json
+from django.http import HttpResponse, Http404
 
-from django.contrib.auth import authenticate, login
+from rest_framework.authentication import TokenAuthentication
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 
+from django_723e.models.accounts.models import Account
+from django_723e.models.accounts.serializers import AccountSerializer, UserSerializer
 
-# Create your views here.
-def api_login(request):
-    results = {}
-    
-    form = AuthenticationForm(request.POST)
-    
-    # Check
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(username=username, password=password)
-    if user is not None:
-        if user.is_active:
-            login(request, user)
-            results['code'] = 200
-        else:
-            # Return a 'disabled account' error message
-            results['code'] = 201
-            results['form'] = form.as_table()
-    else:
-        # Return an 'invalid login' error message.
-        results['code'] = 202
-        results['form'] = form.as_table()
-    
-    
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
 
-    # On retourne le JSON du fichier
-    j = simplejson.dumps(results, separators=(',',':'))
-    return HttpResponse(j, mimetype='application/json')
+
+class api_accounts(viewsets.ModelViewSet):
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
+
+
+class api_users(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
