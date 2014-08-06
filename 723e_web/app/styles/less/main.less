@@ -29,10 +29,12 @@ body{
 	}
 
 	ul{
+		// override bootstrap default margin
+		margin-bottom: 0;
 		li{
 			float: left;
 			list-style: none;
-			padding: 12px 15px 0px 15px;
+			padding: 12px 15px 10px 15px;
 			text-transform: uppercase;
 			.glyphicon{
 				margin-right: 5px;
@@ -47,7 +49,8 @@ body{
 			position: absolute;
 			left: 50%;
 			margin-left: -250px;
-			li:first-child{
+			li.selected{
+				background: @deepblueselected;
 				a{
 					color: white;
 				}
