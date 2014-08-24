@@ -65,6 +65,7 @@ STATICFILES_DIRS = (
 
 INSTALLED_APPS = (
     'mptt',
+    'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -99,6 +100,7 @@ ROOT_URLCONF = 'django_723e.urls'
 WSGI_APPLICATION = 'django_723e.wsgi.application'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

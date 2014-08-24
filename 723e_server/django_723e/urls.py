@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
 	# url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+	# url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
 
     url(r'^api/', include("django_723e.api.urls")),
 

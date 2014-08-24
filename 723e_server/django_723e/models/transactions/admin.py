@@ -4,7 +4,7 @@ from django.contrib import admin
 from django_723e.models.transactions.models import Category, Transaction, Change, Tranfert, Cheque
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('user','name','parent','active')
+    list_display = ('user','name','description', 'color', 'parent','active')
 
 class TransactionAdmin(admin.ModelAdmin):
     list_display = ('account', 'date', 'amount', 'currency', 'category', 'active', 'reference_value')

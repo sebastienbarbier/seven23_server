@@ -11,9 +11,10 @@ require.config({
 		requirejs: '../../bower_components/requirejs/require',
 		mustache: '../../bower_components/mustache.js/mustache',
 		modernizr: '../../bower_components/modernizr/modernizr',
-		mocha: '../../bower_components/mocha/mocha',
-		lodash: '../../bower_components/lodash/dist/lodash.compat',
-		chai: '../../bower_components/chai/chai',
+		// mocha: '../../bower_components/mocha/mocha',
+		// lodash: '../../bower_components/lodash/dist/lodash.compat',
+		// chai: '../../bower_components/chai/chai',
+		// fastclick: '../../bower_components/fastclick/lib/fastclick',
 		// App structure
 		app: 'app',
 		router: 'router',
@@ -30,7 +31,13 @@ require.config({
 });
 
 require(['app'], function(App) {
-	// We first intialize our apllication.
+
+	// We first intialize our application.
 	App.initialize();
+
+	// Supposed to implement fastclick.
+	// var attachFastClick = require(['fastclick']);
+	// attachFastClick(document.body);
+
 
 });

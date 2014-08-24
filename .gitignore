@@ -2,7 +2,7 @@
 *.pot
 *.pyc
 local_settings.py
-723/collectstatic
+723e_server/collectstatic
 723e_web/node_modules
 723e_web/dist
 723e_web/.tmp
