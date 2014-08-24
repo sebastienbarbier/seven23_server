@@ -20,8 +20,12 @@ require.config({
 		// Models
 		userModel: 'models/userModel',
 		// Views
+		initView: 'views/InitView',
 		loginView: 'views/LoginView',
 		dashboardView: 'views/DashboardView',
+		transactionsView: 'views/TransactionsView',
+		categoriesView: 'views/CategoriesView',
+		settingsView: 'views/SettingsView',
 	}
 });
 

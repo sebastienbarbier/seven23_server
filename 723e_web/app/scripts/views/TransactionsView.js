@@ -4,8 +4,8 @@ define([
 	'backbone',
 	'mustache',
 	'initView',
-	'text!templates/dashboard.mustache'
-], function($, _, Backbone, Mustache, InitView, dashboardTemplate) {
+	'text!templates/transactions.mustache'
+], function($, _, Backbone, Mustache, InitView, transactionsTemplate) {
 
 	var DashboardView = Backbone.View.extend({
 		el: $("#content"),
@@ -16,8 +16,8 @@ define([
 				initView.render();
 			}
 
-			initView.changeSelectedItem("nav_dashboard");
-			var template = Mustache.render(dashboardTemplate, {});
+			initView.changeSelectedItem("nav_transactions");
+			var template = Mustache.render(transactionsTemplate, {});
 			$("#content").html(template);
 
 		}

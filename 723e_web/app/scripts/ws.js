@@ -1,5 +1,5 @@
 define("ws", ["jquery"], function($) {
-
+	// Define API Server
 	var server = {
 		protocol: "http",
 		domain: "localhost",
@@ -9,13 +9,14 @@ define("ws", ["jquery"], function($) {
 		}
 	};
 
+	// This service describe remote API
 	var init = server.url() + "/api/v1/init/";
 
 	var v1 = {
-		//login: server.url() + "/api/v1/login/",
+		// List all user accounts
 		accounts: server.url() + "/api/v1/accounts/",
-		login: server.url() + "/api/api-token-auth/",
-		logout: server.url() + "/api/v1/logout/",
+		// Get token key
+		login: server.url() + "/api/api-token-auth/"
 	}
 
 	// Authentification Token Key
