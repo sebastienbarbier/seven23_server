@@ -6,7 +6,7 @@ from django_723e.api.v1.currencies.views import api_currencies
 from django_723e.api.v1.transactions.views import api_categories
 
 
-router = routers.DefaultRouter()
+router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'accounts', api_accounts)
 router.register(r'currencies', api_currencies)
 router.register(r'users', api_users)

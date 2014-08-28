@@ -20,6 +20,9 @@ require.config({
 		router: 'router',
 		// Models
 		userModel: 'models/userModel',
+		categoryModel: 'models/categoryModel',
+		// Collections
+		categoryCollection: 'collections/categoryCollection',
 		// Views
 		initView: 'views/InitView',
 		loginView: 'views/LoginView',

@@ -11,7 +11,6 @@
 			</form>
 		</div>
 		<div class="col-md-6">
-
 			<div>
 				<div class="btn-group" style="float: right; margin: 0 5px;">
 					<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-th-list"></span></button>
@@ -20,11 +19,28 @@
 				<p style="float: right; margin: 0 5px;">
 					<button type="button" class="btn btn-primary addCategorie">Ajouter une nouvelle catégorie</button>
 				</p>
-
 			</div>
-
 		</div>
 	</div>
 	<div class="row">
+		<div class="col-md-12">
+			<div id="categories_list">
+				{{# categories }}
+				<div class="categorie" data-id="{{ id }}">
+					<div class="circle" style="background: {{ color }};">
+					</div>
+					<div class="content">
+						<h3>{{ name }}</h3>
+						<p>{{ description }}</p>
+						<button type="button" class="btn btn-primary btn-xs edit">Modifier</button>
+						<button type="button" class="btn btn-primary btn-xs delete">Supprimer</button>
+					</div>
+				</div>
+				{{/ categories }}
+				{{^ categories}}
+				 <p>Aucune catégorie n'est actuellement renseigné</p>
+				{{/ categories}}
+			</div>
+		</div>
 	</div>
 </div>

@@ -2,7 +2,7 @@ define("ws", ["jquery"], function($) {
 	// Define API Server
 	var server = {
 		protocol: "http",
-		domain: "192.168.1.43",
+		domain: "localhost",
 		port: "8000",
 		url: function() {
 			return this.protocol + "://" + this.domain + ":" + this.port;
@@ -14,7 +14,11 @@ define("ws", ["jquery"], function($) {
 
 	var v1 = {
 		// List all user accounts
-		accounts: server.url() + "/api/v1/accounts/",
+		accounts: server.url() + "/api/v1/accounts",
+		// List all user accounts
+		users: server.url() + "/api/v1/users",
+		// List all user accounts
+		categories: server.url() + "/api/v1/categories",
 		// Get token key
 		login: server.url() + "/api/api-token-auth/"
 	}
@@ -27,19 +31,23 @@ define("ws", ["jquery"], function($) {
 		sessionStorage.setItem("key", _key);
 	}
 
+
 	var _ajax = function(type, _options) {
 
 		// list configuration
 		options = $.extend({
-			type: type,
-			beforeSend: function(xhr) {
-				if (key !== null && key != undefined) {
-					xhr.setRequestHeader('Authorization', 'Token ' + key);
-				}
-			}
+			type: type
 		}, _options);
 
-		console.log(options);
+		// Hook into jquery
+		// Use withCredentials to send the server cookies
+		// The server must allow this through response headers
+		$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+			// If we have a csrf token send it through with the next request
+			if (key !== null && key != undefined) {
+				jqXHR.setRequestHeader('Authorization', 'Token ' + key);
+			}
+		});
 
 		return $.ajax(options);
 	}
