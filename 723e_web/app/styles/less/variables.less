@@ -1,9 +1,9 @@
 @blanc: #FEFEFE; // Blanc d'argent
 
-@deepblue: #313a4f; // Bleu
-@deepbluelighten: lighten(@deepblue, 10%);
+@headerBlue: #313a4f; // Bleu
+@headerBlueSelected: #22273e; // Bleu Selected
+@buttonBlue: lighten(@headerBlue, 10%); // Bleu Bouton
 
-@deepblueselected: #22273e;
 @texteBlue: #919aa3;
 @greywhite: #eff2ed;
 
@@ -29,7 +29,7 @@
 @gray-light:             lighten(#000, 46.7%); // #777
 @gray-lighter:           lighten(#000, 93.5%); // #eee
 
-@brand-primary:         @deepbluelighten;
+@brand-primary:         @buttonBlue;
 @brand-success:         #5cb85c;
 @brand-info:            #5bc0de;
 @brand-warning:         #f0ad4e;
@@ -200,7 +200,7 @@
 //** `<input>` border radius
 @input-border-radius:            @border-radius-base;
 //** Border color for inputs on focus
-@input-border-focus:             lighten(@deepbluelighten, 20%);
+@input-border-focus:             lighten(@buttonBlue, 20%);
 
 //** Placeholder text color
 @input-color-placeholder:        @gray-light;

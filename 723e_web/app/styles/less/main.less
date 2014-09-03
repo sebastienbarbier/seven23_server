@@ -69,8 +69,12 @@ body{
 	padding: 0;
 }
 
+p{
+	margin: 0;
+}
+
 #navbar{
-	background: @deepblue;
+	background: @headerBlue;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -111,7 +115,7 @@ body{
 			left: 50%;
 			margin-left: -305px;
 			li.selected{
-				background: @deepblueselected;
+				background: @headerBlueSelected;
 				a{
 					color: white;
 				}
@@ -138,7 +142,7 @@ body{
 	}
 	label{
 		text-transform: uppercase;
-		color: @deepbluelighten;
+		color: @buttonBlue;
 		margin-top: 5px;
 	}
 	.cat_form_submit{
@@ -168,6 +172,92 @@ body{
 		.content{
 			float: left;
 			margin: 4px 0px 8px 8px;
+		}
+	}
+}
+
+#transactions{
+	#transactions_bar{
+		border-bottom: solid 1px lighten(@buttonBlue, 50%);
+		height: 60px;
+		color: @buttonBlue;
+
+		#t_accounts{
+			width: 300px;
+			float: right;
+			height: 59px;
+			&:hover{
+				background: darken(@greywhite, 5%);
+				cursor: pointer;
+			}
+			.t_account{
+				margin: 10px 5px 0px 10px;
+				p{
+					font-size: 25px;
+					line-height: 20px;
+					small{
+						font-size: 10px;
+					}
+				}
+			}
+			.carret{
+				float: right;
+				padding: 22px 12px 0 12px;
+				height: 59px;
+			}
+		}
+		#t_quicklook{
+			margin: 0 300px 0 350px;
+			.balance{
+				.value{
+					color: black;
+				}
+			}
+			.earned{
+				.value{
+					color: green;
+				}
+			}
+			.spended{
+				.value{
+					color: red;
+				}
+			}
+			.balance, .earned, .spended{
+				width: 33%;
+				float: left;
+				font-size: 20px;
+				line-height: 18px;
+				padding-top: 10px;
+				padding-left: 15px;
+				small{
+					font-size: 12px;
+					vertical-align: middle;
+				}
+				p.last{
+					font-style: italic;
+				}
+			}
+		}
+		#t_date_range{
+			width: 350px;
+			float: left;
+			height: 59px;
+			p{
+				padding: 9px 10px 0 20px;
+				font-size: 30px;
+				text-align: left;
+			}
+			&:hover{
+				background: darken(@greywhite, 5%);
+				cursor: pointer;
+			}
+
+			.carret{
+				float: left;
+				padding: 22px 15px 0 22px;
+				height: 59px;
+			}
 		}
 	}
 }
