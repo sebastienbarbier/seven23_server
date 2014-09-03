@@ -241,7 +241,7 @@ class Change(Transaction):
 
 class Transaction2Change(models.Model):
     """
-        When doing transaction in forein currency, will check if change have been done before
+        When doing transaction in foreign currency, will check if change have been done before
         and estimate precisely price in default currency.
         This allow to link a transaction and a change.
     """
