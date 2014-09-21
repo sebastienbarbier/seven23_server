@@ -94,7 +94,7 @@ class Category(MPTTModel):
         return Transaction.objects.filter(date__gte=date1, date__lte=date2, active=True, category__exact=self).aggregate(Sum('amount'))['amount__sum']
 
 
-class Transaction(models.Model):
+class AbstractTransaction(models.Model):
     """
         Money transaction.
     """
@@ -116,7 +116,7 @@ class Transaction(models.Model):
             creation = True
 
 
-        super(Transaction, self).save(*args, **kwargs) # Call the "real" save() method
+        super(AbstractTransaction, self).save(*args, **kwargs) # Call the "real" save() method
 
         if creation and type(self) is not Change and not self.is_change_complete():
             list_change = Change.objects.filter(new_currency=self.currency, date__lte=self.date, balance__gt=0).order_by('date')
@@ -169,14 +169,20 @@ class Transaction(models.Model):
             for t in self.t2c.all():
                 t.delete()
 
-        super(Transaction, self).delete(*args, **kwargs) # Call the "real" delete() method
+        super(AbstractTransaction, self).delete(*args, **kwargs) # Call the "real" delete() method
 
         if change is not None:
             change = Change.objects.get(pk=change.pk)
             recalculateAllTransactionsAfterChange(change)
 
 
-class Cheque(Transaction):
+class Transaction(AbstractTransaction):
+
+    def __unicode__(self):
+        return u"%s" % (self.name,)
+
+
+class Cheque(AbstractTransaction):
     """
         A cheque is like a Transaction but with two differents dates :
             - When you write a cheque (transaction.date)
@@ -186,7 +192,7 @@ class Cheque(Transaction):
     place       = models.CharField(_(u'Localisation'), max_length= 255, null=True, blank=True)
     debit_date  = models.DateField(_(u'Debit date'), editable=True, null=True, blank=True)
 
-class Tranfert(Transaction):
+class Tranfert(AbstractTransaction):
     """
         Money Transfert from one account to an other (one of yours or externe).
     """
@@ -195,7 +201,7 @@ class Tranfert(Transaction):
     def __unicode__(self):
         return u"%s %s (%s -> %s)" % (self.name, self.currency.verbose(self.amount), self.account, self.account_dest)
 
-class Change(Transaction):
+class Change(AbstractTransaction):
     """
         Change money in a new currency.
     """
@@ -245,7 +251,7 @@ class Transaction2Change(models.Model):
         and estimate precisely price in default currency.
         This allow to link a transaction and a change.
     """
-    transaction         = models.ForeignKey(Transaction, related_name='t2c')
+    transaction         = models.ForeignKey(AbstractTransaction, related_name='t2c')
     transaction_amount  = models.FloatField(_(u'Transaction Amount'), null=False, blank=False, help_text=_(u"Part of the old transaction from this change."))
     change              = models.ForeignKey(Change, related_name='transactions')
     change_amount       = models.FloatField(_(u'Change Amount'), null=False, blank=False, help_text=_(u"Value in the new Currency."))
