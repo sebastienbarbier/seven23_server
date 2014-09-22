@@ -21,8 +21,10 @@ require.config({
 		// Models
 		userModel: 'models/userModel',
 		categoryModel: 'models/categoryModel',
+		debitsCreditsModel: 'models/debitsCreditsModel',
 		// Collections
 		categoryCollection: 'collections/categoryCollection',
+		debitsCreditsCollection: 'collections/debitsCreditsCollection',
 		// Views
 		initView: 'views/InitView',
 		loginView: 'views/LoginView',

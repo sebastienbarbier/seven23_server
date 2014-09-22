@@ -1,0 +1,10 @@
+<h2>Liste des Débits/Crédits</h2>
+
+<ul>
+	{{# debitscredits }}
+	<li>{{ name }} {{ date }} {{ amount }} {{ currency }}</li>
+	{{/ debitscredits }}
+	{{^ debitscredits}}
+	 <p>Aucun debitscredtis n'est actuellement renseigné</p>
+	{{/ debitscredits}}
+</ul>

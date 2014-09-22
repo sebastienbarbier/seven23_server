@@ -29,6 +29,8 @@ define([
 				collection.fetch({
 					success: function() {
 
+
+						console.log(collection);
 						var template = Mustache.render(CategoriesTemplate, {
 							'categories': collection.toJSON()
 						});

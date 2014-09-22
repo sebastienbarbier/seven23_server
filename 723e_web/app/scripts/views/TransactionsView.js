@@ -4,8 +4,22 @@ define([
 	'backbone',
 	'mustache',
 	'initView',
-	'text!templates/transactions.mustache'
-], function($, _, Backbone, Mustache, InitView, transactionsTemplate) {
+	'text!templates/transactions.mustache',
+	'text!templates/transactions/transactionsList.mustache',
+	'debitsCreditsModel',
+	'debitsCreditsCollection'
+], function(
+	$,
+	_,
+	Backbone,
+	Mustache,
+	InitView,
+	TransactionsTemplate,
+	TransactionsListTemplate,
+	DebitsCreditsModel,
+	DebitsCreditsCollection) {
+
+	var collection = new DebitsCreditsCollection();
 
 	var DashboardView = Backbone.View.extend({
 		el: $("#content"),
@@ -17,8 +31,18 @@ define([
 			}
 
 			initView.changeSelectedItem("nav_transactions");
-			var template = Mustache.render(transactionsTemplate, {});
+			var template = Mustache.render(TransactionsTemplate, {});
 			$("#content").html(template);
+
+			collection.fetch({
+				success: function() {
+					console.log(collection.toJSON());
+					var template = Mustache.render(TransactionsListTemplate, {
+						'debitscredits': collection.toJSON()
+					});
+					$("#content").html(template);
+				}
+			});
 
 		}
 	});
