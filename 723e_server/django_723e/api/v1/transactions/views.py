@@ -7,8 +7,8 @@ from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 
-from django_723e.models.transactions.models import Category, Transaction, Cheque, Change, Tranfert
-from django_723e.models.transactions.serializers import CategorySerializer, TransactionSerializer, ChequeSerializer, ChangeSerializer, TranfertSerializer
+from django_723e.models.transactions.models import Category, DebitsCredits, Cheque, Change, Tranfert
+from django_723e.models.transactions.serializers import CategorySerializer, DebitsCreditsSerializer, ChequeSerializer, ChangeSerializer, TranfertSerializer
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -21,9 +21,9 @@ class api_categories(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
-class api_transaction(viewsets.ModelViewSet):
-    queryset = Transaction.objects.all()
-    serializer_class = TransactionSerializer
+class api_debitscredits(viewsets.ModelViewSet):
+    queryset = DebitsCredits.objects.all()
+    serializer_class = DebitsCreditsSerializer
 
 class api_cheque(viewsets.ModelViewSet):
     queryset = Cheque.objects.all()

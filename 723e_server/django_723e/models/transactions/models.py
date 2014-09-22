@@ -19,7 +19,7 @@ class Category(MPTTModel):
     """
         Category of transaction.
     """
-    user     = models.ForeignKey(User, related_name='categories')
+    user        = models.ForeignKey(User, related_name='categories')
     name        = models.CharField(_(u'Name'), max_length=128)
     description = models.TextField(_(u'Description'))
     color       = ColorField(default='ffffff')
@@ -91,7 +91,7 @@ class Category(MPTTModel):
         if date1 > date2:
             date1, date2 = date2, date1
 
-        return Transaction.objects.filter(date__gte=date1, date__lte=date2, active=True, category__exact=self).aggregate(Sum('amount'))['amount__sum']
+        return AbstractTransaction.objects.filter(date__gte=date1, date__lte=date2, active=True, category__exact=self).aggregate(Sum('amount'))['amount__sum']
 
 
 class AbstractTransaction(models.Model):
@@ -176,7 +176,7 @@ class AbstractTransaction(models.Model):
             recalculateAllTransactionsAfterChange(change)
 
 
-class Transaction(AbstractTransaction):
+class DebitsCredits(AbstractTransaction):
 
     def __unicode__(self):
         return u"%s" % (self.name,)

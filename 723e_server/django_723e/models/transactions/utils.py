@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 def recalculateAllTransactionsAfterChange(firstChange):
-    
-    from django_723e.models.transactions.models import Change, Transaction, Transaction2Change
+
+    from django_723e.models.transactions.models import Change, AbstractTransaction, Transaction2Change
 
     """
         Get firstChange object and recalculate all transactions before it.
@@ -13,19 +13,19 @@ def recalculateAllTransactionsAfterChange(firstChange):
     # If c is not a Change, no actions.
     if type(firstChange) is not Change:
         return None
-    
+
     list_change = Change.objects.filter(account=firstChange.account, date__gte=firstChange.date, new_currency=firstChange.new_currency).order_by("date")
-    
+
     # On supprime toutes les transactions
     for c in list_change:
         for t in c.transactions.all():
             t.delete()
-            
+
     list_change = list_change.all()
     currentChangeIndex = 0
     currentChange = list_change[currentChangeIndex]
     # List of transaction with same currency and after firstChange date
-    list_transactions = Transaction.objects.filter(currency=firstChange.new_currency, date__gte=firstChange.date).order_by("date")
+    list_transactions = AbstractTransaction.objects.filter(currency=firstChange.new_currency, date__gte=firstChange.date).order_by("date")
     # For each transaction
     for t in list_transactions:
         if currentChange.date <= t.date:
