@@ -19,6 +19,8 @@ define("ws", ["jquery"], function($) {
 		users: server.url() + "/api/v1/users",
 		// List all user debitscredits
 		debitscredits: server.url() + "/api/v1/debitscredits",
+		//
+		currencies: server.url() + "/api/v1/currencies",
 		// List all user accounts
 		categories: server.url() + "/api/v1/categories",
 		// Get token key

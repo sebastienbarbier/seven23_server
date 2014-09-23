@@ -4,22 +4,28 @@ define([
 	'backbone',
 	'mustache',
 	'initView',
-	'text!templates/transactions.mustache',
 	'text!templates/transactions/transactionsList.mustache',
+	'text!templates/transactions/debitscreditsForm.mustache',
 	'debitsCreditsModel',
-	'debitsCreditsCollection'
+	'debitsCreditsCollection',
+	'currenciesCollection',
+	'categoryCollection'
 ], function(
 	$,
 	_,
 	Backbone,
 	Mustache,
 	InitView,
-	TransactionsTemplate,
 	TransactionsListTemplate,
+	DebitsCreditsFormTemplate,
 	DebitsCreditsModel,
-	DebitsCreditsCollection) {
+	DebitsCreditsCollection,
+	CurrenciesCollection,
+	CategoryCollection) {
 
 	var collection = new DebitsCreditsCollection();
+	var currencies = new CurrenciesCollection();
+	var categories = new CategoryCollection();
 
 	var DashboardView = Backbone.View.extend({
 		el: $("#content"),
@@ -31,8 +37,13 @@ define([
 			}
 
 			initView.changeSelectedItem("nav_transactions");
-			var template = Mustache.render(TransactionsTemplate, {});
-			$("#content").html(template);
+
+
+			var view = this;
+
+			currencies.fetch();
+
+			categories.fetch();
 
 			collection.fetch({
 				success: function() {
@@ -41,10 +52,33 @@ define([
 						'debitscredits': collection.toJSON()
 					});
 					$("#content").html(template);
+
+					$("#content button.addDebitCredit").on('click', function() {
+						view.renderDebitsCreditsForm();
+					});
 				}
 			});
 
+		},
+
+		renderDebitsCreditsForm: function() {
+
+			console.log(currencies.toJSON());
+
+			var template = Mustache.render(DebitsCreditsFormTemplate, {
+				currencies: currencies.toJSON(),
+				categories: categories.toJSON()
+			});
+			$("#content").html(template);
+
+			var view = this;
+			// User cancel form. We go back to view page.
+			$("button.debitscredits_form_cancel").on("click", function() {
+				view.render();
+			});
 		}
+
+
 	});
 
 	return DashboardView;

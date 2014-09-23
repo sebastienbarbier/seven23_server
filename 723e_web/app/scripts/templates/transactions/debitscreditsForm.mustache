@@ -1,0 +1,75 @@
+<form id="cat_form">
+	<div class="row">
+		<div class="col-md-12">
+		{{#debitcredit}}
+			<h2>Modifier un debit/credit</h2>
+		{{/debitcredit}}
+		{{^debitcredit}}
+		 	<h2>Ajouter un debit/credit</h2>
+		{{/debitcredit}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-2 col-md-4">
+			<div class="form-group">
+				<label class="col-sm-12 control-label">Currency</label>
+
+				<div class="col-sm-12">
+					<select class="form-control"  name="">
+						{{#currencies}}
+						<option value="{{ id }}">{{ name }}</option>
+						{{/currencies}}
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Name</label>
+				<div class="col-sm-12">
+					<input type="text" value="" class="form-control"  name="description" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-12 control-label">Amount</label>
+				<div class="col-sm-12">
+					<input type="text" value="" class="form-control" name="color" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-12 control-label">Date</label>
+				<div class="col-sm-12">
+					<input type="text" value="" class="form-control" name="icon" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-12 control-label">Enable</label>
+				<div class="col-sm-12">
+					<input type="text" value="" class="form-control" name="icon" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-12 control-label">Category</label>
+				<div class="col-sm-12">
+					<select class="form-control" name="">
+						{{#categories}}
+						<option value="{{ id }}">{{ name }}</option>
+						{{/categories}}
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 col-md-offset-8">
+			{{#debitcredit}}
+			<input type="hidden" name="id" value="{{ id }}" />
+			<input type="hidden" name="user" value="{{ user }}" />
+
+			<button type="button" class="btn btn-primary debitscredits_form_submit">Modifier</button>
+			{{/debitcredit}}
+			{{^debitcredit}}
+			<button type="button" class="btn btn-primary debitscredits_form_submit">Créer</button>
+			{{/debitcredit}}
+			<button type="button" class="btn btn-primary debitscredits_form_cancel">Annuler</button>
+		</div>
+	</div>
+</form>

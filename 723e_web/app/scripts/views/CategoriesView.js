@@ -9,7 +9,16 @@ define([
 		'categoryModel',
 		'categoryCollection'
 	],
-	function($, _, Backbone, Mustache, InitView, CategoriesTemplate, CategoriesFormTemplate, Category, CategoryCollection) {
+	function(
+		$,
+		_,
+		Backbone,
+		Mustache,
+		InitView,
+		CategoriesTemplate,
+		CategoriesFormTemplate,
+		Category,
+		CategoryCollection) {
 
 		var collection = new CategoryCollection();
 
