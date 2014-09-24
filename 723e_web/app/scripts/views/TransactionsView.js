@@ -47,7 +47,7 @@ define([
 
 			collection.fetch({
 				success: function() {
-					console.log(collection.toJSON());
+
 					var template = Mustache.render(TransactionsListTemplate, {
 						'debitscredits': collection.toJSON()
 					});
@@ -56,20 +56,47 @@ define([
 					$("#content button.addDebitCredit").on('click', function() {
 						view.renderDebitsCreditsForm();
 					});
+
+					// Event create form on button click
+					$("#debitscredits_list button.edit").on('click', function() {
+						var debitcredit = $(this).parents(".debitcredit").data('id');
+						view.renderDebitsCreditsForm(collection.get(debitcredit).toJSON());
+					});
+
+					$("#debitscredits_list button.delete").on('click', function() {
+						var debitcredit = $(this).parents(".debitcredit").data('id');
+						collection.get(debitcredit).destroy({
+							// prints nothing!!!
+							success: function() {
+								view.render();
+							},
+							error: function() {
+								view.render();
+							}
+						});
+
+					});
 				}
 			});
 
 		},
 
-		renderDebitsCreditsForm: function() {
+		renderDebitsCreditsForm: function(debitcredit) {
 
 			console.log(currencies.toJSON());
 
 			var template = Mustache.render(DebitsCreditsFormTemplate, {
+				debitcredit: debitcredit,
 				currencies: currencies.toJSON(),
 				categories: categories.toJSON()
 			});
 			$("#content").html(template);
+
+			// Put select markup as selected
+			if (debitcredit) {
+				$("#debitcredit_form select[name='currency']").find('option[value="' + debitcredit.currency + '"]').attr('selected', true);
+				$("#debitcredit_form select[name='category']").find('option[value="' + debitcredit.category + '"]').attr('selected', true);
+			}
 
 			var view = this;
 			// User cancel form. We go back to view page.

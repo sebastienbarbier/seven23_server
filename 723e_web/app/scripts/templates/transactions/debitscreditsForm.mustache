@@ -16,6 +16,7 @@
 
 				<div class="col-sm-12">
 					<select class="form-control" name="currency">
+						<option value="">---</option>
 						{{#currencies}}
 						<option value="http://localhost:8000/api/v1/currencies/{{ id }}">{{ name }}</option>
 						{{/currencies}}
@@ -25,31 +26,32 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Name</label>
 				<div class="col-sm-12">
-					<input type="text" value="" class="form-control" name="name" />
+					<input type="text" value="{{#debitcredit}}{{ name }}{{/ debitcredit }}" class="form-control" name="name" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-12 control-label">Amount</label>
 				<div class="col-sm-12">
-					<input type="text" value="" class="form-control" name="amount" />
+					<input type="text" value="{{#debitcredit}}{{ amount }}{{/ debitcredit }}" class="form-control" name="amount" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-12 control-label">Date</label>
 				<div class="col-sm-12">
-					<input type="text" value="2014-09-24" class="form-control" name="date" />
+					<input type="text" value="{{#debitcredit}}{{ date }}{{/ debitcredit }}" class="form-control" name="date" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-12 control-label">Enable</label>
 				<div class="col-sm-12">
-					<input type="text" value="true" class="form-control" name="active" />
+					<input type="text" value="{{#debitcredit}}{{ active }}{{/ debitcredit }}" class="form-control" name="active" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-12 control-label">Category</label>
 				<div class="col-sm-12">
-					<select class="form-control" name="">
+					<select class="form-control" name="category">
+						<option value="">---</option>
 						{{#categories}}
 						<option value="http://localhost:8000/api/v1/categories/{{ id }}">{{ name }}</option>
 						{{/categories}}

@@ -1,6 +1,4 @@
 
-
-
 <div class="container-fluid">
 	<div class="row background_grey" style="padding: 16px 0 0 0;">
 		<div class="col-md-6">
@@ -13,15 +11,16 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row" id="debitscredits_list">
 		<div class="col-md-12">
 		<h2>Liste des Débits/Crédits</h2>
 
 		<ul>
 			{{# debitscredits }}
-			<li>{{ name }} {{ date }} {{ amount }} {{ currency }}
-						<button type="button" class="btn btn-primary btn-xs edit">Modifier</button>
-						<button type="button" class="btn btn-primary btn-xs delete">Supprimer</button></li>
+			<li class="debitcredit" data-id="{{ id }}">{{ name }} {{ date }} {{ amount }} {{ currency }}
+				<button type="button" class="btn btn-primary btn-xs edit">Modifier</button>
+				<button type="button" class="btn btn-primary btn-xs delete">Supprimer</button>
+			</li>
 			{{/ debitscredits }}
 			{{^ debitscredits}}
 			 <p>Aucun debitscredtis n'est actuellement renseigné</p>

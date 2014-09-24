@@ -79,7 +79,7 @@ define([
 
 				var view = this;
 				// User validate form
-			$("button.cat_form_submit").on("click", function() {
+				$("button.cat_form_submit").on("click", function() {
 
 					var array = $("#cat_form").serializeArray();
 					var dict = {};
