@@ -19,7 +19,9 @@
 
 		<ul>
 			{{# debitscredits }}
-			<li>{{ name }} {{ date }} {{ amount }} {{ currency }}</li>
+			<li>{{ name }} {{ date }} {{ amount }} {{ currency }}
+						<button type="button" class="btn btn-primary btn-xs edit">Modifier</button>
+						<button type="button" class="btn btn-primary btn-xs delete">Supprimer</button></li>
 			{{/ debitscredits }}
 			{{^ debitscredits}}
 			 <p>Aucun debitscredtis n'est actuellement renseigné</p>

@@ -1,4 +1,4 @@
-<form id="cat_form">
+<form id="debitcredit_form">
 	<div class="row">
 		<div class="col-md-12">
 		{{#debitcredit}}
@@ -15,9 +15,9 @@
 				<label class="col-sm-12 control-label">Currency</label>
 
 				<div class="col-sm-12">
-					<select class="form-control"  name="">
+					<select class="form-control" name="currency">
 						{{#currencies}}
-						<option value="{{ id }}">{{ name }}</option>
+						<option value="http://localhost:8000/api/v1/currencies/{{ id }}">{{ name }}</option>
 						{{/currencies}}
 					</select>
 				</div>
@@ -25,25 +25,25 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Name</label>
 				<div class="col-sm-12">
-					<input type="text" value="" class="form-control"  name="description" />
+					<input type="text" value="" class="form-control" name="name" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-12 control-label">Amount</label>
 				<div class="col-sm-12">
-					<input type="text" value="" class="form-control" name="color" />
+					<input type="text" value="" class="form-control" name="amount" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-12 control-label">Date</label>
 				<div class="col-sm-12">
-					<input type="text" value="" class="form-control" name="icon" />
+					<input type="text" value="2014-09-24" class="form-control" name="date" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-12 control-label">Enable</label>
 				<div class="col-sm-12">
-					<input type="text" value="" class="form-control" name="icon" />
+					<input type="text" value="true" class="form-control" name="active" />
 				</div>
 			</div>
 			<div class="form-group">
@@ -51,7 +51,7 @@
 				<div class="col-sm-12">
 					<select class="form-control" name="">
 						{{#categories}}
-						<option value="{{ id }}">{{ name }}</option>
+						<option value="http://localhost:8000/api/v1/categories/{{ id }}">{{ name }}</option>
 						{{/categories}}
 					</select>
 				</div>
@@ -60,6 +60,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-4 col-md-offset-8">
+			<input type="hidden" name="account" value="http://localhost:8000/api/v1/accounts/1" />
 			{{#debitcredit}}
 			<input type="hidden" name="id" value="{{ id }}" />
 			<input type="hidden" name="user" value="{{ user }}" />

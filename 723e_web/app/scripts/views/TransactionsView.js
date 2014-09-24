@@ -76,6 +76,33 @@ define([
 			$("button.debitscredits_form_cancel").on("click", function() {
 				view.render();
 			});
+
+			$("button.debitscredits_form_submit").on("click", function() {
+
+				var array = $("#debitcredit_form").serializeArray();
+				var dict = {};
+
+				for (var i = 0; i < array.length; i++) {
+					dict[array[i]['name']] = array[i]['value']
+				}
+				dict['user'] = "http://localhost:8000/api/v1/users/1";
+
+				var debitcredit = new DebitsCreditsModel(dict);
+
+				debitcredit.save(dict, {
+					wait: true,
+					success: function(model, response) {
+						console.log('Successfully saved!');
+						view.render();
+					},
+					error: function(model, error) {
+						console.log(model.toJSON());
+						console.log('error.responseText');
+					}
+				});
+
+			});
+
 		}
 
 
