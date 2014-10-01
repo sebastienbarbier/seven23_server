@@ -21,11 +21,13 @@ require.config({
 		// Models
 		userModel: 'models/userModel',
 		categoryModel: 'models/categoryModel',
+		changesModel: 'models/changesModel',
 		debitsCreditsModel: 'models/debitsCreditsModel',
 		currencyModel: 'models/currencyModel',
 		// Collections
 		categoryCollection: 'collections/categoryCollection',
 		debitsCreditsCollection: 'collections/debitsCreditsCollection',
+		changesCollection: 'collections/changesCollection',
 		currenciesCollection: 'collections/currenciesCollection',
 		// Views
 		initView: 'views/InitView',

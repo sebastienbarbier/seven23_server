@@ -240,10 +240,11 @@ class Change(AbstractTransaction):
                 except:
                     recalculateAllTransactionsAfterChange(self)
 
-
-
     def exchange_rate(self):
         return self.new_amount / self.amount
+
+    def new_value(self):
+        return self.new_currency.verbose(self.new_amount)
 
 class Transaction2Change(models.Model):
     """

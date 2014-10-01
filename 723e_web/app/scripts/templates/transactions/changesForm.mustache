@@ -1,0 +1,86 @@
+<form id="changes_form">
+	<div class="row">
+		<div class="col-md-12">
+		{{#change}}
+			<h2>Modifier un change</h2>
+		{{/change}}
+		{{^change}}
+		 	<h2>Ajouter un change</h2>
+		{{/change}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-2 col-md-4">
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Name</label>
+				<div class="col-sm-12">
+					<input type="text" value="{{#change}}{{ name }}{{/change}}" class="form-control" name="name" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-12 control-label">Date</label>
+				<div class="col-sm-12">
+					<input type="text" value="{{#change}}{{ date }}{{/change}}" class="form-control" name="date" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-12 control-label">Amount</label>
+				<div class="col-sm-12">
+					<input type="text" value="{{#change}}{{ amount }}{{/change}}" class="form-control" name="amount" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-12 control-label">Currency</label>
+
+				<div class="col-sm-12">
+					<select class="form-control" name="currency">
+						<option value="">---</option>
+						{{#currencies}}
+						<option value="http://localhost:8000/api/v1/currencies/{{ id }}">{{ name }}</option>
+						{{/currencies}}
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-12 control-label">New Amount</label>
+				<div class="col-sm-12">
+					<input type="text" value="{{#change}}{{ new_amount }}{{/change}}" class="form-control" name="new_amount" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-12 control-label">New Currency</label>
+
+				<div class="col-sm-12">
+					<select class="form-control" name="new_currency">
+						<option value="">---</option>
+						{{#currencies}}
+						<option value="http://localhost:8000/api/v1/currencies/{{ id }}">{{ name }}</option>
+						{{/currencies}}
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-12 control-label">Enable</label>
+				<div class="col-sm-12">
+					<input type="text" value="{{#change}}{{ active }}{{/change}}" class="form-control" name="active" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 col-md-offset-8">
+			<input type="hidden" name="account" value="http://localhost:8000/api/v1/accounts/1" />
+			{{#change}}
+			<input type="hidden" name="id" value="{{ id }}" />
+			<input type="hidden" name="user" value="{{ user }}" />
+
+			<button type="button" class="btn btn-primary changes_form_submit">Modifier</button>
+			{{/change}}
+			{{^change}}
+			<button type="button" class="btn btn-primary changes_form_submit">Créer</button>
+			{{/change}}
+			<button type="button" class="btn btn-primary changes_form_cancel">Annuler</button>
+		</div>
+	</div>
+</form>

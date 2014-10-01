@@ -26,10 +26,12 @@ class ChequeSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'account', 'currency', 'name', 'amount', 'date', 'active', 'category', 'cheque_name', 'place', 'debit_date')
 
 class ChangeSerializer(serializers.HyperlinkedModelSerializer):
+    value = serializers.Field(source='value')
+    new_value = serializers.Field(source='new_value')
 
     class Meta:
         model = Change
-        fields = ('id', 'account', 'currency', 'name', 'amount', 'date', 'active', 'category', 'new_amount', 'new_currency', 'balance')
+        fields = ('id', 'account', 'currency', 'name', 'amount', 'date', 'active', 'category', 'new_amount', 'new_currency', 'balance', 'value', 'new_value')
 
 class TranfertSerializer(serializers.HyperlinkedModelSerializer):
 
