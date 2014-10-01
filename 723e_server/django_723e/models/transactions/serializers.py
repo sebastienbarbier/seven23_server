@@ -11,11 +11,12 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
 
 class DebitsCreditsSerializer(serializers.HyperlinkedModelSerializer):
     is_complete = serializers.Field(source='is_change_complete')
+    value = serializers.Field(source='value')
     reference_value = serializers.Field(source='reference_value')
 
     class Meta:
         model = DebitsCredits
-        fields = ('id', 'account', 'currency', 'name', 'amount', 'date', 'active', 'category', 'is_complete', 'reference_value')
+        fields = ('id', 'account', 'currency', 'name', 'amount', 'date', 'active', 'category', 'is_complete', 'reference_value', 'value')
 
 
 class ChequeSerializer(serializers.HyperlinkedModelSerializer):
