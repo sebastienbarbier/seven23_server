@@ -11,6 +11,7 @@ require.config({
 		requirejs: '../../bower_components/requirejs/require',
 		mustache: '../../bower_components/mustache.js/mustache',
 		modernizr: '../../bower_components/modernizr/modernizr',
+		moment: '../../bower_components/moment/moment',
 		// mocha: '../../bower_components/mocha/mocha',
 		// lodash: '../../bower_components/lodash/dist/lodash.compat',
 		// chai: '../../bower_components/chai/chai',
@@ -47,6 +48,5 @@ require(['app'], function(App) {
 	// Supposed to implement fastclick.
 	// var attachFastClick = require(['fastclick']);
 	// attachFastClick(document.body);
-
 
 });

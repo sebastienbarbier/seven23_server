@@ -1,7 +1,11 @@
-define("app", ["jquery", "router", "ws", "userModel"], function($, Router, ws, UserModel) {
+define("app", ["jquery", "moment", "router", "ws", "userModel"], function($, moment, Router, ws, UserModel) {
 	// Put here the plugin code.
 	// No need to return anything as we are augmenting the jQuery object
 	var initialize = function() {
+
+		// Initialise french moment interface
+		var fr = require(['../../bower_components/moment/locale/fr']);
+		moment.locale('fr');
 
 		var user = new UserModel();
 

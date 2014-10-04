@@ -3,6 +3,7 @@ define([
 	'underscore',
 	'backbone',
 	'mustache',
+	'moment',
 	'initView',
 	'text!templates/transactions.mustache',
 	'text!templates/transactions/transactionsList.mustache',
@@ -21,6 +22,7 @@ define([
 	_,
 	Backbone,
 	Mustache,
+	moment,
 	InitView,
 	TransactionsTemplate,
 	TransactionsListTemplate,
@@ -271,10 +273,10 @@ define([
 			arrayAbstract = _.sortBy(arrayAbstract, function(obj) {
 				return obj[0]
 			});
-
+			// Change date format
 			console.log(arrayAbstract);
 			for (i = 0; i < arrayAbstract.length; i++) {
-				arrayAbstract[i][0] = new Date(arrayAbstract[i][0]);
+				arrayAbstract[i][0] = moment(arrayAbstract[i][0], "YYYY-MM-DD").format("dddd D MMMM YYYY");
 			}
 
 

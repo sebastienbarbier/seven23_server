@@ -7,7 +7,8 @@
     "backbone": "~1.1.0",
     "requirejs": "~2.1.10",
     "requirejs-text": "~2.0.10",
-    "modernizr": "~2.7.1"
+    "modernizr": "~2.7.1",
+    "moment": "~2.8.3"
   },
   "devDependencies": {
     "mustache.js": "~0.8.2",
