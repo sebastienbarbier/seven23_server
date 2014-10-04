@@ -7,6 +7,11 @@ define(["jquery", "backbone", "ws"], function($, Backbone, WebServices) {
 		},
 		initialize: function() {
 			//alert("Welcome to this world");
+		},
+		html: {
+			list: function() {
+				return "DébitsCrédits : " + this.get("name");
+			}
 		}
 	});
 

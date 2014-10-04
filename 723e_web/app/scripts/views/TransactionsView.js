@@ -14,6 +14,7 @@ define([
 	'changesModel',
 	'changesCollection',
 	'currenciesCollection',
+	'text!templates/transactions/list.mustache',
 	'categoryCollection'
 ], function(
 	$,
@@ -31,12 +32,16 @@ define([
 	ChangesModel,
 	ChangesCollection,
 	CurrenciesCollection,
+	listTemplate,
 	CategoryCollection) {
 
 	var collection = new DebitsCreditsCollection();
 	var changesCollection = new ChangesCollection();
 	var currencies = new CurrenciesCollection();
 	var categories = new CategoryCollection();
+
+	var arrayAbstract = [];
+	var nbSource = 0;
 
 	var DashboardView = Backbone.View.extend({
 		el: $("#content"),
@@ -52,6 +57,9 @@ define([
 			$("#content").html(TransactionsTemplate);
 
 			var view = this;
+
+			arrayAbstract = [];
+			nbSource = 0;
 
 			currencies.fetch();
 
@@ -92,6 +100,11 @@ define([
 						});
 
 					});
+
+					nbSource++;
+					if (nbSource === 2) {
+						view.generateListe();
+					}
 				}
 			});
 
@@ -130,6 +143,11 @@ define([
 						});
 
 					});
+
+					nbSource++;
+					if (nbSource === 2) {
+						view.generateListe();
+					}
 				}
 			});
 
@@ -233,6 +251,38 @@ define([
 
 			});
 
+		},
+		generateListe: function() {
+			// Generate array of all models
+			arrayAbstract = _.union(collection.toArray(), changesCollection.toArray());
+
+			console.log(arrayAbstract);
+			// Group by date, return JSON
+			arrayAbstract = _.groupBy(arrayAbstract, function(obj) {
+				return obj.get("date");
+			});
+
+			console.log(arrayAbstract);
+			// Transofrm JSON to Array
+			arrayAbstract = _.pairs(arrayAbstract);
+
+			console.log(arrayAbstract);
+			// Order by date
+			arrayAbstract = _.sortBy(arrayAbstract, function(obj) {
+				return obj[0]
+			});
+
+			console.log(arrayAbstract);
+			for (i = 0; i < arrayAbstract.length; i++) {
+				arrayAbstract[i][0] = new Date(arrayAbstract[i][0]);
+			}
+
+
+			var template = Mustache.render(listTemplate, {
+				liste: arrayAbstract
+			});
+
+			$("#listes").html(template);
 		}
 
 
