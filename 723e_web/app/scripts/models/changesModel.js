@@ -1,4 +1,15 @@
-define(["jquery", "backbone", "ws"], function($, Backbone, WebServices) {
+define([
+	"jquery",
+	"backbone",
+	"ws",
+	"mustache",
+	"text!templates/transactions/timeline/changesTemplate.mustache"
+], function(
+	$,
+	Backbone,
+	WebServices,
+	Mustache,
+	changeTemplate) {
 
 	var changes = Backbone.Model.extend({
 		urlRoot: WebServices.v1.changes,
@@ -10,7 +21,9 @@ define(["jquery", "backbone", "ws"], function($, Backbone, WebServices) {
 		},
 		html: {
 			list: function() {
-				return "Changes : " + this.get("name");
+				return Mustache.render(changeTemplate, {
+					change: this.toJSON()
+				});
 			}
 		}
 	});

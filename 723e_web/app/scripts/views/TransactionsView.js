@@ -6,11 +6,9 @@ define([
 	'moment',
 	'initView',
 	'text!templates/transactions.mustache',
-	'text!templates/transactions/transactionsList.mustache',
 	'text!templates/transactions/debitscreditsForm.mustache',
 	'debitsCreditsModel',
 	'debitsCreditsCollection',
-	'text!templates/transactions/changesList.mustache',
 	'text!templates/transactions/changesForm.mustache',
 	'changesModel',
 	'changesCollection',
@@ -25,11 +23,9 @@ define([
 	moment,
 	InitView,
 	TransactionsTemplate,
-	TransactionsListTemplate,
 	DebitsCreditsFormTemplate,
 	DebitsCreditsModel,
 	DebitsCreditsCollection,
-	ChangesListTemplate,
 	ChangesFormTemplate,
 	ChangesModel,
 	ChangesCollection,
@@ -60,6 +56,15 @@ define([
 
 			var view = this;
 
+			// BIND EVENT
+			$("#content button.addDebitCredit").on('click', function() {
+				view.renderDebitsCreditsForm();
+			});
+
+			$("#content button.addChange").on('click', function() {
+				view.renderChangesForm();
+			});
+
 			arrayAbstract = [];
 			nbSource = 0;
 
@@ -69,40 +74,6 @@ define([
 
 			collection.fetch({
 				success: function() {
-
-					var template = Mustache.render(TransactionsListTemplate, {
-						'debitscredits': collection.toJSON()
-					});
-					$("#transactions").html(template);
-
-					$("#content button.addDebitCredit").on('click', function() {
-						view.renderDebitsCreditsForm();
-					});
-
-					$("#content button.addChange").on('click', function() {
-						view.renderChangesForm();
-					});
-
-					// Event create form on button click
-					$("#transactions button.edit").on('click', function() {
-						var debitcredit = $(this).parents(".debitcredit").data('id');
-						view.renderDebitsCreditsForm(collection.get(debitcredit).toJSON());
-					});
-
-					$("#transactions button.delete").on('click', function() {
-						var debitcredit = $(this).parents(".debitcredit").data('id');
-						collection.get(debitcredit).destroy({
-							// prints nothing!!!
-							success: function() {
-								view.render();
-							},
-							error: function() {
-								view.render();
-							}
-						});
-
-					});
-
 					nbSource++;
 					if (nbSource === 2) {
 						view.generateListe();
@@ -112,40 +83,6 @@ define([
 
 			changesCollection.fetch({
 				success: function() {
-
-					var template = Mustache.render(ChangesListTemplate, {
-						'changes': changesCollection.toJSON()
-					});
-					$("#changes").html(template);
-
-					$("#content button.addChange").on('click', function() {
-						view.renderChangesForm();
-					});
-
-					$("#content button.addChange").on('click', function() {
-						view.renderChangesForm();
-					});
-
-					// Event create form on button click
-					$("#changes button.edit").on('click', function() {
-						var change = $(this).parents(".change").data('id');
-						view.renderChangesForm(changesCollection.get(change).toJSON());
-					});
-
-					$("#changes button.delete").on('click', function() {
-						var change = $(this).parents(".change").data('id');
-						changesCollection.get(change).destroy({
-							// prints nothing!!!
-							success: function() {
-								view.render();
-							},
-							error: function() {
-								view.render();
-							}
-						});
-
-					});
-
 					nbSource++;
 					if (nbSource === 2) {
 						view.generateListe();
@@ -285,6 +222,47 @@ define([
 			});
 
 			$("#listes").html(template);
+
+			var view = this;
+
+			// Event create form on button click
+			$(".debitscredits button.edit").on('click', function() {
+				var debitcredit = $(this).parents(".debitscredits").data('id');
+				view.renderDebitsCreditsForm(collection.get(debitcredit).toJSON());
+			});
+
+			$(".debitscredits button.delete").on('click', function() {
+				var debitcredit = $(this).parents(".debitscredits").data('id');
+				collection.get(debitcredit).destroy({
+					// prints nothing!!!
+					success: function() {
+						view.render();
+					},
+					error: function() {
+						view.render();
+					}
+				});
+
+			});
+
+			$(".changes button.edit").on('click', function() {
+				var change = $(this).parents(".changes").data('id');
+				view.renderChangesForm(changesCollection.get(change).toJSON());
+			});
+
+			$(".changes button.delete").on('click', function() {
+				var change = $(this).parents(".changes").data('id');
+				changesCollection.get(change).destroy({
+					// prints nothing!!!
+					success: function() {
+						view.render();
+					},
+					error: function() {
+						view.render();
+					}
+				});
+
+			});
 		}
 
 

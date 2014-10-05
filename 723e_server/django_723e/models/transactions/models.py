@@ -139,7 +139,7 @@ class AbstractTransaction(models.Model):
         return self.currency.verbose(self.amount)
 
     def is_change_complete(self):
-        if self.account.currency is self.currency:
+        if self.account.currency == self.currency:
             return True
 
         if self.t2c.aggregate(Sum('transaction_amount'))['transaction_amount__sum'] == self.amount:
@@ -154,17 +154,18 @@ class AbstractTransaction(models.Model):
         return self.amount - due
 
     def reference_value(self):
-        if self.currency is not self.account.currency:
+        if self.currency == self.account.currency:
+            return self.value()
+        else:
             if self.is_change_complete():
-                return self.t2c.aggregate(Sum('change_amount'))['change_amount__sum']
+                return "" + self.value() + " - " + self.account.currency.verbose(self.t2c.aggregate(Sum('change_amount'))['change_amount__sum'])
             else:
-                return None
-        return self.amount
+                return "/ CHF"
 
     def delete(self, *args, **kwargs):
         change = None
 
-        if self.currency is not self.account.currency and len(self.t2c.all()) > 0:
+        if self.currency != self.account.currency and len(self.t2c.all()) > 0:
             change = Change.objects.filter(transactions__in=self.t2c.all()).order_by('date')[0]
             for t in self.t2c.all():
                 t.delete()
