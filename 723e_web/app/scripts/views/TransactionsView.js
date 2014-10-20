@@ -195,27 +195,24 @@ define([
 			// Generate array of all models
 			arrayAbstract = _.union(collection.toArray(), changesCollection.toArray());
 
-			console.log(arrayAbstract);
 			// Group by date, return JSON
 			arrayAbstract = _.groupBy(arrayAbstract, function(obj) {
 				return obj.get("date");
 			});
 
-			console.log(arrayAbstract);
 			// Transofrm JSON to Array
 			arrayAbstract = _.pairs(arrayAbstract);
 
-			console.log(arrayAbstract);
 			// Order by date
 			arrayAbstract = _.sortBy(arrayAbstract, function(obj) {
 				return obj[0]
 			});
+			// Reverse
+			arrayAbstract.reverse();
 			// Change date format
-			console.log(arrayAbstract);
 			for (i = 0; i < arrayAbstract.length; i++) {
 				arrayAbstract[i][0] = moment(arrayAbstract[i][0], "YYYY-MM-DD").format("dddd D MMMM YYYY");
 			}
-
 
 			var template = Mustache.render(listTemplate, {
 				liste: arrayAbstract
