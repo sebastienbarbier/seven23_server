@@ -1,9 +1,18 @@
-<div class="debitscredits" data-id="{{ debitsCredits.id }}">
+<div class="debitcredit" data-id="{{ debitsCredits.id }}">
 	<div class="transaction">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-8">{{ debitsCredits.name }}</div>
 				<div class="col-md-4 value">{{ debitsCredits.reference_value }}</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">{{ debitsCredits.is_complete }}</div>
+				<div class="col-md-3">{{ debitsCredits.active }}</div>
+				<div class="col-md-3">{{ debitsCredits.category }}</div>
+				<div class="col-md-3">{{ debitsCredits.amount }}</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">{{ debitsCredits.categoryJSON.name }}</div>
 			</div>
 		</div>
 	</div>

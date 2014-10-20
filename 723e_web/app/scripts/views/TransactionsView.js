@@ -195,6 +195,17 @@ define([
 			// Generate array of all models
 			arrayAbstract = _.union(collection.toArray(), changesCollection.toArray());
 
+
+			for (i = 0; i < arrayAbstract.length; i++) {
+				console.log("DOSSIER");
+				var c = categories.get(arrayAbstract[i].get('category_id'))
+				if (c !== undefined) {
+					arrayAbstract[i].set('categoryJSON', c.toJSON());
+				}
+				console.log(arrayAbstract[i]);
+				console.log(arrayAbstract[i].get('categoryJSON'));
+			}
+
 			// Group by date, return JSON
 			arrayAbstract = _.groupBy(arrayAbstract, function(obj) {
 				return obj.get("date");
@@ -218,18 +229,18 @@ define([
 				liste: arrayAbstract
 			});
 
-			$("#listes").html(template);
+			$("#debitscredits").html(template);
 
 			var view = this;
 
 			// Event create form on button click
-			$(".debitscredits button.edit").on('click', function() {
-				var debitcredit = $(this).parents(".debitscredits").data('id');
+			$(".debitcredit button.edit").on('click', function() {
+				var debitcredit = $(this).parents(".debitcredit").data('id');
 				view.renderDebitsCreditsForm(collection.get(debitcredit).toJSON());
 			});
 
-			$(".debitscredits button.delete").on('click', function() {
-				var debitcredit = $(this).parents(".debitscredits").data('id');
+			$(".debitcredit button.delete").on('click', function() {
+				var debitcredit = $(this).parents(".debitcredit").data('id');
 				collection.get(debitcredit).destroy({
 					// prints nothing!!!
 					success: function() {
@@ -242,13 +253,13 @@ define([
 
 			});
 
-			$(".changes button.edit").on('click', function() {
-				var change = $(this).parents(".changes").data('id');
+			$(".change button.edit").on('click', function() {
+				var change = $(this).parents(".change").data('id');
 				view.renderChangesForm(changesCollection.get(change).toJSON());
 			});
 
-			$(".changes button.delete").on('click', function() {
-				var change = $(this).parents(".changes").data('id');
+			$(".change button.delete").on('click', function() {
+				var change = $(this).parents(".change").data('id');
 				changesCollection.get(change).destroy({
 					// prints nothing!!!
 					success: function() {

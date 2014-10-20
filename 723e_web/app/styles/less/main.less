@@ -270,32 +270,53 @@ p{
 }
 
 #timeline{
-	.date{
-		margin: 4px 0 4px 30px;
-		padding: 0;
-		color: #444;
-		font-size: 0.8em;
-		text-transform: capitalize;
+	margin-left: 40px;
+	.timeline_day{
+		clear: both;
+		.date{
+			float: left;
+			width: 190px;
+			text-align: right;
+			padding: 8px 10px 4px 0px;
+
+			color: #444;
+			font-size: 0.8em;
+			text-transform: capitalize;
+			border-top: 1px solid #ccc;
+		}
+		.elements{
+			float: left;
+			border-left: solid 4px;
+			.element{
+				border-top: 1px solid #ccc;
+			}
+		}
+		&:first-child{
+			.date{
+				border: none;
+			}
+			.element{
+				border: none;
+			}
+		}
+
 	}
+
+
+
 	.transaction{
-		margin: 4px 0 4px 40px;
+		margin: 4px 0 4px 8px;
 		padding: 0px 8px;
 		width: 500px;
 		float: left;
+		border: solid 1px #ccc;
+		background: white;
 		.value{
 			text-align: right;
 		}
 	}
-	.debitscredits{
-		.transaction{
-
-		}
-	}
 	.actions{
 		float: left;
-		padding: 8px 0 0 10px;
-	}
-	.changes{
-
+		padding: 5px 0 0 10px;
 	}
 }
