@@ -1,15 +1,17 @@
-<div class="change" data-id="{{ change.id }}">
-	<div class="transaction">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12">{{ change.name }} <small>{{ change.value }} > {{ change.new_value }} (Taux {{ change.exchange_rate }})</small></div>
+
+<div class="transaction change" data-id="{{ change.id }}">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<p>{{ change.name }} <small>{{ change.value }} > {{ change.new_value }} (Taux {{ change.exchange_rate }})</small></p>
 			</div>
 		</div>
 	</div>
-	<div class="actions">
-		<button type="button" class="btn btn-primary btn-xs edit">Modifier</button>
-		<button type="button" class="btn btn-primary btn-xs delete">Supprimer</button>
-	</div>
-	<div style="clear: both;"></div>
 </div>
+<ul class="actions">
+	<li class="edit">Modifier</li>
+	<li class="delete">Supprimer</li>
+</ul>
+
+
 

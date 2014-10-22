@@ -1,6 +1,7 @@
 @import (inline) "../../bower_components/normalize-css/normalize.css";
 // Bootstrap
 @import "variables.less";
+@import "fonts.less";
 @import "../../bower_components/bootstrap/less/mixins.less";
 
 // Reset and dependencies
@@ -59,6 +60,7 @@
 
 body{
 	background: @greywhite;
+	font-family: "open_sansregular";
 }
 
 .background_grey{
@@ -176,92 +178,6 @@ p{
 	}
 }
 
-#transactions{
-	#transactions_bar{
-		border-bottom: solid 1px lighten(@buttonBlue, 50%);
-		height: 60px;
-		color: @buttonBlue;
-
-		#t_accounts{
-			width: 300px;
-			float: right;
-			height: 59px;
-			&:hover{
-				background: darken(@greywhite, 5%);
-				cursor: pointer;
-			}
-			.t_account{
-				margin: 10px 5px 0px 10px;
-				p{
-					font-size: 25px;
-					line-height: 20px;
-					small{
-						font-size: 10px;
-					}
-				}
-			}
-			.carret{
-				float: right;
-				padding: 22px 12px 0 12px;
-				height: 59px;
-			}
-		}
-		#t_quicklook{
-			margin: 0 300px 0 350px;
-			.balance{
-				.value{
-					color: black;
-				}
-			}
-			.earned{
-				.value{
-					color: green;
-				}
-			}
-			.spended{
-				.value{
-					color: red;
-				}
-			}
-			.balance, .earned, .spended{
-				width: 33%;
-				float: left;
-				font-size: 20px;
-				line-height: 18px;
-				padding-top: 10px;
-				padding-left: 15px;
-				small{
-					font-size: 12px;
-					vertical-align: middle;
-				}
-				p.last{
-					font-style: italic;
-				}
-			}
-		}
-		#t_date_range{
-			width: 350px;
-			float: left;
-			height: 59px;
-			p{
-				padding: 9px 10px 0 20px;
-				font-size: 30px;
-				text-align: left;
-			}
-			&:hover{
-				background: darken(@greywhite, 5%);
-				cursor: pointer;
-			}
-
-			.carret{
-				float: left;
-				padding: 22px 15px 0 22px;
-				height: 59px;
-			}
-		}
-	}
-}
-
 .livicon {
   display: inline-block;
   line-height: inherit;
@@ -278,45 +194,74 @@ p{
 			width: 190px;
 			text-align: right;
 			padding: 8px 10px 4px 0px;
-
 			color: #444;
 			font-size: 0.8em;
 			text-transform: capitalize;
 			border-top: 1px solid #ccc;
 		}
 		.elements{
-			float: left;
 			border-left: solid 4px;
+			margin-left: 190px;
 			.element{
 				border-top: 1px solid #ccc;
+				position: relative;
+				.transaction{
+					margin-right: 20px;
+					padding: 7px 12px;
+					border-right: 1px solid #ccc;
+					.value{
+						text-align: right;
+					}
+				}
+				.debitcredit{
+					background: white;
+				}
+				.actions{
+					position: absolute;
+					cursor: pointer;
+					right: 0;
+					top: 0;
+					bottom: 0;
+					margin: 0;
+					padding: 0 20px 0 0;
+					width: 20px;
+					overflow: hidden;
+					li{
+						float: right;
+						background: red;
+						position: absolute;
+						top: 0px;
+						bottom: 0px;
+						list-style: none;
+						padding: 0px;
+						margin: 0px;
+						&:first-child{
+							right: 100px;
+							width: 80px;
+						}
+						&:last-child{
+							right: 20px;
+							width: 80px;
+						}
+					}
+					&:hover{
+						background: darken(@greywhite, 5%);
+					}
+				}
 			}
 		}
 		&:first-child{
 			.date{
 				border: none;
 			}
-			.element{
-				border: none;
+		}
+
+		&:last-child{
+			.element:last-child{
+				border-bottom: 1px solid #ccc;
 			}
 		}
-
 	}
 
 
-
-	.transaction{
-		margin: 4px 0 4px 8px;
-		padding: 0px 8px;
-		width: 500px;
-		float: left;
-		border: solid 1px #ccc;
-		background: white;
-		.value{
-			text-align: right;
-		}
-	}
-	.actions{
-		float: left;
-		padding: 5px 0 0 10px;
-	}
 }

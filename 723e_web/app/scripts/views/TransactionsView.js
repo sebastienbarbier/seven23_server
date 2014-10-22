@@ -233,44 +233,56 @@ define([
 
 			var view = this;
 
+			$(".actions").on('click', function() {
+				$(this).prev().animate({
+					"marginRight": 180
+				});
+				$(this).animate({
+					"width": 180
+				});
+			});
+
 			// Event create form on button click
-			$(".debitcredit button.edit").on('click', function() {
-				var debitcredit = $(this).parents(".debitcredit").data('id');
-				view.renderDebitsCreditsForm(collection.get(debitcredit).toJSON());
+			$(".element .edit").on('click', function() {
+				var transaction = $(this).parents(".actions").prev();
+				if (transaction.hasClass('debitcredit')) {
+					var debitcredit = transaction.data('id');
+					view.renderDebitsCreditsForm(collection.get(debitcredit).toJSON());
+				} else if (transaction.hasClass('change')) {
+					var change = transaction.data('id');
+					view.renderChangesForm(changesCollection.get(change).toJSON());
+				}
 			});
 
-			$(".debitcredit button.delete").on('click', function() {
-				var debitcredit = $(this).parents(".debitcredit").data('id');
-				collection.get(debitcredit).destroy({
-					// prints nothing!!!
-					success: function() {
-						view.render();
-					},
-					error: function() {
-						view.render();
-					}
-				});
+			$(".element .delete").on('click', function() {
+				var transaction = $(this).parents(".actions").prev();
+				if (transaction.hasClass('debitcredit')) {
+					var debitcredit = $(this).prev().data('id');
+					collection.get(debitcredit).destroy({
+						// prints nothing!!!
+						success: function() {
+							view.render();
+						},
+						error: function() {
+							view.render();
+						}
+					});
+				} else if (transaction.hasClass('change')) {
+					var change = $(this).parents(".change").data('id');
+					changesCollection.get(change).destroy({
+						// prints nothing!!!
+						success: function() {
+							view.render();
+						},
+						error: function() {
+							view.render();
+						}
+					});
+				}
+
 
 			});
 
-			$(".change button.edit").on('click', function() {
-				var change = $(this).parents(".change").data('id');
-				view.renderChangesForm(changesCollection.get(change).toJSON());
-			});
-
-			$(".change button.delete").on('click', function() {
-				var change = $(this).parents(".change").data('id');
-				changesCollection.get(change).destroy({
-					// prints nothing!!!
-					success: function() {
-						view.render();
-					},
-					error: function() {
-						view.render();
-					}
-				});
-
-			});
 		}
 
 
