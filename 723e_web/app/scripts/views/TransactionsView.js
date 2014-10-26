@@ -14,7 +14,8 @@ define([
 	'changesCollection',
 	'currenciesCollection',
 	'text!templates/transactions/list.mustache',
-	'categoryCollection'
+	'categoryCollection',
+	'text!templates/transactions/dateSelectPage.mustache'
 ], function(
 	$,
 	_,
@@ -31,7 +32,8 @@ define([
 	ChangesCollection,
 	CurrenciesCollection,
 	listTemplate,
-	CategoryCollection) {
+	CategoryCollection,
+	DateSelectorPageTemplate) {
 
 	var collection = new DebitsCreditsCollection();
 	var changesCollection = new ChangesCollection();
@@ -44,7 +46,8 @@ define([
 	var DashboardView = Backbone.View.extend({
 		el: $("#content"),
 
-		render: function() {
+		render: function(year, month) {
+
 			var initView = new InitView();
 			if (initView.isLoaded() === false) {
 				initView.render();
@@ -52,47 +55,60 @@ define([
 
 			initView.changeSelectedItem("nav_transactions");
 
-			$("#content").html(TransactionsTemplate);
 
-			var view = this;
 
-			// BIND EVENT
-			$("#content button.addDebitCredit").on('click', function() {
-				view.renderDebitsCreditsForm();
-			});
+			if (year === undefined || year === null) {
+				$("#content").html(DateSelectorPageTemplate);
+			} else {
 
-			$("#content button.addChange").on('click', function() {
-				view.renderChangesForm();
-			});
+				var d = moment(year + "-" + month, "YYYY-MM").format("MMMM YYYY");
 
-			arrayAbstract = [];
-			nbSource = 0;
+				var template = Mustache.render(TransactionsTemplate, {
+					date: d
+				});
+				$("#content").html(template);
 
-			currencies.fetch();
+				var view = this;
 
-			categories.fetch();
 
-			collection.fetch({
-				success: function() {
-					nbSource++;
-					if (nbSource === 2) {
-						view.generateListe();
+				// BIND EVENT
+				$("#content button.addDebitCredit").on('click', function() {
+					view.renderDebitsCreditsForm(year, month);
+				});
+
+				$("#content button.addChange").on('click', function() {
+					view.renderChangesForm(year, month);
+				});
+
+				arrayAbstract = [];
+				nbSource = 0;
+
+				currencies.fetch();
+
+				categories.fetch();
+
+				collection.fetch({
+					success: function() {
+						nbSource++;
+						if (nbSource === 2) {
+							view.generateListe(year, month);
+						}
 					}
-				}
-			});
+				});
 
-			changesCollection.fetch({
-				success: function() {
-					nbSource++;
-					if (nbSource === 2) {
-						view.generateListe();
+				changesCollection.fetch({
+					success: function() {
+						nbSource++;
+						if (nbSource === 2) {
+							view.generateListe(year, month);
+						}
 					}
-				}
-			});
+				});
+			}
 
 		},
 
-		renderDebitsCreditsForm: function(debitcredit) {
+		renderDebitsCreditsForm: function(year, month, debitcredit) {
 
 			var template = Mustache.render(DebitsCreditsFormTemplate, {
 				debitcredit: debitcredit,
@@ -110,7 +126,7 @@ define([
 			var view = this;
 			// User cancel form. We go back to view page.
 			$("button.debitscredits_form_cancel").on("click", function() {
-				view.render();
+				view.render(year, month);
 			});
 
 			$("button.debitscredits_form_submit").on("click", function() {
@@ -129,7 +145,7 @@ define([
 					wait: true,
 					success: function(model, response) {
 						console.log('Successfully saved!');
-						view.render();
+						view.render(year, month);
 					},
 					error: function(model, error) {
 						console.log(model.toJSON());
@@ -141,7 +157,7 @@ define([
 
 		},
 
-		renderChangesForm: function(change) {
+		renderChangesForm: function(year, month, change) {
 
 
 			var template = Mustache.render(ChangesFormTemplate, {
@@ -161,7 +177,7 @@ define([
 			var view = this;
 			// User cancel form. We go back to view page.
 			$("button.changes_form_cancel").on("click", function() {
-				view.render();
+				view.render(year, month);
 			});
 
 			$("button.changes_form_submit").on("click", function() {
@@ -180,7 +196,7 @@ define([
 					wait: true,
 					success: function(model, response) {
 						console.log('Successfully saved!');
-						view.render();
+						view.render(year, month);
 					},
 					error: function(model, error) {
 						console.log(model.toJSON());
@@ -191,19 +207,31 @@ define([
 			});
 
 		},
-		generateListe: function() {
+		generateListe: function(year, month) {
 			// Generate array of all models
 			arrayAbstract = _.union(collection.toArray(), changesCollection.toArray());
 
+			// Date filter stuff
+			if (year !== undefined && year !== null) {
+				var dateStart;
 
+				if (month !== undefined && month !== null) {
+					dateStart = year + "-" + month;
+				} else {
+					dateStart = "" + year;
+				}
+
+				arrayAbstract = _.filter(arrayAbstract, function(c) {
+					return c.get('date').indexOf(dateStart) === 0; //
+				});
+			}
+
+			// Feed each element with category object
 			for (i = 0; i < arrayAbstract.length; i++) {
-				console.log("DOSSIER");
 				var c = categories.get(arrayAbstract[i].get('category_id'))
 				if (c !== undefined) {
 					arrayAbstract[i].set('categoryJSON', c.toJSON());
 				}
-				console.log(arrayAbstract[i]);
-				console.log(arrayAbstract[i].get('categoryJSON'));
 			}
 
 			// Group by date, return JSON
@@ -234,12 +262,24 @@ define([
 			var view = this;
 
 			$(".actions").on('click', function() {
-				$(this).prev().animate({
-					"marginRight": 180
-				});
-				$(this).animate({
-					"width": 180
-				});
+				var action = $(this);
+				if (action.hasClass('open')) {
+					action.removeClass('open');
+					action.prev().animate({
+						"marginRight": 20
+					});
+					action.animate({
+						"width": 20
+					});
+				} else {
+					action.addClass("open");
+					action.prev().animate({
+						"marginRight": 180
+					});
+					action.animate({
+						"width": 180
+					});
+				}
 			});
 
 			// Event create form on button click
@@ -247,10 +287,10 @@ define([
 				var transaction = $(this).parents(".actions").prev();
 				if (transaction.hasClass('debitcredit')) {
 					var debitcredit = transaction.data('id');
-					view.renderDebitsCreditsForm(collection.get(debitcredit).toJSON());
+					view.renderDebitsCreditsForm(year, month, collection.get(debitcredit).toJSON());
 				} else if (transaction.hasClass('change')) {
 					var change = transaction.data('id');
-					view.renderChangesForm(changesCollection.get(change).toJSON());
+					view.renderChangesForm(year, month, changesCollection.get(change).toJSON());
 				}
 			});
 
@@ -261,10 +301,10 @@ define([
 					collection.get(debitcredit).destroy({
 						// prints nothing!!!
 						success: function() {
-							view.render();
+							view.render(year, month);
 						},
 						error: function() {
-							view.render();
+							view.render(year, month);
 						}
 					});
 				} else if (transaction.hasClass('change')) {
@@ -272,10 +312,10 @@ define([
 					changesCollection.get(change).destroy({
 						// prints nothing!!!
 						success: function() {
-							view.render();
+							view.render(year, month);
 						},
 						error: function() {
-							view.render();
+							view.render(year, month);
 						}
 					});
 				}

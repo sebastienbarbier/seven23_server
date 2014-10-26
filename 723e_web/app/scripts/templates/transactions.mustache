@@ -1,13 +1,9 @@
 
-<div class="container-fluid">
-	<div class="row background_grey" style="padding: 16px 0 0 0;">
+<header class="container-fluid grey">
+	<div class="row" style="padding: 16px 0 0 0;">
 		<div class="col-md-6">
-			<button class="btn"style="width: 140px;  float: left;" data-value="2014-09"><< Septembre</button>
-			<select name="" class="form-control" style="width: 180px; margin: 0 10px; float: left;">
-				<option value="2014-10">Octobre 2014</option>
-				<option value="2014-09">Septembre 2014</option>
-			</select>
-			<button class="btn"style="width: 140px; float: left;" data-value="2014-11">Novembre >></button>
+			<p class="" style="width: 50px; font-size: 25px;float: left; padding-left: 10px;"><<</p>
+			<h2><a href="#/transactions">{{ date }}</a></h2>
 		</div>
 		<div class="col-md-6">
 			<div>
@@ -18,6 +14,9 @@
 			</div>
 		</div>
 	</div>
+</header>
+
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<div id="debitscredits"></div>

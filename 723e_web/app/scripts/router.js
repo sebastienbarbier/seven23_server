@@ -29,6 +29,7 @@ define([
 				// Define some URL routes
 				'home': 'home',
 				'dashboard': 'dashboard',
+				'transactions/:year/:month': 'transactions',
 				'transactions': 'transactions',
 				'categories': 'categories',
 				'settings': 'settings',
@@ -60,8 +61,13 @@ define([
 			});
 
 			app_router.on('route:transactions', function() {
-				var dashboardView = new TransactionsView();
-				dashboardView.render();
+				var transactionView = new TransactionsView();
+				transactionView.render();
+			});
+
+			app_router.on('route:transactions', function(year, month) {
+				var transactionView = new TransactionsView();
+				transactionView.render(year, month);
 			});
 
 			app_router.on('route:categories', function() {
