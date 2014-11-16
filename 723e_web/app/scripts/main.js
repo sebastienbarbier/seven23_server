@@ -7,7 +7,8 @@ require.config({
 		jquery: '../../bower_components/jquery/dist/jquery',
 		underscore: '../bower_components/lodash/dist/lodash',
 		backbone: '../../bower_components/backbone/backbone',
-		'requirejs-text': '../../bower_components/requirejs-text/text',
+		css: '../../bower_components/require-css/css',
+		text: '../../bower_components/requirejs-text/text',
 		requirejs: '../../bower_components/requirejs/require',
 		mustache: '../../bower_components/mustache.js/mustache',
 		modernizr: '../../bower_components/modernizr/modernizr',
@@ -15,6 +16,7 @@ require.config({
 		bootstrap: '../../bower_components/bootstrap/dist/js/bootstrap.min',
 		'bootstrap-iconpicker': '../../bower_components/bootstrap-iconpicker/bootstrap-iconpicker/js/bootstrap-iconpicker.min',
 		'bootstrap-iconpicker-fa': '../../bower_components/bootstrap-iconpicker/bootstrap-iconpicker/js/iconset/iconset-fontawesome-4.2.0.min',
+		'bootstrap-colorpicker': '../../bower_components/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min',
 		// mocha: '../../bower_components/mocha/mocha',
 		// lodash: '../../bower_components/lodash/dist/lodash.compat',
 		// chai: '../../bower_components/chai/chai',
@@ -45,6 +47,9 @@ require.config({
 		'bootstrap-iconpicker': {
 			deps: ['bootstrap', 'bootstrap-iconpicker-fa'],
 		},
+		'bootstrap-colorpicker': {
+			deps: ['css!../../bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css'],
+		}
 	}
 });
 

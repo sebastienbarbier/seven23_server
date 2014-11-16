@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6">{{ debitsCredits.name }}</div>
-			<div class="col-md-3">{{ debitsCredits.categoryJSON.name }}</div>
+			<div class="col-md-3"><i class="fa {{  debitsCredits.categoryJSON.icon }}" style="color: {{  debitsCredits.categoryJSON.color }}; font-size: 1.2em; padding-right: 10px;"></i>{{ debitsCredits.categoryJSON.name }}</div>
 			<div class="col-md-3 value">{{ debitsCredits.reference_value }}</div>
 		</div>
 		<!--

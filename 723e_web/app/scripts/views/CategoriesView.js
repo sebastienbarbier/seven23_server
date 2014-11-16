@@ -86,7 +86,7 @@ define([
 			renderForm: function(categorie) {
 
 				var view = this;
-				require(['bootstrap-iconpicker'], function() {
+				require(['bootstrap-iconpicker', 'bootstrap-colorpicker'], function() {
 
 					var categories_actives = collection.where({
 						active: true
@@ -121,6 +121,8 @@ define([
 						selectedClass: 'btn-primary',
 						unselectedClass: ''
 					});
+
+					$('#cat_form .colorpicker').colorpicker();
 
 					// User validate form
 					$("button.cat_form_submit").on("click", function() {
