@@ -29,6 +29,7 @@ define([
 				// Define some URL routes
 				'home': 'home',
 				'dashboard': 'dashboard',
+				'transactions/:year': 'transactions',
 				'transactions/:year/:month': 'transactions',
 				'transactions': 'transactions',
 				'categories': 'categories',

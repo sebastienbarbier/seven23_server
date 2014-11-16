@@ -56,15 +56,36 @@ define([
 			initView.changeSelectedItem("nav_transactions");
 
 
+			if (month === undefined || month === null) {
 
-			if (year === undefined || year === null) {
-				$("#content").html(DateSelectorPageTemplate);
+				var calendar = {};
+				if (year === undefined || year === null) {
+					calendar.year = new Date().getFullYear();
+				} else {
+					calendar.year = moment().year(year).year();
+				}
+				calendar.before = calendar.year - 1;
+				calendar.after = calendar.year + 1;
+				calendar.months = [];
+				for (var i = 1; i <= 12; i = i + 1) {
+					calendar.months.push({
+						month: moment().month(i - 1).format("MM"),
+						year: year,
+						label: moment().month(i - 1).format("MMMM")
+					});
+				}
+
+				var template = Mustache.render(DateSelectorPageTemplate, {
+					calendar: calendar
+				});
+				$("#content").html(template);
 			} else {
 
 				var d = moment(year + "-" + month, "YYYY-MM").format("MMMM YYYY");
 
 				var template = Mustache.render(TransactionsTemplate, {
-					date: d
+					date: d,
+					year: year
 				});
 				$("#content").html(template);
 

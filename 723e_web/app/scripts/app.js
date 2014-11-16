@@ -29,7 +29,6 @@ define("app", ["jquery", "moment", "router", "ws", "userModel"], function($, mom
 				}
 				window.location.hash = "/login?next=" + hash;
 			} else {
-
 				// window.location.hash = "#/dashboard";
 			}
 		}).fail(function() {

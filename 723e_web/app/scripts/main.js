@@ -40,8 +40,7 @@ require.config({
 	}
 });
 
-require(['app'], function(App) {
-
+require(['app'], function(App, moment) {
 	// We first intialize our application.
 	App.initialize();
 
