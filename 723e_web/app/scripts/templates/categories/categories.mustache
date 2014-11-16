@@ -12,11 +12,11 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
+			<h2>Catégories</h2>
 			<div id="categories_list">
-				{{# categories }}
+				{{# categories_actives }}
 				<div class="categorie" data-id="{{ id }}">
-					<div class="circle" style="background: {{ color }};">
-					</div>
+					<i class="circle fa {{ icon }}" style="color: {{ color }}; font-size: 80px;"></i>
 					<div class="content">
 						<h3>{{ name }}</h3>
 						<p>{{ description }}</p>
@@ -24,10 +24,32 @@
 						<button type="button" class="btn btn-primary btn-xs delete">Supprimer</button>
 					</div>
 				</div>
-				{{/ categories }}
-				{{^ categories}}
+				{{/ categories_actives }}
+				{{^ categories_actives}}
 				 <p>Aucune catégorie n'est actuellement renseigné</p>
-				{{/ categories}}
+				{{/ categories_actives}}
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Catégories Désactivées</h2>
+			<div id="categories_list">
+				{{# categories_disabled }}
+				<div class="categorie" data-id="{{ id }}">
+					<div class="circle" style="background: {{ color }};">
+					</div>
+					<div class="content">
+						<h3>{{ name }}</h3>
+						<p>{{ description }}</p>
+						<button type="button" class="btn btn-primary btn-xs delete">Activer</button>
+					</div>
+				</div>
+				{{/ categories_disabled }}
+				{{^ categories_disabled}}
+				 <p>Aucune catégorie n'est actuellement renseigné</p>
+				{{/ categories_disabled}}
 			</div>
 		</div>
 	</div>

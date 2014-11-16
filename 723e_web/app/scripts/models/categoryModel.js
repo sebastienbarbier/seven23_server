@@ -10,6 +10,14 @@ define(["jquery", "backbone", "ws"], function($, Backbone, WebServices) {
 		},
 		initialize: function() {
 			//alert("Welcome to this world");
+		},
+		validate: function(attrs, options) {
+			if (attrs.description === "") {
+				return "NAAAANNNNN";
+			}
+			if (attrs.name === "") {
+				return "BISSS";
+			}
 		}
 	});
 

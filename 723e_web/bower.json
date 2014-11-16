@@ -8,13 +8,15 @@
     "requirejs": "~2.1.10",
     "requirejs-text": "~2.0.10",
     "modernizr": "~2.7.1",
-    "moment": "~2.8.3"
+    "moment": "~2.8.3",
+    "font-awesome": "~4.2.0"
   },
   "devDependencies": {
     "mustache.js": "~0.8.2",
     "bootstrap": "~3.2.0",
     "i18next": "~1.7.3",
     "normalize-css": "~3.0.1",
-    "fastclick": "~1.0.3"
+    "fastclick": "~1.0.3",
+    "bootstrap-iconpicker": "~1.6.0"
   }
 }

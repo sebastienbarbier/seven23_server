@@ -12,6 +12,9 @@ require.config({
 		mustache: '../../bower_components/mustache.js/mustache',
 		modernizr: '../../bower_components/modernizr/modernizr',
 		moment: '../../bower_components/moment/moment',
+		bootstrap: '../../bower_components/bootstrap/dist/js/bootstrap.min',
+		'bootstrap-iconpicker': '../../bower_components/bootstrap-iconpicker/bootstrap-iconpicker/js/bootstrap-iconpicker.min',
+		'bootstrap-iconpicker-fa': '../../bower_components/bootstrap-iconpicker/bootstrap-iconpicker/js/iconset/iconset-fontawesome-4.2.0.min',
 		// mocha: '../../bower_components/mocha/mocha',
 		// lodash: '../../bower_components/lodash/dist/lodash.compat',
 		// chai: '../../bower_components/chai/chai',
@@ -37,6 +40,11 @@ require.config({
 		transactionsView: 'views/TransactionsView',
 		categoriesView: 'views/CategoriesView',
 		settingsView: 'views/SettingsView',
+	},
+	shim: {
+		'bootstrap-iconpicker': {
+			deps: ['bootstrap', 'bootstrap-iconpicker-fa'],
+		},
 	}
 });
 

@@ -5,5 +5,6 @@ define(["jquery", "backbone", "ws", "categoryModel"], function($, Backbone, WebS
 		url: WebServices.v1.categories
 	});
 
+
 	return collection;
 });

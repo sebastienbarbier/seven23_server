@@ -5,9 +5,11 @@ from rest_framework import serializers
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
 
+    parent_id = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+
     class Meta:
         model = Category
-        fields = ('id', 'user', 'name', 'description', 'color', 'icon', 'parent', 'selectable', 'active')
+        fields = ('id', 'user', 'name', 'description', 'color', 'icon', 'parent', 'parent_id', 'selectable', 'active')
 
 class DebitsCreditsSerializer(serializers.HyperlinkedModelSerializer):
     is_complete = serializers.Field(source='is_change_complete')

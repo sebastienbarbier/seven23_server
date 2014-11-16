@@ -1,4 +1,4 @@
-define("app", ["jquery", "moment", "router", "ws", "userModel"], function($, moment, Router, ws, UserModel) {
+define("app", ["jquery", "bootstrap", "moment", "router", "ws", "userModel"], function($, bt, moment, Router, ws, UserModel) {
 	// Put here the plugin code.
 	// No need to return anything as we are augmenting the jQuery object
 	var initialize = function() {
