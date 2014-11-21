@@ -339,20 +339,52 @@ p{
 	}
 }
 
-.monthSelector{
-	background: #ccc;
-	margin: 4px 0px;
-	font-size: 24px;
-	.border-radius(10px);
-	&:hover{
-		background: #bbb;
+.datepickerpage{
+	.title{
+		h2{
+			padding: 10px 0px;
+			text-align: right;
+			float: left;
+			width: 50%;
+		}
+		a{
+			font-size: 30px;
+			padding-top: 5px;
+		}
+		a:first-child{
+			float: left;
+		}
+		a:last-child{
+			float: right;
+		}
 	}
-	a{
-		display: block;
-		width: 100%;
-		height: 100%;
-		padding: 18px 28px;
-		text-decoration: none;
-		text-transform: capitalize;
+	.monthSelector{
+		background: #ccc;
+		margin: 10px 0px;
+		font-size: 24px;
+		&:hover{
+			background: #bbb;
+		}
+		a{
+			display: block;
+			width: 100%;
+			height: 100%;
+			text-decoration: none;
+			text-transform: capitalize;
+			h3{
+				margin: 0;
+				font-size: 14px;
+				padding: 6px 10px 6px 10px;
+				border: solid 1px black;
+				text-align: center;
+			}
+			.details{
+				background: white;
+				padding: 40px;
+				border-bottom: solid 1px black;
+				border-left: solid 1px black;
+				border-right: solid 1px black;
+			}
+		}
 	}
 }

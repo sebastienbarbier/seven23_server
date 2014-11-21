@@ -1,11 +1,11 @@
 {{#calendar}}
-<header class="container-fluid grey">
-
-
+<header class="container-fluid grey datepickerpage">
 	<div class="container">
-		<div class="row">
+		<div class="row title">
 			<div class="col-xs-12">
-				<h2><a href="#/transactions/{{before}}"><<</a> {{ year }} <a href="#/transactions/{{after}}">>></a></h2>
+				<a href="#/transactions/{{before}}"><<</a>
+				<h2>{{ year }}</h2>
+				<a href="#/transactions/{{after}}">>></a>
 			</div>
 		</div>
 		<div class="row">
@@ -13,12 +13,14 @@
 			<div class="col-xs-6 col-md-4 col-lg-3">
 				<div class="monthSelector">
 					<a href="#/transactions/{{year}}/{{month}}">
-					{{label}}
+						<h3>{{label}}</h3>
+						<div class="details">
+
+						</div>
 					</a>
 				</div>
 			</div>
 		{{/months}}
-
 		</div>
 
 	</div>
