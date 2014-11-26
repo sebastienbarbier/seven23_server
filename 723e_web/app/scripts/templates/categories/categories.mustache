@@ -1,55 +1,36 @@
-<div class="container-fluid">
+<div id="categories_view" class="container-fluid">
 	<div class="row" style="padding: 16px 0 0 0;">
 		<div class="col-md-6">
+
+			<h2>Catégories</h2>
 		</div>
 		<div class="col-md-6">
 			<div>
 				<p style="float: right; margin: 0 5px;">
-					<button type="button" class="btn btn-primary addCategorie">Ajouter une nouvelle catégorie</button>
+					<a href="#/categories/add" class="btn btn-primary addCategorie">Ajouter une nouvelle catégorie</a>
 				</p>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<h2>Catégories</h2>
-			<div id="categories_list">
-				{{# categories_actives }}
-				<div class="categorie" data-id="{{ id }}">
-					<i class="circle fa {{ icon }}" style="color: {{ color }}; font-size: 80px;"></i>
-					<div class="content">
-						<h3>{{ name }}</h3>
-						<p>{{ description }}</p>
-						<button type="button" class="btn btn-primary btn-xs edit">Modifier</button>
-						<button type="button" class="btn btn-primary btn-xs delete">Supprimer</button>
-					</div>
-				</div>
-				{{/ categories_actives }}
-				{{^ categories_actives}}
-				 <p>Aucune catégorie n'est actuellement renseigné</p>
-				{{/ categories_actives}}
+
+			<div id="categories" class="row">
+			{{{ tree_enable }}}
 			</div>
+
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-md-12">
-			<h2>Catégories Désactivées</h2>
-			<div id="categories_list">
-				{{# categories_disabled }}
-				<div class="categorie" data-id="{{ id }}">
-					<i class="circle fa {{ icon }}" style="color: {{ color }}; font-size: 80px;"></i>
-					<div class="content">
-						<h3>{{ name }}</h3>
-						<p>{{ description }}</p>
-						<button type="button" class="btn btn-primary btn-xs delete">Activer</button>
-					</div>
-				</div>
-				{{/ categories_disabled }}
-				{{^ categories_disabled}}
-				 <p>Aucune catégorie n'est actuellement renseigné</p>
-				{{/ categories_disabled}}
+			<h6><i class="fa fa-plus-square"></i> Voir les catégories désactivés.</h6>
+
+			<div id="categories_disable">
+				{{{ tree_disable }}}
 			</div>
+
+
 		</div>
 	</div>
 </div>

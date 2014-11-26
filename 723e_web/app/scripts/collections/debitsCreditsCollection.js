@@ -2,7 +2,8 @@ define(["jquery", "backbone", "ws", "debitsCreditsModel"], function($, Backbone,
 
 	var debitscredits = Backbone.Collection.extend({
 		model: DebitsCreditsModel,
-		url: WebServices.v1.debitscredits
+		url: WebServices.v1.debitscredits,
+		comparator: 'date'
 	});
 
 	return debitscredits;

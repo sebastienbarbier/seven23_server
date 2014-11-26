@@ -2,7 +2,8 @@ define(["jquery", "backbone", "ws", "categoryModel"], function($, Backbone, WebS
 
 	var collection = Backbone.Collection.extend({
 		model: CategoryModel,
-		url: WebServices.v1.categories
+		url: WebServices.v1.categories,
+		comparator: 'name'
 	});
 
 

@@ -9,6 +9,7 @@ define([
 		'dashboardView',
 		'transactionsView',
 		'categoriesView',
+		'categoriesFormView',
 		'initView',
 		'settingsView'
 	],
@@ -21,6 +22,7 @@ define([
 		DashboardView,
 		TransactionsView,
 		CategoriesView,
+		CategoriesFormView,
 		InitView,
 		SettingsView) {
 
@@ -29,10 +31,12 @@ define([
 				// Define some URL routes
 				'home': 'home',
 				'dashboard': 'dashboard',
+				'transactions': 'transactions',
 				'transactions/:year': 'transactions',
 				'transactions/:year/:month': 'transactions',
-				'transactions': 'transactions',
 				'categories': 'categories',
+				'categories/add': 'categoriesForm',
+				'categories/edit/:id': 'categoriesForm',
 				'settings': 'settings',
 				// Error
 				'error': 'error',
@@ -47,23 +51,11 @@ define([
 
 			var app_router = new AppRouter;
 
-			app_router.on('route:home', function() {
-				// Call render on the module we loaded in via the dependency array
-				// 'views/projects/list'
-				// var projectListView = new ProjectListView();
-				// projectListView.render();
-				console.log('Home');
-			});
 			// As above, call render on our loaded module
 			// 'views/users/list'
 			app_router.on('route:dashboard', function() {
 				var dashboardView = new DashboardView();
 				dashboardView.render();
-			});
-
-			app_router.on('route:transactions', function() {
-				var transactionView = new TransactionsView();
-				transactionView.render();
 			});
 
 			app_router.on('route:transactions', function(year, month) {
@@ -74,6 +66,11 @@ define([
 			app_router.on('route:categories', function() {
 				var dashboardView = new CategoriesView();
 				dashboardView.render();
+			});
+
+			app_router.on('route:categoriesForm', function(categorie_id) {
+				var dashboardView = new CategoriesFormView();
+				dashboardView.render(categorie_id);
 			});
 
 			app_router.on('route:settings', function() {

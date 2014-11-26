@@ -1,0 +1,130 @@
+
+.datepickerpage{
+	.title{
+		h2{
+			padding: 10px 0px;
+			text-align: right;
+			float: left;
+			width: 50%;
+		}
+		a{
+			font-size: 30px;
+			padding-top: 5px;
+		}
+		a:first-child{
+			float: left;
+		}
+		a:last-child{
+			float: right;
+		}
+	}
+	.monthSelector{
+		background: #ccc;
+		margin: 10px 0px;
+		font-size: 24px;
+		&:hover{
+			background: #bbb;
+		}
+		a{
+			display: block;
+			width: 100%;
+			height: 100%;
+			text-decoration: none;
+			text-transform: capitalize;
+			h3{
+				margin: 0;
+				font-size: 14px;
+				padding: 6px 10px 6px 10px;
+				border: solid 1px black;
+				text-align: center;
+			}
+			.details{
+				background: white;
+				padding: 40px;
+				border-bottom: solid 1px black;
+				border-left: solid 1px black;
+				border-right: solid 1px black;
+			}
+		}
+	}
+}
+
+
+#timeline{
+	margin-left: 40px;
+	.timeline_day{
+		clear: both;
+		.date{
+			float: left;
+			width: 190px;
+			text-align: right;
+			padding: 8px 10px 4px 0px;
+			color: #444;
+			font-size: 0.8em;
+			text-transform: capitalize;
+			border-top: 1px solid #ccc;
+		}
+		.elements{
+			border-left: solid 4px;
+			margin-left: 190px;
+			.element{
+				border-top: 1px solid #ccc;
+				position: relative;
+				.transaction{
+					margin-right: 20px;
+					padding: 7px 12px;
+					border-right: 1px solid #ccc;
+					.value{
+						text-align: right;
+					}
+				}
+				.debitcredit{
+					background: white;
+				}
+				.actions{
+					position: absolute;
+					cursor: pointer;
+					right: 0;
+					top: 0;
+					bottom: 0;
+					margin: 0;
+					padding: 0 20px 0 0;
+					width: 20px;
+					overflow: hidden;
+					li{
+						float: right;
+						background: red;
+						position: absolute;
+						top: 0px;
+						bottom: 0px;
+						list-style: none;
+						padding: 0px;
+						margin: 0px;
+						&:first-child{
+							right: 100px;
+							width: 80px;
+						}
+						&:last-child{
+							right: 20px;
+							width: 80px;
+						}
+					}
+					&:hover{
+						background: darken(@greywhite, 5%);
+					}
+				}
+			}
+		}
+		&:first-child{
+			.date{
+				border: none;
+			}
+		}
+
+		&:last-child{
+			.element:last-child{
+				border-bottom: 1px solid #ccc;
+			}
+		}
+	}
+}
