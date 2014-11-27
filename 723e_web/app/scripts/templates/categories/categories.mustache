@@ -14,23 +14,20 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-
 			<div id="categories" class="row">
-			{{{ tree_enable }}}
+				{{{ tree_enable }}}
 			</div>
-
 		</div>
 	</div>
 
+	{{#tree_disable}}
 	<div class="row">
 		<div class="col-md-12">
 			<h6><i class="fa fa-plus-square"></i> Voir les catégories désactivés.</h6>
-
 			<div id="categories_disable">
 				{{{ tree_disable }}}
 			</div>
-
-
 		</div>
 	</div>
+	{{/tree_disable}}
 </div>
