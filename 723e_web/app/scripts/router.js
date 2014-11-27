@@ -8,6 +8,7 @@ define([
 		'ws',
 		'dashboardView',
 		'transactionsView',
+		'yearView',
 		'debitscreditsFormView',
 		'changesFormView',
 		'categoriesView',
@@ -23,6 +24,7 @@ define([
 		ws,
 		DashboardView,
 		TransactionsView,
+		YearView,
 		DebitscreditsFormView,
 		ChangesFormView,
 		CategoriesView,
@@ -67,8 +69,13 @@ define([
 			});
 
 			app_router.on('route:transactions', function(year, month) {
-				var transactionView = new TransactionsView();
-				transactionView.render(year, month);
+				if (month !== undefined && month !== null) {
+					var transactionView = new TransactionsView();
+					transactionView.render(year, month);
+				}else{
+					var transactionView = new YearView();
+					transactionView.render(year);
+				}
 			});
 
 			app_router.on('route:debitcreditsForm', function(year, month, id) {

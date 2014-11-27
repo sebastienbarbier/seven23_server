@@ -56,82 +56,56 @@ define([
 			initView.changeSelectedItem("nav_transactions");
 
 
-			if (month === undefined || month === null) {
+			var d = moment(year + "-" + month, "YYYY-MM").format("MMMM YYYY");
 
-				var calendar = {};
-				if (year === undefined || year === null) {
-					calendar.year = new Date().getFullYear();
-				} else {
-					calendar.year = moment().year(year).year();
-				}
-				calendar.before = calendar.year - 1;
-				calendar.after = calendar.year + 1;
-				calendar.months = [];
-				for (var i = 1; i <= 12; i = i + 1) {
-					calendar.months.push({
-						month: moment().month(i - 1).format("MM"),
-						year: year,
-						label: moment().month(i - 1).format("MMMM")
-					});
-				}
+			var template = Mustache.render(TransactionsTemplate, {
+				date: d,
+				year: year
+			});
+			$("#content").html(template);
 
-				var template = Mustache.render(DateSelectorPageTemplate, {
-					calendar: calendar
+			var view = this;
+
+
+			// BIND EVENT
+			$("#content button.addDebitCredit").on('click', function() {
+				//transactionsFormView.render(year, month);
+				Backbone.history.navigate("#/transactions/"+year+"/"+month+"/debitscredits/add", {
+					trigger: true
 				});
-				$("#content").html(template);
-			} else {
+			});
 
-				var d = moment(year + "-" + month, "YYYY-MM").format("MMMM YYYY");
-
-				var template = Mustache.render(TransactionsTemplate, {
-					date: d,
-					year: year
+			$("#content button.addChange").on('click', function() {
+				//changesFormView.render(year, month);
+				Backbone.history.navigate("#/transactions/"+year+"/"+month+"/changes/add", {
+					trigger: true
 				});
-				$("#content").html(template);
+			});
 
-				var view = this;
+			arrayAbstract = [];
+			nbSource = 0;
 
+			currencies.fetch();
 
-				// BIND EVENT
-				$("#content button.addDebitCredit").on('click', function() {
-					//transactionsFormView.render(year, month);
-					Backbone.history.navigate("#/transactions/"+year+"/"+month+"/debitscredits/add", {
-						trigger: true
-					});
-				});
+			categories.fetch();
 
-				$("#content button.addChange").on('click', function() {
-					//changesFormView.render(year, month);
-					Backbone.history.navigate("#/transactions/"+year+"/"+month+"/changes/add", {
-						trigger: true
-					});
-				});
-
-				arrayAbstract = [];
-				nbSource = 0;
-
-				currencies.fetch();
-
-				categories.fetch();
-
-				collection.fetch({
-					success: function() {
-						nbSource++;
-						if (nbSource === 2) {
-							view.generateListe(year, month);
-						}
+			collection.fetch({
+				success: function() {
+					nbSource++;
+					if (nbSource === 2) {
+						view.generateListe(year, month);
 					}
-				});
+				}
+			});
 
-				changesCollection.fetch({
-					success: function() {
-						nbSource++;
-						if (nbSource === 2) {
-							view.generateListe(year, month);
-						}
+			changesCollection.fetch({
+				success: function() {
+					nbSource++;
+					if (nbSource === 2) {
+						view.generateListe(year, month);
 					}
-				});
-			}
+				}
+			});
 
 		},
 
@@ -177,6 +151,7 @@ define([
 			});
 			// Reverse
 			arrayAbstract.reverse();
+
 			// Change date format
 			for (i = 0; i < arrayAbstract.length; i++) {
 				arrayAbstract[i][0] = moment(arrayAbstract[i][0], "YYYY-MM-DD").format("dddd D MMMM YYYY");

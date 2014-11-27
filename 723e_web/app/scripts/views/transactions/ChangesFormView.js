@@ -121,10 +121,7 @@ define([
 					});
 				}
 			});
-
 		}
-
-
 	});
 
 	return DashboardView;
