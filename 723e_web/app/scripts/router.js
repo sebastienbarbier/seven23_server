@@ -8,6 +8,8 @@ define([
 		'ws',
 		'dashboardView',
 		'transactionsView',
+		'debitscreditsFormView',
+		'changesFormView',
 		'categoriesView',
 		'categoriesFormView',
 		'initView',
@@ -21,6 +23,8 @@ define([
 		ws,
 		DashboardView,
 		TransactionsView,
+		DebitscreditsFormView,
+		ChangesFormView,
 		CategoriesView,
 		CategoriesFormView,
 		InitView,
@@ -34,6 +38,10 @@ define([
 				'transactions': 'transactions',
 				'transactions/:year': 'transactions',
 				'transactions/:year/:month': 'transactions',
+				'transactions/:year/:month/debitscredits/add': 'debitcreditsForm',
+				'transactions/:year/:month/debitscredits/edit/:id': 'debitcreditsForm',
+				'transactions/:year/:month/changes/add': 'changesForm',
+				'transactions/:year/:month/changes/edit/:id': 'changesForm',
 				'categories': 'categories',
 				'categories/add': 'categoriesForm',
 				'categories/edit/:id': 'categoriesForm',
@@ -61,6 +69,16 @@ define([
 			app_router.on('route:transactions', function(year, month) {
 				var transactionView = new TransactionsView();
 				transactionView.render(year, month);
+			});
+
+			app_router.on('route:debitcreditsForm', function(year, month, id) {
+				var transactionView = new DebitscreditsFormView();
+				transactionView.render(year, month, id);
+			});
+
+			app_router.on('route:changesForm', function(year, month, id) {
+				var transactionView = new ChangesFormView();
+				transactionView.render(year, month, id);
 			});
 
 			app_router.on('route:categories', function() {
