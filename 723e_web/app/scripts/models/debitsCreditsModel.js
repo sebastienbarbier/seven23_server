@@ -27,7 +27,8 @@ define([
 					return true;
 				},
 				defaultCurrency: function(){
-
+					console.log(this.debitsCredits.currency_id);
+					return storage.currencies.get(this.debitsCredits.currency_id).toString(this.debitsCredits.amount);
 				},
 				favoriteCurrency: function(){
 

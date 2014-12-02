@@ -4,35 +4,18 @@ define([
 	'backbone',
 	'mustache',
 	'initView',
-	'text!templates/transactions.mustache',
-	'text!templates/transactions/debitscreditsForm.mustache',
-	'debitsCreditsModel',
-	'debitsCreditsCollection',
 	'text!templates/transactions/changesForm.mustache',
 	'changesModel',
-	'currenciesCollection',
-	'text!templates/transactions/list.mustache',
-	'categoryCollection',
-	'text!templates/transactions/dateSelectPage.mustache'
+	'storage'
 ], function(
 	$,
 	_,
 	Backbone,
 	Mustache,
 	InitView,
-	TransactionsTemplate,
-	DebitsCreditsFormTemplate,
-	DebitsCreditsModel,
-	DebitsCreditsCollection,
 	ChangesFormTemplate,
 	ChangesModel,
-	CurrenciesCollection,
-	listTemplate,
-	CategoryCollection,
-	DateSelectorPageTemplate) {
-
-	var currencies = new CurrenciesCollection();
-	var categories = new CategoryCollection();
+	storage) {
 
 	var arrayAbstract = [];
 	var nbSource = 0;
@@ -43,8 +26,7 @@ define([
 		displayForm: function(year, month, change){
 			var template = Mustache.render(ChangesFormTemplate, {
 				change: change,
-				currencies: currencies.toJSON(),
-				categories: categories.toJSON()
+				currencies: storage.currencies.toJSON()
 			});
 			$("#content").html(template);
 
@@ -103,24 +85,16 @@ define([
 
 			var view = this;
 
-			currencies.fetch({
-				success: function() {
-					categories.fetch({
-						success: function() {
-							if(change_id){
-								var change = new ChangesModel({id: change_id});
-								change.fetch({
-							        success: function (c) {
-							            view.displayForm(year, month, change.toJSON());
-							        }
-							    });
-							}else{
-								view.displayForm(year, month);
-							}
-						}
-					});
-				}
-			});
+			if(change_id){
+				var change = new ChangesModel({id: change_id});
+				change.fetch({
+			        success: function (c) {
+			            view.displayForm(year, month, change.toJSON());
+			        }
+			    });
+			}else{
+				view.displayForm(year, month);
+			}
 		}
 	});
 

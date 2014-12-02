@@ -136,6 +136,8 @@ define([
 			// arrayAbstract is a list of transaction with categorieJSON.
 			//
 
+			console.log(arrayAbstract);
+
 			var bilan = {};
 			bilan.total = 0;
 			bilan.debits = 0;

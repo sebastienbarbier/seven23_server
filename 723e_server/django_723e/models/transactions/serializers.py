@@ -13,10 +13,11 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
 
 class DebitsCreditsSerializer(serializers.HyperlinkedModelSerializer):
     category_id = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    currency_id = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
 
     class Meta:
         model = DebitsCredits
-        fields = ('id', 'account', 'currency', 'name', 'amount', 'date', 'active', 'category', 'category_id')
+        fields = ('id', 'account', 'currency', 'currency_id', 'name', 'amount', 'date', 'active', 'category', 'category_id')
 
 
 class ChequeSerializer(serializers.HyperlinkedModelSerializer):
