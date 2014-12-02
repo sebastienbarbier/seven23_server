@@ -6,5 +6,6 @@ define(["jquery", "backbone", "ws", "debitsCreditsModel"], function($, Backbone,
 		comparator: 'date'
 	});
 
+
 	return debitscredits;
 });

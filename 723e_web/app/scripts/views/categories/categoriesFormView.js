@@ -7,7 +7,8 @@ define([
 		'text!templates/categories/categoriesItem.mustache',
 		'text!templates/categories/categoriesForm.mustache',
 		'categoryModel',
-		'categoryCollection'
+		'categoryCollection',
+		'storage'
 	],
 	function(
 		$,
@@ -18,18 +19,15 @@ define([
 		CategoriesItemTemplate,
 		CategoriesFormTemplate,
 		Category,
-		CategoryCollection) {
-
-		var collection = new CategoryCollection();
+		CategoryCollection,
+		storage) {
 
 		var CategoryFormView = Backbone.View.extend({
 			el: $("#content"),
 
 			displayForm: function(categorie){
 
-				var categories_actives = collection.where({
-					active: true
-				});
+				var categories_actives = storage.categories.enable();
 
 				var template = Mustache.render(CategoriesFormTemplate, {
 					'categorie': categorie,
@@ -75,7 +73,7 @@ define([
 					dict['user'] = "http://localhost:8000/api/v1/users/1";
 
 					if (dict.parent && dict.parent !== "") {
-						dict.parent = collection.get(dict.parent).url();
+						dict.parent = storage.categories.get(dict.parent).url();
 					}
 
 					var category = new Category(dict);
@@ -106,25 +104,20 @@ define([
 
 				var view = this;
 
-				collection.fetch({
+				require(['bootstrap-iconpicker', 'bootstrap-colorpicker'], function() {
 
-					success: function() {
-						require(['bootstrap-iconpicker', 'bootstrap-colorpicker'], function() {
-
-							if(categorie_id){
-								var categorie = new Category({id: categorie_id});
-								categorie.fetch({
-							        success: function (c) {
-							            view.displayForm(categorie.toJSON());
-							        }
-							    });
-							}else{
-								view.displayForm();
-							}
-
-
-						});
+					if(categorie_id){
+						var categorie = new Category({id: categorie_id});
+						categorie.fetch({
+					        success: function (c) {
+					            view.displayForm(categorie.toJSON());
+					        }
+					    });
+					}else{
+						view.displayForm();
 					}
+
+
 				});
 			}
 		});

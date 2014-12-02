@@ -1,4 +1,19 @@
-define("app", ["jquery", "bootstrap", "moment", "router", "ws", "userModel"], function($, bt, moment, Router, ws, UserModel) {
+define("app", [
+			"jquery",
+			"bootstrap",
+			"moment",
+			"router",
+			"ws",
+			"userModel",
+			"storage"],
+		function(
+			$,
+			bt,
+			moment,
+			Router,
+			ws,
+			UserModel,
+			storage) {
 	// Put here the plugin code.
 	// No need to return anything as we are augmenting the jQuery object
 	var initialize = function() {
@@ -7,14 +22,12 @@ define("app", ["jquery", "bootstrap", "moment", "router", "ws", "userModel"], fu
 		var fr = require(['../../bower_components/moment/locale/fr']);
 		moment.locale('fr');
 
-		var user = new UserModel();
-
 		// First we check if user is logged to charge the correct page.
 		ws.get({
 			url: ws.init,
 			async: false
 		}).done(function(json) {
-
+			console.log(json);
 			if (json.is_authenticated === false) {
 				// User is invited to login
 				// GET[’next'] is the page to load
@@ -28,15 +41,17 @@ define("app", ["jquery", "bootstrap", "moment", "router", "ws", "userModel"], fu
 					}
 				}
 				window.location.hash = "/login?next=" + hash;
-			} else {
-				// window.location.hash = "#/dashboard";
+				Router.initialize();
+			}else{
+				storage.init(json.id, function(){
+					Router.initialize();
+				});
 			}
 		}).fail(function() {
 			window.location.hash = "/error";
+			Router.initialize();
 		});
 
-		// Pass in our Router module and call it's initialize function
-		Router.initialize();
 	};
 
 	return {

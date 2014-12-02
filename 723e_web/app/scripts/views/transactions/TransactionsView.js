@@ -14,8 +14,8 @@ define([
 	'changesCollection',
 	'currenciesCollection',
 	'text!templates/transactions/list.mustache',
-	'categoryCollection',
-	'text!templates/transactions/dateSelectPage.mustache'
+	'text!templates/transactions/dateSelectPage.mustache',
+	'storage'
 ], function(
 	$,
 	_,
@@ -32,13 +32,11 @@ define([
 	ChangesCollection,
 	CurrenciesCollection,
 	listTemplate,
-	CategoryCollection,
-	DateSelectorPageTemplate) {
+	DateSelectorPageTemplate,
+	storage) {
 
 	var collection = new DebitsCreditsCollection();
 	var changesCollection = new ChangesCollection();
-	var currencies = new CurrenciesCollection();
-	var categories = new CategoryCollection();
 
 	var arrayAbstract = [];
 	var nbSource = 0;
@@ -85,10 +83,6 @@ define([
 			arrayAbstract = [];
 			nbSource = 0;
 
-			currencies.fetch();
-
-			categories.fetch();
-
 			collection.fetch({
 				success: function() {
 					nbSource++;
@@ -131,18 +125,45 @@ define([
 
 			// Feed each element with category object
 			for (i = 0; i < arrayAbstract.length; i++) {
-				var c = categories.get(arrayAbstract[i].get('category_id'))
+				var c = storage.categories.get(arrayAbstract[i].get('category_id'))
 				if (c !== undefined) {
 					arrayAbstract[i].set('categoryJSON', c.toJSON());
 				}
 			}
 
+			//
+			// PREPARE LIST OF RESULT
+			// arrayAbstract is a list of transaction with categorieJSON.
+			//
+
+			var bilan = {};
+			bilan.total = 0;
+			bilan.debits = 0;
+			bilan.credits = 0;
+
+			for (i = 0; i < arrayAbstract.length; i++) {
+				if(arrayAbstract[i].amount >= 0){
+					bilan.credits = bilan.credits + arrayAbstract[i].get('reference_amount');
+				}else{
+					bilan.debits = bilan.credits + arrayAbstract[i].get('reference_amount');
+				}
+			}
+
+			bilan.total = bilan.debits + bilan.credits;
+
+			//
+			// Prepare Timeline
+			//
+
+			console.log(arrayAbstract);
+
+			console.log(bilan);
 			// Group by date, return JSON
 			arrayAbstract = _.groupBy(arrayAbstract, function(obj) {
 				return obj.get("date");
 			});
 
-			// Transofrm JSON to Array
+			// Transform JSON to Array
 			arrayAbstract = _.pairs(arrayAbstract);
 
 			// Order by date
@@ -158,7 +179,8 @@ define([
 			}
 
 			var template = Mustache.render(listTemplate, {
-				liste: arrayAbstract
+				liste: arrayAbstract,
+				bilan: bilan,
 			});
 
 			$("#debitscredits").html(template);
@@ -227,13 +249,8 @@ define([
 						}
 					});
 				}
-
-
 			});
-
 		}
-
-
 	});
 
 	return DashboardView;

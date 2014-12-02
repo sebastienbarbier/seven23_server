@@ -4,31 +4,20 @@ define([
 	'backbone',
 	'mustache',
 	'initView',
-	'text!templates/transactions.mustache',
 	'text!templates/transactions/debitscreditsForm.mustache',
 	'debitsCreditsModel',
 	'debitsCreditsCollection',
-	'currenciesCollection',
-	'text!templates/transactions/list.mustache',
-	'categoryCollection',
-	'text!templates/transactions/dateSelectPage.mustache'
+	'storage'
 ], function(
 	$,
 	_,
 	Backbone,
 	Mustache,
 	InitView,
-	TransactionsTemplate,
 	DebitsCreditsFormTemplate,
 	DebitsCreditsModel,
 	DebitsCreditsCollection,
-	CurrenciesCollection,
-	listTemplate,
-	CategoryCollection,
-	DateSelectorPageTemplate) {
-
-	var currencies = new CurrenciesCollection();
-	var categories = new CategoryCollection();
+	storage) {
 
 	var arrayAbstract = [];
 	var nbSource = 0;
@@ -40,8 +29,8 @@ define([
 
 			var template = Mustache.render(DebitsCreditsFormTemplate, {
 				debitcredit: debitcredit,
-				currencies: currencies.toJSON(),
-				categories: categories.toJSON()
+				currencies: storage.currencies.toJSON(),
+				categories: storage.categories.toJSON()
 			});
 
 			$("#content").html(template);
@@ -101,24 +90,16 @@ define([
 
 			var view = this;
 
-			currencies.fetch({
-				success: function() {
-					categories.fetch({
-						success: function() {
-							if(debitcredit_id){
-								var debitcredit = new DebitsCreditsModel({id: debitcredit_id});
-								debitcredit.fetch({
-							        success: function (c) {
-							            view.displayForm(year, month, debitcredit.toJSON());
-							        }
-							    });
-							}else{
-								view.displayForm(year, month);
-							}
-						}
-					});
-				}
-			});
+			if(debitcredit_id){
+				var debitcredit = new DebitsCreditsModel({id: debitcredit_id});
+				debitcredit.fetch({
+			        success: function (c) {
+			            view.displayForm(year, month, debitcredit.toJSON());
+			        }
+			    });
+			}else{
+				view.displayForm(year, month);
+			}
 		}
 
 	});

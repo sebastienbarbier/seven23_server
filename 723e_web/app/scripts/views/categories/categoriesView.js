@@ -8,7 +8,8 @@ define([
 		'text!templates/categories/categoriesItem.mustache',
 		'text!templates/categories/categoriesForm.mustache',
 		'categoryModel',
-		'categoryCollection'
+		'categoryCollection',
+		'storage'
 	],
 	function(
 		$,
@@ -20,9 +21,8 @@ define([
 		CategoriesItemTemplate,
 		CategoriesFormTemplate,
 		Category,
-		CategoryCollection) {
-
-		var collection = new CategoryCollection();
+		CategoryCollection,
+		storage) {
 
 		var DashboardView = Backbone.View.extend({
 			el: $("#content"),
@@ -54,10 +54,11 @@ define([
 
 			getListDisableHTML: function(catCollection) {
 				var result = "";
+				var collectionDisabled = catCollection;
 
-				for (var i = 0, len = catCollection.length; i < len; i = i + 1) {
+				for (var i = 0, len = collectionDisabled.length; i < len; i = i + 1) {
 					result += Mustache.render(CategoriesItemTemplate, {
-						'categorie': catCollection[i]
+						'categorie': collectionDisabled[i].toJSON()
 					});
 				}
 
@@ -74,73 +75,54 @@ define([
 
 				var view = this;
 
-				collection.fetch({
+				var tree_enable = view.getTreeHTML(storage.categories);
+				var tree_disable = view.getListDisableHTML(storage.categories.disable());
 
-					success: function() {
-
-						var categories_actives = collection.where({
-							active: true
-						});
-						categories_actives = new CategoryCollection(categories_actives);
-
-						var categories_disabled = collection.where({
-							active: false
-						});
-						categories_disabled = new CategoryCollection(categories_disabled);
-
-						var tree_enable = view.getTreeHTML(categories_actives);
-						var tree_disable = view.getListDisableHTML(categories_disabled.toJSON());
-
-						var template = Mustache.render(CategoriesTemplate, {
-							'categories_actives': categories_actives.toJSON(),
-							'categories_disabled': categories_disabled.toJSON(),
-							'tree_enable': tree_enable,
-							'tree_disable': tree_disable
-						});
-						$("#content").html(template);
-
-
-						// Event create form on button click
-						$("#categories button.edit").on('click', function() {
-							var cat = $(this).parents("li").data('id');
-							// TODO SBA REPLACE THIS BY A LINK
-							// view.renderForm(collection.get(cat).toJSON());
-							Backbone.history.navigate("#/categories/edit/"+cat, {
-								trigger: true
-							});
-						});
-
-						$("#categories button.delete").on('click', function() {
-							var cat = $(this).parents("li").data('id');
-							collection.get(cat).destroy( // prints nothing!!!
-								{
-									success: function() {
-										view.render();
-									},
-									error: function() {
-										view.render();
-									}
-								});
-						});
-						$("#categories_disable button.delete").on('click', function() {
-							var cat = $(this).parents("li").data('id');
-							collection.get(cat).destroy( // prints nothing!!!
-								{
-									success: function() {
-										view.render();
-									},
-									error: function() {
-										view.render();
-									}
-								});
-						});
-
-						$("#categories_view h6").on('click', function() {
-							$("#categories_disable").toggle()
-						});
-
-					}
+				var template = Mustache.render(CategoriesTemplate, {
+					'tree_enable': tree_enable,
+					'tree_disable': tree_disable
 				});
+				$("#content").html(template);
+
+
+				// Event create form on button click
+				$("#categories button.edit").on('click', function() {
+					var cat = $(this).parents("li").data('id');
+
+					Backbone.history.navigate("#/categories/edit/"+cat, {
+						trigger: true
+					});
+				});
+
+				$("#categories button.delete").on('click', function() {
+					var cat = $(this).parents("li").data('id');
+					storage.categories.get(cat).destroy( // prints nothing!!!
+						{
+							success: function() {
+								view.render();
+							},
+							error: function() {
+								view.render();
+							}
+						});
+				});
+				$("#categories_disable button.delete").on('click', function() {
+					var cat = $(this).parents("li").data('id');
+					storage.categories.get(cat).destroy( // prints nothing!!!
+						{
+							success: function() {
+								view.render();
+							},
+							error: function() {
+								view.render();
+							}
+						});
+				});
+
+				$("#categories_view h6").on('click', function() {
+					$("#categories_disable").toggle()
+				});
+
 			}
 		});
 

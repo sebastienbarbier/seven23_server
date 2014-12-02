@@ -6,15 +6,8 @@ define([
 	'moment',
 	'initView',
 	'text!templates/transactions.mustache',
-	'text!templates/transactions/debitscreditsForm.mustache',
-	'debitsCreditsModel',
-	'debitsCreditsCollection',
 	'text!templates/transactions/changesForm.mustache',
-	'changesModel',
-	'changesCollection',
-	'currenciesCollection',
 	'text!templates/transactions/list.mustache',
-	'categoryCollection',
 	'text!templates/transactions/dateSelectPage.mustache'
 ], function(
 	$,
@@ -24,21 +17,10 @@ define([
 	moment,
 	InitView,
 	TransactionsTemplate,
-	DebitsCreditsFormTemplate,
-	DebitsCreditsModel,
-	DebitsCreditsCollection,
 	ChangesFormTemplate,
-	ChangesModel,
-	ChangesCollection,
-	CurrenciesCollection,
 	listTemplate,
-	CategoryCollection,
 	DateSelectorPageTemplate) {
 
-	var collection = new DebitsCreditsCollection();
-	var changesCollection = new ChangesCollection();
-	var currencies = new CurrenciesCollection();
-	var categories = new CategoryCollection();
 
 	var arrayAbstract = [];
 	var nbSource = 0;

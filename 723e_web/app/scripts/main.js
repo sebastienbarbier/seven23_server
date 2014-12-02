@@ -24,6 +24,7 @@ require.config({
 		// App structure
 		app                       : 'app',
 		router                    : 'router',
+		storage                   : 'storage',
 		// Models
 		userModel                 : 'models/userModel',
 		categoryModel             : 'models/categoryModel',

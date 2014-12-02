@@ -22,10 +22,11 @@ def api_init(request):
         result['is_authenticated'] = True
         # If user is authentificated, we return some details which might
         # be usefull like displaying name, or sending mail.
-        result['username'] = request.user.username
-        result['first_name'] = request.user.first_name
-        result['last_name'] = request.user.last_name
-        result['email'] = request.user.email
+        result['id'] = request.user.id
+        # result['username'] = request.user.username
+        # result['first_name'] = request.user.first_name
+        # result['last_name'] = request.user.last_name
+        # result['email'] = request.user.email
     else:
         result['is_authenticated'] = False
 

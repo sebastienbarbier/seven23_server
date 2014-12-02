@@ -158,9 +158,15 @@ class AbstractTransaction(models.Model):
             return self.value()
         else:
             if self.is_change_complete():
-                return "" + self.value() + " - " + self.account.currency.verbose(self.t2c.aggregate(Sum('change_amount'))['change_amount__sum'])
+                return self.account.currency.verbose(self.t2c.aggregate(Sum('change_amount'))['change_amount__sum'])
             else:
                 return "/ CHF"
+
+    def reference_amount(self):
+        if self.currency == self.account.currency:
+            return None
+        else:
+            return self.t2c.aggregate(Sum('change_amount'))['change_amount__sum']
 
     def delete(self, *args, **kwargs):
         change = None
