@@ -24,14 +24,14 @@ define([
 					return this.get('amount') < 0;
 				},
 				isFavoriteCurrency: function(){
-					return true;
+					console.log(this.debitsCredits.currency_id === storage.user.currency());
+					return this.debitsCredits.currency_id === storage.user.currency();
 				},
 				defaultCurrency: function(){
-					console.log(this.debitsCredits.currency_id);
 					return storage.currencies.get(this.debitsCredits.currency_id).toString(this.debitsCredits.amount);
 				},
 				favoriteCurrency: function(){
-
+					return storage.currencies.get(storage.user.currency()).toString(this.debitsCredits.amount);
 				}
 			},
 			initialize: function() {

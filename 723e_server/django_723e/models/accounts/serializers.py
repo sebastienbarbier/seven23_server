@@ -4,12 +4,17 @@ from rest_framework import serializers
 
 class AccountSerializer(serializers.HyperlinkedModelSerializer):
 
+    currency = serializers.PrimaryKeyRelatedField(read_only=True)
+
     class Meta:
         model = Account
-        fields = ('id', 'user', 'name', 'create', 'currency', 'archived')
+        fields = ('id', 'name', 'create', 'currency', 'archived')
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
+
+    accounts = AccountSerializer(many=True)
+
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'groups')
+        fields = ('id', 'username', 'email', 'groups', 'accounts')

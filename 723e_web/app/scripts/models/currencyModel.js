@@ -9,7 +9,16 @@ define(["jquery", "backbone", "ws"], function($, Backbone, WebServices) {
 			//alert("Welcome to this world");
 		},
 		toString: function(amount){
-			return ""+amount+" AMOUNT"
+			var space = "";
+			if(this.get('space')){
+				space = " ";
+			}
+
+			if(this.get('after_amount')){
+				return amount + space + this.get('sign');
+			} else {
+				return this.get('sign') + space + amount;
+			}
 		}
 	});
 

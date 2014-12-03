@@ -10,7 +10,7 @@ define("storage",
 		UserModel) {
 
 	// Properties
-	var user;
+	var user = new UserModel();
 	var categories = new CategoriesCollection();
 	var currencies = new CurrenciesCollection();
 
@@ -23,9 +23,9 @@ define("storage",
 		var fetchCounter = 0;
 
 		// Get User model
-		user = new UserModel({id: userid});
+		user.set('id', userid);
 		user.fetch({
-	        success: function (user) {
+	        success: function (u) {
 	        	fetchCounter++;
 	        	if(fetchCounter === fetchNb){
 	        		callback();

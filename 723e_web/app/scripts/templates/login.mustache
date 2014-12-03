@@ -5,22 +5,3 @@
 	<input type="password" name="password" placeholder="Mot de passe"/>
 	<input type="submit" />
 </p></form>
-
-<script type="text/javascript">
-require(['jquery', 'backbone', 'ws'], function($, Backbone, ws){
-	$("#login_form").submit(function(){
-
-		ws.post({
-			url: "{{& url }}",
-			data: $("#login_form").serialize()
-		}).done(function(json){
-				// We save token in sessionStorage
-				ws.setToken(json.token);
-				Backbone.history.navigate("#/dashboard", {trigger: true});
-
-		});
-
-		return false;
-	});
-});
-</script>
