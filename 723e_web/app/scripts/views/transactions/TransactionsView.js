@@ -132,10 +132,16 @@ define([
 			bilan.credits = 0;
 
 			for (i = 0; i < arrayAbstract.length; i++) {
-				if(arrayAbstract[i].amount >= 0){
-					bilan.credits = bilan.credits + arrayAbstract[i].get('reference_amount');
+				var valeur;
+				if(arrayAbstract[i].get('isFavoriteCurrency')){
+					valeur = arrayAbstract[i].get('amount');
+				} else {
+					valeur = arrayAbstract[i].get('new_amount');
+				}
+				if(arrayAbstract[i].get('amount') >= 0){
+					bilan.credits = bilan.credits + valeur;
 				}else{
-					bilan.debits = bilan.credits + arrayAbstract[i].get('reference_amount');
+					bilan.debits = bilan.debits + valeur;
 				}
 			}
 

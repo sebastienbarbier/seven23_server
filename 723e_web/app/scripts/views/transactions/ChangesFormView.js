@@ -62,7 +62,6 @@ define([
 					change = new ChangesModel(dict);
 				}
 
-
 				change.save(dict, {
 					wait: true,
 					success: function(model, response) {
