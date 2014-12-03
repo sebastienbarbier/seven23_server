@@ -27,7 +27,6 @@ define("app", [
 			url: ws.init,
 			async: false
 		}).done(function(json) {
-			console.log(json);
 			if (json.is_authenticated === false) {
 				// User is invited to login
 				// GET[’next'] is the page to load

@@ -24,18 +24,14 @@ define([
 					return this.get('amount') < 0;
 				},
 				isFavoriteCurrency: function(){
-					console.log(this.debitsCredits.currency_id === storage.user.currency());
 					return this.debitsCredits.currency_id === storage.user.currency();
 				},
 				defaultCurrency: function(){
 					return storage.currencies.get(this.debitsCredits.currency_id).toString(this.debitsCredits.amount);
 				},
 				favoriteCurrency: function(){
-					return storage.currencies.get(storage.user.currency()).toString(this.debitsCredits.amount);
+					return storage.currencies.get(storage.user.currency()).toString(this.debitsCredits.new_amount);
 				}
-			},
-			initialize: function() {
-				//alert("Welcome to this world");
 			},
 			html: {
 				list: function() {

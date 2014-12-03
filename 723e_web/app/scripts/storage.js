@@ -2,23 +2,26 @@ define("storage",
 	   ["jquery",
 		"categoryCollection",
 		"currenciesCollection",
+		"changesCollection",
 		"userModel"],
 	function(
 		$,
 		CategoriesCollection,
 		CurrenciesCollection,
+		ChangesCollection,
 		UserModel) {
 
 	// Properties
-	var user = new UserModel();
+	var user       = new UserModel();
 	var categories = new CategoriesCollection();
 	var currencies = new CurrenciesCollection();
+	var changes    = new ChangesCollection();
 
 	// This function intialise storage object.
 	var init = function(userid, callback){
 
 		// Number of collection to fetch asynchronously
-		var fetchNb = 3;
+		var fetchNb = 4;
 		// Number of collection already fetched
 		var fetchCounter = 0;
 
@@ -53,6 +56,16 @@ define("storage",
 			}
 		});
 
+		// Get list of all change
+		changes.fetch({
+			success: function() {
+	        	fetchCounter++;
+	        	if(fetchCounter === fetchNb){
+	        		callback();
+	        	}
+			}
+		});
+
 
 	};
 
@@ -60,6 +73,7 @@ define("storage",
 		init       : init,
 		user       : user,
 		categories : categories,
-		currencies : currencies
+		currencies : currencies,
+		changes    : changes
 	}
 });

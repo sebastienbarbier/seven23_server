@@ -81,23 +81,11 @@ define([
 			});
 
 			arrayAbstract = [];
-			nbSource = 0;
 
 			collection.fetch({
 				success: function() {
-					nbSource++;
-					if (nbSource === 2) {
-						view.generateListe(year, month);
-					}
-				}
-			});
-
-			changesCollection.fetch({
-				success: function() {
-					nbSource++;
-					if (nbSource === 2) {
-						view.generateListe(year, month);
-					}
+					collection.convert();
+					view.generateListe(year, month);
 				}
 			});
 
@@ -106,7 +94,7 @@ define([
 
 		generateListe: function(year, month) {
 			// Generate array of all models
-			arrayAbstract = _.union(collection.toArray(), changesCollection.toArray());
+			arrayAbstract = _.union(collection.toArray(), storage.changes.toArray());
 
 			// Date filter stuff
 			if (year !== undefined && year !== null) {
@@ -136,7 +124,7 @@ define([
 			// arrayAbstract is a list of transaction with categorieJSON.
 			//
 
-			console.log(arrayAbstract);
+			// console.log(arrayAbstract);
 
 			var bilan = {};
 			bilan.total = 0;
@@ -157,9 +145,9 @@ define([
 			// Prepare Timeline
 			//
 
-			console.log(arrayAbstract);
+			// console.log(arrayAbstract);
 
-			console.log(bilan);
+			// console.log(bilan);
 			// Group by date, return JSON
 			arrayAbstract = _.groupBy(arrayAbstract, function(obj) {
 				return obj.get("date");
@@ -240,8 +228,8 @@ define([
 						}
 					});
 				} else if (transaction.hasClass('change')) {
-					var change = $(this).parents(".change").data('id');
-					changesCollection.get(change).destroy({
+					var change = $(this).parents(".actions").prev().data('id');
+					storage.changes.get(change).destroy({
 						// prints nothing!!!
 						success: function() {
 							view.render(year, month);

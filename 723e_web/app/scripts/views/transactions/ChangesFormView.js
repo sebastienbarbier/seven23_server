@@ -55,11 +55,18 @@ define([
 				}
 				dict['user'] = "http://localhost:8000/api/v1/users/1";
 
-				var change = new ChangesModel(dict);
+				var change;
+				if(dict['id'] !== undefined){
+					change = storage.changes.get(dict['id']).set(dict);
+				}else{
+					change = new ChangesModel(dict);
+				}
+
 
 				change.save(dict, {
 					wait: true,
 					success: function(model, response) {
+						storage.changes.add(model);
 						console.log('Successfully saved!');
 						Backbone.history.navigate("#/transactions/"+year+"/"+month, {
 							trigger: true
@@ -86,12 +93,7 @@ define([
 			var view = this;
 
 			if(change_id){
-				var change = new ChangesModel({id: change_id});
-				change.fetch({
-			        success: function (c) {
-			            view.displayForm(year, month, change.toJSON());
-			        }
-			    });
+			    view.displayForm(year, month, storage.changes.get(change_id).toJSON());
 			}else{
 				view.displayForm(year, month);
 			}
