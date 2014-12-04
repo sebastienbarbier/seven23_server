@@ -150,6 +150,11 @@ define([
 
 			bilan.total = bilan.debits + bilan.credits;
 
+
+			bilan.total = storage.currencies.get(storage.user.currency()).toString(bilan.total);
+			bilan.debits = storage.currencies.get(storage.user.currency()).toString(bilan.debits);
+			bilan.credits = storage.currencies.get(storage.user.currency()).toString(bilan.credits);
+
 			//
 			// Prepare Timeline
 			//

@@ -6,7 +6,8 @@ define([
 	'initView',
 	'text!templates/transactions/changesForm.mustache',
 	'changesModel',
-	'storage'
+	'storage',
+	'bootstrap-datepicker'
 ], function(
 	$,
 	_,
@@ -24,11 +25,18 @@ define([
 		el: $("#content"),
 
 		displayForm: function(year, month, change){
+
+
 			var template = Mustache.render(ChangesFormTemplate, {
 				change: change,
 				currencies: storage.currencies.toJSON()
 			});
 			$("#content").html(template);
+
+			$('#content input.datepicker').datepicker({
+				format: 'yyyy-mm-dd',
+				autoclose: true
+			});
 
 			// Put select markup as selected
 			if (change) {
@@ -76,9 +84,7 @@ define([
 						console.log('error.responseText');
 					}
 				});
-
 			});
-
 		},
 
 		render: function(year, month, change_id) {

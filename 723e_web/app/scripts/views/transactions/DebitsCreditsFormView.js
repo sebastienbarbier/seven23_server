@@ -7,7 +7,8 @@ define([
 	'text!templates/transactions/debitscreditsForm.mustache',
 	'debitsCreditsModel',
 	'debitsCreditsCollection',
-	'storage'
+	'storage',
+	'bootstrap-datepicker'
 ], function(
 	$,
 	_,
@@ -34,6 +35,11 @@ define([
 			});
 
 			$("#content").html(template);
+
+			$('#content input.datepicker').datepicker({
+				format: 'yyyy-mm-dd',
+				autoclose: true
+			});
 
 			// Put select markup as selected
 			if (debitcredit) {

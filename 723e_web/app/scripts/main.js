@@ -15,8 +15,8 @@ require.config({
 		moment                    : '../../bower_components/moment/moment',
 		bootstrap                 : '../../bower_components/bootstrap/dist/js/bootstrap.min',
 		'bootstrap-iconpicker'    : '../../bower_components/bootstrap-iconpicker/bootstrap-iconpicker/js/bootstrap-iconpicker.min',
-		'bootstrap-iconpicker-fa' : '../../bower_components/bootstrap-iconpicker/bootstrap-iconpicker/js/iconset/iconset-fontawesome-4.2.0.min',
 		'bootstrap-colorpicker'   : '../../bower_components/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min',
+		'bootstrap-datepicker'	  : '../../bower_components/bootstrap-datepicker/js/bootstrap-datepicker',
 		// mocha                  : '../../bower_components/mocha/mocha',
 		// lodash                 : '../../bower_components/lodash/dist/lodash.compat',
 		// chai                   : '../../bower_components/chai/chai',
@@ -50,10 +50,13 @@ require.config({
 	},
 	shim: {
 		'bootstrap-iconpicker': {
-			deps: ['bootstrap', 'bootstrap-iconpicker-fa'],
+			deps: ['bootstrap', '../../bower_components/bootstrap-iconpicker/bootstrap-iconpicker/js/iconset/iconset-fontawesome-4.2.0.min'],
 		},
 		'bootstrap-colorpicker': {
 			deps: ['css!../../bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css'],
+		},
+		'bootstrap-datepicker': {
+			deps: ['css!../../bower_components/bootstrap-datepicker/css/datepicker3.css'],
 		}
 	}
 });
