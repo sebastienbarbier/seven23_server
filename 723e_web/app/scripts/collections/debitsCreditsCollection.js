@@ -48,9 +48,7 @@ define(["jquery",
         				debitcredit.set('new_amount', debitcredit.get('amount') / ratio);
         			}
 
-        			console.log(change);
         		}
-        		console.log(debitcredit);
         	}
         }
 	});

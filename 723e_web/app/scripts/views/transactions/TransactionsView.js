@@ -130,38 +130,57 @@ define([
 			bilan.total = 0;
 			bilan.debits = 0;
 			bilan.credits = 0;
+			bilan.categories = {};
 
 			for (i = 0; i < arrayAbstract.length; i++) {
 				var valeur;
+				// Eliminate Change Model because has no isFavoriteCurrency
 				var isFavorite = arrayAbstract[i].get('isFavoriteCurrency');
+
 				if(isFavorite !== undefined && isFavorite !== null){
-					if(isFavorite){
+					var category = arrayAbstract[i].get('category_id');
+					if(arrayAbstract[i].get('currency_id') === storage.user.currency()){
 						valeur = arrayAbstract[i].get('amount');
 					} else {
 						valeur = arrayAbstract[i].get('new_amount');
 					}
-					if(arrayAbstract[i].get('amount') >= 0){
+					if(valeur >= 0){
 						bilan.credits = bilan.credits + valeur;
 					}else{
 						bilan.debits = bilan.debits + valeur;
+					}
+					if(category && valeur < 0){
+						// Sum by categories
+						if(!bilan.categories[category]){
+							bilan.categories[category] = 0;
+						}
+						bilan.categories[category] = bilan.categories[category] + valeur;
 					}
 				}
 			}
 
 			bilan.total = bilan.debits + bilan.credits;
 
-
 			bilan.total = storage.currencies.get(storage.user.currency()).toString(bilan.total);
 			bilan.debits = storage.currencies.get(storage.user.currency()).toString(bilan.debits);
 			bilan.credits = storage.currencies.get(storage.user.currency()).toString(bilan.credits);
+
+			// Optimize categories
+			bilan.categories = _.pairs(bilan.categories);
+
+			bilan.categories = _.sortBy(bilan.categories, function(obj) {
+				return obj[1]
+			});
+
+			for(var i=0, l=bilan.categories.length; i < l; i=i+1){
+				bilan.categories[i][0] = storage.categories.get(bilan.categories[i][0]).toJSON();
+				bilan.categories[i][1] = storage.currencies.get(storage.user.currency()).toString(bilan.categories[i][1]);
+			}
 
 			//
 			// Prepare Timeline
 			//
 
-			// console.log(arrayAbstract);
-
-			// console.log(bilan);
 			// Group by date, return JSON
 			arrayAbstract = _.groupBy(arrayAbstract, function(obj) {
 				return obj.get("date");

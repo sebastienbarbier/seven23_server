@@ -7,7 +7,9 @@
 	</div>
 	<div class="col-md-8 categories">
 		<div class="box">
-			Liste catégorie
+			{{# bilan.categories }}
+			<p>{{0.name}} / {{ 1 }}</p>
+			{{/bilan.categories}}
 		</div>
 	</div>
 </div>
