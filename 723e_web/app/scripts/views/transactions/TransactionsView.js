@@ -133,15 +133,18 @@ define([
 
 			for (i = 0; i < arrayAbstract.length; i++) {
 				var valeur;
-				if(arrayAbstract[i].get('isFavoriteCurrency')){
-					valeur = arrayAbstract[i].get('amount');
-				} else {
-					valeur = arrayAbstract[i].get('new_amount');
-				}
-				if(arrayAbstract[i].get('amount') >= 0){
-					bilan.credits = bilan.credits + valeur;
-				}else{
-					bilan.debits = bilan.debits + valeur;
+				var isFavorite = arrayAbstract[i].get('isFavoriteCurrency');
+				if(isFavorite !== undefined && isFavorite !== null){
+					if(isFavorite){
+						valeur = arrayAbstract[i].get('amount');
+					} else {
+						valeur = arrayAbstract[i].get('new_amount');
+					}
+					if(arrayAbstract[i].get('amount') >= 0){
+						bilan.credits = bilan.credits + valeur;
+					}else{
+						bilan.debits = bilan.debits + valeur;
+					}
 				}
 			}
 
