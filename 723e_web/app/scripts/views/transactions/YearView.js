@@ -45,6 +45,7 @@ define([
 
 			ws.get({
 				"url": ws.v1.resume_year,
+				"data": {year: calendar.year},
 				success: function(json){
 
 					for (var i = 1; i <= 12; i = i + 1) {
