@@ -7,7 +7,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('user','name','description', 'color', 'icon', 'parent','active')
 
 class DebitsCreditsAdmin(admin.ModelAdmin):
-    list_display = ('account', 'date', 'amount', 'currency', 'category', 'active', 'reference_value')
+    list_display = ('account', 'date', 'amount', 'currency', 'category', 'active')
     list_filter = ('account', 'currency')
 
 class ChangeAdmin(admin.ModelAdmin):

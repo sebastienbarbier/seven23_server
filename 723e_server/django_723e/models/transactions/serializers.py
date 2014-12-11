@@ -17,7 +17,7 @@ class DebitsCreditsSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model  = DebitsCredits
-        fields = ('id', 'account', 'currency', 'currency_id', 'name', 'amount', 'date', 'active', 'category', 'category_id')
+        fields = ('id', 'account', 'currency', 'currency_id', 'name', 'amount', 'reference_amount', 'date', 'active', 'category', 'category_id')
 
 
 class ChequeSerializer(serializers.HyperlinkedModelSerializer):
@@ -35,7 +35,7 @@ class ChangeSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model  = Change
-        fields = ('id', 'account', 'currency', 'name', 'amount', 'date', 'active', 'category', 'new_amount', 'new_currency', 'balance', 'value', 'new_value', 'exchange_rate')
+        fields = ('id', 'account', 'currency', 'name', 'amount', 'date', 'active', 'category', 'new_amount', 'new_currency', 'value', 'new_value', 'exchange_rate')
 
 class TranfertSerializer(serializers.HyperlinkedModelSerializer):
 
