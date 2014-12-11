@@ -5,9 +5,7 @@ define([
 	'mustache',
 	'moment',
 	'initView',
-	'text!templates/transactions.mustache',
-	'text!templates/transactions/changesForm.mustache',
-	'text!templates/transactions/list.mustache',
+	'ws',
 	'text!templates/transactions/dateSelectPage.mustache'
 ], function(
 	$,
@@ -16,9 +14,7 @@ define([
 	Mustache,
 	moment,
 	InitView,
-	TransactionsTemplate,
-	ChangesFormTemplate,
-	listTemplate,
+	ws,
 	DateSelectorPageTemplate) {
 
 
@@ -46,18 +42,28 @@ define([
 			calendar.before = calendar.year - 1;
 			calendar.after = calendar.year + 1;
 			calendar.months = [];
-			for (var i = 1; i <= 12; i = i + 1) {
-				calendar.months.push({
-					month: moment().month(i - 1).format("MM"),
-					year: year,
-					label: moment().month(i - 1).format("MMMM")
-				});
-			}
 
-			var template = Mustache.render(DateSelectorPageTemplate, {
-				calendar: calendar
+			ws.get({
+				"url": ws.v1.resume_year,
+				success: function(json){
+
+					for (var i = 1; i <= 12; i = i + 1) {
+						calendar.months.push({
+							month: moment().month(i - 1).format("MM"),
+							year: year,
+							label: moment().month(i - 1).format("MMMM"),
+							count: (json.months[i] ? json.months[i] : 0)
+						});
+					}
+
+					var template = Mustache.render(DateSelectorPageTemplate, {
+						calendar: calendar
+					});
+					$("#content").html(template);
+
+				}
 			});
-			$("#content").html(template);
+
 
 
 		}

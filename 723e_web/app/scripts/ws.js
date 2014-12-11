@@ -23,6 +23,8 @@ define("ws", ["jquery"], function($) {
 		changes: server.url() + "/api/v1/changes",
 		//
 		currencies: server.url() + "/api/v1/currencies",
+		//
+		resume_year: server.url() + "/api/v1/resume_year/", // "/api/v1/resume_year/2014/"
 		// List all user accounts
 		categories: server.url() + "/api/v1/categories",
 		// Get token key
