@@ -1,36 +1,35 @@
-
 <div class="row">
-	<div class="col-md-4 totale">
-		<div class="box">
-			Total : {{ bilan.total }} ({{ bilan.debits }} , {{ bilan.credits }})
-		</div>
-	</div>
-	<div class="col-md-8 categories">
-		<div class="box">
-			{{# bilan.categories }}
-			<p>{{0.name}} / {{ 1 }}</p>
-			{{/bilan.categories}}
-		</div>
-	</div>
+    <div class="col-md-4 totale">
+        <div class="box">
+            Total : {{ bilan.total }} ({{ bilan.debits }} , {{ bilan.credits }})
+        </div>
+    </div>
+    <div class="col-md-8 categories">
+        <div class="box">
+            {{# bilan.categories }}
+            <p>{{0.name}} / {{ 1 }}</p>
+            {{/bilan.categories}}
+        </div>
+    </div>
 </div>
 
 <div class="row">
-	<div class="col-md-12 list">
-		<div class="box">
-			<div id="timeline">
-				{{#liste}}
-				<div class="timeline_day">
-					<p class="date">{{ 0 }}</p>
-					<div class="elements">
-					{{#1}}
-						<div class="element">
-							{{{ html.list }}}
-						</div>
-					{{/1}}
-					</div>
-				</div>
-				{{/liste}}
-			</div>
-		</div>
-	</div>
+    <div class="col-md-12 list">
+        <div class="box">
+            <div id="timeline">
+                {{#liste}}
+                <div class="timeline_day">
+                    <p class="date">{{ 0 }}</p>
+                    <div class="elements">
+                        {{#1}}
+                        <div class="element">
+                            {{{ html.list }}}
+                        </div>
+                        {{/1}}
+                    </div>
+                </div>
+                {{/liste}}
+            </div>
+        </div>
+    </div>
 </div>
