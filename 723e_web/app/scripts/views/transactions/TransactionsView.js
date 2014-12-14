@@ -84,7 +84,6 @@ define([
 
 			collection.fetch({
 				success: function() {
-					collection.convert();
 					view.generateListe(year, month);
 				}
 			});
@@ -95,6 +94,8 @@ define([
 		generateListe: function(year, month) {
 			// Generate array of all models
 			arrayAbstract = _.union(collection.toArray(), storage.changes.toArray());
+
+			console.log(arrayAbstract);
 
 			// Date filter stuff
 			if (year !== undefined && year !== null) {
@@ -142,7 +143,7 @@ define([
 					if(arrayAbstract[i].get('currency_id') === storage.user.currency()){
 						valeur = arrayAbstract[i].get('amount');
 					} else {
-						valeur = arrayAbstract[i].get('new_amount');
+						valeur = arrayAbstract[i].get('reference_amount');
 					}
 					if(valeur >= 0){
 						bilan.credits = bilan.credits + valeur;
@@ -200,6 +201,7 @@ define([
 			for (i = 0; i < arrayAbstract.length; i++) {
 				arrayAbstract[i][0] = moment(arrayAbstract[i][0], "YYYY-MM-DD").format("dddd D MMMM YYYY");
 			}
+
 
 			var template = Mustache.render(listTemplate, {
 				liste: arrayAbstract,

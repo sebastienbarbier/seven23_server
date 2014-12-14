@@ -4,8 +4,9 @@ define([
 	'backbone',
 	'mustache',
 	'initView',
-	'text!templates/settings.mustache'
-], function($, _, Backbone, Mustache, InitView, settingsTemplate) {
+	'text!templates/settings.mustache',
+	'storage'
+], function($, _, Backbone, Mustache, InitView, settingsTemplate, storage) {
 
 	var SettingsView = Backbone.View.extend({
 		el: $("#content"),
@@ -17,7 +18,17 @@ define([
 			}
 
 			initView.changeSelectedItem("nav_settings");
-			var template = Mustache.render(settingsTemplate, {});
+
+			var user = storage.user.toJSON();
+
+			for(var i = 0; i < user.accounts.length; i=i+1){
+				user.accounts[i].currency = storage.currencies.get(user.accounts[i].currency).toJSON()
+			}
+
+			// Generate and push template.
+			var template = Mustache.render(settingsTemplate, {
+				'user': user
+			});
 			$("#content").html(template);
 
 		}

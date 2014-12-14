@@ -6,7 +6,6 @@ from django_723e.models.currency.models import Currency
 from django_723e.models.accounts.models import Account
 from django.utils.translation import ugettext as _
 from django.db.models import Sum
-from django_723e.models.transactions.utils import recalculateAllTransactionsAfterChange
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
 
@@ -112,12 +111,12 @@ class AbstractTransaction(models.Model):
 
     def update_amount(self):
         if type(self) is not Change and self.currency is not self.account.currency:
-            list_change = Change.objects.filter(new_currency=self.currency, date__lte=self.date).order_by('date')
+            list_change = Change.objects.filter(new_currency=self.currency, date__lte=self.date).order_by('-date')
             if list_change:
                 change = list_change[0]
                 self.reference_amount = self.amount/change.exchange_rate()
             else:
-                self.reference_amount = None
+                self.reference_amount = self.amount
 
     def save(self, *args, **kwargs):
         self.update_amount()
@@ -125,6 +124,9 @@ class AbstractTransaction(models.Model):
 
     def value(self):
         return self.currency.verbose(self.amount)
+
+    def isForeignCurrency(self):
+        return not self.currency == self.account.currency
 
 
 class DebitsCredits(AbstractTransaction):
@@ -166,6 +168,8 @@ class Change(AbstractTransaction):
         super(Change, self).save(*args, **kwargs) # Call the "real" save() method
 
     def save(self, *args, **kwargs):
+        # First save to have correct value
+        super(Change, self).save(*args, **kwargs) # Call the "real" save() method
         # Select nextChange plus récent que celui ci
         c = Change.objects.filter(date__gt=self.date, new_currency=self.new_currency).order_by("-date");
         # Select tous les Débits après self mais avant nextChange
@@ -176,11 +180,15 @@ class Change(AbstractTransaction):
             for d in list_debitscredits:
                 d.update_amount()
                 d.save()
+        else:
+            list_debitscredits = DebitsCredits.objects.filter(date__gte=self.date);
+            for d in list_debitscredits:
+                d.update_amount()
+                d.save()
 
-        super(Change, self).save(*args, **kwargs) # Call the "real" save() method
 
     def exchange_rate(self):
-        return self.new_amount / self.amount
+        return float("{0:.2f}".format(self.new_amount / self.amount))
 
     def new_value(self):
         return self.new_currency.verbose(self.new_amount)

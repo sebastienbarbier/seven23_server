@@ -12,12 +12,13 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'user', 'name', 'description', 'color', 'icon', 'parent', 'parent_id', 'selectable', 'active')
 
 class DebitsCreditsSerializer(serializers.HyperlinkedModelSerializer):
-    category_id = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
-    currency_id = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    category_id       = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    currency_id       = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    isForeignCurrency = serializers.Field(source='isForeignCurrency')
 
     class Meta:
         model  = DebitsCredits
-        fields = ('id', 'account', 'currency', 'currency_id', 'name', 'amount', 'reference_amount', 'date', 'active', 'category', 'category_id')
+        fields = ('id', 'account', 'currency', 'currency_id', 'name', 'amount', 'reference_amount', 'date', 'active', 'category', 'category_id', 'isForeignCurrency')
 
 
 class ChequeSerializer(serializers.HyperlinkedModelSerializer):
