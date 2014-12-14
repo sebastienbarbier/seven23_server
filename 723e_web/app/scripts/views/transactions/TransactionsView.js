@@ -83,6 +83,7 @@ define([
 			arrayAbstract = [];
 
 			collection.fetch({
+				data: {'year': year, 'month': month},
 				success: function() {
 					view.generateListe(year, month);
 				}
@@ -94,8 +95,6 @@ define([
 		generateListe: function(year, month) {
 			// Generate array of all models
 			arrayAbstract = _.union(collection.toArray(), storage.changes.toArray());
-
-			console.log(arrayAbstract);
 
 			// Date filter stuff
 			if (year !== undefined && year !== null) {
