@@ -81,8 +81,12 @@ define([
 					category.save(dict, {
 						wait: true,
 						success: function(model, response) {
-							Backbone.history.navigate("#/categories", {
-								trigger: true
+							storage.categories.fetch({
+								success: function(){
+									Backbone.history.navigate("#/categories", {
+										trigger: true
+									});
+								}
 							});
 						},
 						error: function(model, error) {
