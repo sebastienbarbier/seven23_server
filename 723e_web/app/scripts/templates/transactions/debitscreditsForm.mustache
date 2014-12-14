@@ -43,7 +43,7 @@
 			<div class="form-group">
 				<label class="col-sm-12 control-label">Enable</label>
 				<div class="col-sm-12">
-					<input type="text" value="{{#debitcredit}}{{ active }}{{/ debitcredit }}" class="form-control" name="active" />
+					<input type="text" value="{{#debitcredit}}{{ active }}{{/ debitcredit }}{{^debitcredit}}true{{/debitcredit}}" class="form-control" name="active" />
 				</div>
 			</div>
 			<div class="form-group">

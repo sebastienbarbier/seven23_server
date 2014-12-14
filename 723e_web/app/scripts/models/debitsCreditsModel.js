@@ -18,13 +18,13 @@ define([
             urlRoot: WebServices.v1.debitscredits,
             defaults: {
                 isCredit: function() {
-                    return this.get('amount') >= 0;
+                    return this.debitsCredits.amount >= 0;
                 },
                 isDebit: function() {
-                    return this.get('amount') < 0;
+                    return this.debitsCredits.amount < 0;
                 },
                 isFavoriteCurrency: function() {
-                    return this.debitsCredits.currency_id === storage.user.currency();
+                    return !this.debitsCredits.isForeignCurrency;
                 },
                 defaultCurrency: function() {
                     return storage.currencies.get(this.debitsCredits.currency_id).toString(this.debitsCredits.amount);
