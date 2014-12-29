@@ -3,6 +3,7 @@
 *.pyc
 local_settings.py
 723e_server/collectstatic
+723e_server/django_723e/settings.py
 723e_web/node_modules
 723e_web/dist
 723e_web/.tmp
