@@ -1,20 +1,20 @@
 
 from django_723e.models.transactions.models import Category, DebitsCredits, Cheque, Change, Tranfert
+from django_723e.models.currency.models import Currency
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
 
-    parent_id = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    parent_id = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model  = Category
         fields = ('id', 'user', 'name', 'description', 'color', 'icon', 'parent', 'parent_id', 'selectable', 'active')
 
 class DebitsCreditsSerializer(serializers.HyperlinkedModelSerializer):
-    category_id       = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
-    currency_id       = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
-    isForeignCurrency = serializers.Field(source='isForeignCurrency')
+    category_id       = serializers.PrimaryKeyRelatedField(read_only=True)
+    currency_id       = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model  = DebitsCredits
@@ -28,12 +28,8 @@ class ChequeSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'account', 'currency', 'name', 'amount', 'date', 'active', 'category', 'cheque_name', 'place', 'debit_date')
 
 class ChangeSerializer(serializers.HyperlinkedModelSerializer):
-    currency      = serializers.PrimaryKeyRelatedField(many=False)
-    new_currency  = serializers.PrimaryKeyRelatedField(many=False)
-    value         = serializers.Field(source='value')
-    new_value     = serializers.Field(source='new_value')
-    exchange_rate = serializers.Field(source='exchange_rate')
-
+    currency      = serializers.PrimaryKeyRelatedField(queryset=Currency.objects.all())
+    new_currency  = serializers.PrimaryKeyRelatedField(queryset=Currency.objects.all())
     class Meta:
         model  = Change
         fields = ('id', 'account', 'currency', 'name', 'amount', 'date', 'active', 'category', 'new_amount', 'new_currency', 'value', 'new_value', 'exchange_rate')
