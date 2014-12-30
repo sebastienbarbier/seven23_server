@@ -43,7 +43,12 @@ define([
 				$("#changes_form select[name='currency']").find('option[value="' + change.currency + '"]').attr('selected', true);
 				$("#changes_form select[name='new_currency']").find('option[value="' + change.new_currency + '"]').attr('selected', true);
 				$("#changes_form select[name='category']").find('option[value="' + change.category + '"]').attr('selected', true);
+			}else{
+				var currency = storage.user.get('accounts')[0].currency;
+				$("#changes_form select[name='currency']").find('option[value="' + currency + '"]').attr('selected', true);
 			}
+
+
 
 			var view = this;
 			// User cancel form. We go back to view page.

@@ -22,7 +22,7 @@ define([
 			var user = storage.user.toJSON();
 
 			for(var i = 0; i < user.accounts.length; i=i+1){
-				user.accounts[i].currency = storage.currencies.get(user.accounts[i].currency).toJSON()
+				user.accounts[i].currency_json = storage.currencies.get(user.accounts[i].currency).toJSON()
 			}
 
 			// Generate and push template.
