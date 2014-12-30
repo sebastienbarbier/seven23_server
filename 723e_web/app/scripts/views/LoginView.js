@@ -23,12 +23,19 @@ define([
 					url: ws.v1.login,
 					data: $("#login_form").serialize()
 				}).done(function(json){
-						// We save token in sessionStorage
-						ws.setToken(json.token);
+					// We save token in sessionStorage
+					ws.setToken(json.token);
+					console.log(json);
+					ws.get({
+						url: ws.init,
+						async: false
+					}).done(function(json) {
+
 						storage.init(json.id, function(){
 							Backbone.history.navigate("#/dashboard", {trigger: true});
 						});
 
+					});
 				});
 
 				return false;

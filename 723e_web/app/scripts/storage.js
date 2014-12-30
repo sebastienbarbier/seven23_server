@@ -26,6 +26,9 @@ define("storage",
 		var fetchCounter = 0;
 
 		// Get User model
+		console.log(userid);
+		console.log(user);
+
 		user.set('id', userid);
 		user.fetch({
 	        success: function (u) {
