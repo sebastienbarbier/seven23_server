@@ -25,12 +25,10 @@ define([
 				}).done(function(json){
 					// We save token in sessionStorage
 					ws.setToken(json.token);
-					console.log(json);
 					ws.get({
 						url: ws.init,
 						async: false
 					}).done(function(json) {
-
 						storage.init(json.id, function(){
 							Backbone.history.navigate("#/dashboard", {trigger: true});
 						});
