@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 
 from django_723e.models.accounts.models import Account
 from django_723e.models.currency.models import Currency
-from django_723e.models.transactions.models import AbstractTransaction, Category, DebitsCredits, Cheque, Change
+from django_723e.models.categories.models import Category
+from django_723e.models.transactions.models import AbstractTransaction, DebitsCredits, Cheque, Change
 import datetime
 
 class AccountTest(TransactionTestCase):

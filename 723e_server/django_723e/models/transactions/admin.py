@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
-from django_723e.models.transactions.models import Category, DebitsCredits, Change, Tranfert, Cheque
-
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('user','name','description', 'color', 'icon', 'parent','active')
+from django_723e.models.transactions.models import DebitsCredits, Change, Tranfert, Cheque
 
 class DebitsCreditsAdmin(admin.ModelAdmin):
     list_display = ('account', 'date', 'amount', 'currency', 'category', 'active')
@@ -22,7 +19,6 @@ class ChequeAdmin(admin.ModelAdmin):
     list_display = ('account', 'date', 'amount', 'currency', 'category', 'active')
     list_filter = ('account', 'currency')
 
-admin.site.register(Category, CategoryAdmin)
 admin.site.register(DebitsCredits, DebitsCreditsAdmin)
 admin.site.register(Change, ChangeAdmin)
 admin.site.register(Tranfert, TranfertAdmin)

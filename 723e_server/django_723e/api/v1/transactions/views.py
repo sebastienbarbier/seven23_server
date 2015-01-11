@@ -25,6 +25,7 @@ class api_debitscredits(viewsets.ModelViewSet):
     queryset = DebitsCredits.objects.all()
     serializer_class = DebitsCreditsSerializer
 
+    # Get list with filter year and month
     def list(self, request):
         if request.GET.get('month') and request.GET.get('year'):
             queryset = DebitsCredits.objects.filter(date__year=request.GET.get('year'), date__month=request.GET.get('month'))

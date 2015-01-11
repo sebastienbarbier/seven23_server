@@ -77,6 +77,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'rest_framework.authtoken', # Token Authentification
     'django_723e.models.accounts',
+    'django_723e.models.categories',
     'django_723e.models.currency',
     'django_723e.models.transactions'
 )
