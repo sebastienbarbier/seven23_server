@@ -67,7 +67,9 @@ define([
 					dict[array[i]['name']] = array[i]['value']
 				}
 				dict['user'] = "http://localhost:8000/api/v1/users/1";
-
+				if(dict['currency'] === undefined || dict['currency'] === null){
+					dict['currency'] = storage.user.get('accounts')[0].currency;
+				}
 				var change;
 				if(dict['id'] !== undefined){
 					change = storage.changes.get(dict['id']).set(dict);
