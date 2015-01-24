@@ -96,13 +96,13 @@
 	border-top-left-radius: @radius;
 }
 
-.shadow-box(@color: @shadow, @x: 0px, @y: 0px, @blur: 5px, @spread: 5px){
+.box-shadow(@color: @shadow, @x: 0px, @y: 0px, @blur: 5px, @spread: 5px){
 	-moz-box-shadow: @x @y @blur @spread @color !important;
 	-webkit-box-shadow: @x @y @blur @spread @color !important;
 	box-shadow: @x @y @blur @spread @color !important;
 }
 
-.inset-shadow-box(@color: @shadow, @x: 0px, @y: 0px, @blur: 5px, @spread: 5px){
+.inset-box-shadow(@color: @shadow, @x: 0px, @y: 0px, @blur: 5px, @spread: 5px){
 	-moz-box-shadow: inset @x @y @blur @spread @color;
 	-webkit-box-shadow: inset @x @y @blur @spread @color;
 	box-shadow: inset @x @y @blur @spread @color;
@@ -126,6 +126,13 @@
 	transform: rotate(@rotate);
 }
 
+.transition(@transition){
+	-webkit-transition: @transition;
+       -moz-transition: @transition;
+         -o-transition: @transition;
+            transition: @transition;
+}
+
 body{
 	background: white;
 	font-family: "open_sansregular";
@@ -147,7 +154,7 @@ p{
 	left: 0;
 	right: 0;
 	color: @texteBlue;
-	.shadow-box(#444, 0px, 0px, 5px, 0px);
+	.box-shadow(#444, 0px, 0px, 5px, 0px);
 	h1{
 		float: left;
 		font-size: 30px;
@@ -201,7 +208,7 @@ p{
 #content{
 	margin-top: 42px;
 	header{
-		.shadow-box(#CCC, 0px, 0px, 3px, 0px);
+		.box-shadow(#CCC, 0px, 0px, 3px, 0px);
 		padding-bottom: 18px;
 		h2{
 			margin: 0px;
