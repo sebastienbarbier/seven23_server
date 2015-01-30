@@ -6,6 +6,7 @@ define([
     'moment',
     'initView',
     'ws',
+    'storage',
     'text!templates/transactions/dateSelectPage.mustache'
 ], function(
     $,
@@ -15,6 +16,7 @@ define([
     moment,
     InitView,
     ws,
+    storage,
     DateSelectorPageTemplate) {
 
 
@@ -53,13 +55,13 @@ define([
                     for (var i = 1; i <= 12; i = i + 1) {
                         calendar.months.push({
 							month   : moment().month(i - 1).format("MM"),
-							year    : year,
-							label   : moment().month(i - 1).format("MMMM"),
-							exist   : (json.months[i] ? true : false),
-							count   : (json.months[i] ? json.months[i].count : 0),
-							sum     : (json.months[i] ? json.months[i].sum : 0),
-							credits : (json.months[i] ? json.months[i].sum_credits : 0),
-							debits  : (json.months[i] ? json.months[i].sum_debits : 0)
+                            year    : year,
+                            label   : moment().month(i - 1).format("MMMM"),
+                            exist   : (json.months[i] ? true : false),
+                            count   : (json.months[i] ? json.months[i].count : 0),
+                            sum     : storage.currencies.get(storage.user.currency()).toString((json.months[i] ? json.months[i].sum : 0)),
+                            credits : storage.currencies.get(storage.user.currency()).toString((json.months[i] ? json.months[i].sum_credits : 0)),
+                            debits  : storage.currencies.get(storage.user.currency()).toString((json.months[i] ? json.months[i].sum_debits : 0))
                         });
                     }
 

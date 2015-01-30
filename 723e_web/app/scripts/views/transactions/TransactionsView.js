@@ -113,7 +113,7 @@ define([
 
 			// Feed each element with category object
 			for (i = 0; i < arrayAbstract.length; i++) {
-				var c = storage.categories.get(arrayAbstract[i].get('category_id'))
+				var c = storage.categories.get(arrayAbstract[i].get('category_id'));
 				if (c !== undefined) {
 					arrayAbstract[i].set('categoryJSON', c.toJSON());
 				}
@@ -169,7 +169,7 @@ define([
 			bilan.categories = _.pairs(bilan.categories);
 
 			bilan.categories = _.sortBy(bilan.categories, function(obj) {
-				return obj[1]
+				return obj[1];
 			});
 
 			for(var i=0, l=bilan.categories.length; i < l; i=i+1){
@@ -195,7 +195,7 @@ define([
 
 			// Order by date
 			arrayAbstract = _.sortBy(arrayAbstract, function(obj) {
-				return obj[0]
+				return obj[0];
 			});
 			// Reverse
 			arrayAbstract.reverse();
@@ -255,7 +255,7 @@ define([
 			$(".element .delete").on('click', function() {
 				var transaction = $(this).parents(".actions").prev();
 				if (transaction.hasClass('debitcredit')) {
-					var debitcredit = $(this).prev().data('id');
+					var debitcredit = transaction.data('id');
 					collection.get(debitcredit).destroy({
 						// prints nothing!!!
 						success: function() {
