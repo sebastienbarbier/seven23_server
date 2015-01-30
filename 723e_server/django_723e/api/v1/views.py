@@ -20,19 +20,22 @@ def resume_year(request):
             year = datetime.datetime.today.year()
 
         list = DebitsCredits.objects.filter(date__year=year).extra(select={'month': "EXTRACT(month from date)"}).values('month').annotate(count=Count('amount'), sum=Sum('reference_amount'))
+        print(list)
         months = {}
         for i in list:
-            months[i['month']] = {}
-            months[i['month']]['count'] = i['count']
-            months[i['month']]['sum'] = i['sum']
-            list2 = DebitsCredits.objects.filter(date__year=year, date__month=i['month'], amount__lt=0).extra(select={'month': "EXTRACT(month from date)"}).values('category').annotate(count=Count('amount'), sum=Sum('reference_amount'))
+            month_number = int(i['month'])
+            months[month_number] = {}
+            months[month_number]['count'] = i['count']
+            months[month_number]['sum'] = i['sum']
+            list2 = DebitsCredits.objects.filter(date__year=year, date__month=month_number, amount__lt=0).extra(select={'month': "EXTRACT(month from date)"}).values('category').annotate(count=Count('amount'), sum=Sum('reference_amount'))
 
             if len(list2) > 0:
-                months[i['month']]['sum_debits'] = list2[0]['sum']
+                months[month_number]['sum_debits'] = list2[0]['sum']
             else:
-                months[i['month']]['sum_debits'] = 0
+                months[month_number]['sum_debits'] = 0
 
-            months[i['month']]['sum_credits'] = months[i['month']]['sum'] - months[i['month']]['sum_debits']
+            months[month_number]['sum_credits'] = months[month_number]['sum'] - months[month_number]['sum_debits']
 
+        print(months)
         return Response({"year": year, "months": months})
 

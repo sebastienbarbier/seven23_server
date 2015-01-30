@@ -55,7 +55,7 @@
 		margin: 10px 20px 0px 20px;
 		padding: 2px 8px;
 		background: #FAFAFA;
-		.shadow-box(black, 1px, 1px, 5px 5px);
+		.box-shadow(black, 1px, 1px, 5px 5px);
 	}
 	.totale{
 		.box{
@@ -115,6 +115,11 @@
 				}
 				.debitcredit{
 					background: white;
+					.transition(background 0.2s ease-out);
+					&:hover{
+						background: #EEE;
+						.transition(background 0.2s linear);
+					}
 				}
 				.actions{
 					position: absolute;
