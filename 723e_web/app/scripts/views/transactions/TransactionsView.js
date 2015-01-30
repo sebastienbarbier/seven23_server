@@ -173,8 +173,12 @@ define([
 			});
 
 			for(var i=0, l=bilan.categories.length; i < l; i=i+1){
-				bilan.categories[i][0] = storage.categories.get(bilan.categories[i][0]).toJSON();
-				bilan.categories[i][1] = storage.currencies.get(storage.user.currency()).toString(bilan.categories[i][1]);
+				try{
+					bilan.categories[i][0] = storage.categories.get(bilan.categories[i][0]).toJSON();
+					bilan.categories[i][1] = storage.currencies.get(storage.user.currency()).toString(bilan.categories[i][1]);
+				}catch(e){
+
+				}
 			}
 
 			//

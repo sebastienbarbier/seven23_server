@@ -7,8 +7,10 @@ from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 
-from django_723e.models.transactions.models import Category, DebitsCredits, Cheque, Change, Tranfert
-from django_723e.models.transactions.serializers import CategorySerializer, DebitsCreditsSerializer, ChequeSerializer, ChangeSerializer, TranfertSerializer
+from django_723e.models.categories.models import Category
+from django_723e.models.transactions.models import DebitsCredits, Cheque, Change, Tranfert
+from django_723e.models.categories.serializers import CategorySerializer
+from django_723e.models.transactions.serializers import DebitsCreditsSerializer, ChequeSerializer, ChangeSerializer, TranfertSerializer
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
