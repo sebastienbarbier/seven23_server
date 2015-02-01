@@ -32,17 +32,20 @@ class AbstractTransaction(models.Model):
     def __unicode__(self):
         return u"(%d) %s %s" % (self.pk, self.name, self.currency.verbose(self.amount))
 
-    def update_amount(self):
-        if type(self) is not Change and self.currency is not self.account.currency:
-            list_change = Change.objects.filter(new_currency=self.currency, date__lte=self.date).order_by('-date')
-            if list_change:
-                change = list_change[0]
-                self.reference_amount = self.amount/change.exchange_rate()
+    def update_amount(self, *args, **kwargs):
+        if type(self) is DebitsCredits:
+            if self.currency != self.account.currency:
+                list_change = Change.objects.filter(new_currency=self.currency, date__lte=self.date).order_by('-date')
+                if list_change:
+                    change = list_change[0]
+                    self.reference_amount = self.amount/change.exchange_rate()
+                else:
+                    self.reference_amount = None;
             else:
-                self.reference_amount = self.amount
+                self.reference_amount = self.amount;
 
     def save(self, *args, **kwargs):
-        self.update_amount()
+        self.update_amount(*args, **kwargs)
         super(AbstractTransaction, self).save(*args, **kwargs) # Call the "real" save() method
 
     def value(self):
@@ -85,7 +88,7 @@ class Change(AbstractTransaction):
     new_currency = models.ForeignKey(Currency, related_name="change", blank= True, null= True)
 
     def __unicode__(self):
-        return u"%d %s (%s -> %s) : %f" % (self.pk, self.name, self.currency.verbose(self.amount), self.new_currency.verbose(self.new_amount), self.balance)
+        return u"%d %s (%s -> %s)" % (self.pk, self.name, self.currency.verbose(self.amount), self.new_currency.verbose(self.new_amount))
 
     def force_save(self, *args, **kwargs):
         super(Change, self).save(*args, **kwargs) # Call the "real" save() method
