@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.db.models import Count, Sum
-from django_723e.models.transactions.models import DebitsCredits
+from django_723e.models.transactions.models import DebitsCredits, Change
 import datetime
 
 @api_view(['GET'])
@@ -36,6 +36,16 @@ def resume_year(request):
 
             months[month_number]['sum_credits'] = months[month_number]['sum'] - months[month_number]['sum_debits']
 
-        print(months)
-        return Response({"year": year, "months": months})
+        stats = {}
+        stats['changes'] = Change.objects.filter(date__year=year).values('new_currency').annotate(count=Count('new_amount'), new=Sum('new_amount'), old=Sum('amount'))
+        #define rate for each currency
+        for c in stats['changes']:
+            c['rate'] = c['new'] / c['old']
+            c['average'] = c['old'] / c['count']
+
+        categories = {}
+        categories['list'] = DebitsCredits.objects.filter(date__year=year, amount__lt=0, reference_amount__isnull=False, category__isnull=False).values('category').annotate(count=Count('reference_amount'), sum=Sum('reference_amount')).order_by('sum')
+
+
+        return Response({"year": year, "months": months, "stats": stats, "categories": categories})
 
