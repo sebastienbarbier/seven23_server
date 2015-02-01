@@ -38,7 +38,7 @@ class AbstractTransaction(models.Model):
                 list_change = Change.objects.filter(new_currency=self.currency, date__lte=self.date).order_by('-date')
                 if list_change:
                     change = list_change[0]
-                    self.reference_amount = self.amount/change.exchange_rate()
+                    self.reference_amount = float("{0:.2f}".format(self.amount/change.exchange_rate()))
                 else:
                     self.reference_amount = None;
             else:
