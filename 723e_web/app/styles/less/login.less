@@ -1,0 +1,46 @@
+#login_page {
+	opacity: 1;
+	position: relative;
+	top: 0px;
+	.transition(all 0.3s linear);
+	&.not_loaded{
+		opacity: 0;
+		position: relative;
+		top: 5px;
+		.transition(all 0.3s linear);
+	}
+	h1{
+		font-size: 4.5em;
+		text-align: left;
+		padding-left: 20px;
+		color: @text_500;
+	}
+	.box{
+		background: @color_200;	
+		padding: 20px 40px;
+		margin-bottom: 20px;
+		.border-radius(10px);
+		form{
+			input[type=text], input[type=password]{
+				display: block;
+				width: 100%;
+				padding: 4px;
+				margin: 4px 0 10px 0;
+				font-size: 1.2em;
+			}
+			input[type=submit]{
+				display: block;
+				float: right;
+				font-size: 1.2em;
+			}
+		}
+	}
+	ul{
+		li{
+			list-style: none;
+			a {
+				color: @text_500;
+			}
+		}
+	}
+}

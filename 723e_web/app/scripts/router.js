@@ -122,6 +122,7 @@ define([
             // This wiew delete tokenkey
             app_router.on('route:logout', function() {
                 sessionStorage.removeItem("key");
+                $('body').removeClass('app');
                 Backbone.history.navigate("#/login", {
                     trigger: true
                 });

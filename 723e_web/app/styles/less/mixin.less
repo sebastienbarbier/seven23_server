@@ -1,0 +1,87 @@
+
+.border-radius(@sz){
+	-webkit-border-radius: @sz;
+	-moz-border-radius: @sz;
+	border-radius: @sz;
+}
+
+.border-radius (@radius: 5px) {
+  	border-radius: @radius !important;
+  	-moz-border-radius: @radius !important;
+  	-webkit-border-radius: @radius !important;
+}
+
+.border-radius-left (@radius: 5px)
+{
+	-webkit-border-top-left-radius: @radius;
+	-webkit-border-bottom-left-radius: @radius;
+	-moz-border-radius-topleft: @radius;
+	-moz-border-radius-bottomleft: @radius;
+	border-top-left-radius: @radius;
+	border-bottom-left-radius: @radius;
+}
+
+.border-radius-bottom (@radius: 5px)
+{
+	-webkit-border-bottom-right-radius: @radius;
+	-webkit-border-bottom-left-radius: @radius;
+	-moz-border-radius-bottomright: @radius;
+	-moz-border-radius-bottomleft: @radius;
+	border-bottom-right-radius: @radius;
+	border-bottom-left-radius: @radius;
+}
+
+.border-radius-top (@radius: 5px)
+{
+	-webkit-border-top-right-radius: @radius;
+	-webkit-border-top-left-radius: @radius;
+	-moz-border-radius-topright: @radius;
+	-moz-border-radius-topleft: @radius;
+	border-top-right-radius: @radius;
+	border-top-left-radius: @radius;
+}
+
+.box-shadow(@color: @shadow, @x: 0px, @y: 0px, @blur: 5px, @spread: 5px){
+	-moz-box-shadow: @x @y @blur @spread @color !important;
+	-webkit-box-shadow: @x @y @blur @spread @color !important;
+	box-shadow: @x @y @blur @spread @color !important;
+}
+
+.inset-box-shadow(@color: @shadow, @x: 0px, @y: 0px, @blur: 5px, @spread: 5px){
+	-moz-box-shadow: inset @x @y @blur @spread @color;
+	-webkit-box-shadow: inset @x @y @blur @spread @color;
+	box-shadow: inset @x @y @blur @spread @color;
+}
+
+.gradient-background(@top: #718DA9, @bottom: #415D79){
+	background: -moz-linear-gradient(top, @top 0%, @bottom 100%) !important; /* firefox */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@top), color-stop(100%,@bottom)) !important; /* webkit */
+
+}
+
+.text-shadow(@color: #6374AB, @size: 2px, @x: 0px, @y:0px){
+	text-shadow:  @color @x @y @size;
+}
+
+.rotate(@rotate: 90deg){
+	-webkit-transform: rotate(@rotate);
+	-moz-transform: rotate(@rotate);
+	-ms-transform: rotate(@rotate);
+	-o-transform: rotate(@rotate);
+	transform: rotate(@rotate);
+}
+
+.transition(@transition){
+	-webkit-transition: @transition;
+       -moz-transition: @transition;
+         -o-transition: @transition;
+            transition: @transition;
+}
+
+.transition(@transition, @transition2){
+	-webkit-transition: @transition, @transition2;
+       -moz-transition: @transition, @transition2;
+         -o-transition: @transition, @transition2;
+            transition: @transition, @transition2;
+}
+

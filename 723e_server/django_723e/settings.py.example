@@ -51,9 +51,9 @@ STATIC_URL = '/_static/'
 LOGIN_URL = '/'
 
 # Override Template position.
-TEMPLATE_DIRS = (
+TEMPLATE_DIRS = [
     PROJECT_PATH + '/templates/'
-)
+]
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -107,6 +107,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+# django.db.backends.postgresql_psycopg2
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

@@ -43,6 +43,7 @@ define("app", [
 				Router.initialize();
 			}else{
 				storage.init(json.id, function(){
+					$('body').addClass('app');
 					Router.initialize();
 				});
 			}
