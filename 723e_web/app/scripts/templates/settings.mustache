@@ -5,7 +5,6 @@
                 <a href="#/settings" class="list-group-item active">User account</a>
                 <a href="#/settings" class="list-group-item disabled">Languages</a>
             </div>
-
         </div>
         <div class="col-md-9">
             <h1>User détails</h1>
@@ -17,14 +16,14 @@
               <dt>Id</dt>
               <dd>{{ user.id }}</dd>
             </dl>
-			<h2>Accounts</h2>
+			      <h2>Accounts</h2>
             <dl class="dl-horizontal">
                 {{# user.accounts }}
                 <dt>{{ name }}</dt>
                 <dd>{{ create }} - {{ currency_json.sign }} - {{ archived }}</dd>
                 {{/ user.accounts }}
             </dl>
-
         </div>
     </div>
 </div>
+ 
