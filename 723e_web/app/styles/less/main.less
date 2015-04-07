@@ -61,11 +61,10 @@ body{
 	font-family: "open_sansregular";
 	.transition(all 0.3s linear);
 	&.app{
-		background: @color_50;
+		background: @color_0;
 		.transition(all 0.3s linear);
 	}
 }
-
 
 .container-fluid{
 	padding: 0;
@@ -75,8 +74,12 @@ p{
 	margin: 0;
 }
 
+a:focus { 
+    outline: none; 
+}
+
 #navbar{
-	background: @headerBlue;
+	background: @color_800;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -118,9 +121,10 @@ p{
 			left: 50%;
 			margin-left: -305px;
 			li.selected{
-				background: @headerBlueSelected;
+				background: @color_900;
 				a{
 					color: white;
+					outline: none; 
 				}
 			}
 		}
@@ -144,8 +148,8 @@ p{
 			text-transform: capitalize;
 		}
 		&.grey{
-			background: @greywhite;
-			border-bottom: solid 1px darken(@greywhite, 8%);
+			background: @color_50;
+			border-bottom: solid 1px darken(@color_50, 8%);
 		}
 	}
 }
