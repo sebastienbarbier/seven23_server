@@ -1,12 +1,5 @@
 @blanc: #FEFEFE; // Blanc d'argent
 
-@headerBlue: #313a4f; // Bleu
-@headerBlueSelected: #22273e; // Bleu Selected
-@buttonBlue: lighten(@headerBlue, 10%); // Bleu Bouton
-
-@texteBlue: #919aa3;
-@greywhite: #eff2ed;
-
 // Colors are coming from http://www.google.com/design/spec/style/color.html#color-color-palette
 
 // List of change :
@@ -82,7 +75,7 @@
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-@font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-sans-serif:  "open_sansregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-family-serif:       Georgia, "Times New Roman", Times, serif;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 @font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -227,7 +220,7 @@
 //** `<input>` border radius
 @input-border-radius:            @border-radius-base;
 //** Border color for inputs on focus
-@input-border-focus:             lighten(@buttonBlue, 20%);
+@input-border-focus:             lighten(@color_800, 20%);
 
 //** Placeholder text color
 @input-color-placeholder:        @gray-light;

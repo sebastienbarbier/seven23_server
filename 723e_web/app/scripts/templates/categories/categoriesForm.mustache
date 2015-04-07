@@ -1,5 +1,5 @@
 
-<form id="cat_form">
+<form id="cat_form" class="container">
 	<div class="row">
 		<div class="col-md-12">
 		{{#categorie}}
@@ -58,7 +58,6 @@
 			{{#categorie}}
 			<input type="hidden" name="id" value="{{ id }}" />
 			<input type="hidden" name="user" value="{{ user }}" />
-
 			<button type="button" class="btn btn-primary cat_form_submit">Modifier</button>
 			{{/categorie}}
 			{{^categorie}}

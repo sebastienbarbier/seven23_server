@@ -58,7 +58,7 @@
 
 body{
 	background: @color_500;
-	font-family: "open_sansregular";
+	font-family: @font-family-sans-serif;
 	.transition(all 0.3s linear);
 	&.app{
 		background: @color_0;
@@ -77,6 +77,10 @@ p{
 a:focus { 
     outline: none; 
 }
+button::-moz-focus-inner {
+  border: 0;
+}
+
 
 #navbar{
 	background: @color_800;
@@ -84,7 +88,7 @@ a:focus {
 	top: 0;
 	left: 0;
 	right: 0;
-	color: @texteBlue;
+	color: @color_300;
 	.box-shadow(#444, 0px, 0px, 5px, 0px);
 	h1{
 		float: left;
@@ -92,7 +96,7 @@ a:focus {
 		margin: 4px 10px;
 	}
 	a{
-		color: @texteBlue;
+		color: @color_300;
 		text-decoration: none;
 		&:hover{
 			color: white;
