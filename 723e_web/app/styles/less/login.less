@@ -5,7 +5,8 @@
 	bottom: 0;
 	left: 0;
 	width: 400px;
-	background: @color_800;	
+	background: @color_600;
+	padding: 20px;
 	.transition(all 0.3s linear);
 	&.not_loaded{
 		opacity: 0;
@@ -16,7 +17,7 @@
 		font-size: 4.5em;
 		text-align: left;
 		padding-left: 20px;
-		color: @text_800;
+		color: @text_600;
 	}
 	.box{
 		padding: 20px 40px;
@@ -41,8 +42,14 @@
 		li{
 			list-style: none;
 			a {
-				color: @text_800;
+				color: @text_600;
 			}
 		}
+	}
+	.row-bottom {
+		position: absolute;
+		bottom: 20px;
+		left: 20px;
+		right: 20px;
 	}
 }
