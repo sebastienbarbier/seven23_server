@@ -40,9 +40,10 @@ define([
 								$('body').addClass('app');
 								Backbone.history.navigate("#/dashboard", {trigger: true});
 							});
-
 						});
 					}, 200);
+				}).fail(function(error) {
+					$('#login_page .error').addClass('show');
 				});
 
 				return false;

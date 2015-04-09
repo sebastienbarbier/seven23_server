@@ -18,12 +18,12 @@
 		text-align: left;
 		padding-left: 20px;
 		color: @text_600;
+		margin-bottom: 30px;
 	}
 	.box{
 		margin-bottom: 20px;
 		.border-radius(10px);
 		form{
-			margin-top: 40px;
 			input[type=text], input[type=password]{
 				display: block;
 				width: 100%;
@@ -38,6 +38,17 @@
 			}
 		}
 	}
+	.error {
+		visibility: hidden;
+		opacity: 0;
+		margin-bottom: 30px;
+		.transition(all 0.3s linear);
+		&.show {
+			visibility: visible;
+			opacity: 1;
+			.transition(all 0.3s linear);
+		}
+	}
 	ul{
 		li{
 			list-style: none;
@@ -48,8 +59,11 @@
 	}
 	.row-bottom {
 		position: absolute;
-		bottom: 20px;
+		bottom: 0;
 		left: 30px;
 		right: 30px;
+		a.btn {
+			margin-bottom: 20px;
+		}
 	}
 }
