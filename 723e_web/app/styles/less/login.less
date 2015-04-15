@@ -1,23 +1,23 @@
 #login_page {
 	opacity: 1;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
 	width: 400px;
-	background: @color_600;
-	padding: 30px;
+	margin: auto;
+	margin-top: 20px;
+	background: white;
+	border-top: solid 4px @color_900;
+	color: black;
+	padding: 10px 30px;
 	.transition(all 0.3s linear);
 	&.not_loaded{
 		opacity: 0;
-		left: -10px;
+		margin-top: 30px;
 		.transition(all 0.3s linear);
 	}
 	h1{
 		font-size: 4.5em;
 		text-align: left;
 		padding-left: 20px;
-		color: @text_600;
+		color: black;
 		margin-bottom: 30px;
 	}
 	.box{
@@ -25,16 +25,11 @@
 		.border-radius(10px);
 		form{
 			input[type=text], input[type=password]{
-				display: block;
 				width: 100%;
 				padding: 4px;
-				margin: 4px 0 18px 0;
-				font-size: 1.2em;
 			}
 			input[type=submit]{
-				display: block;
 				float: right;
-				font-size: 1.2em;
 			}
 		}
 	}
@@ -53,17 +48,13 @@
 		li{
 			list-style: none;
 			a {
-				color: @text_600;
+				color: black;
 			}
 		}
 	}
 	.row-bottom {
-		position: absolute;
-		bottom: 0;
-		left: 30px;
-		right: 30px;
 		a.btn {
-			margin-bottom: 20px;
+			margin-bottom: 10px;
 		}
 	}
 }

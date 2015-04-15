@@ -61,7 +61,7 @@ body{
 	font-family: @font-family-sans-serif;
 	.transition(all 0.3s linear);
 	&.app{
-		background: @color_0;
+		background: @color_100;
 		.transition(all 0.3s linear);
 	}
 }
@@ -152,9 +152,12 @@ button::-moz-focus-inner {
 			text-transform: capitalize;
 		}
 		&.grey{
-			background: @color_50;
-			border-bottom: solid 1px darken(@color_50, 8%);
+			background: white;
+			border-bottom: solid 1px darken(@color_100, 8%);
 		}
+	}
+	div.container.simple_page {
+		padding-top: 20px;
 	}
 }
 

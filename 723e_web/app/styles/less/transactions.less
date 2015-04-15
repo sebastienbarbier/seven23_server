@@ -19,11 +19,15 @@
 		}
 	}
 	.monthSelector{
-		background: @color_200;
+		background: @color_900;
+		border: solid 1px #777;
 		margin: 10px 0px;
-		font-size: 24px;
+		overflow: hidden;
+		opacity: 0.9;
+		.border-radius(4px);
+		.box-shadow(#AAA, 1px, 0px, 10px, 2px);
 		&:hover{
-			background: @color_300;
+			opacity: 1;
 		}
 		a{
 			display: block;
@@ -34,17 +38,19 @@
 			h3{
 				margin: 0;
 				font-size: 14px;
-				padding: 6px 10px 6px 10px;
-				border: solid 1px black;
+				padding: 8px 10px 6px 10px;
 				text-align: center;
+				background: @color_800;
+				color: @color_100;
+				font-family: @font-family-light;
 			}
 			.details{
 				text-align: right;
-				background: white;
-				padding: 40px;
-				border-bottom: solid 1px black;
-				border-left: solid 1px black;
-				border-right: solid 1px black;
+				font-family: @font-family-light;
+				background: @color_900;
+				color: @color_100;
+				padding: 8px 12px;
+				font-size: 14px;
 			}
 		}
 	}
