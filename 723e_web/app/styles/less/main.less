@@ -81,117 +81,6 @@ button::-moz-focus-inner {
   border: 0;
 }
 
-
-#navbar{
-	background: @color_900;
-	color: @color_200;
-	height: 42px;
-	.box-shadow(#444, 0px, 0px, 5px, 0px);
-	h1.brand{
-		font-size: 24px;
-		margin: 7px 10px;
-		float: left;
-	}
-
-	a{
-		color: @color_300;
-		text-decoration: none;
-		&:hover{
-			color: white;
-		}
-	}
-
-	nav {
-		float: right;
-		@media all and (max-width: 768px) {
-			visibility: hidden;
-			opacity: 0;
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			width: 250px;
-			background: rgba(0, 0, 0, 0.9);
-			z-index: 1000;
-			padding-top: 50px;
-			.transition(opacity 0.1s linear, visibility 0s linear 0.2s);
-			&.open {
-				opacity: 1;
-				visibility: visible;
-				.transition(visibility 0s linear, opacity 0.2s linear);
-			}
-			ul{
-				// override bootstrap default margin
-				margin-bottom: 0;
-				li{
-					list-style: none;
-					padding: 12px 15px 10px 10px;
-					text-transform: uppercase;
-					.text-shadow(#111, 20px, 0px, 0px);
-					.glyphicon{
-						margin-right: 5px;
-					}
-					.glyphicon-tags{
-						margin-right: 8px;
-					}
-				}
-			}
-		}
-		@media all and (min-width: 769px) {
-			ul{
-				// override bootstrap default margin
-				margin-bottom: 0;
-				li{
-					float: left;
-					list-style: none;
-					padding: 12px 15px 10px 15px;
-					text-transform: uppercase;
-					.glyphicon{
-						margin-right: 5px;
-					}
-					.glyphicon-tags{
-						margin-right: 8px;
-					}
-				}
-				&:first-child{
-					text-align: center;
-					float: left;
-					position: absolute;
-					left: 50%;
-					margin-left: -305px;
-					li.selected{
-						background: @color_800;
-						a{
-							color: white;
-							outline: none; 
-						}
-					}
-				}
-				&:last-child{
-					float: right;
-					li{
-						text-transform: capitalize;
-					}
-				}
-			}
-		}
-	}
-
-	.menu-button-smartphone {
-		position: absolute;
-		top: 0;
-		right: 0;
-		z-index: 1001;
-		a{
-			color: white;
-			span {
-				margin: 10px 30px 0px 0px;
-				font-size: 20px;
-			}
-		}
-	}
-}
-
 #content{
 	header{
 		.box-shadow(#CCC, 0px, 0px, 3px, 0px);
@@ -222,6 +111,7 @@ button::-moz-focus-inner {
   height: 18px!important;
 }
 
+@import "navigation.less";
 @import "transactions.less";
 @import "categories.less";
 @import "login.less";
