@@ -1,19 +1,23 @@
-
 {{#categorie}}
+
 {{^parent}}
 <div class="col-md-4 categorie-{{i}}">
-{{/parent}}
-	<ul>
-		<li data-id="{{ id }}">
-			<div class="categorie">
-			<i class="circle fa {{ icon }}" style="color: {{ color }}; font-size: 20px;"></i>
-			{{ name }}
-				<div class="actions"><button type="button" class="btn btn-primary btn-xs edit">M</button><button type="button" class="btn btn-primary btn-xs delete">S</button></div>
-			</div>
-			{{{ tree }}}
-		</li>
-	</ul>
-{{^parent}}
+	<div class="panel panel-default">
+  		<div class="panel-body">
+		{{/parent}}
+			<ul>
+				<li data-id="{{ id }}">
+					<div class="categorie">
+					<i class="circle fa {{ icon }}" style="color: {{ color }}; font-size: 20px;"></i>
+					{{ name }}
+						<div class="actions"><button type="button" class="btn btn-primary btn-xs edit">M</button><button type="button" class="btn btn-primary btn-xs delete">S</button></div>
+					</div>
+					{{{ tree }}}
+				</li>
+			</ul>
+		{{^parent}}
+		</div>
+	</div>
 </div>
 {{/parent}}
 

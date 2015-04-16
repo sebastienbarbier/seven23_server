@@ -1,69 +1,70 @@
-
-<form id="cat_form" class="container">
-	<div class="row">
-		<div class="col-md-12">
-		{{#categorie}}
-			<h2>Modifier une catégorie</h2>
-		{{/categorie}}
-		{{^categorie}}
-		 	<h2>Ajouter une nouvelle catégorie</h2>
-		{{/categorie}}
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group">
-				<label class="col-sm-12 control-label">Nom</label>
-				<div class="col-sm-12">
-					<input type="text" value="{{#categorie}}{{ name }}{{/ categorie }}" class="form-control"  name="name" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Description</label>
-				<div class="col-sm-12">
-					<input type="text" value="{{#categorie}}{{ description }}{{/categorie}}" class="form-control"  name="description" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-12 control-label">Category</label>
-				<div class="col-sm-12">
-					<select class="form-control" name="parent">
-						<option value="">---</option>
-						{{#categories}}
-						<option value="{{ id }}">{{ name }}</option>
-						{{/categories}}
-					</select>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="form-group">
-				<label class="col-sm-12 control-label">Couleur</label>
-				<div class="col-sm-12">
-					<input type="text" value="{{#categorie}}{{ color }}{{/categorie}}{{^categorie}}#ffffff{{/categorie}}" class="form-control colorpicker" name="color" />
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="form-group">
-				<label class="col-sm-12 control-label">Icone</label>
-				<div class="col-sm-12">
-                	<button class="btn btn-default iconpicker" name="icon" role="iconpicker"></button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-4 col-md-offset-8">
+<div class="container">
+	<form id="cat_form">
+		<div class="row">
+			<div class="col-md-12">
 			{{#categorie}}
-			<input type="hidden" name="id" value="{{ id }}" />
-			<input type="hidden" name="user" value="{{ user }}" />
-			<button type="button" class="btn btn-primary cat_form_submit">Modifier</button>
+				<h2>Modifier une catégorie</h2>
 			{{/categorie}}
 			{{^categorie}}
-			<button type="button" class="btn btn-primary cat_form_submit">Créer</button>
+			 	<h2>Ajouter une nouvelle catégorie</h2>
 			{{/categorie}}
-			<a href="#/categories" class="btn btn-primary cat_form_cancel">Annuler</a>
+			</div>
 		</div>
-	</div>
-</form>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+					<label class="col-sm-12 control-label">Nom</label>
+					<div class="col-sm-12">
+						<input type="text" value="{{#categorie}}{{ name }}{{/ categorie }}" class="form-control"  name="name" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Description</label>
+					<div class="col-sm-12">
+						<input type="text" value="{{#categorie}}{{ description }}{{/categorie}}" class="form-control"  name="description" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-12 control-label">Category</label>
+					<div class="col-sm-12">
+						<select class="form-control" name="parent">
+							<option value="">---</option>
+							{{#categories}}
+							<option value="{{ id }}">{{ name }}</option>
+							{{/categories}}
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label class="col-sm-12 control-label">Couleur</label>
+					<div class="col-sm-12">
+						<input type="text" value="{{#categorie}}{{ color }}{{/categorie}}{{^categorie}}#ffffff{{/categorie}}" class="form-control colorpicker" name="color" />
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label class="col-sm-12 control-label">Icone</label>
+					<div class="col-sm-12">
+	                	<button class="btn btn-default iconpicker" name="icon" role="iconpicker"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-8">
+				{{#categorie}}
+				<input type="hidden" name="id" value="{{ id }}" />
+				<input type="hidden" name="user" value="{{ user }}" />
+				<button type="button" class="btn btn-primary cat_form_submit">Modifier</button>
+				{{/categorie}}
+				{{^categorie}}
+				<button type="button" class="btn btn-primary cat_form_submit">Créer</button>
+				{{/categorie}}
+				<a href="#/categories" class="btn btn-primary cat_form_cancel">Annuler</a>
+			</div>
+		</div>
+	</form>
+</div>
