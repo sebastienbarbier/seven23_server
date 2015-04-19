@@ -62,14 +62,12 @@ define([
 				var invite = new Invitation(dict);
 				invite.save(dict, {
 					success: function(model, response) {
-						form.toggleClass('hide');
-						alertSuccess.toggleClass('show');
 						alertDanger.removeClass('show');
+						alertSuccess.toggleClass('show');
+						form.toggleClass('hide');
 					},
 					error: function(model, error) {
-						if (error.status === 400) {
-							alertDanger.toggleClass('show');
-						}
+						alertDanger.addClass('show');
 					}
 				});
 				return false;
