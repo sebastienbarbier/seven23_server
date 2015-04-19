@@ -50,6 +50,9 @@ require.config({
 		'404View'               : 'views/404View',
     },
     shim: {
+    	'bootstrap': {
+			deps: ['jquery'],
+    	},
         'bootstrap-iconpicker': {
             deps: ['bootstrap', '../../bower_components/bootstrap-iconpicker/bootstrap-iconpicker/js/iconset/iconset-fontawesome-4.2.0.min'],
         },
