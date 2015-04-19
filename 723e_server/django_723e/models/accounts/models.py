@@ -25,3 +25,15 @@ class Account(models.Model):
 
     def __unicode__(self):
         return u'%s' % (self.name)
+
+class InvitationRequest(models.Model):
+
+    email    = models.EmailField(_(u'Email'))
+    create   = models.DateField(_(u'Creation date'), auto_now=True, editable=False)
+
+    class Meta:
+        ordering = ('create', 'email')
+        verbose_name = _(u'Invitation Email')
+
+    def __unicode__(self):
+        return u'%s' % (self.email)

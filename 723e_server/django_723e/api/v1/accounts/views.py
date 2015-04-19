@@ -7,8 +7,8 @@ from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 
-from django_723e.models.accounts.models import Account
-from django_723e.models.accounts.serializers import AccountSerializer, UserSerializer
+from django_723e.models.accounts.models import Account, InvitationRequest
+from django_723e.models.accounts.serializers import AccountSerializer, UserSerializer, InvitationRequestSerializer
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -28,3 +28,8 @@ class api_users(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+class api_invitationrequest(viewsets.ModelViewSet):
+    queryset = InvitationRequest.objects.all()
+    serializer_class = InvitationRequestSerializer
+	

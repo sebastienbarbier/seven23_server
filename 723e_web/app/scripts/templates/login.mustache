@@ -1,38 +1,53 @@
 <div id="login_page" class="not_loaded">
-	<div class="container-fluid">
+	<div class="container">
 		<div class="row">
-	  		<div class="col-md-12">
-				<h1>723e</h1>
-				<div class="box">
-					<form id="login_form"><p>
-						<div class="form-group">
-					    	<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-						    <div class="input-group">
-						      	<div class="input-group-addon"><i class="fa fa-user"></i></div>
-								<input type="text" name="username" placeholder="Identifiant"/>
+		  	<div class="col-md-12">
+				<div class="box_background">
+					<h1>723e <small>- ALPHA</small></h1>
+					<div class="box">
+						<form id="login_form"><p>
+							<div class="form-group">
+						    	<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+							    <div class="input-group">
+							      	<div class="input-group-addon"><i class="fa fa-user"></i></div>
+									<input type="text" name="username" placeholder="Identifiant"/>
+							    </div>
 						    </div>
-					    </div>
-						<div class="form-group">
-						    <div class="input-group">
-						      	<div class="input-group-addon"><i class="fa fa-lock"></i></div>
-								<input type="password" name="password" placeholder="Mot de passe"/>
+							<div class="form-group">
+							    <div class="input-group">
+							      	<div class="input-group-addon"><i class="fa fa-lock"></i></div>
+									<input type="password" name="password" placeholder="Mot de passe"/>
+							    </div>
 						    </div>
-					    </div>
-						<input type="submit" class="btn btn-primary" />
-						<div class="clearfix"></div>
-					</p></form>
-				</div>
-				<div class="error alert alert-danger" role="alert">
-					<p>Mot de passe incorrect</p>
+							<input type="submit" class="btn btn-primary" />
+							<div class="clearfix"></div>
+						</p></form>
+					</div>
+					<div class="error alert alert-danger" role="alert">
+						<p>Mot de passe incorrect</p>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row row-bottom">
-			<div class="col-md-6">
-				<a href="" class="btn btn-primary btn-expend">Inscription</a>
-			</div>
-			<div class="col-md-6">
-				<a href="" class="btn btn-default btn-expend">Mot de passe oublié</a>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="request">
+					<h2>Private alpha, please request an invitation.</h2>
+					<form action="GET" id="send-request">
+						<div class="input-group">
+					     	<input type="text" class="form-control" id="request-mail" placeholder="Email">
+					     	<span class="input-group-btn">
+						        <input class="btn btn-primary" value="Send a request" type="submit"/>
+						    </span>
+					    </div>
+					</form>
+					<div class="alert alert-success">
+						<p><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Request has been successfully sent.</p>
+					</div>
+					<div class="alert alert-danger">
+						<p><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Enter a valid email address.</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

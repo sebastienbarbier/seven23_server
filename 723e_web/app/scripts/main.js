@@ -31,6 +31,7 @@ require.config({
 		changesModel            : 'models/changesModel',
 		debitsCreditsModel      : 'models/debitsCreditsModel',
 		currencyModel           : 'models/currencyModel',
+		invitationModel         : 'models/invitationModel',
 		// Collections
 		categoryCollection      : 'collections/categoryCollection',
 		debitsCreditsCollection : 'collections/debitsCreditsCollection',

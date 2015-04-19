@@ -5,8 +5,9 @@ define([
 	'mustache',
 	'ws',
 	'text!templates/login.mustache',
-	'storage'
-], function($, _, Backbone, Mustache, ws, loginTemplate, storage) {
+	'storage',
+	'invitationModel'
+], function($, _, Backbone, Mustache, ws, loginTemplate, storage, Invitation) {
 
 	var LoginView = Backbone.View.extend({
 		el: $("#page"),
@@ -46,6 +47,31 @@ define([
 					$('#login_page .error').addClass('show');
 				});
 
+				return false;
+			});
+
+			$("#send-request").submit(function () {
+				var alertSuccess = $(".request .alert-success");
+				var alertDanger = $(".request .alert-danger");
+				var form = $("#send-request");
+
+				var dict = { 
+					email: $('#request-mail').val() 
+				};
+
+				var invite = new Invitation(dict);
+				invite.save(dict, {
+					success: function(model, response) {
+						form.toggleClass('hide');
+						alertSuccess.toggleClass('show');
+						alertDanger.removeClass('show');
+					},
+					error: function(model, error) {
+						if (error.status === 400) {
+							alertDanger.toggleClass('show');
+						}
+					}
+				});
 				return false;
 			});
 

@@ -1,17 +1,16 @@
 #login_page {
-	opacity: 1;
-	width: 400px;
-	margin: auto;
-	margin-top: 20px;
-	background: white;
-	border-top: solid 4px @color_900;
 	color: black;
-	padding: 10px 30px;
-	.transition(all 0.3s linear);
 	&.not_loaded{
-		opacity: 0;
-		margin-top: 30px;
-		.transition(all 0.3s linear);
+		.box_background {
+			opacity: 0;
+			margin-top: 60px;
+			.transition(all 0.3s linear);
+		}
+		.request {
+			opacity: 0;
+			margin-top: 30px;
+			.transition(all 0.3s linear);
+		}
 	}
 	h1{
 		font-size: 4.5em;
@@ -19,17 +18,32 @@
 		padding-left: 20px;
 		color: black;
 		margin-bottom: 30px;
+		small {
+			font-size: 14px;
+		}
 	}
-	.box{
-		margin-bottom: 20px;
-		.border-radius(10px);
-		form{
-			input[type=text], input[type=password]{
-				width: 100%;
-				padding: 4px;
-			}
-			input[type=submit]{
-				float: right;
+	.box_background {
+		opacity: 1;
+		width: 400px;
+		margin: auto;
+		padding: 10px 30px;
+		background: white;
+		border: solid 1px #CCC;
+		border-top: solid 4px @color_900;
+		margin-top: 80px;
+		margin-bottom: 80px;
+		.transition(all 0.3s linear);
+		.box{
+			margin-bottom: 20px;
+			.border-radius(10px);
+			form{
+				input[type=text], input[type=password]{
+					width: 100%;
+					padding: 4px;
+				}
+				input[type=submit]{
+					float: right;
+				}
 			}
 		}
 	}
@@ -37,7 +51,6 @@
 		visibility: hidden;
 		opacity: 0;
 		margin-bottom: 30px;
-		.transition(all 0.3s linear);
 		&.show {
 			visibility: visible;
 			opacity: 1;
@@ -55,6 +68,55 @@
 	.row-bottom {
 		a.btn {
 			margin-bottom: 10px;
+		}
+	}
+	.request {
+		position: relative;
+		.transition(all 0.3s linear 0.2s);
+		margin: 40px;
+		h2 {
+			font-size: 16px;
+			color: #777;
+			margin: 0 0 18px 0;
+			text-align: center;
+		}
+		form#send-request {
+			
+			opacity: 1;
+			&.hide {
+				visibility: hidden;
+				opacity: 0;
+				.transition(opacity 0.3s linear, visiblity 0s linear 0.3s);
+			}
+		}
+		.alert-success{
+			position: absolute;
+			visibility: hidden;
+			opacity: 0;
+			left: 0;
+			right: 0;
+			.transition(all 0.3s linear);
+			&.show {
+				visibility: visible;
+				opacity: 1;
+				.transition(all 0.3s linear);
+			}
+			span {
+				padding-right: 15px;
+			}
+		}
+		.alert-danger {
+			margin-top: 15px;
+			visibility: hidden;
+			.transition(all 0.3s linear);
+			&.show {
+				visibility: visible;
+				opacity: 1;
+				.transition(all 0.3s linear);
+			}
+			span {
+				padding-right: 15px;
+			}
 		}
 	}
 }
