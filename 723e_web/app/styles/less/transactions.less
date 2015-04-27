@@ -1,15 +1,22 @@
-
 .datepickerpage{
+	padding: 0 30px;
 	.title{
 		h2{
-			padding: 10px 0px;
-			text-align: right;
+			padding: 20px 40px 20px 60px;
+			text-align: left;
+			font-size: 90px;
 			float: left;
-			width: 50%;
 		}
 		a{
-			font-size: 30px;
-			padding-top: 5px;
+			font-size: 18px;
+			text-align: center;
+			padding-top: 9px;
+			margin: 50px 10px;
+			background: #BBB;
+			color: white;
+			width: 40px;
+			height: 40px;
+			.border-radius(50px);
 		}
 		a:first-child{
 			float: left;
@@ -19,13 +26,9 @@
 		}
 	}
 	.monthSelector{
-		background: @color_900;
-		border: solid 1px #777;
 		margin: 10px 0px;
 		overflow: hidden;
 		opacity: 0.9;
-		.border-radius(4px);
-		.box-shadow(#AAA, 1px, 0px, 10px, 2px);
 		&:hover{
 			opacity: 1;
 		}
@@ -37,20 +40,31 @@
 			text-transform: capitalize;
 			h3{
 				margin: 0;
-				font-size: 14px;
-				padding: 8px 10px 6px 10px;
+				font-size: 12px;
+				padding: 12px 10px 14px 10px;
 				text-align: center;
-				background: @color_800;
-				color: @color_100;
-				font-family: @font-family-light;
+				background: #AAA;
+				border: solid 1px #BBB;
+				color: black;
+				text-transform: uppercase;
 			}
 			.details{
 				text-align: right;
-				font-family: @font-family-light;
-				background: @color_900;
-				color: @color_100;
-				padding: 8px 12px;
-				font-size: 14px;
+				color: grey;
+				padding: 12px 20px 5px 0px;
+				font-size: 12px;
+				strong {
+					color: black;
+					font-weight: normal;
+				}
+				big{
+					&.green{
+						color: green;
+					}
+					&.red {
+						color: red;
+					}
+				}
 			}
 		}
 	}

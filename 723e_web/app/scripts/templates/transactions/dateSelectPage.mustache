@@ -1,41 +1,55 @@
 {{#calendar}}
 <header class="container-fluid grey datepickerpage">
-	<div class="container">
+	
 		<div class="row title">
 			<div class="col-xs-12">
-				<a href="#/transactions/{{before}}"><<</a>
+				<a href="#/transactions/{{before}}"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 				<h2>{{ year }}</h2>
-				<a href="#/transactions/{{after}}">>></a>
+				<div class="desc"></div>
+				<a href="#/transactions/{{after}}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
 			</div>
 		</div>
 		<div class="row">
+
 		{{#months}}
-			<div class="col-xs-4 col-md-3 col-lg-2">
+			<div class="col-xs-6 col-md-3 col-lg-2">
 				<div class="monthSelector">
 					<a href="#/transactions/{{year}}/{{month}}">
 						<h3>{{label}}</h3>
-						<!--
+						
 						<div class="details">
-							<p>{{ credits }}</p>
-							<p>{{ debits }}</p>
+							<p><strong>Crédits</strong> : {{ credits }}</p>
+							<p><strong>Débits</strong> : {{ debits }}</p>
+							<p style="padding: 1px 0 1px 0;"><strong>Resultat</strong> : <big class="{{ color }}">{{ sum }}</big></p>
+							<p><strong>Transactions</strong> : {{ count }}</p>
 						</div>
-						-->
+						
 					</a>
 				</div>
 			</div>
 		{{/months}}
+
 		</div>
 
-	</div>
 
 </header>
 {{/calendar}}
 
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-xs-10 col-xs-offset-1">
 			<h2>Statistiques</h2>
+			<canvas id="expenseYearLine" width="400" height="100"></canvas>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 col-md-offset-1">
+			<h2>Catégories</h2>
+			<canvas id="categorieYearPie" width="150" height="100"></canvas>
+		</div>
+		<div class="col-md-3 col-md-offset-1">
 
+			<h2>Summary</h2>
 			<p>Total debit : {{ stats.global.debits }} CHF</p>
 			<p>Total crédit : {{ stats.global.credits }} CHF</p>
 			<p>Global result : {{ stats.global.sum }} CHF</p>

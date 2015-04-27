@@ -12,6 +12,7 @@ require.config({
 		requirejs               : '../../bower_components/requirejs/require',
 		mustache                : '../../bower_components/mustache.js/mustache',
 		modernizr               : '../../bower_components/modernizr/modernizr',
+		chartjs                 : '../../bower_components/Chart.js/Chart',
 		moment                  : '../../bower_components/moment/moment',
 		bootstrap               : '../../bower_components/bootstrap/dist/js/bootstrap.min',
 		'bootstrap-iconpicker'  : '../../bower_components/bootstrap-iconpicker/bootstrap-iconpicker/js/bootstrap-iconpicker.min',

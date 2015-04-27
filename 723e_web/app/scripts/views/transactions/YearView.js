@@ -7,6 +7,7 @@ define([
     'initView',
     'ws',
     'storage',
+    'chartjs',
     'text!templates/transactions/dateSelectPage.mustache'
 ], function(
     $,
@@ -17,6 +18,7 @@ define([
     InitView,
     ws,
     storage,
+    Chart,
     DateSelectorPageTemplate) {
 
 
@@ -73,10 +75,6 @@ define([
                         'categories': json.categories.list
                     };
 
-                    console.log(json.categories.list);
-
-
-
                     for (i = 1; i <= 12; i = i + 1) {
                         var sum     = (json.months[i] ? json.months[i].sum : 0),
                             credits = (json.months[i] ? json.months[i].sum_credits : 0),
@@ -91,7 +89,10 @@ define([
                             count   : count,
                             sum     : account_currency.toString(sum),
                             credits : account_currency.toString(credits),
-                            debits  : account_currency.toString(debits)
+                            debits  : account_currency.toString(debits),
+                            c       : credits,
+                            d       : Math.abs(debits),
+                            color : (sum >= 0) ? 'green' : 'red'
                         });
 
                         if(i <= currentDate.getMonth() && count !== 0){
@@ -123,6 +124,73 @@ define([
                         stats: stats
                     });
                     $("#content").html(template);
+
+                    // Init graph
+                    var ctx = document.getElementById("expenseYearLine").getContext("2d");
+                    var data = {
+                        labels: _.pluck(calendar.months, 'label'),
+                        datasets: [
+                            {
+                                label: "Crédits",
+                                fillColor: "rgba(0,150,0,0.2)",
+                                strokeColor: "rgba(0,150,0,1)",
+                                pointColor: "rgba(0,150,0,1)",
+                                pointStrokeColor: "#fff",
+                                pointHighlightFill: "#fff",
+                                pointHighlightStroke: "rgba(0,150,0,1)",
+                                data: _.pluck(calendar.months, 'c')
+                            },
+                            {
+                                label: "Débits",
+                                fillColor: "rgba(151,0,0,0.2)",
+                                strokeColor: "rgba(151,0,0,1)",
+                                pointColor: "rgba(151,0,0,1)",
+                                pointStrokeColor: "#fff",
+                                pointHighlightFill: "#fff",
+                                pointHighlightStroke: "rgba(151,0,0,1)",
+                                data: _.pluck(calendar.months, 'd')
+                            }
+                        ]
+                    };
+                    var myNewChart = new Chart(ctx).Line(data, {
+                        responsive: true
+                    });
+
+
+                    var ctx = document.getElementById("categorieYearPie").getContext("2d");
+                    var data = [];
+                    for(i = 0, l = stats.categories.length; i < l; i=i+1){
+                        data.push({
+                            value: Math.abs(stats.categories[i].sum),
+                            color: stats.categories[i].category.color,
+                            highlight: stats.categories[i].category.color,
+                            label: stats.categories[i].category.name
+                        });
+
+                    }
+
+                        // {
+                        //     value: 300,
+                        //     color:"#F7464A",
+                        //     highlight: "#FF5A5E",
+                        //     label: "Red"
+                        // },
+                        // {
+                        //     value: 50,
+                        //     color: "#46BFBD",
+                        //     highlight: "#5AD3D1",
+                        //     label: "Green"
+                        // },
+                        // {
+                        //     value: 100,
+                        //     color: "#FDB45C",
+                        //     highlight: "#FFC870",
+                        //     label: "Yellow"
+                        // }
+                    
+                    var myNewChart = new Chart(ctx).Pie(data, {
+                        responsive: true
+                    });
                 }
             });
         }
