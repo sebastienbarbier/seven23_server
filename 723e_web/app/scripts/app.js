@@ -32,11 +32,11 @@ define("app", [
 				// GET[’next'] is the page to load
 				var hash = window.location.hash
 				if (hash == undefined) {
-					hash = "/dashboard";
+					hash = "/transactions";
 				} else {
 					hash = window.location.hash.split("?")[0];
 					if (hash == "#/login") {
-						hash = "/dashboard";
+						hash = "/transactions";
 					}
 				}
 				window.location.hash = "/login?next=" + hash;

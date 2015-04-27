@@ -39,7 +39,7 @@ define([
 						}).done(function(json) {
 							storage.init(json.id, function(){
 								$('body').addClass('app');
-								Backbone.history.navigate("#/dashboard", {trigger: true});
+								Backbone.history.navigate("#/transactions", {trigger: true});
 							});
 						});
 					}, 200);
