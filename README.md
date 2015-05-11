@@ -1,6 +1,6 @@
 # 723e
 
-Personnal side-project. All about measuring my daily expenses, but also learning some
+Personal side-project. All about measuring my daily expenses, but also learning some
 programming skills/tools.
 
 ## Features
