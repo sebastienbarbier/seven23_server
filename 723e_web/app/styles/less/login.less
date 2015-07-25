@@ -15,7 +15,6 @@
 	h1{
 		font-size: 4.5em;
 		text-align: left;
-		padding-left: 20px;
 		color: black;
 		margin-bottom: 30px;
 		small {
@@ -24,7 +23,6 @@
 	}
 	.box_background {
 		opacity: 1;
-		width: 400px;
 		margin: auto;
 		padding: 10px 30px;
 		background: white;
@@ -32,27 +30,26 @@
 		border-top: solid 4px @color_900;
 		margin-top: 80px;
 		margin-bottom: 80px;
+		padding-bottom: 30px;
 		.transition(all 0.3s linear);
-		.box{
-			margin-bottom: 20px;
-			.border-radius(10px);
-			form{
-				input[type=text], input[type=password]{
-					width: 100%;
-					padding: 4px;
-				}
-				input[type=submit]{
-					float: right;
-				}
+		
+		form{
+			input[type=text], input[type=password]{
+				width: 100%;
+				padding: 4px;
+			}
+			input[type=submit]{
+				float: right;
 			}
 		}
 	}
 	.error {
 		visibility: hidden;
+		display: none;
 		opacity: 0;
-		margin-bottom: 30px;
 		&.show {
 			visibility: visible;
+			display: block;
 			opacity: 1;
 			.transition(all 0.3s linear);
 		}
@@ -70,52 +67,17 @@
 			margin-bottom: 10px;
 		}
 	}
-	.request {
-		position: relative;
-		.transition(all 0.3s linear 0.2s);
-		margin: 40px;
-		h2 {
-			font-size: 16px;
-			color: #777;
-			margin: 0 0 18px 0;
-			text-align: center;
-		}
-		form#send-request {
-			
-			opacity: 1;
-			&.hide {
-				visibility: hidden;
-				opacity: 0;
-				.transition(opacity 0.3s linear, visiblity 0s linear 0.3s);
-			}
-		}
-		.alert-success{
-			position: absolute;
-			visibility: hidden;
-			opacity: 0;
-			left: 0;
-			right: 0;
-			&.show {
-				visibility: visible;
-				opacity: 1;
-				.transition(all 0.3s linear);
-			}
-			span {
-				padding-right: 15px;
-			}
-		}
-		.alert-danger {
-			margin-top: 15px;
-			visibility: hidden;
-			opacity: 0;
-			&.show {
-				visibility: visible;
-				opacity: 1;
-				.transition(all 0.3s linear);
-			}
-			span {
-				padding-right: 15px;
-			}
-		}
+	#subscription_form {
+		display: none;
+	}
+	#about {
+		display: none;
+	}
+	footer {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		padding: 10px 18px 18px 18px;
 	}
 }

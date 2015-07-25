@@ -5,7 +5,8 @@ define("app", [
 			"router",
 			"ws",
 			"userModel",
-			"storage"],
+			"storage",
+			"validator"],
 		function(
 			$,
 			bt,

@@ -7,6 +7,7 @@ require.config({
 		jquery                  : '../../bower_components/jquery/dist/jquery',
 		underscore              : '../bower_components/lodash/dist/lodash',
 		backbone                : '../../bower_components/backbone/backbone',
+		validator  				: '../../bower_components/backbone-validation/dist/backbone-validation-amd-min',
 		css                     : '../../bower_components/require-css/css',
 		text                    : '../../bower_components/requirejs-text/text',
 		requirejs               : '../../bower_components/requirejs/require',
@@ -28,11 +29,11 @@ require.config({
 		storage                 : 'storage',
 		// Models
 		userModel               : 'models/userModel',
+		subscriptionModel       : 'models/subscriptionModel',
 		categoryModel           : 'models/categoryModel',
 		changesModel            : 'models/changesModel',
 		debitsCreditsModel      : 'models/debitsCreditsModel',
 		currencyModel           : 'models/currencyModel',
-		invitationModel         : 'models/invitationModel',
 		// Collections
 		categoryCollection      : 'collections/categoryCollection',
 		debitsCreditsCollection : 'collections/debitsCreditsCollection',

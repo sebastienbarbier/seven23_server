@@ -30,7 +30,9 @@ define("ws", ["jquery"], function($) {
 		// Invitation for aalpha version
 		invitations: server.url() + "/api/v1/invitations",
 		// Get token key
-		login: server.url() + "/api/api-token-auth/"
+		login: server.url() + "/api/api-token-auth/",
+		// Create an account
+		subscription: server.url() + "/api/v1/subscription/"
 	}
 
 	// Authentification Token Key

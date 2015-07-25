@@ -49,3 +49,14 @@ def resume_year(request):
 
         return Response({"year": year, "months": months, "stats": stats, "categories": categories})
 
+@api_view(['POST'])
+def subscription(request):
+    """
+    Give a resume of a specific year.
+    """
+
+    if request.method == 'POST':
+
+        args = request.POST
+
+        return Response({"code": 200})

@@ -1,54 +1,137 @@
 <div id="login_page" class="not_loaded">
-	<div class="container">
-		<div class="row">
-		  	<div class="col-md-12">
-				<div class="box_background">
-					<h1>723e <small>- ALPHA</small></h1>
-					<div class="box">
-						<form id="login_form"><p>
-							<div class="form-group">
-						    	<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-							    <div class="input-group">
-							      	<div class="input-group-addon"><i class="fa fa-user"></i></div>
-									<input type="text" name="username" placeholder="Identifiant"/>
-							    </div>
-						    </div>
-							<div class="form-group">
-							    <div class="input-group">
-							      	<div class="input-group-addon"><i class="fa fa-lock"></i></div>
-									<input type="password" name="password" placeholder="Mot de passe"/>
-							    </div>
-						    </div>
-							<input type="submit" class="btn btn-primary" />
-							<div class="clearfix"></div>
-						</p></form>
-					</div>
-					<div class="error alert alert-danger" role="alert">
-						<p>Mot de passe incorrect</p>
+	<div class="hide_if_about">
+		<div id="login">
+			<div class="container">
+				<div class="row">
+				  	<div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
+						<div class="box_background">
+							<h1>723e <small>- ALPHA</small></h1>
+
+							<div class="error alert alert-danger" role="alert">
+								<p>Mot de passe incorrect</p>
+							</div>
+							<form id="login_form">
+								<p>
+									<div class="form-group">
+								    	<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+									    <div class="input-group">
+									      	<div class="input-group-addon"><i class="fa fa-user"></i></div>
+											<input type="text" name="username" placeholder="Identifiant"/>
+									    </div>
+								    </div>
+									<div class="form-group">
+									    <div class="input-group">
+									      	<div class="input-group-addon"><i class="fa fa-lock"></i></div>
+											<input type="password" name="password" placeholder="Mot de passe"/>
+									    </div>
+								    </div>
+									<input type="submit" class="btn btn-primary" value="Se connecter"/>
+									<div class="clearfix"></div>
+								</p>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<div class="request">
-					<h2>Private alpha, please request an invitation.</h2>
-					<form action="GET" id="send-request">
-						<div class="input-group">
-					     	<input type="text" class="form-control" id="request-mail" placeholder="Email">
-					     	<span class="input-group-btn">
-						        <input class="btn btn-primary" value="Send a request" type="submit"/>
-						    </span>
-					    </div>
-					</form>
-					<div class="alert alert-success">
-						<p><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Request has been successfully sent.</p>
-					</div>
-					<div class="alert alert-danger">
-						<p><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Enter a valid email address.</p>
+		<div id="subscription_form">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-offset-3 col-sm-6 ">
+						<div class="box_background">
+							<h2>Create an account</h2>
+							<hr/>
+							<form id="subscribe_form">
+								<p>
+									<div class="form-group">
+									    <p class="error-msg"></p>
+									    <div class="input-group">
+									      	<div class="input-group-addon"><i class="fa fa-user"></i></div>
+											<input type="text" name="username" placeholder="Identifiant"/>
+									    </div>
+								    </div>
+									<div class="form-group">
+									    <p class="error-msg"></p>
+									    <div class="input-group">
+									      	<div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+											<input type="text" name="email" placeholder="Adresse email"/>
+									    </div>
+								    </div>
+									<div class="form-group">
+									    <p class="error-msg"></p>
+									    <div class="input-group">
+									      	<div class="input-group-addon"><i class="fa fa-lock"></i></div>
+											<input type="password" name="password" placeholder="Mot de passe"/>
+									    </div>
+								    </div>
+									<div class="form-group">
+									    <p class="error-msg"></p>
+									    <div class="input-group">
+									      	<div class="input-group-addon"><i class="fa fa-lock"></i></div>
+											<input type="password" name="passwordRepeat" placeholder="Répéter le mot de passe"/>
+									    </div>
+								    </div>
+								    <hr/>
+									<div class="form-group">
+									    <p class="error-msg"></p>
+									    <div class="input-group">
+									      	<div class="input-group-addon"><i class="fa fa-area-chart"></i></div>
+											<input type="text" name="name" placeholder="Libellé du compte (eg: compte courant)"/>
+									    </div>
+								    </div>
+									<div class="form-group">
+									    <p class="error-msg"></p>
+									    <div class="input-group">
+									      	<div class="input-group-addon"><i class="fa fa-money"></i></div>
+											<select name="currency" class="form-control" placeholder="Currency">
+										        <option value="" disabled selected>Devise du compte</option>
+										        <option value="EUR">EUR</option>
+										        <option value="CHF">CHF</option>
+										        <option value="GBP">GBP</option>
+										        <option value="USD">USD</option>
+										    </select>
+									    </div>
+								    </div>
+								    <hr/>
+								    <div class="row">
+										<div class="col-xs-12 col-sm-6">
+											<input type="submit" class="btn btn-primary btn-block" value="Enregistrer et se connecter"/>
+										</div>
+										<div class="col-xs-12 col-sm-6">
+											<input type="button" class="btn btn-default btn-block back" value="Annuler"/>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+								</p>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div id="about">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-offset-2 col-sm-8">
+					<h2>About us</h2>
+					<hr/>
+					<p>Thanks for showing interest in this project. A lot more coming soon, sorry if it takes times but this project is develop only on my spare time and I work really hard at not going crazy by coding too much :D</p>
+					<hr/>
+					<p  class="text-right"><a href="https://github.com/sebastienbarbier/723e" target="_blank" class="btn btn-default">Github</a> <a class="btn btn-default back">Retour</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div class="container-fluid">
+			<div class="col-md-12">
+				<p style="text-align: right;">
+					<a class="btn btn-default subscribe">Créer un compte</a>
+					<a class="btn btn-default about">A propos</a> 
+				</p>
+		  	</div>
+		</div>
+	</footer>
 </div>
