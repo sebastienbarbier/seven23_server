@@ -16,22 +16,31 @@
 						<div class="col-md-12">
 								<div class="form-group">
 								    <p class="error-msg"></p>
-									<input type="text" value="{{#debitcredit}}{{ name }}{{/ debitcredit }}"  class="form-control" name="name" placeholder="Label" />
+								    <div>
+										<input type="text" value="{{#debitcredit}}{{ name }}{{/ debitcredit }}"  class="form-control" name="name" placeholder="Label" />
+									</div>
 								</div>
 								<div class="row">
+
+									<div class="col-md-12">
+									    <p class="error-msg"></p>
+									    <div>
+											<input type="hidden" value="" name="amount" />
+										</div>
+									</div>
 									<div class="col-md-6">
-										<div class="form-group has-success">
+										<div class="form-group">
 											<p class="error-msg"></p>
-										    <div class="input-group">
+										    <div class="input-group has-success">
 										    	<div class="input-group-addon"><i class="fa fa-plus"></i></div>
 												<input type="text" value="{{#debitcredit}}{{ credit }}{{/ debitcredit }}" class="form-control" name="credit" placeholder="Credit" />
 											</div>
 										</div>
 									</div>
 									<div class="col-md-6">
-										<div class="form-group has-error">
+										<div class="form-group">
 											<p class="error-msg"></p>
-										    <div class="input-group">
+										    <div class="input-group has-error">
 										    	<div class="input-group-addon"><i class="fa fa-minus"></i></div>
 												<input type="text" value="{{#debitcredit}}{{ debit }}{{/ debitcredit }}" class="form-control" name="debit" placeholder="Debit" />
 											</div>

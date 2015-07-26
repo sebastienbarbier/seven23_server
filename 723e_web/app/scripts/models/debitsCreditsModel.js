@@ -39,6 +39,22 @@ define([
                         debitsCredits: this.toJSON()
                     });
                 }
+            },
+            validation: {
+                name: {
+                    required: true
+                },
+                amount: function(value, attr, computedState) {
+                    if(value === 0) {
+                      return 'Amount is required';
+                    }
+                },
+                date: {
+                  required: true
+                },
+                currency: {
+                  required: true
+                }
             }
         });
 
