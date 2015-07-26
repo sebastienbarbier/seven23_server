@@ -93,7 +93,7 @@ define([
 
 			// Feed each element with category object
 			for (i = 0; i < arrayAbstract.length; i++) {
-				var c = storage.categories.get(arrayAbstract[i].get('category_id'));
+				var c = storage.categories.get(arrayAbstract[i].get('category'));
 				if (c !== undefined) {
 					arrayAbstract[i].set('categoryJSON', c.toJSON());
 				}
@@ -118,9 +118,9 @@ define([
 				var isFavorite = arrayAbstract[i].get('isFavoriteCurrency');
 
 				if(isFavorite !== undefined && isFavorite !== null){
-					var category = arrayAbstract[i].get('category_id');
+					var category = arrayAbstract[i].get('category');
 
-					if(arrayAbstract[i].get('currency_id') === storage.user.currency()){
+					if(arrayAbstract[i].get('currency') === storage.user.currency()){
 						valeur = arrayAbstract[i].get('amount');
 					} else {
 						valeur = arrayAbstract[i].get('reference_amount');
@@ -264,7 +264,7 @@ define([
             var data = [];
             for(i = 0, l = bilan.categories.length; i < l; i=i+1){
                 data.push({
-                    value: Math.abs(bilan.categories[i][1]),
+                    value: Math.round(Math.abs(bilan.categories[i][1]) * 100) / 100,
                     color: bilan.categories[i][0].color,
                     highlight: bilan.categories[i][0].color,
                     label: bilan.categories[i][0].name

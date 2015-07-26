@@ -1,77 +1,98 @@
-<form id="debitcredit_form" class="container">
+<div class="container">
 	<div class="row">
-		<div class="col-md-offset-3 col-md-6">
-		{{#debitcredit}}
-			<h2>Modifier un debit/credit</h2>
-		{{/debitcredit}}
-		{{^debitcredit}}
-		 	<h2>Ajouter un debit/credit</h2>
-		{{/debitcredit}}
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-offset-3 col-md-6">
-			<div class="form-group">
-				<label class="col-sm-12 control-label">Currency</label>
-				<div class="col-sm-12">
-					<select class="form-control" name="currency">
-						<option value="">---</option>
-						{{#currencies}}
-						<option value="http://localhost:8000/api/v1/currencies/{{ id }}">{{ name }}</option>
-						{{/currencies}}
-					</select>
-				</div>
+		<div class="col-sm-6 col-sm-offset-3">	
+			<div class="box_background">
+				<form id="debitcredit_form">
+					<div class="row">
+						<div class="col-md-12">
+						{{#debitcredit}}
+							<h2>Modifier un debit/credit</h2>
+						{{/debitcredit}}
+						{{^debitcredit}}
+						 	<h2>Ajouter un debit/credit</h2>
+						{{/debitcredit}}
+						<hr/>
+						</div>
+						<div class="col-md-12">
+								<div class="form-group">
+								    <p class="error-msg"></p>
+									<input type="text" value="{{#debitcredit}}{{ name }}{{/ debitcredit }}"  class="form-control" name="name" placeholder="Label" />
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group has-success">
+											<p class="error-msg"></p>
+										    <div class="input-group">
+										    	<div class="input-group-addon"><i class="fa fa-plus"></i></div>
+												<input type="text" value="{{#debitcredit}}{{ credit }}{{/ debitcredit }}" class="form-control" name="credit" placeholder="Credit" />
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group has-error">
+											<p class="error-msg"></p>
+										    <div class="input-group">
+										    	<div class="input-group-addon"><i class="fa fa-minus"></i></div>
+												<input type="text" value="{{#debitcredit}}{{ debit }}{{/ debitcredit }}" class="form-control" name="debit" placeholder="Debit" />
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<p class="error-msg"></p>
+								    <div class="input-group">
+								    	<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+										<input type="text" value="{{#debitcredit}}{{ date }}{{/ debitcredit }}" class="form-control datepicker" name="date" placeholder="Date" />
+									</div>
+								</div>
+								<div class="form-group">
+									<p class="error-msg"></p>
+								 	<div class="input-group">
+									  	<div class="input-group-addon"><i class="fa fa-money"></i></div>
+										<select class="form-control" name="currency">
+											<option value="" disabled selected>Please select a currency</option>
+											{{#currencies}}
+											<option value="{{ id }}">{{ name }}</option>
+											{{/currencies}}
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<p class="error-msg"></p>
+								    <div class="input-group">
+								    	<div class="input-group-addon"><i class="fa fa-tag"></i></div>
+										<select class="form-control" name="category">
+											<option value="" selected>Please select a category</option>
+											{{#categories}}
+											<option value="{{ id }}">{{ name }}</option>
+											{{/categories}}
+										</select>
+									</div>
+								</div>
+								<input type="hidden" name="account" value="" />
+								<input type="hidden" name="active" value="true" />
+								{{#debitcredit}}
+								<input type="hidden" name="id" value="{{ id }}" />
+								{{/debitcredit}}
+							</div>
+					</div>
+					<hr/>
+					<div class="row">
+						<div class="col-md-6">
+							{{#debitcredit}}
+							<input type="submit" class="btn btn-primary btn-block debitscredits_form_submit" value="Enregistrer"></input>
+							{{/debitcredit}}
+							{{^debitcredit}}
+							<input type="submit" class="btn btn-primary btn-block debitscredits_form_submit" value="Ajouter"></input>
+							{{/debitcredit}}
+						</div>
+						<div class="col-md-6">
+							<button type="button" class="btn btn-default btn-block debitscredits_form_cancel">Annuler</button>
+						</div>
+					</div>
+				</form>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Name</label>
-				<div class="col-sm-12">
-					<input type="text" value="{{#debitcredit}}{{ name }}{{/ debitcredit }}" class="form-control" name="name" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-12 control-label">Amount</label>
-				<div class="col-sm-12">
-					<input type="text" value="{{#debitcredit}}{{ amount }}{{/ debitcredit }}" class="form-control" name="amount" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-12 control-label">Date</label>
-				<div class="col-sm-12">
-					<input type="text" value="{{#debitcredit}}{{ date }}{{/ debitcredit }}" class="form-control datepicker" name="date" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-12 control-label">Enable</label>
-				<div class="col-sm-12">
-					<input type="text" value="{{#debitcredit}}{{ active }}{{/ debitcredit }}{{^debitcredit}}true{{/debitcredit}}" class="form-control" name="active" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-12 control-label">Category</label>
-				<div class="col-sm-12">
-					<select class="form-control" name="category">
-						<option value="">---</option>
-						{{#categories}}
-						<option value="http://localhost:8000/api/v1/categories/{{ id }}">{{ name }}</option>
-						{{/categories}}
-					</select>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-offset-3 col-md-6">
-			<input type="hidden" name="account" value="" />
-			{{#debitcredit}}
-			<input type="hidden" name="id" value="{{ id }}" />
-			<input type="hidden" name="user" value="{{ user }}" />
 
-			<button type="button" class="btn btn-primary debitscredits_form_submit">Modifier</button>
-			{{/debitcredit}}
-			{{^debitcredit}}
-			<button type="button" class="btn btn-primary debitscredits_form_submit">Créer</button>
-			{{/debitcredit}}
-			<button type="button" class="btn btn-primary debitscredits_form_cancel">Annuler</button>
 		</div>
 	</div>
-</form>
+</div>

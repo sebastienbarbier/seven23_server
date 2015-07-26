@@ -161,7 +161,7 @@ define([
                     var data = [];
                     for(i = 0, l = stats.categories.length; i < l; i=i+1){
                         data.push({
-                            value: Math.abs(stats.categories[i].sum),
+                            value: Math.round(Math.abs(stats.categories[i].sum) * 100) / 100,
                             color: stats.categories[i].category.color,
                             highlight: stats.categories[i].category.color,
                             label: stats.categories[i].category.name

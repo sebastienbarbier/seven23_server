@@ -1,3 +1,26 @@
+
+.box_background {
+	opacity: 1;
+	margin: auto;
+	padding: 10px 30px;
+	background: white;
+	border: solid 1px #CCC;
+	border-top: solid 4px @color_900;
+	margin-bottom: 80px;
+	margin-top: 40px;
+	padding-bottom: 30px;
+	.transition(all 0.3s linear);
+	
+	form{
+		input[type=text], input[type=password]{
+			width: 100%;
+			padding: 4px;
+		}
+		input[type=submit]{
+			float: right;
+		}
+	}
+}
 #login_page {
 	color: black;
 	&.not_loaded{
@@ -21,27 +44,9 @@
 			font-size: 14px;
 		}
 	}
+
 	.box_background {
-		opacity: 1;
-		margin: auto;
-		padding: 10px 30px;
-		background: white;
-		border: solid 1px #CCC;
-		border-top: solid 4px @color_900;
 		margin-top: 80px;
-		margin-bottom: 80px;
-		padding-bottom: 30px;
-		.transition(all 0.3s linear);
-		
-		form{
-			input[type=text], input[type=password]{
-				width: 100%;
-				padding: 4px;
-			}
-			input[type=submit]{
-				float: right;
-			}
-		}
 	}
 	.error {
 		visibility: hidden;

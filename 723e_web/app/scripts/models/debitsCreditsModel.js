@@ -27,7 +27,7 @@ define([
                     return !this.debitsCredits.isForeignCurrency;
                 },
                 defaultCurrency: function() {
-                    return storage.currencies.get(this.debitsCredits.currency_id).toString(this.debitsCredits.amount);
+                    return storage.currencies.get(this.debitsCredits.currency).toString(this.debitsCredits.amount);
                 },
                 favoriteCurrency: function() {
                     return storage.currencies.get(storage.user.currency()).toString(this.debitsCredits.reference_amount);
