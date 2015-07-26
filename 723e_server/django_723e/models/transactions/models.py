@@ -60,26 +60,6 @@ class DebitsCredits(AbstractTransaction):
     def __unicode__(self):
         return u"%s" % (self.name)
 
-
-class Cheque(AbstractTransaction):
-    """
-        A cheque is like a Transaction but with two differents dates :
-            - When you write a cheque (transaction.date)
-            - When it is debit from you bank account (cheque.debit_date)
-    """
-    cheque_name = models.CharField(_(u'Beneficiary'), max_length= 255, null=True, blank=True)
-    place       = models.CharField(_(u'Localisation'), max_length= 255, null=True, blank=True)
-    debit_date  = models.DateField(_(u'Debit date'), editable=True, null=True, blank=True)
-
-class Tranfert(AbstractTransaction):
-    """
-        Money Transfert from one account to an other (one of yours or externe).
-    """
-    account_dest    = models.ForeignKey(Account, related_name='transfert')
-
-    def __unicode__(self):
-        return u"%s %s (%s -> %s)" % (self.name, self.currency.verbose(self.amount), self.account, self.account_dest)
-
 class Change(AbstractTransaction):
     """
         Change money in a new currency.

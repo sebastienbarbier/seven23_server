@@ -48,8 +48,6 @@ define([
 				$("#changes_form select[name='currency']").find('option[value="' + currency + '"]').attr('selected', true);
 			}
 
-
-
 			var view = this;
 			// User cancel form. We go back to view page.
 			$("button.changes_form_cancel").on("click", function() {
@@ -66,7 +64,7 @@ define([
 				for (var i = 0; i < array.length; i++) {
 					dict[array[i]['name']] = array[i]['value']
 				}
-				dict['user'] = "http://localhost:8000/api/v1/users/1";
+				dict['user'] = storage.user.url();
 				if(dict['currency'] === undefined || dict['currency'] === null){
 					dict['currency'] = storage.user.get('accounts')[0].currency;
 				}

@@ -63,7 +63,8 @@ define([
 				for (var i = 0; i < array.length; i++) {
 					dict[array[i]['name']] = array[i]['value']
 				}
-				dict['user'] = "http://localhost:8000/api/v1/users/1";
+				dict['user'] = storage.user.url();
+				dict['account'] = storage.user.get('accounts')[0].id;
 
 				var debitcredit = new DebitsCreditsModel(dict);
 

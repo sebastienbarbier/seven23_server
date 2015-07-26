@@ -9,8 +9,6 @@ define(["jquery", "backbone", "ws"], function($, Backbone, WebServices) {
 		},
 		currency: function(){
 			var accounts = this.get('accounts');
-
-
 			return this.get('accounts')[0].currency;
 		}
 	});

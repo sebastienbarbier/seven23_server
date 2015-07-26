@@ -6,6 +6,7 @@ from rest_framework import serializers
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
 
     parent_id = serializers.PrimaryKeyRelatedField(read_only=True)
+    user      = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
     class Meta:
         model  = Category

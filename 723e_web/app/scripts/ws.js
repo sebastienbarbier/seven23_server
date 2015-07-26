@@ -27,8 +27,6 @@ define("ws", ["jquery"], function($) {
 		resume_year: server.url() + "/api/v1/resume_year/", // "/api/v1/resume_year/2014/"
 		// List all user accounts
 		categories: server.url() + "/api/v1/categories",
-		// Invitation for aalpha version
-		invitations: server.url() + "/api/v1/invitations",
 		// Get token key
 		login: server.url() + "/api/api-token-auth/",
 		// Create an account
