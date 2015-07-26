@@ -65,6 +65,8 @@ define([
 					dict[array[i]['name']] = array[i]['value']
 				}
 				dict['user'] = storage.user.url();
+				dict['account'] = storage.user.get('accounts')[0].id;
+				
 				if(dict['currency'] === undefined || dict['currency'] === null){
 					dict['currency'] = storage.user.get('accounts')[0].currency;
 				}
