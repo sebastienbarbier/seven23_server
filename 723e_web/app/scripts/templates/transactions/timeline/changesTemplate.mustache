@@ -2,8 +2,11 @@
 <div class="transaction change" data-id="{{ change.id }}">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-12">
-				<p>{{ change.name }} <small>{{ change.value }} > {{ change.new_value }} (Taux {{ change.exchange_rate }})</small></p>
+			<div class="col-md-7">
+				<p><i class="fa fa-exchange"></i> {{ change.name }}</p>
+			</div>
+			<div class="col-md-5">
+				<p class="text-right"><small>{{ change.value }} <i class="fa fa-long-arrow-right"></i> {{ change.new_value }} <em>(Taux {{ change.exchange_rate }})</em></small></p>
 			</div>
 		</div>
 	</div>
