@@ -7,6 +7,7 @@ from django_723e.models.accounts.models import Account
 from django_723e.models.categories.models import Category
 from django.utils.translation import ugettext as _
 from django.db.models import Sum
+from django.utils import timezone
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
 
@@ -25,7 +26,7 @@ class AbstractTransaction(models.Model):
     name             = models.CharField(_(u'Name'), max_length=255)
     amount           = models.FloatField(_(u'Amount'), null=False, blank=False, help_text=_(u"Credit and debit are represented by positive and negative value."))
     reference_amount = models.FloatField(_(u'Reference Amount'), null=True, blank=True, editable=False, help_text=_(u"Value based on account curency."))
-    date             = models.DateField(_(u'Date'), editable=True, default=datetime.date.today())
+    date             = models.DateField(_(u'Date'), editable=True, default=timezone.now)
     active           = models.BooleanField(_(u'Enable'), default=True, help_text=_(u"A disabled transaction will be save as a draft and not use in any report."))
     category         = models.ForeignKey(Category, related_name='transactions', blank=True, null=True)
 
