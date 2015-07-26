@@ -1,25 +1,12 @@
-
-<header class="container-fluid grey">
-	<div class="row" style="padding: 16px 0 0 0;">
-		<div class="col-md-6">
-			<p class="" style="width: 50px; font-size: 25px;float: left; padding-left: 10px;"><<</p>
-			<h2><a href="#/transactions/{{ year }}">{{ date }}</a></h2>
-		</div>
-		<div class="col-md-6">
-			<div>
-				<p style="float: right; margin: 0 5px;">
-					<button type="button" class="btn btn-primary addDebitCredit">Ajout Débits/Crédits</button>
-					<button type="button" class="btn btn-primary addChange">Ajout Change</button>
-				</p>
-			</div>
-		</div>
-	</div>
-</header>
-
-<div class="container-fluid">
+<div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<div id="debitscredits"></div>
+        	<p class="backYearView">
+        		<a href="#/transactions/{{ year }}"><i class="fa fa-angle-left" aria-hidden="true"></i> back to {{ year }} view </a>
+        	</p>
 		</div>
+	</div>
+	<div id="debitscredits">
+		
 	</div>
 </div>

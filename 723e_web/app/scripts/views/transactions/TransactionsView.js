@@ -53,32 +53,12 @@ define([
 
 			initView.changeSelectedItem("nav_transactions");
 
-
-			var d = moment(year + "-" + month, "YYYY-MM").format("MMMM YYYY");
-
 			var template = Mustache.render(TransactionsTemplate, {
-				date: d,
 				year: year
 			});
 			$("#content").html(template);
 
 			var view = this;
-
-
-			// BIND EVENT
-			$("#content button.addDebitCredit").on('click', function() {
-				//transactionsFormView.render(year, month);
-				Backbone.history.navigate("#/transactions/"+year+"/"+month+"/debitscredits/add", {
-					trigger: true
-				});
-			});
-
-			$("#content button.addChange").on('click', function() {
-				//changesFormView.render(year, month);
-				Backbone.history.navigate("#/transactions/"+year+"/"+month+"/changes/add", {
-					trigger: true
-				});
-			});
 
 			arrayAbstract = [];
 
@@ -139,6 +119,7 @@ define([
 
 				if(isFavorite !== undefined && isFavorite !== null){
 					var category = arrayAbstract[i].get('category_id');
+
 					if(arrayAbstract[i].get('currency_id') === storage.user.currency()){
 						valeur = arrayAbstract[i].get('amount');
 					} else {
@@ -149,6 +130,7 @@ define([
 					}else{
 						bilan.debits = bilan.debits + valeur;
 					}
+					// If has categorw and is negative
 					if(category && valeur < 0){
 						// Sum by categories
 						if(!bilan.categories[category]){
@@ -160,6 +142,8 @@ define([
 			}
 
 			bilan.total = bilan.debits + bilan.credits;
+			bilan.color = ((bilan.total >= 0) ? 'green' : 'red');
+
 
 			bilan.total = storage.currencies.get(storage.user.currency()).toString(bilan.total);
 			bilan.debits = storage.currencies.get(storage.user.currency()).toString(bilan.debits);
@@ -175,12 +159,11 @@ define([
 			for(var i=0, l=bilan.categories.length; i < l; i=i+1){
 				try{
 					bilan.categories[i][0] = storage.categories.get(bilan.categories[i][0]).toJSON();
-					bilan.categories[i][1] = storage.currencies.get(storage.user.currency()).toString(bilan.categories[i][1]);
+					bilan.categories[i][2] = storage.currencies.get(storage.user.currency()).toString(bilan.categories[i][1]);
 				}catch(e){
 
 				}
 			}
-
 			//
 			// Prepare Timeline
 			//
@@ -205,35 +188,32 @@ define([
 				arrayAbstract[i][0] = moment(arrayAbstract[i][0], "YYYY-MM-DD").format("dddd D MMMM YYYY");
 			}
 
+			var d = moment(year + "-" + month, "YYYY-MM").format("MMMM YYYY");
 
 			var template = Mustache.render(listTemplate, {
 				liste: arrayAbstract,
 				bilan: bilan,
+				year: year,
+				date: d
 			});
 
 			$("#debitscredits").html(template);
 
 			var view = this;
 
-			$(".actions").on('click', function() {
-				var action = $(this);
-				if (action.hasClass('open')) {
-					action.removeClass('open');
-					action.prev().animate({
-						"marginRight": 20
-					});
-					action.animate({
-						"width": 20
-					});
-				} else {
-					action.addClass("open");
-					action.prev().animate({
-						"marginRight": 180
-					});
-					action.animate({
-						"width": 180
-					});
-				}
+			// BIND EVENT
+			$("button.addDebitCredit").on('click', function() {
+				//transactionsFormView.render(year, month);
+				Backbone.history.navigate("#/transactions/"+year+"/"+month+"/debitscredits/add", {
+					trigger: true
+				});
+			});
+
+			$("button.addChange").on('click', function() {
+				//changesFormView.render(year, month);
+				Backbone.history.navigate("#/transactions/"+year+"/"+month+"/changes/add", {
+					trigger: true
+				});
 			});
 
 			// Event create form on button click
@@ -278,6 +258,22 @@ define([
 					});
 				}
 			});
+
+			// Pie categroy chart
+			var ctx = document.getElementById("categorieYearPie").getContext("2d");
+            var data = [];
+            for(i = 0, l = bilan.categories.length; i < l; i=i+1){
+                data.push({
+                    value: Math.abs(bilan.categories[i][1]),
+                    color: bilan.categories[i][0].color,
+                    highlight: bilan.categories[i][0].color,
+                    label: bilan.categories[i][0].name
+                });
+            }
+            
+            var myNewChart = new Chart(ctx).Pie(data, {
+                responsive: true
+            });
 		}
 	});
 

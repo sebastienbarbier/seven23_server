@@ -1,4 +1,4 @@
-<div class="transaction debitcredit" data-id="{{ debitsCredits.id }}">
+<div class="transaction debitcredit" data-id="{{ debitsCredits.id }}" style="border-left: solid 5px {{ debitsCredits.categoryJSON.color }};">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-6 col-md-5">{{ debitsCredits.name }}{{^debitsCredits.isFavoriteCurrency}} ({{ debitsCredits.defaultCurrency }}){{/debitsCredits.isFavoriteCurrency}}</div>
@@ -25,14 +25,10 @@
 				<div class="col-sm-2 col-md-2 value">{{ debitsCredits.favoriteCurrency }}</div>
 				{{/debitsCredits.isCredit}}
 			{{/debitsCredits.isFavoriteCurrency}}
-
-
-
-
 		</div>
 	</div>
 </div>
 <ul class="actions">
-	<li class="edit">Modifier</li>
-	<li class="delete">Supprimer</li>
+	<li class="delete"><i class="fa fa-trash-o"></i></li>
+	<li class="edit"><i class="fa fa-pencil-square-o"></i></li>
 </ul>
