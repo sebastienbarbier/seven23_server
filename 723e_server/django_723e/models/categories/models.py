@@ -18,7 +18,7 @@ class Category(MPTTModel):
     """
     user        = models.ForeignKey(User, related_name='categories')
     name        = models.CharField(_(u'Name'), max_length=128)
-    description = models.TextField(_(u'Description'))
+    description = models.TextField(_(u'Description'), blank=True, null=True)
     color       = ColorField(default='ffffff')
     icon        = models.TextField(_(u'Icon'))
     parent      = TreeForeignKey('self', null=True, blank=True, related_name='children')

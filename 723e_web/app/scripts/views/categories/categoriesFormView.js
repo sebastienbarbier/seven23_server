@@ -62,7 +62,7 @@ define([
 				$('#cat_form .colorpicker').colorpicker();
 
 				// User validate form
-				$("button.cat_form_submit").on("click", function() {
+				$("#cat_form").on("submit", function() {
 
 					var array = $("#cat_form").serializeArray();
 					var dict = {};
@@ -78,23 +78,50 @@ define([
 
 					var category = new Category(dict);
 
-					category.save(dict, {
-						wait: true,
-						success: function(model, response) {
-							storage.categories.fetch({
-								success: function(){
-									Backbone.history.navigate("#/categories", {
-										trigger: true
-									});
-								}
-							});
-						},
-						error: function(model, error) {
-							console.log(model.toJSON());
-							console.log('error.responseText');
-						}
-					});
+					Backbone.Validation.bind(this, {
+					      model: category,
+					      valid: function(view, attr) {
+							// Check if all are required
+						    $(view).find('input[name=' + attr + '], select[name=' + attr + ']')
+						    	.parent()
+						    	.removeClass('has-error')
+						    	.addClass('has-success')
+						    	.prev().html('');
+							
+					      },
+					      invalid: function(view, attr, error) {
 
+						    $(view).find('input[name=' + attr + '], select[name=' + attr + ']')
+						    	.parent()
+						    	.addClass('has-error')
+						    	.removeClass('has-success')
+						    	.prev().html(error);
+
+					      }
+			   		});
+
+			   		category.validate();
+
+			   		if (category.isValid()) {
+						category.save(dict, {
+							wait: true,
+							success: function(model, response) {
+								storage.categories.fetch({
+									success: function(){
+										Backbone.history.navigate("#/categories", {
+											trigger: true
+										});
+									}
+								});
+							},
+							error: function(model, error) {
+								console.log(model.toJSON());
+								console.log('error.responseText');
+							}
+						});
+					}
+
+					return false;
 				});
 			},
 
