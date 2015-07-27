@@ -25,7 +25,31 @@ define([
 					change: this.toJSON()
 				});
 			}
-		}
+		},
+        validation: {
+            name: {
+                required: true
+            },
+            date: {
+              required: true
+            },
+            amount: function(value, attr, computedState) {
+                if(value === 0) {
+                  return 'Amount is required';
+                }
+            },
+            currency: {
+              required: true
+            },
+            new_amount: function(value, attr, computedState) {
+                if(value === 0) {
+                  return 'Amount is required';
+                }
+            },
+            new_currency: {
+              required: true
+            }
+        }
 	});
 
 	return changes;

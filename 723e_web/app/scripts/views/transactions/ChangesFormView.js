@@ -42,7 +42,6 @@ define([
 			if (change) {
 				$("#changes_form select[name='currency']").find('option[value="' + change.currency + '"]').attr('selected', true);
 				$("#changes_form select[name='new_currency']").find('option[value="' + change.new_currency + '"]').attr('selected', true);
-				$("#changes_form select[name='category']").find('option[value="' + change.category + '"]').attr('selected', true);
 			}else{
 				var currency = storage.user.get('accounts')[0].currency;
 				$("#changes_form select[name='currency']").find('option[value="' + currency + '"]').attr('selected', true);
@@ -64,6 +63,17 @@ define([
 				for (var i = 0; i < array.length; i++) {
 					dict[array[i]['name']] = array[i]['value']
 				}
+				if (!dict['amount']) {
+					dict['amount'] = 0;
+				} else {
+					dict['amount'] = dict['amount'].replace(',', '.');
+				}
+				if (!dict['new_amount']) {
+					dict['new_amount'] = 0;
+				} else {
+					dict['new_amount'] = dict['new_amount'].replace(',', '.');
+				}
+
 				dict['user'] = storage.user.url();
 				dict['account'] = storage.user.get('accounts')[0].id;
 				
@@ -77,20 +87,47 @@ define([
 					change = new ChangesModel(dict);
 				}
 
-				change.save(dict, {
-					wait: true,
-					success: function(model, response) {
-						storage.changes.add(model);
-						console.log('Successfully saved!');
-						Backbone.history.navigate("#/transactions/"+year+"/"+month, {
-							trigger: true
-						});
-					},
-					error: function(model, error) {
-						console.log(model.toJSON());
-						console.log('error.responseText');
-					}
-				});
+				Backbone.Validation.bind(this, {
+			      model: change,
+			      valid: function(view, attr) {
+
+					// Check if all are required
+				    $(view).find('input[name=' + attr + '], select[name=' + attr + ']')
+				    	.parent()
+				    	.removeClass('has-error')
+				    	.addClass('has-success')
+				    	.prev().html('');
+					
+			      },
+			      invalid: function(view, attr, error) {
+
+				    $(view).find('input[name=' + attr + '], select[name=' + attr + ']')
+				    	.parent()
+				    	.addClass('has-error')
+				    	.removeClass('has-success')
+				    	.prev().html(error);
+
+			      }
+			    });
+
+			    change.validate();
+
+			    if (change.isValid()) {
+					change.save(dict, {
+						wait: true,
+						success: function(model, response) {
+							storage.changes.add(model);
+							console.log('Successfully saved!');
+							Backbone.history.navigate("#/transactions/"+year+"/"+month, {
+								trigger: true
+							});
+						},
+						error: function(model, error) {
+							console.log(model.toJSON());
+							console.log('error.responseText');
+						}
+					});
+				}
 				return false;
 			});
 		},
