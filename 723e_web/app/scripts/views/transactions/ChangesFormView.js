@@ -56,7 +56,7 @@ define([
 				});
 			});
 
-			$("button.changes_form_submit").on("click", function() {
+			$("#changes_form").on("submit", function() {
 
 				var array = $("#changes_form").serializeArray();
 				var dict = {};
@@ -91,6 +91,7 @@ define([
 						console.log('error.responseText');
 					}
 				});
+				return false;
 			});
 		},
 
