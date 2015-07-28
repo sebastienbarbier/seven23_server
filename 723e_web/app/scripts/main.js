@@ -19,6 +19,7 @@ require.config({
 		'bootstrap-iconpicker'  : '../../bower_components/bootstrap-iconpicker/bootstrap-iconpicker/js/bootstrap-iconpicker.min',
 		'bootstrap-colorpicker' : '../../bower_components/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min',
 		'bootstrap-datepicker'  : '../../bower_components/bootstrap-datepicker/js/bootstrap-datepicker',
+		'fittext' 			    : '../../bower_components/FitText.js/jquery.fittext',
 		// mocha                : '../../bower_components/mocha/mocha',
 		// lodash               : '../../bower_components/lodash/dist/lodash.compat',
 		// chai                 : '../../bower_components/chai/chai',
@@ -54,6 +55,9 @@ require.config({
     },
     shim: {
     	'bootstrap': {
+			deps: ['jquery'],
+    	},
+    	'fittext': {
 			deps: ['jquery'],
     	},
         'bootstrap-iconpicker': {

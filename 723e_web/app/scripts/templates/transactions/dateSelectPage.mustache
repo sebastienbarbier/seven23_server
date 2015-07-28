@@ -42,32 +42,62 @@
 	</div>
 	<hr/>
 	<div class="row">
-		<div class="col-md-3 col-md-offset-1">
-			<h2>Catégories</h2>
-			<canvas id="categorieYearPie" width="150" height="100"></canvas>
+		<div class="col-md-10 col-md-offset-1">
+			<div class="row">
+				<div class="col-md-4">
+					<p class="fitText text-center">+ {{ stats.global.debits }} CHF</p>
+				</div>
+				<div class="col-md-4">
+					<p class="fitText text-center">- {{ stats.global.credits }} CHF</p>
+				</div>
+				<div class="col-md-4">
+					<p class="fitText text-center">= {{ stats.global.sum }} CHF</p>
+				</div>
+			</div>
+			<hr/>
+			<div class="row">
+
+				<div class="col-md-4">
+					<p class="fitText"><i class="fa fa-exchange"></i> Exchange</p>
+
+					{{#stats.changes}}
+					<p>This year, you exchange {{ old }} CHF with {{ new }} € <br/> (Average of {{ average }} per change)<br/>
+					<small>Average exchange rate : {{ rate }}</small></p>
+					{{/stats.changes }}
+				</div>
+				<div class="col-md-8">
+					
+					<div class="row">
+						<div class="col-md-6">
+							<p class="fitText"><i class="fa fa-tags"></i> Catégories</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<canvas id="categorieYearPie" width="150" height="100"></canvas>
+						</div>
+
+						<div class="col-md-6">
+
+							<p>Expense per category : </p>
+							<ul>
+								{{#stats.categories}}
+								<li>{{ category.name }} : {{ sum }}</li>
+								{{/stats.categories}}
+							</ul>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+
 		</div>
+
 		<div class="col-md-3 col-md-offset-1">
-
-			<h2>Summary</h2>
-			<p>Total debit : {{ stats.global.debits }} CHF</p>
-			<p>Total crédit : {{ stats.global.credits }} CHF</p>
-			<p>Global result : {{ stats.global.sum }} CHF</p>
-
-			<p>Average debit per month : {{ stats.average.debits }} CHF</p>
-			<p>Average credit per month : {{ stats.average.credits }} CHF</p>
-			<p>Average result per month : {{ stats.average.sum }} CHF</p>
-
-			<p>Expense per category : </p>
-			<ul>
-				{{#stats.categories}}
-				<li>{{ category.name }} : {{ sum }}</li>
-				{{/stats.categories}}
-			</ul>
-
-			{{#stats.changes}}
-			<p>This year, you exchange {{ old }} CHF with {{ new }} € (Average of {{ average }} per change)<br/>
-			<small>Average exchange rate : {{ rate }}</small></p>
-			{{/stats.changes }}
 		</div>
 	</div>
 </div>

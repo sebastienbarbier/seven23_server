@@ -125,6 +125,8 @@ define([
                     });
                     $("#content").html(template);
 
+                    $("#content .fitText").fitText();
+
                     // Init graph
                     var ctx = document.getElementById("expenseYearLine").getContext("2d");
                     var data = {

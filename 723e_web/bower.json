@@ -15,7 +15,8 @@
     "require-css": "~0.1.7",
     "bootstrap-datepicker": "~1.3.0",
     "Chart.js": "~1.0.2",
-    "backbone-validation": "~0.11.5"
+    "backbone-validation": "~0.11.5",
+    "FitText.js": "~1.2.0"
   },
   "devDependencies": {
     "mustache.js": "~0.8.2",
