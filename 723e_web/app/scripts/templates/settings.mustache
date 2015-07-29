@@ -1,28 +1,47 @@
+
 <div class="container">
-    <div class="row">
-        <div class="col-md-3" style="padding-top: 20px;">
-            <div class="list-group">
-                <a href="#/settings" class="list-group-item active">User account</a>
-            </div>
-        </div>
-        <div class="col-md-9">
-            <h1>User détails</h1>
-            <dl class="dl-horizontal">
-              <dt>Username</dt>
-              <dd>{{ user.username }}</dd>
-              <dt>Mail</dt>
-              <dd>{{ user.email }}</dd>
-              <dt>Id</dt>
-              <dd>{{ user.id }}</dd>
-            </dl>
-			      <h2>Accounts</h2>
-            <dl class="dl-horizontal">
-                {{# user.accounts }}
-                <dt>{{ name }}</dt>
-                <dd>{{ create }} - {{ currency_json.sign }} - {{ archived }}</dd>
-                {{/ user.accounts }}
-            </dl>
-        </div>
-    </div>
+  <div class="row">
+	<div class="col-sm-6 col-sm-offset-3">  
+	  <div class="box_background">
+		<h1>Settings</h1>
+ 		<hr/>
+		<table class="table table-striped">
+			<tr>
+				<td>Username</td>
+				<td>{{ user.username }}</td>
+			</tr>
+			<tr>
+				<td>Mail</td>
+				<td>{{ user.email }}</td>
+			</tr>
+			{{# user.accounts }}
+			<tr>
+				<td>Account</td>
+				<td>{{ name }}</td>
+			</tr>
+			<tr>
+				<td>Created</td>
+				<td>{{ create }} </td>
+			</tr>
+			<tr>
+				<td>Currency</td>
+				<td>{{ currency_json.name }} / {{ currency_json.sign }}</td>
+			</tr>
+
+			{{/ user.accounts }}
+		</table>
+	  </div>
+	</div>
+
+	<div class="col-sm-6 col-sm-offset-3">  
+	  <div class="row">
+		<div class="col-md-6">
+		  <a class="btn btn-default btn-block">Modifier le compte</a>
+		</div>
+		<div class="col-md-6">
+		  <a class="btn btn-danger btn-block">Supprimer le compte</a>
+		</div>
+	  </div>
+	</div>
+  </div>
 </div>
- 
