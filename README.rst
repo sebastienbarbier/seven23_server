@@ -1,20 +1,31 @@
-# 723e
+723e
+====
 
 Personal side-project. All about measuring my daily expenses, but also learning some
 programming skills/tools.
 
-## Features
+Features
+--------
 
 First version is all about simplicity. Monthly view of your expenses, related to a
 category usefull to light-up some patterns. Also include a yearly view with a graph and
 some interesting value. Then classic settings page. That's it.
 
-## Documentation
+Documentation
+-------------
 
-Not yet available (Ouuuh that is really bad). I hope it will come soon, but I know this is critical to make
+|readthedocs|
+
+.. |readthedocs| image:: https://readthedocs.org/projects/723e/?badge=latest
+    :target: http://723e.readthedocs.org/
+    :alt: 723e Documentation Status
+
+[http://723e.readthedocs.org](http://723e.readthedocs.org), but don't expect much, it is 
+almost empty for know. (Ouuuh that is really bad). I hope it will come soon, but I know this is critical to make
 this project usable.
 
-## About the author
+About the author
+----------------
 
 My name is [Sebastien BARBIER](http://www.sebastienbarbier.com) and I am a web developer. This project has been a long story
 for me since I 'worked' on it for so long. It was my really first
