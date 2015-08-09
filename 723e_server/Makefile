@@ -6,3 +6,6 @@ start:
 
 stop:
 	launchctl unload /usr/local/opt/postgresql/homebrew.mxcl.postgresql.plist 
+
+docs:
+	sphinx-autobuild ../docs/ ../docs/_build
