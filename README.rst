@@ -19,7 +19,7 @@ Documentation
 	:alt: Documentation Status
 
 `http://723e.readthedocs.org <http://723e.readthedocs.org>`_, but don't expect much, it is 
-almost empty for know. (Ouuuh that is really bad). I hope it will come soon, but I know this is critical to make
+almost empty for now. (Ouuuh that is really bad). I hope it will come soon, but I know this is critical to make
 this project usable.
 
 About the author
