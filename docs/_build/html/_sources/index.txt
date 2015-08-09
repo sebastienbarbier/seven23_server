@@ -1,51 +1,42 @@
 .. 723e documentation master file, created by
-   sphinx-quickstart on Mon Feb 17 23:54:37 2014.
+   sphinx-quickstart on Sun Aug  9 22:27:48 2015.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. toctree::
-   :maxdepth: 2
-   
-.. _index:
+Welcome to 723e's documentation!
+================================
 
-723e's documentation :: HomePage
-===============================
+Thanks for trying to access this documentation, it means you shown interest in this project.
 
-Thanks for considering user this solution in any purpose, 
-I hope this technical documentation will help you to understand most concepts. 
-
-Feel free to give me any feedback by mail at contact@sebastienbarbier.com or via twitter `@SebBarbier <http://twitter.com/SebBarbier>`_.
-
-First step
+About 723e
 ----------
 
-:ref:`introduction` | :ref:`install`
+This is a **personal side-project**. All about measuring my daily expenses, but also learning some
+programming skills/tools.
 
-Models
-------
+First version is all about simplicity. Monthly view of your expenses, related to a
+category usefull to light-up some patterns. Also include a yearly view with a graph and
+some interesting value. Then classic settings page. That's it.
 
-:ref:`accounts` | Transactions | Events | Depts | Shared pots
+I apologize for the terrible code quality. When first release will come I'll spend time refactoring, documenting, and testing. For now, I barely satisfy first few features.
 
-API
----
+*NDLR : This projet is in development since few years now, going very slowly.
+Had some interesting evolution in July 2015, might expect a first realease around September 2015.*
 
-v1
-^^
 
-Yeah for the moment, just one version ... lets not skip major steps just to flatter my ego.
+About the author
+----------------
 
-Web Interface
--------------
+My name is `Sebastien BARBIER <http://www.sebastienbarbier.com>`_ and I am a web developer. This project has been a long story for me since I 'worked' on it for so long. It was my really first
+experience about **Backbone** and **Django REST Framework**, made multiple prototype and 
+failed quite a lot. I learned from my mistake, no doubts about that.
 
-Many thing about how is build the web interface
+For the anecdote, the name of this project (723e) come from the fact at the time I needed it, my monthly
+salary was exactly 723 euros. I was freelance, tough time, but gosh I loved it.
 
-Mobile applications
--------------------
+Thanks for reading, I hope my small contribution might help you in any way whatsoever :D
 
-iPhone
-^^^^^^
 
-An iPhone app might come some days, to quickly add a transaction on the rush straight from your phone. 
-This might be an interessant project for students, if anyone volontered, I'll make a pleasure to supervised it.
-
+.. toctree::
+   :maxdepth: 2
 
