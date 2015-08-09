@@ -15,8 +15,8 @@ Documentation
 -------------
 
 .. image:: https://readthedocs.org/projects/723e/badge/?version=latest
-:target: https://readthedocs.org/projects/723e/?badge=latest
-:alt: Documentation Status
+	:target: https://readthedocs.org/projects/723e/?badge=latest
+	:alt: Documentation Status
 
 `http://723e.readthedocs.org <http://723e.readthedocs.org>`_, but don't expect much, it is 
 almost empty for know. (Ouuuh that is really bad). I hope it will come soon, but I know this is critical to make
