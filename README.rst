@@ -14,20 +14,18 @@ some interesting value. Then classic settings page. That's it.
 Documentation
 -------------
 
-|readthedocs|
+.. image:: https://readthedocs.org/projects/723e/badge/?version=latest
+:target: https://readthedocs.org/projects/723e/?badge=latest
+:alt: Documentation Status
 
-.. |readthedocs| image:: https://readthedocs.org/projects/723e/?badge=latest
-    :target: http://723e.readthedocs.org/
-    :alt: 723e Documentation Status
-
-[http://723e.readthedocs.org](http://723e.readthedocs.org), but don't expect much, it is 
+`http://723e.readthedocs.org <http://723e.readthedocs.org>`_, but don't expect much, it is 
 almost empty for know. (Ouuuh that is really bad). I hope it will come soon, but I know this is critical to make
 this project usable.
 
 About the author
 ----------------
 
-My name is [Sebastien BARBIER](http://www.sebastienbarbier.com) and I am a web developer. This project has been a long story
+My name is `Sebastien BARBIER <http://www.sebastienbarbier.com>`_ and I am a web developer. This project has been a long story
 for me since I 'worked' on it for so long. It was my really first
 experience about **Backbone** and **Django REST Framework**, made multiple prototype and 
 failed quite a lot. I learned from my mistake, no doubts about that.
