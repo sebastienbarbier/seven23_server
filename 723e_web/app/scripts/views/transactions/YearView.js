@@ -103,6 +103,11 @@ define([
                         }
                     }
 
+                    // Round to 2 digit after comma
+                    stats.global.sum = stats.global.sum.toFixed(2);
+                    stats.global.debits = stats.global.debits.toFixed(2);
+                    stats.global.credits = stats.global.credits.toFixed(2);
+
                     stats.average.sum = stats.global.sum / stats.global.counter;
                     stats.average.credits = stats.global.credits / stats.global.counter;
                     stats.average.debits = stats.global.debits / stats.global.counter;
