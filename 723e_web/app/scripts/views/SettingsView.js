@@ -5,8 +5,9 @@ define([
 	'mustache',
 	'initView',
 	'text!templates/settings.mustache',
+	'text!templates/user/deleteUser.mustache',
 	'storage'
-], function($, _, Backbone, Mustache, InitView, settingsTemplate, storage) {
+], function($, _, Backbone, Mustache, InitView, settingsTemplate, deleteTemplate, storage) {
 
 	var SettingsView = Backbone.View.extend({
 		el: $("#content"),
@@ -22,7 +23,7 @@ define([
 			var user = storage.user.toJSON();
 
 			for(var i = 0; i < user.accounts.length; i=i+1){
-				user.accounts[i].currency_json = storage.currencies.get(user.accounts[i].currency).toJSON()
+				user.accounts[i].currency_json = storage.currencies.get(user.accounts[i].currency).toJSON();
 			}
 
 			// Generate and push template.
@@ -31,8 +32,22 @@ define([
 			});
 			$("#content").html(template);
 
+			// When properly closing modal, we delete user.
+			$("button.deleteUserButton").on("click", function() {
+				$('#deleteModal').one('hidden.bs.modal', function(e) {
+			        deleteUser('user');
+			    }).modal('hide');
+			});
 		}
 	});
+
+	function deleteUser () {
+		storage.user.destroy({success: function(model, response) {
+			// Generate and push template.
+			var template = Mustache.render(deleteTemplate);
+			$("#page").html(template);
+		}});
+	}
 
 	return SettingsView;
 

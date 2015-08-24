@@ -61,7 +61,7 @@ define([
 
         var initialize = function() {
 
-            var app_router = new AppRouter;
+            var app_router = new AppRouter();
 
             // As above, call render on our loaded module
             // 'views/users/list'
@@ -71,11 +71,12 @@ define([
             });
 
             app_router.on('route:transactions', function(year, month) {
+                var transactionView;
                 if (month !== undefined && month !== null) {
-                    var transactionView = new TransactionsView();
+                    transactionView = new TransactionsView();
                     transactionView.render(year, month);
                 } else {
-                    var transactionView = new YearView();
+                    transactionView = new YearView();
                     transactionView.render(year);
                 }
             });
@@ -91,13 +92,13 @@ define([
             });
 
             app_router.on('route:categories', function() {
-                var dashboardView = new CategoriesView();
-                dashboardView.render();
+                var categoriesView = new CategoriesView();
+                categoriesView.render();
             });
 
             app_router.on('route:categoriesForm', function(categorie_id) {
-                var dashboardView = new CategoriesFormView();
-                dashboardView.render(categorie_id);
+                var categorieFormView = new CategoriesFormView();
+                categorieFormView.render(categorie_id);
             });
 
             app_router.on('route:settings', function() {
@@ -108,10 +109,9 @@ define([
             app_router.on('route:defaultAction', function(actions) {
                 // We have no matching route, lets just log what the URL was
                 console.log('No route:', actions);
-                var dashboardView = new norouteview();
-                dashboardView.render();
+                var noRouteView = new norouteview();
+                noRouteView.render();
             });
-
 
             app_router.on('route:login', function(actions) {
                 // We have no matching route, lets just log what the URL was

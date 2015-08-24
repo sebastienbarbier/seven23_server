@@ -1,47 +1,63 @@
-
 <div class="container">
-  <div class="row">
-	<div class="col-sm-6 col-sm-offset-3">  
-	  <div class="box_background">
-		<h1>Settings</h1>
- 		<hr/>
-		<table class="table table-striped">
-			<tr>
-				<td>Username</td>
-				<td>{{ user.username }}</td>
-			</tr>
-			<tr>
-				<td>Mail</td>
-				<td>{{ user.email }}</td>
-			</tr>
-			{{# user.accounts }}
-			<tr>
-				<td>Account</td>
-				<td>{{ name }}</td>
-			</tr>
-			<tr>
-				<td>Created</td>
-				<td>{{ create }} </td>
-			</tr>
-			<tr>
-				<td>Currency</td>
-				<td>{{ currency_json.name }} / {{ currency_json.sign }}</td>
-			</tr>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="box_background">
+                <h1>Settings</h1>
+                <hr/>
+                <table class="table table-striped">
+                    <tr>
+                        <td>Username</td>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>Mail</td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    {{# user.accounts }}
+                    <tr>
+                        <td>Account</td>
+                        <td>{{ name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Created</td>
+                        <td>{{ create }} </td>
+                    </tr>
+                    <tr>
+                        <td>Currency</td>
+                        <td>{{ currency_json.name }} / {{ currency_json.sign }}</td>
+                    </tr>
+                    {{/ user.accounts }}
+                </table>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a class="btn btn-default btn-block">Modifier le compte</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="btn btn-danger btn-block" data-toggle="modal" data-target="#deleteModal">Supprimer le compte</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-			{{/ user.accounts }}
-		</table>
-	  </div>
-	</div>
 
-	<div class="col-sm-6 col-sm-offset-3">  
-	  <div class="row">
-		<div class="col-md-6">
-		  <a class="btn btn-default btn-block">Modifier le compte</a>
-		</div>
-		<div class="col-md-6">
-		  <a class="btn btn-danger btn-block">Supprimer le compte</a>
-		</div>
-	  </div>
-	</div>
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Wow, you are about to delete your account, are you sure ?</h4>
+      </div>
+      <div class="modal-body">
+        <p>Restoring your data will not be possible. They will be gone for ever.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger deleteUserButton" >I agree and want to erase all of my data</button>
+      </div>
+    </div>
   </div>
 </div>

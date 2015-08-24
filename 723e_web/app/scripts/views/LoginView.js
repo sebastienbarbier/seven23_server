@@ -72,8 +72,6 @@ define([
 				// Check if email is email synthax
 				var sub = new Subscription(dict);
 
-				console.log(dict);
-
 			    Backbone.Validation.bind(this, {
 			      model: sub,
 			      valid: function(view, attr) {
@@ -84,7 +82,7 @@ define([
 				    	.removeClass('has-error')
 				    	.addClass('has-success')
 				    	.prev().html('');
-					
+
 			      },
 			      invalid: function(view, attr, error) {
 
@@ -123,14 +121,13 @@ define([
 				return false;
 			});
 
-
 			//
 			$('footer .subscribe').on('click', function() {
 				// Get list of all currencies
 				$('#login').hide();
 				$('#about').hide();
 				$('.hide_if_about').show();
-				
+
 				currencies.fetch({
 					success: function() {
 
