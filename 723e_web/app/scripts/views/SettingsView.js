@@ -44,6 +44,7 @@ define([
 	function deleteUser () {
 		storage.user.destroy({success: function(model, response) {
 			// Generate and push template.
+			sessionStorage.removeItem("key");
 			var template = Mustache.render(deleteTemplate);
 			$("#page").html(template);
 		}});

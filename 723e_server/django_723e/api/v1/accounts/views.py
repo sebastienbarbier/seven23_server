@@ -21,13 +21,14 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated
 
-
+@permission_classes((IsAuthenticated,))
 class api_accounts(viewsets.ModelViewSet):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
 
-
+@permission_classes((IsAuthenticated,))
 class api_users(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -35,6 +36,30 @@ class api_users(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    def retrieve(self, request, pk=None):
+        user = self.get_object()
+        if self.request.user.is_staff or self.request.user.id == user.id:
+            serializer = self.get_serializer(user, many=False)
+            return Response(serializer.data, status=200)
+        else:
+            return Response({'code': 401}, status=401)
+
+    def update(self, request, pk=None):
+        pass
+
+    def partial_update(self, request, pk=None):
+        pass
+
+    def destroy(self, request, pk=None):
+        user = self.get_object()
+        if self.request.user.is_staff:
+            user.delete()
+            return Response({'code': 200}, status=200)
+        elif self.request.user.id == user.id:
+            self.request.user.delete()
+            return Response({'code': 200}, status=200)
+        else:
+            return Response({'code': 401}, status=401)
 
 @api_view(['POST'])
 def subscription(request):
