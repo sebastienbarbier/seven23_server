@@ -9,3 +9,7 @@ stop:
 
 docs:
 	sphinx-autobuild ../docs/ ../docs/_build
+
+clean:
+	find . -name '*.pyc' -delete
+	find . -name '*~' -delete
