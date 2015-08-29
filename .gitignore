@@ -13,3 +13,4 @@ docs/_templates
 723e_web/.tmp
 723e_web/app/bower_components
 723e_web/app/styles/css/main.css
+.DS_Store
