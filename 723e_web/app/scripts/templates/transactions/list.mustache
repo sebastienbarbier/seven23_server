@@ -49,7 +49,7 @@
         </div>
         <div>
             <div id="timeline">
-                {{#liste.length}}
+                {{#liste}}
                 <p class="day">{{ 0 }}</p>
                 <div class="elements">
                     {{#1}}
@@ -58,7 +58,7 @@
                     </div>
                     {{/1}}
                 </div>
-                {{/liste.length}}
+                {{/liste}}
                 {{^liste.length}}You have no transaction for this month yet.{{/liste.length}}
             </div>
         </div>
