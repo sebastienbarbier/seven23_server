@@ -86,7 +86,7 @@ define([
 
 
 				// Event create form on button click
-				$("#categories button.edit").on('click', function() {
+				$("#categories i.edit").on('click', function() {
 					var cat = $(this).parents("li").data('id');
 
 					Backbone.history.navigate("#/categories/edit/"+cat, {
@@ -94,7 +94,7 @@ define([
 					});
 				});
 
-				$("#categories button.delete").on('click', function() {
+				$("#categories i.delete").on('click', function() {
 					var cat = $(this).parents("li").data('id');
 					storage.categories.get(cat).destroy( // prints nothing!!!
 						{
