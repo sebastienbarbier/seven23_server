@@ -9,7 +9,7 @@
     "requirejs-text": "~2.0.10",
     "modernizr": "~2.7.1",
     "moment": "~2.8.3",
-    "font-awesome": "~4.2.0",
+    "font-awesome": "~4.3.0",
     "bootstrap-colorpicker": "https://github.com/mjolnic/bootstrap-colorpicker",
     "mjolnic-bootstrap-colorpicker": "https://github.com/mjolnic/bootstrap-colorpicker.git#~2.0.0",
     "require-css": "~0.1.7",

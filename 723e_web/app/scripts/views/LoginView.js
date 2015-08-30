@@ -35,7 +35,9 @@ define([
 
 		render: function() {
 
-			var template = Mustache.render(loginTemplate);
+			var template = Mustache.render(loginTemplate, {
+				'server': ws.server.url()
+			});
 
 			this.$el.html(template);
 			//alert('TEST');
