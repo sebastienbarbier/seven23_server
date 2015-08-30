@@ -1,9 +1,9 @@
 define("ws", ["jquery"], function($) {
 	// Define API Server
 	var server = {
-		protocol: "http",
-		domain: "localhost",
-		port: "8000",
+		protocol: (APP_CONFIG.apiProtocol ? APP_CONFIG.apiProtocol : "https"),
+		domain: (APP_CONFIG.apiUrl ? APP_CONFIG.apiUrl : "api.723e.com"),
+		port: (APP_CONFIG.apiPort ? APP_CONFIG.apiPort : "80"),
 		url: function() {
 			return this.protocol + "://" + this.domain + ":" + this.port;
 		}
