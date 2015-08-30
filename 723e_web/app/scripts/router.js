@@ -14,6 +14,7 @@ define([
         'categoriesView',
         'categoriesFormView',
         'initView',
+        'errorView',
         'settingsView',
         '404View'
     ],
@@ -31,6 +32,7 @@ define([
         CategoriesView,
         CategoriesFormView,
         InitView,
+        ErrorView,
         SettingsView,
         norouteview) {
 
@@ -129,7 +131,8 @@ define([
             });
 
             app_router.on('route:error', function(actions) {
-                alert("Serveur not available");
+                var errorView = new ErrorView();
+                errorView.render();
             });
 
             Backbone.history.start();

@@ -54,7 +54,7 @@ define("ws", ["jquery"], function($) {
 		// The server must allow this through response headers
 		$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
 			// If we have a csrf token send it through with the next request
-			if (!key) {
+			if (key) {
 				jqXHR.setRequestHeader('Authorization', 'Token ' + key);
 			}
 		});

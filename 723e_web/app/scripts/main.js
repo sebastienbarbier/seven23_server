@@ -42,6 +42,7 @@ require.config({
 		currenciesCollection    : 'collections/currenciesCollection',
 		// Views
 		initView                : 'views/InitView',
+		errorView               : 'views/ErrorView',
 		loginView               : 'views/LoginView',
 		dashboardView           : 'views/DashboardView',
 		yearView                : 'views/transactions/YearView',
