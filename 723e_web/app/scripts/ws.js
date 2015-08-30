@@ -31,7 +31,7 @@ define("ws", ["jquery"], function($) {
 		login: server.url() + "/api/api-token-auth/",
 		// Create an account
 		subscription: server.url() + "/api/v1/subscription/"
-	}
+	};
 
 	// Authentification Token Key
 	var key = sessionStorage.getItem("key");
@@ -39,7 +39,7 @@ define("ws", ["jquery"], function($) {
 	var _setToken = function(_key) {
 		key = _key;
 		sessionStorage.setItem("key", _key);
-	}
+	};
 
 
 	var _ajax = function(type, _options) {
@@ -54,26 +54,26 @@ define("ws", ["jquery"], function($) {
 		// The server must allow this through response headers
 		$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
 			// If we have a csrf token send it through with the next request
-			if (key !== null && key != undefined) {
+			if (!key) {
 				jqXHR.setRequestHeader('Authorization', 'Token ' + key);
 			}
 		});
 
 		return $.ajax(options);
-	}
+	};
 
 	var _get = function(_options) {
 		return _ajax('GET', _options);
-	}
+	};
 	var _post = function(_options) {
 		return _ajax('POST', _options);
-	}
+	};
 	var _push = function(_options) {
 		return _ajax('PUSH', _options);
-	}
+	};
 	var _delete = function(_options) {
 		return _ajax('DELETE', _options);
-	}
+	};
 
 	return {
 		// This object return server access.
@@ -84,5 +84,5 @@ define("ws", ["jquery"], function($) {
 		push: _push,
 		del: _delete,
 		setToken: _setToken
-	}
+	};
 });
