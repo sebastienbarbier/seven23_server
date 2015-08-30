@@ -104,25 +104,25 @@ define([
                     }
 
                     // Round to 2 digit after comma
-                    stats.global.sum = stats.global.sum.toFixed(2);
-                    stats.global.debits = stats.global.debits.toFixed(2);
-                    stats.global.credits = stats.global.credits.toFixed(2);
+                    // stats.global.sum = stats.global.sum;
+                    // stats.global.debits = stats.global.debits;
+                    // stats.global.credits = stats.global.credits;
 
-                    stats.average.sum = stats.global.sum / stats.global.counter;
-                    stats.average.credits = stats.global.credits / stats.global.counter;
-                    stats.average.debits = stats.global.debits / stats.global.counter;
+                    // stats.average.sum = stats.global.sum / stats.global.counter;
+                    // stats.average.credits = stats.global.credits / stats.global.counter;
+                    // stats.average.debits = stats.global.debits / stats.global.counter;
 
-                    for(i = 0, l = stats.average.length; i < l; i=i+1){
-                        var new_currency = storage.currencies.get(stats.average[i].currency);
-                        stats.average[i].old = account_currency.toString(stats.average[i].old);
-                        stats.average[i].new = new_currency.toString(stats.average[i].new);
-                        stats.average[i].average = account_currency.toString(stats.average[i].average);
-                    }
+                    // for(i = 0, l = stats.average.length; i < l; i=i+1){
+                    //     var new_currency = storage.currencies.get(stats.average[i].currency);
+                    //     stats.average[i].old = account_currency.toString(stats.average[i].old);
+                    //     stats.average[i].new = new_currency.toString(stats.average[i].new);
+                    //     stats.average[i].average = account_currency.toString(stats.average[i].average);
+                    // }
 
 
-                    for(i = 0, l = stats.categories.length; i < l; i=i+1){
-                        stats.categories[i].category = storage.categories.get(stats.categories[i].category).toJSON();
-                    }
+                    // for(i = 0, l = stats.categories.length; i < l; i=i+1){
+                    //     stats.categories[i].category = storage.categories.get(stats.categories[i].category).toJSON();
+                    // }
 
                     var template = Mustache.render(DateSelectorPageTemplate, {
                         calendar: calendar,
@@ -130,7 +130,7 @@ define([
                     });
                     $("#content").html(template);
 
-                    $("#content .fitText").fitText();
+                    // $("#content .fitText").fitText();
 
                     // Init graph
                     var ctx = document.getElementById("expenseYearLine").getContext("2d");
@@ -165,41 +165,22 @@ define([
                     });
 
                     // Pie chart
-                    ctx = document.getElementById("categorieYearPie").getContext("2d");
-                    data = [];
-                    for(i = 0, l = stats.categories.length; i < l; i=i+1){
-                        data.push({
-                            value: Math.round(Math.abs(stats.categories[i].sum) * 100) / 100,
-                            color: stats.categories[i].category.color,
-                            highlight: stats.categories[i].category.color,
-                            label: stats.categories[i].category.name
-                        });
+                    // ctx = document.getElementById("categorieYearPie").getContext("2d");
+                    // data = [];
+                    // for(i = 0, l = stats.categories.length; i < l; i=i+1){
+                    //     data.push({
+                    //         value: Math.round(Math.abs(stats.categories[i].sum) * 100) / 100,
+                    //         color: stats.categories[i].category.color,
+                    //         highlight: stats.categories[i].category.color,
+                    //         label: stats.categories[i].category.name
+                    //     });
 
-                    }
+                    // }
 
-                        // {
-                        //     value: 300,
-                        //     color:"#F7464A",
-                        //     highlight: "#FF5A5E",
-                        //     label: "Red"
-                        // },
-                        // {
-                        //     value: 50,
-                        //     color: "#46BFBD",
-                        //     highlight: "#5AD3D1",
-                        //     label: "Green"
-                        // },
-                        // {
-                        //     value: 100,
-                        //     color: "#FDB45C",
-                        //     highlight: "#FFC870",
-                        //     label: "Yellow"
-                        // }
-
-                    myNewChart = new Chart(ctx).Pie(data, {
-                        responsive: true,
-                        animation : false
-                    });
+                    // myNewChart = new Chart(ctx).Pie(data, {
+                    //     responsive: true,
+                    //     animation : false
+                    // });
                 }
             });
         }

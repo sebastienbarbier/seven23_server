@@ -1,6 +1,6 @@
 {{#calendar}}
 <header class="container-fluid grey datepickerpage">
-	
+
 		<div class="row title">
 			<div class="col-xs-12">
 				<a href="#/transactions/{{before}}"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
@@ -16,14 +16,14 @@
 				<div class="monthSelector">
 					<a href="#/transactions/{{year}}/{{month}}">
 						<h3>{{label}}</h3>
-						
+
 						<div class="details">
 							<p><strong>Crédits</strong> : {{ credits }}</p>
 							<p><strong>Débits</strong> : {{ debits }}</p>
 							<p style="padding: 1px 0 1px 0;"><strong>Resultat</strong> : <big class="{{ color }}">{{ sum }}</big></p>
 							<p><strong>Transactions</strong> : {{ count }}</p>
 						</div>
-						
+
 					</a>
 				</div>
 			</div>
@@ -38,66 +38,6 @@
 		<div class="col-xs-10 col-xs-offset-1">
 			<h2>About {{#calendar}}{{ year }}{{/calendar}} ...</h2>
 			<canvas id="expenseYearLine" width="400" height="100"></canvas>
-		</div>
-	</div>
-	<hr/>
-	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
-			<div class="row">
-				<div class="col-md-4">
-					<p class="fitText text-center">+ {{ stats.global.credits }} CHF</p>
-				</div>
-				<div class="col-md-4">
-					<p class="fitText text-center">- {{ stats.global.debits }} CHF</p>
-				</div>
-				<div class="col-md-4">
-					<p class="fitText text-center">= {{ stats.global.sum }} CHF</p>
-				</div>
-			</div>
-			<hr/>
-			<div class="row">
-
-				<div class="col-md-4">
-					<p class="fitText"><i class="fa fa-exchange"></i> Exchange</p>
-
-					{{#stats.changes}}
-					<p>This year, you exchange {{ old }} CHF with {{ new }} € <br/> (Average of {{ average }} per change)<br/>
-					<small>Average exchange rate : {{ rate }}</small></p>
-					{{/stats.changes }}
-				</div>
-				<div class="col-md-8">
-					
-					<div class="row">
-						<div class="col-md-6">
-							<p class="fitText"><i class="fa fa-tags"></i> Catégories</p>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-6">
-							<canvas id="categorieYearPie" width="150" height="100"></canvas>
-						</div>
-
-						<div class="col-md-6">
-
-							<p>Expense per category : </p>
-							<ul>
-								{{#stats.categories}}
-								<li>{{ category.name }} : {{ sum }}</li>
-								{{/stats.categories}}
-							</ul>
-						</div>
-
-					</div>
-
-				</div>
-
-			</div>
-
-
-		</div>
-
-		<div class="col-md-3 col-md-offset-1">
 		</div>
 	</div>
 </div>
