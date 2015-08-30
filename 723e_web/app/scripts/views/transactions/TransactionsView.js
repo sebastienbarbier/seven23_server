@@ -94,11 +94,11 @@ define([
 				});
 			}
 
-			console.log(arrayAbstract);
+			var template;
 
 			if (arrayAbstract.length === 0) {
 
-				var template = Mustache.render(listEmptyTemplate, {
+				template = Mustache.render(listEmptyTemplate, {
 					year: year,
 					date: d
 				});
@@ -220,7 +220,7 @@ define([
 				}
 
 
-				var template = Mustache.render(listTemplate, {
+				template = Mustache.render(listTemplate, {
 					liste: arrayAbstract,
 					bilan: bilan,
 					year: year,
@@ -300,9 +300,10 @@ define([
 	                    label: bilan.categories[i][0].name
 	                });
 	            }
-	            
+
 	            var myNewChart = new Chart(ctx).Pie(data, {
-	                responsive: true
+	                responsive: true,
+	                animation : false
 	            });
 
 			}

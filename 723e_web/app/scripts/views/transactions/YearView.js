@@ -160,12 +160,13 @@ define([
                         ]
                     };
                     var myNewChart = new Chart(ctx).Line(data, {
-                        responsive: true
+                        responsive: true,
+                        animation: false
                     });
 
-
-                    var ctx = document.getElementById("categorieYearPie").getContext("2d");
-                    var data = [];
+                    // Pie chart
+                    ctx = document.getElementById("categorieYearPie").getContext("2d");
+                    data = [];
                     for(i = 0, l = stats.categories.length; i < l; i=i+1){
                         data.push({
                             value: Math.round(Math.abs(stats.categories[i].sum) * 100) / 100,
@@ -194,9 +195,10 @@ define([
                         //     highlight: "#FFC870",
                         //     label: "Yellow"
                         // }
-                    
-                    var myNewChart = new Chart(ctx).Pie(data, {
-                        responsive: true
+
+                    myNewChart = new Chart(ctx).Pie(data, {
+                        responsive: true,
+                        animation : false
                     });
                 }
             });
