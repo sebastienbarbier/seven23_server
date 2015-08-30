@@ -14,9 +14,12 @@
                 <p><strong>Crédits</strong> : {{ bilan.credits }}</p>
                 <p><strong>Débits</strong> : {{ bilan.debits }}</p>
                 <p style="padding: 1px 0 1px 0;"><strong>Balance</strong> : <big class="{{ bilan.color }}">{{ bilan.total }}</big></p>
+                {{#liste.length}}
                 <p><strong>Transactions</strong> : {{ liste.length }}</p>
+                {{/liste.length}}
             </div>
             <hr/>
+            {{#bilan.categories.length}}
             <div>
                 <h3>Catégories</h3>
                 <canvas id="categorieYearPie" style="margin: 10px 0;"></canvas>
@@ -33,6 +36,7 @@
                 {{/bilan.categories}}
                 </table>
             </div>
+            {{/bilan.categories.length}}
         </div>
     </aside>
 
@@ -45,7 +49,7 @@
         </div>
         <div>
             <div id="timeline">
-                {{#liste}}
+                {{#liste.length}}
                 <p class="day">{{ 0 }}</p>
                 <div class="elements">
                     {{#1}}
@@ -54,7 +58,8 @@
                     </div>
                     {{/1}}
                 </div>
-                {{/liste}}
+                {{/liste.length}}
+                {{^liste.length}}You have no transaction for this month yet.{{/liste.length}}
             </div>
         </div>
     </div>
