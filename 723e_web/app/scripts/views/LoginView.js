@@ -36,7 +36,8 @@ define([
 		render: function() {
 
 			var template = Mustache.render(loginTemplate, {
-				'server': ws.server.url()
+				'server': ws.server.url(),
+				'allowSubscription': APP_CONFIG.allowSubscription
 			});
 
 			this.$el.html(template);

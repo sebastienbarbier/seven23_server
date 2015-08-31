@@ -34,6 +34,7 @@
 				</div>
 			</div>
 		</div>
+		{{#allowSubscription}}
 		<div id="subscription_form">
 			<div class="container">
 				<div class="row">
@@ -105,6 +106,8 @@
 				</div>
 			</div>
 		</div>
+
+		{{/allowSubscription}}
 	</div>
 	<div id="about">
 		<div class="container">
@@ -126,7 +129,10 @@
 			</div>
 			<div class="col-md-6">
 				<p style="text-align: right;">
+
+					{{#allowSubscription}}
 					<a class="btn btn-default subscribe">Créer un compte</a>
+					{{/allowSubscription}}
 					<a class="btn btn-default about">A propos</a>
 				</p>
 		  	</div>
