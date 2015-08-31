@@ -52,7 +52,7 @@ LOGIN_URL = '/'
 
 # Override Template position.
 TEMPLATE_DIRS = [
-    PROJECT_PATH + '/templates/'
+    PROJECT_PATH + '/homepage/'
 ]
 
 # Additional locations of static files
