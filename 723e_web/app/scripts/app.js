@@ -22,7 +22,6 @@ define("app", [
 	var initialize = function() {
 
 		// Initialise french moment interface
-		var fr = require(['../../bower_components/moment/locale/fr']);
 		moment.locale('fr');
 
 		// First we check if user is logged to charge the correct page.

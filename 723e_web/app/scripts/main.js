@@ -5,10 +5,9 @@ require.config({
     paths: {
         // Librairies dependancies
 		jquery                  : '../../bower_components/jquery/dist/jquery',
-		underscore              : '../bower_components/lodash/dist/lodash',
+		underscore              : '../../bower_components/lodash/dist/lodash',
 		backbone                : '../../bower_components/backbone/backbone',
 		validator  				: '../../bower_components/backbone-validation/dist/backbone-validation-amd-min',
-		css                     : '../../bower_components/require-css/css',
 		text                    : '../../bower_components/requirejs-text/text',
 		requirejs               : '../../bower_components/requirejs/require',
 		mustache                : '../../bower_components/mustache.js/mustache',
@@ -62,13 +61,9 @@ require.config({
 			deps: ['jquery'],
     	},
         'bootstrap-iconpicker': {
-            deps: ['bootstrap', '../../bower_components/bootstrap-iconpicker/bootstrap-iconpicker/js/iconset/iconset-fontawesome-4.2.0.min'],
-        },
-        'bootstrap-colorpicker': {
-            deps: ['css!../../bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css'],
-        },
-        'bootstrap-datepicker': {
-            deps: ['css!../../bower_components/bootstrap-datepicker/css/datepicker3.css'],
+            deps: [
+            	'../../bower_components/bootstrap-iconpicker/bootstrap-iconpicker/js/iconset/iconset-fontawesome-4.2.0.min'
+            ]
         }
     }
 });

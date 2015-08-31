@@ -261,22 +261,26 @@ define([
 				}
 			});
 
-			// Pie categroy chart
-			var ctx = document.getElementById("categorieYearPie").getContext("2d");
-            var data = [];
-            for(i = 0, l = bilan.categories.length; i < l; i=i+1){
-                data.push({
-                    value: Math.round(Math.abs(bilan.categories[i][1]) * 100) / 100,
-                    color: bilan.categories[i][0].color,
-                    highlight: bilan.categories[i][0].color,
-                    label: bilan.categories[i][0].name
-                });
-            }
+			// If there is some data, we display
+			if (arrayAbstract.length) {
+				// Pie categroy chart
+				var ctx = document.getElementById("categorieYearPie").getContext("2d");
+	            var data = [];
+	            for(i = 0, l = bilan.categories.length; i < l; i=i+1){
+	                data.push({
+	                    value: Math.round(Math.abs(bilan.categories[i][1]) * 100) / 100,
+	                    color: bilan.categories[i][0].color,
+	                    highlight: bilan.categories[i][0].color,
+	                    label: bilan.categories[i][0].name
+	                });
+	            }
 
-            var myNewChart = new Chart(ctx).Pie(data, {
-                responsive: true,
-                animation : false
-            });
+	            var myNewChart = new Chart(ctx).Pie(data, {
+	                responsive: true,
+	                animation : false
+	            });
+			}
+
 
 
 		}

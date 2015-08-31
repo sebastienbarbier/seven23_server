@@ -76,7 +76,8 @@ module.exports = function(grunt) {
 						return [
 							lrSnippet,
 							mountFolder(connect, '.tmp'),
-							mountFolder(connect, yeomanConfig.app)
+							mountFolder(connect, yeomanConfig.app),
+							mountFolder(connect, '.')
 						];
 					}
 				}
@@ -142,12 +143,7 @@ module.exports = function(grunt) {
 				options: {
 					baseUrl: '<%= yeoman.app %>/scripts',
 					optimize: 'none',
-					paths: {
-						'templates': '../../.tmp/scripts/templates',
-						'jquery': '../../<%= yeoman.app %>/bower_components/jquery/dist/jquery',
-						'underscore': '../../<%= yeoman.app %>/bower_components/lodash/dist/lodash',
-						'backbone': '../../<%= yeoman.app %>/bower_components/backbone/backbone'
-					},
+					mainConfigFile: 'app/scripts/main.js',
 					// TODO: Figure out how to make sourcemaps work with grunt-usemin
 					// https://github.com/yeoman/grunt-usemin/issues/30
 					//generateSourceMaps: true,
@@ -213,8 +209,37 @@ module.exports = function(grunt) {
 					src: [
 						'*.{ico,txt}',
 						'.htaccess',
+						'scripts/requirejs.js',
 						'images/{,*/}*.{webp,gif}',
 						'styles/fonts/{,*/}*.*',
+						'config.js',
+					]
+				},
+				{
+					expand: true,
+					dot: true,
+					cwd: '.',
+					dest: '<%= yeoman.dist %>',
+					src: [
+						'bower_components/requirejs/require.js',
+						'bower_components/moment/locale/fr',
+						'bower_components/mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/saturation.png',
+						'bower_components/bootstrap-iconpicker/bootstrap-iconpicker/js/bootstrap-iconpicker.min.js',
+						'bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css',
+						'bower_components/bootstrap-iconpicker/bootstrap-iconpicker/js/iconset/iconset-fontawesome-4.2.0.min.js',
+						'bower_components/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js',
+						'bower_components/mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/hue.png',
+						'bower_components/mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/alpha.png',
+						'bower_components/bootstrap-iconpicker/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css'
+					]
+				},
+				{
+					expand: true,
+					dot: true,
+					cwd: 'bower_components/mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker',
+					dest: '<%= yeoman.dist %>/styles/img/bootstrap-colorpicker/',
+					src: [
+						'{,*/}*.png'
 					]
 				}]
 			}
@@ -266,10 +291,11 @@ module.exports = function(grunt) {
 		grunt.task.run(['serve' + (target ? ':' + target : '')]);
 	});
 
-	grunt.registerTask('serve', function(target) {
-		if (target === 'dist') {
-			return grunt.task.run(['build', 'open:server', 'connect:dist:keepalive']);
-		}
+	grunt.registerTask('serve-dist', function(target) {
+		return grunt.task.run(['build', 'open:server', 'connect:dist:keepalive']);
+	});
+
+	grunt.registerTask('serve-dev', function(target) {
 
 		if (target === 'test') {
 			return grunt.task.run([
@@ -310,6 +336,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('build', [
 		'clean:dist',
+		'less',
 		'jst',
 		'useminPrepare',
 		'requirejs',
