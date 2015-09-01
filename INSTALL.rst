@@ -31,7 +31,7 @@ You will need a PostgreSQL server for the database layer.
 
 #. Copy the settings.py.example and configure your application::
 
-    cp 723e_server/settings.py.example 723e_server/settings.py
+    cp 723e_server/django_723e/settings.py.example 723e_server/django_723e/settings.py
 
 #. `Generate a new SECRET_KEY <http://www.miniwebtool.com/django-secret-key-generator/>`_
 #. Set ``DEBUG=False`` if production
@@ -54,4 +54,4 @@ Then build the CSS files::
 
 Then serve the cient::
 
-    grunt server
+    grunt serve-dev
