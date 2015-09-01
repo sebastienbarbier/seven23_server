@@ -11,8 +11,8 @@
             <h2 class="text-center capitalize">{{ date }}</h2>
             <hr/>
             <div class="details">
-                <p><strong>Crédits</strong> : {{ bilan.credits }}</p>
-                <p><strong>Débits</strong> : {{ bilan.debits }}</p>
+                <p><strong>Credits</strong> : {{ bilan.credits }}</p>
+                <p><strong>Debits</strong> : {{ bilan.debits }}</p>
                 <p style="padding: 1px 0 1px 0;"><strong>Balance</strong> : <big class="{{ bilan.color }}">{{ bilan.total }}</big></p>
                 {{#liste.length}}
                 <p><strong>Transactions</strong> : {{ liste.length }}</p>
@@ -21,11 +21,11 @@
             <hr/>
             {{#bilan.categories.length}}
             <div>
-                <h3>Catégories</h3>
+                <h3>Categories</h3>
                 <canvas id="categorieYearPie" style="margin: 10px 0;"></canvas>
                 <table class="table table-striped">
                     <tr>
-                        <th>Libellé</th>
+                        <th>Label</th>
                         <th>Total</th>
                     </tr>
                 {{# bilan.categories }}
@@ -43,8 +43,8 @@
     <div class="col-md-8">
         <div>
             <p style="float: right; margin: 10px 50px 20px 5px;">
-                <button type="button" class="btn btn-primary addDebitCredit">Ajout Débits/Crédits</button>
-                <button type="button" class="btn btn-primary addChange">Ajout Change</button>
+                <button type="button" class="btn btn-primary addDebitCredit">Add Debits/Credits</button>
+                <button type="button" class="btn btn-primary addChange">Add Change</button>
             </p>
         </div>
         <div>

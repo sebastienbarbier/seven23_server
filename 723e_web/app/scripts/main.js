@@ -43,7 +43,6 @@ require.config({
 		initView                : 'views/InitView',
 		errorView               : 'views/ErrorView',
 		loginView               : 'views/LoginView',
-		dashboardView           : 'views/DashboardView',
 		yearView                : 'views/transactions/YearView',
 		transactionsView        : 'views/transactions/TransactionsView',
 		debitscreditsFormView   : 'views/transactions/DebitsCreditsFormView',

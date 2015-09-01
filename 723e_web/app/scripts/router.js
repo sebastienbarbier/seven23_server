@@ -6,7 +6,6 @@ define([
         'backbone',
         'loginView',
         'ws',
-        'dashboardView',
         'transactionsView',
         'yearView',
         'debitscreditsFormView',
@@ -24,7 +23,6 @@ define([
         Backbone,
         LoginView,
         ws,
-        DashboardView,
         TransactionsView,
         YearView,
         DebitscreditsFormView,
@@ -67,11 +65,6 @@ define([
 
             // As above, call render on our loaded module
             // 'views/users/list'
-            app_router.on('route:dashboard', function() {
-                var dashboardView = new DashboardView();
-                dashboardView.render();
-            });
-
             app_router.on('route:transactions', function(year, month) {
                 var transactionView;
                 if (month !== undefined && month !== null) {

@@ -1,15 +1,15 @@
 <div class="container">
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3">	
+		<div class="col-sm-6 col-sm-offset-3">
 			<div class="box_background">
 				<form id="changes_form">
 					<div class="row">
 						<div class="col-md-12">
 						{{#change}}
-							<h2>Modifier un change</h2>
+							<h2>Edit change</h2>
 						{{/change}}
 						{{^change}}
-						 	<h2>Ajouter un change</h2>
+						 	<h2>Add change</h2>
 						{{/change}}
 						<hr/>
 						</div>
@@ -93,15 +93,15 @@
 						<div class="col-md-6">
 
 							{{#change}}
-							<input type="submit"class="btn btn-primary btn-block" value="Modifier" />
+							<input type="submit"class="btn btn-primary btn-block" value="Edit" />
 							{{/change}}
 							{{^change}}
-							<input type="submit"class="btn btn-primary btn-block" value="Créer" />
+							<input type="submit"class="btn btn-primary btn-block" value="Save" />
 							{{/change}}
 						</div>
 
 						<div class="col-md-6">
-							<button type="button" class="btn btn-default btn-block changes_form_cancel">Annuler</button>
+							<button type="button" class="btn btn-default btn-block changes_form_cancel">Cancel</button>
 						</div>
 					</div>
 				</form>

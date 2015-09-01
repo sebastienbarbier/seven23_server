@@ -1,15 +1,15 @@
 <div class="container">
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3">	
+		<div class="col-sm-6 col-sm-offset-3">
 			<div class="box_background">
 				<form id="debitcredit_form">
 					<div class="row">
 						<div class="col-md-12">
 						{{#debitcredit}}
-							<h2>Modifier un debit/credit</h2>
+							<h2>Edit a debit/credit</h2>
 						{{/debitcredit}}
 						{{^debitcredit}}
-						 	<h2>Ajouter un debit/credit</h2>
+						 	<h2>Add a debit/credit</h2>
 						{{/debitcredit}}
 						<hr/>
 						</div>
@@ -89,14 +89,14 @@
 					<div class="row">
 						<div class="col-md-6">
 							{{#debitcredit}}
-							<input type="submit" class="btn btn-primary btn-block debitscredits_form_submit" value="Enregistrer"></input>
+							<input type="submit" class="btn btn-primary btn-block debitscredits_form_submit" value="Save"></input>
 							{{/debitcredit}}
 							{{^debitcredit}}
-							<input type="submit" class="btn btn-primary btn-block debitscredits_form_submit" value="Ajouter"></input>
+							<input type="submit" class="btn btn-primary btn-block debitscredits_form_submit" value="Add"></input>
 							{{/debitcredit}}
 						</div>
 						<div class="col-md-6">
-							<button type="button" class="btn btn-default btn-block debitscredits_form_cancel">Annuler</button>
+							<button type="button" class="btn btn-default btn-block debitscredits_form_cancel">Cancel</button>
 						</div>
 					</div>
 				</form>
