@@ -3,11 +3,11 @@ define("ws", ["jquery"], function($) {
 	var server = {
 		protocol: (APP_CONFIG.apiProtocol ? APP_CONFIG.apiProtocol : "https"),
 		domain: (APP_CONFIG.apiUrl ? APP_CONFIG.apiUrl : "723e.com"),
-		port: (APP_CONFIG.apiPort ? APP_CONFIG.apiPort : "80"),
+		port: (APP_CONFIG.apiPort ? APP_CONFIG.apiPort : null),
 		url: function() {
 			var completeUrl;
 			completeUrl = this.protocol + "://" + this.domain;
-			if (this.port !== "80" || this.port !== 80) {
+			if (this.port && this.port !== "80" && this.port !== "443") {
 				completeUrl = completeUrl + ":" + this.port;
 			}
 			return completeUrl;
