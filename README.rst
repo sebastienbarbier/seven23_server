@@ -17,6 +17,6 @@ Might be nice using a client to interact with.
 
 * `Online Documentation <http://723e-server.readthedocs.org/en/latest/>`_
 * `Issue tracker <https://github.com/sebastienbarbier/723e_server/issues>`_
-* `Official webapp available on 723e.com <https://www.723e.com>`_  (source on `Github <https://github.com/sebastienbarbier/723e_web>`_
+* `Official webapp available on 723e.com <https://www.723e.com>`_  (also on `Github <https://github.com/sebastienbarbier/723e_web>`_)
 
 
