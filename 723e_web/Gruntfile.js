@@ -291,6 +291,11 @@ module.exports = function(grunt) {
 		grunt.task.run(['serve' + (target ? ':' + target : '')]);
 	});
 
+	grunt.registerTask('serve', function() {
+		grunt.log.warn('You are using serve as a shortcut to serve-dev. You can also use serve-dist to run builded app.');
+		grunt.task.run(['serve-dev']);
+	});
+
 	grunt.registerTask('serve-dist', function(target) {
 		return grunt.task.run(['build', 'open:server', 'connect:dist:keepalive']);
 	});
