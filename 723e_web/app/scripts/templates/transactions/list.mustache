@@ -14,9 +14,9 @@
                 <p><strong>Credits</strong> : {{ bilan.credits }}</p>
                 <p><strong>Debits</strong> : {{ bilan.debits }}</p>
                 <p style="padding: 1px 0 1px 0;"><strong>Balance</strong> : <big class="{{ bilan.color }}">{{ bilan.total }}</big></p>
-                {{#liste.length}}
-                <p><strong>Transactions</strong> : {{ liste.length }}</p>
-                {{/liste.length}}
+                {{#bilan.counter}}
+                <p><strong>Transactions</strong> : {{ bilan.counter }}</p>
+                {{/bilan.counter}}
             </div>
             <hr/>
             {{#bilan.categories.length}}

@@ -114,6 +114,7 @@ define([
 			bilan.debits = 0;
 			bilan.credits = 0;
 			bilan.categories = {};
+			bilan.counter = arrayAbstract.length;
 
 			for (i = 0; i < arrayAbstract.length; i++) {
 				var valeur;
@@ -190,7 +191,6 @@ define([
 			for (i = 0; i < arrayAbstract.length; i++) {
 				arrayAbstract[i][0] = moment(arrayAbstract[i][0], "YYYY-MM-DD").format("dddd D MMMM YYYY");
 			}
-
 
 			template = Mustache.render(listTemplate, {
 				liste: arrayAbstract,
