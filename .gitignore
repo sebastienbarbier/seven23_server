@@ -5,13 +5,7 @@ local_settings.py
 docs/_build
 docs/_static
 docs/_templates
-723e_server/collectstatic
-723e_server/apps
-723e_server/django_723e/settings.py
-723e_web/node_modules
-723e_web/dist
-723e_web/.tmp
-723e_web/bower_components
-723e_web/app/bower_components
-723e_web/app/styles/css/main.css
+collectstatic
+apps
+django_723e/settings.py
 .DS_Store
