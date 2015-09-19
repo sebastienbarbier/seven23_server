@@ -23,6 +23,9 @@ SECRET_KEY = 'k3-=2r(yq-towhfr-$@am&p%ze_&1!m!n7h2p%6*=fn4nr$=d^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Allow public account creation
+ALLOW_ACCOUNT_CREATION = True
+
 TEMPLATE_DEBUG = True
 
 APPEND_SLASH = False
@@ -110,7 +113,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 # django.db.backends.postgresql_psycopg2
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': '723e',
         'USER': 'root',
         'PASSWORD': 'root',
