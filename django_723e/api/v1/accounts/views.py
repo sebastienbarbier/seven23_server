@@ -23,6 +23,8 @@ from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 
+from django_723e import settings
+
 @permission_classes((IsAuthenticated,))
 class api_accounts(viewsets.ModelViewSet):
     queryset = Account.objects.all()
@@ -68,6 +70,9 @@ def subscription(request):
     """
 
     if request.method == 'POST':
+        if not settings.ALLOW_ACCOUNT_CREATION:
+            return Response({'code': 403}, status=403)
+
         args = request.data
 
         try:
