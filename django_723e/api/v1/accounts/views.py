@@ -63,10 +63,10 @@ class api_users(viewsets.ModelViewSet):
         else:
             return Response({'code': 401}, status=401)
 
-@api_view(['POST'])
+@api_view(['POST', 'PUT'])
 def subscription(request):
     """
-    Give a resume of a specific year.
+    Create a user account
     """
 
     if request.method == 'POST':
@@ -89,3 +89,19 @@ def subscription(request):
             token = Token.objects.get_or_create(user=user)
             # Log user with Token
             return Response({'code': 200, 'token': token[0].key}, status=200)
+
+    if request.method == 'PUT':
+        
+        user = request.user
+        args = request.data
+
+        if args.get('oldPassword'):
+            if not authenticate(username=user.username, password=args.get('oldPassword')):
+                return Response({'field': 'oldPassword', 'errorMsg': 'Wrong password'}, status=400)
+            else:
+                user.set_password(args.get('newPassword'))
+
+        user.email = args.get('email')
+        user.save()
+
+        return Response({'code': 200}, status=200)
