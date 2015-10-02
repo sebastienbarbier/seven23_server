@@ -105,3 +105,22 @@ def subscription(request):
         user.save()
 
         return Response({'code': 200}, status=200)
+
+
+@api_view(['GET'])
+def password_reset(request):
+    """
+    Create a user account
+    """
+
+    if request.method == 'GET':
+        return Response({'code': 200}, status=200)
+
+@api_view(['GET'])
+def password_reset_confirm(request):
+    """
+    Create a user account
+    """
+
+    if request.method == 'GET':
+        return Response({'code': 200}, status=200)
