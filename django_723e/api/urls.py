@@ -1,9 +1,6 @@
 from django.conf.urls import patterns, include, url
-
 from django.contrib import admin
-
 from django_723e.api.views import api_init
-
 
 admin.autodiscover()
 

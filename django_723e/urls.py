@@ -12,7 +12,6 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'django_723e.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-
 	# url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 	# url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
 
