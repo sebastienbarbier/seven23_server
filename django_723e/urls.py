@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import url, include
 
 from django.contrib import admin
 
@@ -8,7 +8,8 @@ from django_723e.api.v1.accounts.views import api_accounts
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = [
+
     # Examples:
     # url(r'^$', 'django_723e.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
@@ -16,6 +17,5 @@ urlpatterns = patterns('',
 	# url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
 
     url(r'^api/', include("django_723e.api.urls")),
-
-    url(r'^admin/', include(admin.site.urls)),
-)
+    url(r'^admin/', admin.site.urls),
+]

@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url, include
+from django.conf.urls import url, include
 from rest_framework import routers
 
 from django_723e.api.v1.accounts.views import api_accounts, api_users, subscription
@@ -15,20 +15,19 @@ router.register(r'categories', api_categories)
 router.register(r'debitscredits', api_debitscredits)
 router.register(r'changes', api_change)
 
-
-urlpatterns = patterns('',
+urlpatterns = [
     # Examples:
 	url(r'resume_year/$', resume_year, name='resume_current_year'),
 	url(r'resume_year/(?P<year>[0-9]+)/$', resume_year, name='resume_specific_year'),
 	url(r'subscription/$', subscription, name='subscription'),
-	
+
 	# URL used to send mail
 	url(r'rest-auth/', include('rest_auth.urls')),
 	# Change Password
-	url(r'reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', 
+	url(r'reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
 		auth_views.password_reset_confirm, name='password_reset_confirm'),
-	url(r'reset/complete/$', 
+	url(r'reset/complete/$',
 		auth_views.password_reset_complete, name='password_reset_complete'),
 
-	url(r'^', include(router.urls))
-)
+	url(r'^', include(router.urls)),
+]

@@ -26,8 +26,6 @@ DEBUG = True
 # Allow public account creation
 ALLOW_ACCOUNT_CREATION = True
 
-TEMPLATE_DEBUG = True
-
 APPEND_SLASH = False
 
 ALLOWED_HOSTS = []
@@ -53,9 +51,18 @@ STATIC_URL = '/_static/'
 
 LOGIN_URL = '/'
 
-# Override Template position.
-TEMPLATE_DIRS = [
-    PROJECT_PATH + '/templates/'
+TEMPLATES = [
+    {
+        'BACKEND':
+            'django.template.backends.django.DjangoTemplates'
+        ,
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                "django.contrib.auth.context_processors.auth",
+            ]
+        }
+    },
 ]
 
 # Additional locations of static files

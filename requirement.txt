@@ -4,7 +4,7 @@ django-colorfield
 django-cors-headers
 django-grappelli
 django-mptt
-django-rest-auth
+django-rest-auth==0.7.0
 djangorestframework
 psycopg2
 pytz
