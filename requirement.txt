@@ -1,3 +1,4 @@
+dj_database_url
 Django
 django-colorfield
 django-cors-headers
