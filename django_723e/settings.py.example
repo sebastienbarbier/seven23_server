@@ -73,8 +73,13 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_PATH, 'static'),
 )
 
-# Application definition
+# Fix problem when creating new database about missing migration
+MIGRATION_MODULES = {
+  'auth': 'django_723e.migrations.auth',
+  'contenttypes': 'django_723e.migrations.contenttypes',
+}
 
+# Application definition
 INSTALLED_APPS = (
     'mptt',
     'colorfield',

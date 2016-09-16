@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django_723e.models.accounts.models import Account
 from django_723e.models.currency.models import Currency
 from django_723e.models.categories.models import Category
-from django_723e.models.transactions.models import AbstractTransaction, DebitsCredits, Cheque, Change
+from django_723e.models.transactions.models import AbstractTransaction, DebitsCredits, Change
 import datetime
 
 class AccountTest(TransactionTestCase):
@@ -98,23 +98,9 @@ class AccountTest(TransactionTestCase):
         self.assertEqual(self.cat1.sum_between(datetime.date.today(), datetime.date.today()-datetime.timedelta(days=3)), 49.3)
 
 
-    def test_Cheque(self):
-
-        # A Cheque
-        cheque = Cheque.objects.create(account=self.account,
-                                       currency=self.euro,
-                                       date=datetime.datetime.today() - datetime.timedelta(days=1),
-                                       name=u"Shopping chèque",
-                                       amount=120,
-                                       category=self.cat1,
-                                       cheque_name="",
-                                       place="Besançon, France",
-                                       debit_date=datetime.date.today())
-        self.assertNotEqual(cheque, None)
 
     def test_Change(self):
 
-        # A Cheque
         change = Change.objects.create(account=self.account,
                                        currency=self.euro,
                                        date=datetime.datetime.today() - datetime.timedelta(days=1),
@@ -123,7 +109,7 @@ class AccountTest(TransactionTestCase):
                                        new_amount=140,
                                        new_currency=self.chf)
         self.assertNotEqual(change, None)
-        self.assertEqual(change.exchange_rate(), 1.17)
+        self.assertEqual(change.exchange_rate(), 1.00)
 
     def test_Change_Transactions(self):
         trans1 = DebitsCredits.objects.create(account=self.account,
