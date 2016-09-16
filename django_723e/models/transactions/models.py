@@ -16,25 +16,27 @@ from colorfield.fields import ColorField
 import calendar
 import datetime
 
-def recursiveLookForChange(account, transaction, previous_exchange_rate):
+def getExchangeRate(transaction, currency, previous_exchange_rate = 1):
     """
-        This function return the exchange Rate for a transaction related to an account
+        This function return the exchangeRate for a transaction with defined currency
+        Will try multi exchange rate with a recursive algorithm
+        (Jump from EUR > CHF to CHF > THB to THB > USD to calculate EUR > USD exchange rate)
     """
-    # Look for all Change object with X > Y
+    # Look for change object with X > Y
     list = Change.objects.filter(new_currency=transaction.currency, date__lte=transaction.date).order_by('-date')
     for item in list:
-        if item.currency == transaction.currency or item.currency == account.currency:
+        if item.currency == transaction.currency or item.currency == currency:
             return item.exchange_rate() * previous_exchange_rate
         else:
-            return recursiveLookForChange(account, item, previous_exchange_rate * item.exchange_rate())
+            return getExchangeRate(item, currency, previous_exchange_rate * item.exchange_rate())
 
-    # Look for all Change object with Y > X
+    # Look for reverse change object like Y > X
     list = Change.objects.filter(currency=transaction.currency, date__lte=transaction.date).order_by('-date')
     for item in list:
-        if item.currency == transaction.currency or item.currency == account.currency:
+        if item.currency == transaction.currency or item.currency == currency:
             return previous_exchange_rate / item.exchange_rate()
         else:
-            return recursiveLookForChange(account, item, previous_exchange_rate / item.exchange_rate())
+            return getExchangeRate(item, currency, previous_exchange_rate / item.exchange_rate())
 
     return None
 
@@ -61,7 +63,7 @@ class AbstractTransaction(models.Model):
             if self.currency == self.account.currency:
                 self.reference_amount = self.amount
             else:
-                exchange_rate = recursiveLookForChange(self.account, self, 1)
+                exchange_rate = getExchangeRate(self, self.account.currency)
 
                 if exchange_rate:
                     self.reference_amount = float("{0:.2f}".format(self.amount/exchange_rate))
@@ -100,12 +102,12 @@ class Change(AbstractTransaction):
     def save(self, *args, **kwargs):
         # First save to have correct value
         super(Change, self).save(*args, **kwargs) # Call the "real" save() method
-        # Select nextChange plus récent que celui ci
+        # Select closest same change pattern
         c = Change.objects.filter(date__gt=self.date, new_currency=self.new_currency).order_by("-date");
-        # Select tous les Débits après self mais avant nextChange
+        # Select all debitsCredits transaction between this and newest one which no longer need to be updated
         if len(c) > 0:
             change = c[0]
-            #Update leur ratio ... ca semble judicieux !!!
+            # Update reference_amount based on this new Change value
             list_debitscredits = DebitsCredits.objects.filter(date__gte=self.date, date__lt=change.date);
             for d in list_debitscredits:
                 d.update_amount()
