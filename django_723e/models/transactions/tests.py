@@ -13,22 +13,28 @@ class AccountTest(TransactionTestCase):
 
     def setUp(self):
         """
-            Create a user
+            Create a set of data to access during tests
+            user foo
+            currency euro, chf, thb
+            account user.foo.account
+            categories category1, category2
         """
         self.user = User.objects.create()
         self.user.login = "foo"
         self.user.save()
+
         self.euro = Currency.objects.create(name="Euro", sign=u"\u20AC", space=True, after_amount=True)
         self.chf = Currency.objects.create(name="Franc suisse", sign="CHF")
         self.thb = Currency.objects.create(name=u"Bahts Thaïlandais", sign="BHT")
-
-        self.account = Account.objects.create(user=self.user, name="Compte courant", currency=self.euro)
+        self.usd = Currency.objects.create(name=u"US Dollars", sign="USD")
+        self.account = Account.objects.create(user=self.user, name="User Account", currency=self.euro)
         self.cat1 = Category.objects.create(user=self.user, name="Category 1")
         self.cat2 = Category.objects.create(user=self.user, name="Category 2")
 
     def test_CategoriesMoveRight(self):
         """
             Create sub-categories and try to move them from one level up.
+            Using MPTT to keep an organized structure
         """
         # Check is move_children_right properly moved children's category one level up.
         self.cat1_1 = Category.objects.create(user=self.user, name="Category 1.1", parent=self.cat1)
@@ -47,13 +53,17 @@ class AccountTest(TransactionTestCase):
 
     def test_CategoriesDelete(self):
         """
-            Try to delete a Category. If it has transaction, is just disable to keep trace, and if not, is delete.
+            Try to delete a Category.
+            If it has transaction, it is just disable to keep trace,
+            and if no transaction attched, it is delete.
         """
-        trans1 = DebitsCredits.objects.create(account=self.account,
-                                            currency=self.euro,
-                                            name="Shopping",
-                                            amount=1,
-                                            category=self.cat1)
+        trans1 = DebitsCredits.objects.create(
+              account=self.account,
+              currency=self.euro,
+              name="Shopping",
+              amount=1,
+              category=self.cat1
+        )
         self.cat1.delete()
         self.assertEqual(self.cat1.active, False)
 
@@ -68,24 +78,24 @@ class AccountTest(TransactionTestCase):
         """
             Create a serie of transaction and verify calculated data
 
-            J-3    trans    49.3    Enable     cat1
-            J-2    trans    20      Disable    cat1
+            J-3    trans    49.3 €    Enable     cat1
+            J-2    trans    20 €      Disable    cat1
         """
         # First transaction
         trans1 = DebitsCredits.objects.create(account=self.account,
-                                            currency=self.euro,
                                             date=datetime.date.today() - datetime.timedelta(days=3),
                                             name="Shopping",
                                             amount=49.3,
+                                            currency=self.euro,
                                             category=self.cat1)
         self.assertNotEqual(trans1, None)
 
         # Second transaction
         trans2 = DebitsCredits.objects.create(account=self.account,
-                                            currency=self.euro,
                                             date=datetime.date.today() - datetime.timedelta(days=2),
                                             name="Shopping",
                                             amount=20,
+                                            currency=self.euro,
                                             category=self.cat1)
         self.assertNotEqual(trans2, None)
 
@@ -98,188 +108,198 @@ class AccountTest(TransactionTestCase):
         self.assertEqual(self.cat1.sum_between(datetime.date.today(), datetime.date.today()-datetime.timedelta(days=3)), 49.3)
 
 
-
     def test_Change(self):
-
+        """
+            Test if Change object calculate well the exchange_rate
+        """
         change = Change.objects.create(account=self.account,
-                                       currency=self.euro,
                                        date=datetime.datetime.today() - datetime.timedelta(days=1),
-                                       name="Change",
+                                       name="Withdraw",
                                        amount=120,
+                                       currency=self.euro,
                                        new_amount=140,
                                        new_currency=self.chf)
         self.assertNotEqual(change, None)
-        self.assertEqual(change.exchange_rate(), 1.00)
+        self.assertEqual(change.exchange_rate(), 1.1666666666666667)
+
+        change2 = Change.objects.create(account=self.account,
+                                       date=datetime.datetime.today() - datetime.timedelta(days=1),
+                                       name="Withdraw",
+                                       amount=130,
+                                       currency=self.euro,
+                                       new_amount=140,
+                                       new_currency=self.chf)
+        self.assertNotEqual(change2, None)
+        self.assertEqual(change2.exchange_rate(), 1.0769230769230769)
 
     def test_Change_Transactions(self):
-        trans1 = DebitsCredits.objects.create(account=self.account,
-                                            currency=self.chf,
+        """
+            Test if editing change update transaction new_Amount
+        """
+        transaction1 = DebitsCredits.objects.create(account=self.account,
                                             date=datetime.datetime.today() - datetime.timedelta(days=20),
-                                            name="Achat 1 en suisse",
-                                            amount=6)
-        # self.assertEqual(trans1.reference_value(), None)
-        change1 = Change.objects.create(account=self.account,
-                                       date=datetime.datetime.today() - datetime.timedelta(days=30),
-                                       name="Change",
-                                       amount=80,
-                                       currency=self.euro,
-                                       new_amount=60,
-                                       new_currency=self.chf)
+                                            name="Buy a 6 CHF item",
+                                            amount=6,
+                                            currency=self.chf)
+        # After this point, transaction 1 Should have no reference Value
+        transaction1 = DebitsCredits.objects.get(pk=transaction1.pk)
+        self.assertEqual(transaction1.amount, 6)
+        self.assertEqual(transaction1.reference_amount, None)
 
-        change1 = Change.objects.get(pk=change1.pk)
-        # self.assertEqual(trans1.reference_value(), 8)
-        # self.assertEqual(change1.balance, 54) # Still 54 CHF Available
-        change1.balance = 0
-        change1.force_save()
-        self.assertEqual(change1.balance, 0)
-        #
-        # TRY WITH MULTIPLE CHANGE ON A SINGLE TRANSACTION
-        #
-
-
-
-        trans2 = DebitsCredits.objects.create(account=self.account,
-                                            currency=self.chf,
-                                            date=datetime.datetime.today() - datetime.timedelta(days=2),
-                                            name="Achat 1 en suisse",
-                                            amount=60)
-
-        # self.assertEqual(trans2.due_to_change(), 60) # Still 60 CHF to xhange
-        # self.assertEqual(trans2.is_change_complete(), False)
-        change2 = Change.objects.create(account=self.account,
-                                       date=datetime.datetime.today().date() - datetime.timedelta(days=3),
-                                       name="Change",
-                                       amount=80,
-                                       currency=self.euro,
-                                       new_amount=40,
-                                       new_currency=self.chf)
-        change2 = Change.objects.get(pk=change2.pk)
-        # self.assertEqual(change2.balance, 0)
-        # self.assertEqual(trans2.is_change_complete(), False)
-        # self.assertEqual(trans2.due_to_change(), 20) # Only 30 CHF to change now
-        change3 = Change.objects.create(account=self.account,
-                                       date=datetime.datetime.today().date() - datetime.timedelta(days=3),
-                                       name="Change",
-                                       amount=20,
-                                       currency=self.euro,
-                                       new_amount=40,
-                                       new_currency=self.chf)
-
-        change3 = Change.objects.get(pk=change3.pk)
-        trans2 = DebitsCredits.objects.get(pk=trans2.pk)
-
-        # self.assertEqual(trans2.due_to_change(), 0) # No more Money to Change
-        # self.assertEqual(trans2.is_change_complete(), True) # No more Money to Change
-        self.assertEqual(trans2.amount, 60)
-        change3 = Change.objects.get(pk=change3.pk)
-        # self.assertEqual(change3.balance, 20)
-        # self.assertEqual(trans2.reference_value(), 90)
-
-
-    def test_Change_Transactions3(self):
+        # We define a change rate after the transaction 1
+        # and check if there is still no reference_amount
         Change.objects.create(account=self.account,
-                                   date=datetime.datetime.today() - datetime.timedelta(days=3),
-                                   name="Change",
-                                   amount=80,
-                                   currency=self.euro,
-                                   new_amount=40,
-                                   new_currency=self.chf)
-        trans1 = DebitsCredits.objects.create(account=self.account,
-                                            currency=self.chf,
+                               date=datetime.datetime.today() + datetime.timedelta(days=30),
+                               name="Withdraw",
+                               amount=80,
+                               currency=self.euro,
+                               new_amount=60,
+                               new_currency=self.chf)
+        transaction1 = DebitsCredits.objects.get(pk=transaction1.pk)
+        self.assertEqual(transaction1.amount, 6)
+        self.assertEqual(transaction1.reference_amount, None)
+
+        # We define a change rate BEFORE transaction 1
+        # To check if trsnaction reference_amount has been edited
+        Change.objects.create(account=self.account,
+                               date=datetime.datetime.today() - datetime.timedelta(days=30),
+                               name="Withdraw",
+                               amount=80,
+                               currency=self.euro,
+                               new_amount=60,
+                               new_currency=self.chf)
+
+        transaction1 = DebitsCredits.objects.get(pk=transaction1.pk)
+        self.assertEqual(transaction1.amount, 6)
+        self.assertEqual(transaction1.reference_amount, 8)
+
+        # We now create a transaction in THB.
+        # App should not be able to define an exchange rate
+        transaction2 = DebitsCredits.objects.create(account=self.account,
                                             date=datetime.datetime.today() - datetime.timedelta(days=2),
-                                            name="Achat 2 en suisse",
-                                            amount=60)
+                                            name="Buy an item using Thai Baths",
+                                            amount=60,
+                                            currency=self.thb)
+        transaction2 = DebitsCredits.objects.get(pk=transaction2.pk)
+        self.assertEqual(transaction2.amount, 60)
+        self.assertEqual(transaction2.reference_amount, None)
 
-        # self.assertEqual(trans1.reference_value(), None)
-        # self.assertEqual(trans1.due_to_change(), 20)
+        # Now we had a change rate from CHF to THB
+        # Should be able to define a EUR > THB exchange rate from
+        # EUR > CHF > THB
+        # In this case 80€ > 60 CHF > 120 THB so a 60 THB item should be 40€
+        Change.objects.create(account=self.account,
+                               date=datetime.datetime.today() - datetime.timedelta(days=28),
+                               name="Withdraw",
+                               amount=60,
+                               currency=self.chf,
+                               new_amount=120,
+                               new_currency=self.thb)
 
-        c2 = Change.objects.create(account=self.account,
-                                   date=datetime.datetime.today() - datetime.timedelta(days=3),
-                                   name="Change",
-                                   amount=40,
-                                   currency=self.euro,
-                                   new_amount=40,
-                                   new_currency=self.chf)
-        c2 = Change.objects.get(pk=c2.pk)
+        transaction2 = DebitsCredits.objects.get(pk=transaction2.pk)
+        self.assertEqual(transaction2.amount, 60)
+        self.assertEqual(transaction2.reference_amount, 40)
 
-        # self.assertEqual(c2.balance, 20)
-        # self.assertEqual(trans1.reference_value(), 100)
+        # If I buy a new item using THB, I should have refernce_amount using Euro exchange rate
+        transaction3 = DebitsCredits.objects.create(account=self.account,
+                                            date=datetime.datetime.today() - datetime.timedelta(days=20),
+                                            name="Buy a 6 CHF item",
+                                            amount=600,
+                                            currency=self.thb)
+        transaction3 = DebitsCredits.objects.get(pk=transaction3.pk)
+        self.assertEqual(transaction3.amount, 600)
+        self.assertEqual(transaction3.reference_amount, 400)
 
-        c2.delete()
-        trans1 = DebitsCredits.objects.get(pk=trans1.pk)
+        # Now we test with a fourth transaction, from THB to USD
+        # We had a change rate from CHF to THB
+        # Should be able to define a EUR > THB exchange rate from
+        # EUR > CHF > THB > USD
+        # In this case 80€ > 60 CHF > 120 THB > 240 USD so a 240 USD item should be 80
+        Change.objects.create(account=self.account,
+                               date=datetime.datetime.today() - datetime.timedelta(days=27),
+                               name="Withdraw",
+                               amount=120,
+                               currency=self.thb,
+                               new_amount=240,
+                               new_currency=self.usd)
+        transaction4 = DebitsCredits.objects.create(account=self.account,
+                                            date=datetime.datetime.today() - datetime.timedelta(days=20),
+                                            name="Buy a 240 USD item",
+                                            amount=240,
+                                            currency=self.usd)
+        transaction4 = DebitsCredits.objects.get(pk=transaction4.pk)
+        self.assertEqual(transaction4.amount, 240)
+        self.assertEqual(transaction4.reference_amount, 80)
 
-        # self.assertEqual(trans1.reference_value(), None)
-        # self.assertEqual(trans1.due_to_change(), 20)
+    def test_Edit_Change_Propagation(self):
+        """
+            We need to evaluate if editing a Change propagate well to all transactions
+            80€ > 60 CHF > 120 THB > 240 USD so a 240 USD item should be 80
+        """
+        change1 = Change.objects.create(account=self.account,
+                               date=datetime.datetime.today() - datetime.timedelta(days=30),
+                               name="Withdraw",
+                               amount=80,
+                               currency=self.euro,
+                               new_amount=60,
+                               new_currency=self.chf)
+        change2 = Change.objects.create(account=self.account,
+                               date=datetime.datetime.today() - datetime.timedelta(days=28),
+                               name="Withdraw",
+                               amount=60,
+                               currency=self.chf,
+                               new_amount=120,
+                               new_currency=self.thb)
+        change3 = Change.objects.create(account=self.account,
+                               date=datetime.datetime.today() - datetime.timedelta(days=27),
+                               name="Withdraw",
+                               amount=120,
+                               currency=self.thb,
+                               new_amount=240,
+                               new_currency=self.usd)
+        transaction = DebitsCredits.objects.create(account=self.account,
+                                            date=datetime.datetime.today() - datetime.timedelta(days=20),
+                                            name="Buy a 240 USD item",
+                                            amount=240,
+                                            currency=self.usd)
+        transaction = DebitsCredits.objects.get(pk=transaction.pk)
+        self.assertEqual(transaction.amount, 240)
+        self.assertEqual(transaction.reference_amount, 80)
 
-        c3 = Change.objects.create(account=self.account,
-                                   date=datetime.datetime.today() - datetime.timedelta(days=2),
-                                   name="Change",
-                                   amount=40,
-                                   currency=self.euro,
-                                   new_amount=40,
-                                   new_currency=self.chf)
-        c3 = Change.objects.get(pk=c3.pk)
+        # Now we change the mount of change 2
+        change2 = Change.objects.get(pk=change2.pk)
+        change2.new_amount = 240
+        change2.save()
+        # 80€ > 60 CHF > 240 THB > 240 USD so a 240 USD item should be 40
+        transaction = DebitsCredits.objects.get(pk=transaction.pk)
+        self.assertEqual(transaction.amount, 240)
+        self.assertEqual(transaction.reference_amount, 40)
 
-        # self.assertEqual(c3.balance, 20)
-        # self.assertEqual(trans1.reference_value(), 100)
+        # Now we change the amount of change 1
+        change1 = Change.objects.get(pk=change1.pk)
+        change1.new_amount = 120
+        change1.save()
+        # 80€ > 120 CHF > 240 THB > 240 USD so a 240 USD item should be 20
+        transaction = DebitsCredits.objects.get(pk=transaction.pk)
+        self.assertEqual(transaction.amount, 240)
+        self.assertEqual(transaction.reference_amount, 20)
 
-    def test_Change_Delete_Transactions(self):
-        c1 = Change.objects.create(account=self.account,
-                                   date=datetime.datetime.today() - datetime.timedelta(days=5),
-                                   name="Change",
-                                   amount=80,
-                                   currency=self.euro,
-                                   new_amount=40,
-                                   new_currency=self.chf)
-        t1 = DebitsCredits.objects.create(account=self.account,
-                                            currency=self.chf,
-                                            date=datetime.datetime.today() - datetime.timedelta(days=2),
-                                            name="Achat 2 en suisse",
-                                            amount=60)
-        c2 = Change.objects.create(account=self.account,
-                                   date=datetime.datetime.today() - datetime.timedelta(days=4),
-                                   name="Change",
-                                   amount=40,
-                                   currency=self.euro,
-                                   new_amount=40,
-                                   new_currency=self.chf)
-        t2 = DebitsCredits.objects.create(account=self.account,
-                                            currency=self.chf,
-                                            date=datetime.datetime.today() - datetime.timedelta(days=2),
-                                            name="Achat 2 en suisse",
-                                            amount=60)
-        c3 = Change.objects.create(account=self.account,
-                                   date=datetime.datetime.today() - datetime.timedelta(days=3),
-                                   name="Change",
-                                   amount=120,
-                                   currency=self.euro,
-                                   new_amount=40,
-                                   new_currency=self.chf)
-        t3 = DebitsCredits.objects.create(account=self.account,
-                                            currency=self.chf,
-                                            date=datetime.datetime.today() - datetime.timedelta(days=2),
-                                            name="Achat 2 en suisse",
-                                            amount=40)
-        t1 = DebitsCredits.objects.get(pk=t1.pk)
-        t2 = DebitsCredits.objects.get(pk=t2.pk)
-        t3 = DebitsCredits.objects.get(pk=t3.pk)
+        # We create a second transaction before actually changing USD
+        # transaction_rate will not be calculable
+        transaction2 = DebitsCredits.objects.create(account=self.account,
+                                            date=datetime.datetime.today() - datetime.timedelta(days=28),
+                                            name="Buy a 240 USD item",
+                                            amount=1,
+                                            currency=self.usd)
+        transaction2 = DebitsCredits.objects.get(pk=transaction2.pk)
+        self.assertEqual(transaction2.amount, 1)
+        self.assertEqual(transaction2.reference_amount, None)
 
-        # self.assertEqual(t1.is_change_complete(), True)
-        # self.assertEqual(t1.reference_value(), 100)
-        # self.assertEqual(t2.is_change_complete(), True)
-        # self.assertEqual(t2.reference_value(), 140)
-        # self.assertEqual(t3.is_change_complete(), False)
-        # self.assertEqual(t3.reference_value(), None)
+        # Now we change the date of change 3
+        change3 = Change.objects.get(pk=change3.pk)
+        change3.date = datetime.datetime.today() - datetime.timedelta(days=28)
+        change3.save()
 
-        t2.delete()
-
-        t1 = DebitsCredits.objects.get(pk=t1.pk)
-        t3 = DebitsCredits.objects.get(pk=t3.pk)
-
-
-        # self.assertEqual(t1.is_change_complete(), True)
-        # self.assertEqual(t1.reference_value(), 100)
-        # self.assertEqual(t3.is_change_complete(), True)
-        # self.assertEqual(t3.reference_value(), 80)
-
-
+        transaction2 = DebitsCredits.objects.get(pk=transaction2.pk)
+        self.assertEqual(transaction2.amount, 1)
+        self.assertEqual(transaction2.reference_amount, 0.08)

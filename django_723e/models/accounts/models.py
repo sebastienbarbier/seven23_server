@@ -23,6 +23,14 @@ class Account(models.Model):
         ordering = ('user', 'create', 'name')
         verbose_name = _(u'Account')
 
+    def save(self, *args, **kwargs):
+        # First save to have correct value
+        super(Account, self).save(*args, **kwargs) # Call the "real" save() method
+        # Update all DebitsCredits transactions
+        from django_723e.models.transactions.models import DebitsCredits
+        for d in DebitsCredits.objects.filter(account=self):
+            d.save()
+
     def __unicode__(self):
         return u'%s' % (self.name)
 
