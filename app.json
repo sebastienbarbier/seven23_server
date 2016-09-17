@@ -1,0 +1,12 @@
+{
+  "name": "723 Server",
+  "description": "Manage your expenses.",
+  "keywords": [
+    "723e",
+    "Django",
+    "Python"
+  ],
+  "website": "https://723e.com/",
+  "repository": "https://github.com/sebastienbarbier/723e_server",
+  "image": "heroku/python"
+}
