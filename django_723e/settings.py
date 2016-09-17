@@ -56,7 +56,7 @@ LOGIN_URL = '/'
 if os.environ.get('DATABASE_URL'):
     DATABASE_URL = os.environ.get('DATABASE_URL')
 else:
-    DATABASE_URL = 'postgres://localhost/723e'
+    DATABASE_URL = 'postgres://localhost/723e5'
 
 import dj_database_url
 DATABASES = {}
@@ -76,11 +76,6 @@ TEMPLATES = [
         }
     },
 ]
-
-# MIGRATION_MODULES = {
-#   'auth': 'django_723e.migrations.auth',
-#   'contenttypes': 'django_723e.migrations.contenttypes',
-# }
 
 # Application definition
 INSTALLED_APPS = (

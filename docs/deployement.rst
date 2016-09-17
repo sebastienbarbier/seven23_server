@@ -11,7 +11,12 @@ Cloud hosting
 =============
 
 By far the easiest way, a one click installation on a specific cloud infrastructure.
-This solution has not been implemented yet but is on the top of current roadmap.
+
+.. image:: https://www.herokucdn.com/deploy/button.svg
+   :target: https://heroku.com/deploy?template=https://github.com/sebastienbarbier/723e_server
+   :alt: Deploy on Heroku
+
+You can then access your application with the dedicated URL (should be https). Then go on 723e.com, scroll down and change server link to your new instance.
 
 Dedicated Server
 ================
