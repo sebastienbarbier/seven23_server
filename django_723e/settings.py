@@ -77,11 +77,10 @@ TEMPLATES = [
     },
 ]
 
-# Fix problem when creating new database
-MIGRATION_MODULES = {
-  'auth': 'django_723e.migrations.auth',
-  'contenttypes': 'django_723e.migrations.contenttypes',
-}
+# MIGRATION_MODULES = {
+#   'auth': 'django_723e.migrations.auth',
+#   'contenttypes': 'django_723e.migrations.contenttypes',
+# }
 
 # Application definition
 INSTALLED_APPS = (
