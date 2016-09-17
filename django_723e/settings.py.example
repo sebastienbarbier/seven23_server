@@ -122,12 +122,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-# django.db.backends.postgresql_psycopg2
-import dj_database_url
-DATABASES = {}
-DATABASES['default'] = dj_database_url.parse('postgres://sbarbier@localhost/723e', conn_max_age=600)
+DATABASES_URL = 'postgres://sbarbier@localhost/723e'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -147,3 +142,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Database
+# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+# django.db.backends.postgresql_psycopg2
+import dj_database_url
+DATABASES = {}
+DATABASES['default'] = dj_database_url.parse(DATABASES_URL, conn_max_age=600)
