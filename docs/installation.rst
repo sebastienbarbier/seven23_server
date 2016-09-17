@@ -32,19 +32,15 @@ Install dependancies using pip
 Configure
 ---------
 
-You need to define your own settings.py file
+You need to define your own settings.py file. Go on django_723e/settings.py and edit configuration to match your specification (normally you only need to adapt ``DATABASES_URL`` variable to access your database, and change ``SECRET_KEY``).
 
-.. code-block:: bash
-
-	cp django_723e/settings.py.example django_723e/settings.py
-
-Edit your new settings file to satisfy your configuration (normally you only need to adapt ``DATABASES_URL`` variable to access your database).
+You can always consult ``django_723e/settings.py.example`` as a reminder of what default config file looks like.
 
 Then create a default database structure with a admin user account
 
 .. code-block:: bash
 
-	python managed migrate
+	python manage.py migrate
 
 Run server
 ----------
