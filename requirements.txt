@@ -6,6 +6,7 @@ django-grappelli
 django-mptt
 django-rest-auth==0.7.0
 djangorestframework
+gunicorn
 psycopg2
 pytz
 PyYAML
