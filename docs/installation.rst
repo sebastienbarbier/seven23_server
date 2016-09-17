@@ -26,8 +26,8 @@ Install dependancies using pip
 
 .. code-block:: bash
 
-	pip install -r requirement.txt
-	pip install -r requirement-dev.txt	# manage documentation and testing
+	pip install -r requirements.txt
+	pip install -r requirements-dev.txt	# manage documentation and testing
 
 Configure
 ---------
