@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
@@ -50,6 +51,17 @@ STATIC_ROOT = BASE_DIR + '/collectstatic/'
 STATIC_URL = '/static/'
 
 LOGIN_URL = '/'
+
+# Database confugration using environment variable DATABASES_URL
+if os.environ.get('DATABASE_URL'):
+    DATABASE_URL = os.environ.get('DATABASE_URL')
+else:
+    DATABASE_URL = 'postgres://localhost/723e'
+
+import dj_database_url
+DATABASES = {}
+DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+
 
 TEMPLATES = [
     {
@@ -114,8 +126,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-DATABASES_URL = 'postgres://sbarbier@localhost/723e'
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -128,10 +138,3 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-# django.db.backends.postgresql_psycopg2
-import dj_database_url
-DATABASES = {}
-DATABASES['default'] = dj_database_url.parse(DATABASES_URL, conn_max_age=600)

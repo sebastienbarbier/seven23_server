@@ -34,6 +34,8 @@ Configure
 
 You need to define your own settings.py file. Go on django_723e/settings.py and edit configuration to match your specification (normally you only need to adapt ``DATABASES_URL`` variable to access your database, and change ``SECRET_KEY``).
 
+You can also use a system environment variable named ``DATABASE_URL``, this one will automatically override the defined url in ``settings.py``.
+
 You can always consult ``django_723e/settings.py.example`` as a reminder of what default config file looks like.
 
 Then create a default database structure with a admin user account
