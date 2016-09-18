@@ -62,16 +62,18 @@ import dj_database_url
 DATABASES = {}
 DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
 
-
 TEMPLATES = [
     {
         'BACKEND':
             'django.template.backends.django.DjangoTemplates'
         ,
+        'DIRS': [
+            BASE_DIR + '/django_723e/templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                "django.contrib.auth.context_processors.auth",
+                'django.contrib.auth.context_processors.auth',
             ]
         }
     },

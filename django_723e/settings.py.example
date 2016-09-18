@@ -66,10 +66,13 @@ TEMPLATES = [
         'BACKEND':
             'django.template.backends.django.DjangoTemplates'
         ,
+        'DIRS': [
+            BASE_DIR + '/django_723e/templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                "django.contrib.auth.context_processors.auth",
+                'django.contrib.auth.context_processors.auth',
             ]
         }
     },
