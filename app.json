@@ -9,7 +9,8 @@
   "website": "https://723e.com/",
   "repository": "https://github.com/sebastienbarbier/723e_server",
   "addons": [
-    "heroku-postgresql"
+    "heroku-postgresql",
+    "newrelic"
   ],
   "scripts": {
     "postdeploy": "python manage.py migrate"
