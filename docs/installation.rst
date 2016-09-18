@@ -38,11 +38,12 @@ You can also use a system environment variable named ``DATABASE_URL``, this one 
 
 You can always consult ``django_723e/settings.py.example`` as a reminder of what default config file looks like.
 
-Then create a default database structure with a admin user account
+Then create a default database structure and load initial data.
 
 .. code-block:: bash
 
 	python manage.py migrate
+	python manage.py loaddata dumpdata.json
 
 Run server
 ----------
