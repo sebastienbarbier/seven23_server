@@ -43,7 +43,7 @@ Then create a default database structure and load initial data.
 .. code-block:: bash
 
 	python manage.py migrate
-	python manage.py loaddata dumpdata.json
+	python manage.py loaddata initial_data.json
 
 Run server
 ----------
