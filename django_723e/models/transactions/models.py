@@ -78,7 +78,7 @@ class AbstractTransaction(models.Model):
         return self.currency.verbose(self.amount)
 
     def isForeignCurrency(self):
-        return not self.currency == self.account.currency
+        return self.amount != self.reference_amount
 
 
 class DebitsCredits(AbstractTransaction):
