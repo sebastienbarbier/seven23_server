@@ -50,9 +50,9 @@ class AccountTest(TransactionTestCase):
             Try to delete a Category. If it has transaction, is just disable to keep trace, and if not, is delete.
         """
         trans1 = DebitsCredits.objects.create(account=self.account,
-                                            currency=self.euro,
                                             name="Shopping",
-                                            amount=1,
+                                            local_amount=1,
+                                            local_currency=self.euro,
                                             category=self.cat1)
         self.cat1.delete()
         self.assertEqual(self.cat1.active, False)

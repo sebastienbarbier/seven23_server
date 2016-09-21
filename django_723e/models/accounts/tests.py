@@ -44,23 +44,23 @@ class AccountTest(TransactionTestCase):
         """
         self.account = Account.objects.create(user=self.user, name="Compte courant", currency=self.euro)
 
-        # Transaction in Eur will have no difference between amount and reference_amount
+        # Transaction in Eur will have no difference between amount and foreign_amount
         transaction1 = DebitsCredits.objects.create(account=self.account,
                                             date=datetime.datetime.today() - datetime.timedelta(days=20),
                                             name="Buy a 6 EUR item",
-                                            amount=6,
-                                            currency=self.euro)
+                                            local_amount=6,
+                                            local_currency=self.euro)
         # After this point, transaction 1 Should have no reference Value
         transaction1 = DebitsCredits.objects.get(pk=transaction1.pk)
-        self.assertEqual(transaction1.amount, 6)
-        self.assertEqual(transaction1.reference_amount, 6)
+        self.assertEqual(transaction1.local_amount, 6)
+        self.assertEqual(transaction1.foreign_amount, 6)
 
         # Now we had a Change rate before the transaction 1, and change the account currency
         Change.objects.create(account=self.account,
                                date=datetime.datetime.today() - datetime.timedelta(days=30),
                                name="Withdraw",
-                               amount=6,
-                               currency=self.euro,
+                               local_amount=6,
+                               local_currency=self.euro,
                                new_amount=4,
                                new_currency=self.chf)
 
@@ -70,5 +70,6 @@ class AccountTest(TransactionTestCase):
 
         # After this point, transaction 1 Should have no reference Value
         transaction1 = DebitsCredits.objects.get(pk=transaction1.pk)
-        self.assertEqual(transaction1.amount, 6)
-        self.assertEqual(transaction1.reference_amount, 4)
+        self.assertEqual(transaction1.local_amount, 6)
+        self.assertEqual(transaction1.foreign_amount, 4)
+

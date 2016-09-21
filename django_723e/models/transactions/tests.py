@@ -59,9 +59,9 @@ class AccountTest(TransactionTestCase):
         """
         trans1 = DebitsCredits.objects.create(
               account=self.account,
-              currency=self.euro,
               name="Shopping",
-              amount=1,
+              local_amount=1,
+              local_currency=self.euro,
               category=self.cat1
         )
         self.cat1.delete()
@@ -85,8 +85,8 @@ class AccountTest(TransactionTestCase):
         trans1 = DebitsCredits.objects.create(account=self.account,
                                             date=datetime.date.today() - datetime.timedelta(days=3),
                                             name="Shopping",
-                                            amount=49.3,
-                                            currency=self.euro,
+                                            local_amount=49.3,
+                                            local_currency=self.euro,
                                             category=self.cat1)
         self.assertNotEqual(trans1, None)
 
@@ -94,8 +94,8 @@ class AccountTest(TransactionTestCase):
         trans2 = DebitsCredits.objects.create(account=self.account,
                                             date=datetime.date.today() - datetime.timedelta(days=2),
                                             name="Shopping",
-                                            amount=20,
-                                            currency=self.euro,
+                                            local_amount=20,
+                                            local_currency=self.euro,
                                             category=self.cat1)
         self.assertNotEqual(trans2, None)
 
@@ -115,8 +115,8 @@ class AccountTest(TransactionTestCase):
         change = Change.objects.create(account=self.account,
                                        date=datetime.datetime.today() - datetime.timedelta(days=1),
                                        name="Withdraw",
-                                       amount=120,
-                                       currency=self.euro,
+                                       local_amount=120,
+                                       local_currency=self.euro,
                                        new_amount=140,
                                        new_currency=self.chf)
         self.assertNotEqual(change, None)
@@ -125,8 +125,8 @@ class AccountTest(TransactionTestCase):
         change2 = Change.objects.create(account=self.account,
                                        date=datetime.datetime.today() - datetime.timedelta(days=1),
                                        name="Withdraw",
-                                       amount=130,
-                                       currency=self.euro,
+                                       local_amount=130,
+                                       local_currency=self.euro,
                                        new_amount=140,
                                        new_currency=self.chf)
         self.assertNotEqual(change2, None)
@@ -139,50 +139,50 @@ class AccountTest(TransactionTestCase):
         transaction1 = DebitsCredits.objects.create(account=self.account,
                                             date=datetime.datetime.today() - datetime.timedelta(days=20),
                                             name="Buy a 6 CHF item",
-                                            amount=6,
-                                            currency=self.chf)
+                                            local_amount=6,
+                                            local_currency=self.chf)
         # After this point, transaction 1 Should have no reference Value
         transaction1 = DebitsCredits.objects.get(pk=transaction1.pk)
-        self.assertEqual(transaction1.amount, 6)
-        self.assertEqual(transaction1.reference_amount, None)
+        self.assertEqual(transaction1.local_amount, 6)
+        self.assertEqual(transaction1.foreign_amount, None)
 
         # We define a change rate after the transaction 1
-        # and check if there is still no reference_amount
+        # and check if there is still no foreign_amount
         Change.objects.create(account=self.account,
                                date=datetime.datetime.today() + datetime.timedelta(days=30),
                                name="Withdraw",
-                               amount=80,
-                               currency=self.euro,
+                               local_amount=80,
+                               local_currency=self.euro,
                                new_amount=60,
                                new_currency=self.chf)
         transaction1 = DebitsCredits.objects.get(pk=transaction1.pk)
-        self.assertEqual(transaction1.amount, 6)
-        self.assertEqual(transaction1.reference_amount, None)
+        self.assertEqual(transaction1.local_amount, 6)
+        self.assertEqual(transaction1.foreign_amount, None)
 
         # We define a change rate BEFORE transaction 1
-        # To check if trsnaction reference_amount has been edited
+        # To check if trsnaction foreign_amount has been edited
         Change.objects.create(account=self.account,
                                date=datetime.datetime.today() - datetime.timedelta(days=30),
                                name="Withdraw",
-                               amount=80,
-                               currency=self.euro,
+                               local_amount=80,
+                               local_currency=self.euro,
                                new_amount=60,
                                new_currency=self.chf)
 
         transaction1 = DebitsCredits.objects.get(pk=transaction1.pk)
-        self.assertEqual(transaction1.amount, 6)
-        self.assertEqual(transaction1.reference_amount, 8)
+        self.assertEqual(transaction1.local_amount, 6)
+        self.assertEqual(transaction1.foreign_amount, 8)
 
         # We now create a transaction in THB.
         # App should not be able to define an exchange rate
         transaction2 = DebitsCredits.objects.create(account=self.account,
                                             date=datetime.datetime.today() - datetime.timedelta(days=2),
                                             name="Buy an item using Thai Baths",
-                                            amount=60,
-                                            currency=self.thb)
+                                            local_amount=60,
+                                            local_currency=self.thb)
         transaction2 = DebitsCredits.objects.get(pk=transaction2.pk)
-        self.assertEqual(transaction2.amount, 60)
-        self.assertEqual(transaction2.reference_amount, None)
+        self.assertEqual(transaction2.local_amount, 60)
+        self.assertEqual(transaction2.foreign_amount, None)
 
         # Now we had a change rate from CHF to THB
         # Should be able to define a EUR > THB exchange rate from
@@ -191,24 +191,24 @@ class AccountTest(TransactionTestCase):
         Change.objects.create(account=self.account,
                                date=datetime.datetime.today() - datetime.timedelta(days=28),
                                name="Withdraw",
-                               amount=60,
-                               currency=self.chf,
+                               local_amount=60,
+                               local_currency=self.chf,
                                new_amount=120,
                                new_currency=self.thb)
 
         transaction2 = DebitsCredits.objects.get(pk=transaction2.pk)
-        self.assertEqual(transaction2.amount, 60)
-        self.assertEqual(transaction2.reference_amount, 40)
+        self.assertEqual(transaction2.local_amount, 60)
+        self.assertEqual(transaction2.foreign_amount, 40)
 
         # If I buy a new item using THB, I should have refernce_amount using Euro exchange rate
         transaction3 = DebitsCredits.objects.create(account=self.account,
                                             date=datetime.datetime.today() - datetime.timedelta(days=20),
                                             name="Buy a 6 CHF item",
-                                            amount=600,
-                                            currency=self.thb)
+                                            local_amount=600,
+                                            local_currency=self.thb)
         transaction3 = DebitsCredits.objects.get(pk=transaction3.pk)
-        self.assertEqual(transaction3.amount, 600)
-        self.assertEqual(transaction3.reference_amount, 400)
+        self.assertEqual(transaction3.local_amount, 600)
+        self.assertEqual(transaction3.foreign_amount, 400)
 
         # Now we test with a fourth transaction, from THB to USD
         # We had a change rate from CHF to THB
@@ -218,18 +218,18 @@ class AccountTest(TransactionTestCase):
         Change.objects.create(account=self.account,
                                date=datetime.datetime.today() - datetime.timedelta(days=27),
                                name="Withdraw",
-                               amount=120,
-                               currency=self.thb,
+                               local_amount=120,
+                               local_currency=self.thb,
                                new_amount=240,
                                new_currency=self.usd)
         transaction4 = DebitsCredits.objects.create(account=self.account,
                                             date=datetime.datetime.today() - datetime.timedelta(days=20),
                                             name="Buy a 240 USD item",
-                                            amount=240,
-                                            currency=self.usd)
+                                            local_amount=240,
+                                            local_currency=self.usd)
         transaction4 = DebitsCredits.objects.get(pk=transaction4.pk)
-        self.assertEqual(transaction4.amount, 240)
-        self.assertEqual(transaction4.reference_amount, 80)
+        self.assertEqual(transaction4.local_amount, 240)
+        self.assertEqual(transaction4.foreign_amount, 80)
 
     def test_Edit_Change_Propagation(self):
         """
@@ -239,32 +239,32 @@ class AccountTest(TransactionTestCase):
         change1 = Change.objects.create(account=self.account,
                                date=datetime.datetime.today() - datetime.timedelta(days=30),
                                name="Withdraw",
-                               amount=80,
-                               currency=self.euro,
+                               local_amount=80,
+                               local_currency=self.euro,
                                new_amount=60,
                                new_currency=self.chf)
         change2 = Change.objects.create(account=self.account,
                                date=datetime.datetime.today() - datetime.timedelta(days=28),
                                name="Withdraw",
-                               amount=60,
-                               currency=self.chf,
+                               local_amount=60,
+                               local_currency=self.chf,
                                new_amount=120,
                                new_currency=self.thb)
         change3 = Change.objects.create(account=self.account,
                                date=datetime.datetime.today() - datetime.timedelta(days=27),
                                name="Withdraw",
-                               amount=120,
-                               currency=self.thb,
+                               local_amount=120,
+                               local_currency=self.thb,
                                new_amount=240,
                                new_currency=self.usd)
         transaction = DebitsCredits.objects.create(account=self.account,
                                             date=datetime.datetime.today() - datetime.timedelta(days=20),
                                             name="Buy a 240 USD item",
-                                            amount=240,
-                                            currency=self.usd)
+                                            local_amount=240,
+                                            local_currency=self.usd)
         transaction = DebitsCredits.objects.get(pk=transaction.pk)
-        self.assertEqual(transaction.amount, 240)
-        self.assertEqual(transaction.reference_amount, 80)
+        self.assertEqual(transaction.local_amount, 240)
+        self.assertEqual(transaction.foreign_amount, 80)
 
         # Now we change the mount of change 2
         change2 = Change.objects.get(pk=change2.pk)
@@ -272,8 +272,8 @@ class AccountTest(TransactionTestCase):
         change2.save()
         # 80€ > 60 CHF > 240 THB > 240 USD so a 240 USD item should be 40
         transaction = DebitsCredits.objects.get(pk=transaction.pk)
-        self.assertEqual(transaction.amount, 240)
-        self.assertEqual(transaction.reference_amount, 40)
+        self.assertEqual(transaction.local_amount, 240)
+        self.assertEqual(transaction.foreign_amount, 40)
 
         # Now we change the amount of change 1
         change1 = Change.objects.get(pk=change1.pk)
@@ -281,19 +281,19 @@ class AccountTest(TransactionTestCase):
         change1.save()
         # 80€ > 120 CHF > 240 THB > 240 USD so a 240 USD item should be 20
         transaction = DebitsCredits.objects.get(pk=transaction.pk)
-        self.assertEqual(transaction.amount, 240)
-        self.assertEqual(transaction.reference_amount, 20)
+        self.assertEqual(transaction.local_amount, 240)
+        self.assertEqual(transaction.foreign_amount, 20)
 
         # We create a second transaction before actually changing USD
         # transaction_rate will not be calculable
         transaction2 = DebitsCredits.objects.create(account=self.account,
                                             date=datetime.datetime.today() - datetime.timedelta(days=28),
                                             name="Buy a 240 USD item",
-                                            amount=1,
-                                            currency=self.usd)
+                                            local_amount=1,
+                                            local_currency=self.usd)
         transaction2 = DebitsCredits.objects.get(pk=transaction2.pk)
-        self.assertEqual(transaction2.amount, 1)
-        self.assertEqual(transaction2.reference_amount, None)
+        self.assertEqual(transaction2.local_amount, 1)
+        self.assertEqual(transaction2.foreign_amount, None)
 
         # Now we change the date of change 3
         change3 = Change.objects.get(pk=change3.pk)
@@ -301,5 +301,5 @@ class AccountTest(TransactionTestCase):
         change3.save()
 
         transaction2 = DebitsCredits.objects.get(pk=transaction2.pk)
-        self.assertEqual(transaction2.amount, 1)
-        self.assertEqual(transaction2.reference_amount, 0.08)
+        self.assertEqual(transaction2.local_amount, 1)
+        self.assertEqual(transaction2.foreign_amount, 0.08)

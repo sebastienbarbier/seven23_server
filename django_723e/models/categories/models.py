@@ -91,5 +91,5 @@ class Category(MPTTModel):
         if date1 > date2:
             date1, date2 = date2, date1
 
-        return AbstractTransaction.objects.filter(date__gte=date1, date__lte=date2, active=True, category__exact=self).aggregate(Sum('amount'))['amount__sum']
+        return AbstractTransaction.objects.filter(date__gte=date1, date__lte=date2, active=True, category__exact=self).aggregate(Sum('local_amount'))['local_amount__sum']
 
