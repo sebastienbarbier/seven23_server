@@ -78,9 +78,6 @@ class DebitsCredits(AbstractTransaction):
             else:
                 self.foreign_amount = None
 
-    def isForeignCurrency(self):
-        return self.foreign_currency and self.local_currency != self.foreign_currency
-
     def save(self, *args, **kwargs):
         self.update_amount(*args, **kwargs)
         super(AbstractTransaction, self).save(*args, **kwargs) # Call the "real" save() method

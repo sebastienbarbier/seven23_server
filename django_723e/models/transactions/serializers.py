@@ -6,20 +6,26 @@ from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 
 class DebitsCreditsSerializer(serializers.HyperlinkedModelSerializer):
+
+    queryset = Currency.objects.all()
+
     account          = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all())
     category         = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), required=False)
-    local_currency   = serializers.PrimaryKeyRelatedField(queryset=Currency.objects.all())
-    foreign_currency = serializers.PrimaryKeyRelatedField(queryset=Currency.objects.all())
+    local_currency   = serializers.PrimaryKeyRelatedField(queryset=queryset)
+    foreign_currency = serializers.PrimaryKeyRelatedField(queryset=queryset, required=False)
 
     class Meta:
         model  = DebitsCredits
-        fields = ('id', 'account', 'name', 'local_amount', 'local_currency', 'foreign_amount', 'foreign_currency', 'date', 'active', 'category', 'isForeignCurrency')
+        fields = ('id', 'account', 'name', 'local_amount', 'local_currency', 'foreign_amount', 'foreign_currency', 'date', 'active', 'category')
 
 
 class ChangeSerializer(serializers.HyperlinkedModelSerializer):
+
+    queryset = Currency.objects.all()
+
     account        = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all())
-    local_currency = serializers.PrimaryKeyRelatedField(queryset=Currency.objects.all())
-    new_currency   = serializers.PrimaryKeyRelatedField(queryset=Currency.objects.all())
+    local_currency = serializers.PrimaryKeyRelatedField(queryset=queryset)
+    new_currency   = serializers.PrimaryKeyRelatedField(queryset=queryset)
 
     class Meta:
         model  = Change

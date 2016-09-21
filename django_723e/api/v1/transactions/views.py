@@ -23,7 +23,7 @@ from django.contrib.auth.models import User
 class api_categories(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    
+
     def get_queryset(self):
         return self.request.user.categories.all()
 
@@ -53,5 +53,5 @@ class api_change(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Change.objects.filter(account__exact=self.request.user.accounts.all()[0])
-    
+
 
