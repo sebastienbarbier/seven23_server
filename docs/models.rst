@@ -74,18 +74,20 @@ Both ``Change`` and ``DebitsCredits`` own the following attributes.
 .. code-block:: python
 
 	class AbstractTransaction(models.Model):
+	    """
+	        Money transaction.
+	    """
 	    account          = models.ForeignKey(Account, related_name='transactions')
 	    name             = models.CharField(_(u'Name'), max_length=255)
-	    amount           = models.FloatField(_(u'Amount'), null=False, blank=False, help_text=_(u"Credit and debit are represented by positive and negative value."))
-	    currency         = models.ForeignKey(Currency, related_name='transactions')
-	    category         = models.ForeignKey(Category, related_name='transactions', blank=True, null=True)
+	    local_amount     = models.FloatField(_(u'Amount'), null=False, blank=False, help_text=_(u"Credit and debit are represented by positive and negative value."))
+	    local_currency   = models.ForeignKey(Currency, related_name='transactions')
 	    date             = models.DateField(_(u'Date'), editable=True, default=timezone.now)
 	    active           = models.BooleanField(_(u'Enable'), default=True, help_text=_(u"A disabled transaction will be save as a draft and not use in any report."))
-	    reference_amount = models.FloatField(_(u'Reference Amount'), null=True, blank=True, editable=False, help_text=_(u"Value based on account curency."))
+	    category         = models.ForeignKey(Category, related_name='transactions', blank=True, null=True)
 
-``reference_amount`` is a stored calculated version of ``amount`` based on ``account.currency``. This is done on purpose to allow fast database calculation and manipulation. However, it involve on account.currency change event to recalculate all transaction in datbase which might consume time and ressources.
+``reference_amount`` is a stored calculated version of ``local_amount`` based on ``account.currency``. This is done on purpose to allow fast database calculation and manipulation. However, it involve on account.currency change event to recalculate all transaction in database which might consume time and ressources.
 
-``reference_amount`` is also recalculated when a ``change`` model is edited.
+``foreign_amount`` is also recalculated when a ``change`` model is edited.
 
 .. note::
 
@@ -94,7 +96,11 @@ Both ``Change`` and ``DebitsCredits`` own the following attributes.
 DebitsCredits
 -------------
 
-``DebitsCredits`` has no difference with ``AbstractTransaction`` and just override *__unicode__* methode.
+.. code-block:: python
+
+	class DebitsCredits(AbstractTransaction):
+	    foreign_amount     = models.FloatField(_(u'Reference Amount'), null=True, blank=True, editable=False, help_text=_(u"Value based on account curency."))
+	    foreign_currency   = models.ForeignKey(Currency, null=True, blank=True)
 
 Change
 ------
