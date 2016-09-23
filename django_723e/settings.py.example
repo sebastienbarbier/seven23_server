@@ -24,7 +24,7 @@ SECRET_KEY = 'k3-=2r(yq-towhfr-$@am&p%ze_&1!m!n7h2p%6*=fn4nr$=d^'
 DEBUG = True
 
 # Allow public account creation
-ALLOW_ACCOUNT_CREATION = True
+ALLOW_ACCOUNT_CREATION = False
 
 APPEND_SLASH = False
 
