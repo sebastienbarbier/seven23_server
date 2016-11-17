@@ -8,7 +8,6 @@ from django.core import serializers
 
 import datetime
 
-
 class Account(models.Model):
     """
         An account is considere as a bank account. Name is just a label for the user interface.
@@ -26,10 +25,6 @@ class Account(models.Model):
     def save(self, *args, **kwargs):
         # First save to have correct value
         super(Account, self).save(*args, **kwargs) # Call the "real" save() method
-        # Update all DebitsCredits transactions
-        from django_723e.models.transactions.models import DebitsCredits
-        for d in DebitsCredits.objects.filter(account=self):
-            d.save()
 
     def __unicode__(self):
         return u'%s' % (self.name)

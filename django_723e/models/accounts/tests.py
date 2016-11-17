@@ -30,7 +30,6 @@ class AccountTest(TransactionTestCase):
         self.cat1 = Category.objects.create(user=self.user, name="Category 1")
         self.cat2 = Category.objects.create(user=self.user, name="Category 2")
 
-
     def test_createAccount(self):
         """
             Create a profile, and a standard account in euro currency.
@@ -53,7 +52,6 @@ class AccountTest(TransactionTestCase):
         # After this point, transaction 1 Should have no reference Value
         transaction1 = DebitsCredits.objects.get(pk=transaction1.pk)
         self.assertEqual(transaction1.local_amount, 6)
-        self.assertEqual(transaction1.foreign_amount, 6)
 
         # Now we had a Change rate before the transaction 1, and change the account currency
         Change.objects.create(account=self.account,
@@ -71,5 +69,4 @@ class AccountTest(TransactionTestCase):
         # After this point, transaction 1 Should have no reference Value
         transaction1 = DebitsCredits.objects.get(pk=transaction1.pk)
         self.assertEqual(transaction1.local_amount, 6)
-        self.assertEqual(transaction1.foreign_amount, 4)
 

@@ -12,13 +12,13 @@ from django_723e import settings
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
- 
+
 @api_view(["GET"])
 def api_init(request):
     result = {}
 
     # Return API Version.
-    result['api_version'] = [1, 0, 0]
+    result['api_version'] = [1, 1, 0]
     result['allow_account_creation'] = settings.ALLOW_ACCOUNT_CREATION
 
     if request.user.is_authenticated():

@@ -9,7 +9,7 @@ from django_723e.models.categories.models import Category
 from django_723e.models.transactions.models import DebitsCredits
 import datetime
 
-class AccountTest(TransactionTestCase):
+class CategoriesTest(TransactionTestCase):
 
     def setUp(self):
         """

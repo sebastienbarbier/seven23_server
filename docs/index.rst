@@ -20,7 +20,6 @@ This documentation cover 723e's server architecture.
 
    installation
    models
-   rules
    api
    deployement
 

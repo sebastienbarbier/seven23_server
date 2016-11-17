@@ -63,33 +63,3 @@ class Category(MPTTModel):
             self.toggle()
         else:
             super(Category, self).delete()
-
-    def sum(self, year=None, month=None, day=None):
-        """
-            Sum of transaction in this category
-            Return None if no value
-        """
-        if not year:
-            return self.sum_between()
-
-        if not month:
-            return self.sum_between(datetime.date(year, 1, 1), datetime.date(year, 12, 31))
-
-        if not day:
-            return self.sum_between(datetime.date(year, month, 1), datetime.date(year, month, calendar.monthrange(year, month)[1]))
-
-        return self.sum_between(datetime.date(year, month, day), datetime.date(year, month, day))
-
-    def sum_between(self, date1=None, date2=None):
-        """
-            Sum of current transaction between date1 and date2. date1 < date2.
-            Return None if no value
-        """
-        from django_723e.models.transactions.models import AbstractTransaction
-
-
-        if date1 > date2:
-            date1, date2 = date2, date1
-
-        return AbstractTransaction.objects.filter(date__gte=date1, date__lte=date2, active=True, category__exact=self).aggregate(Sum('local_amount'))['local_amount__sum']
-

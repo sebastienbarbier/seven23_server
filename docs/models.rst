@@ -85,10 +85,6 @@ Both ``Change`` and ``DebitsCredits`` own the following attributes.
 	    active           = models.BooleanField(_(u'Enable'), default=True, help_text=_(u"A disabled transaction will be save as a draft and not use in any report."))
 	    category         = models.ForeignKey(Category, related_name='transactions', blank=True, null=True)
 
-``reference_amount`` is a stored calculated version of ``local_amount`` based on ``account.currency``. This is done on purpose to allow fast database calculation and manipulation. However, it involve on account.currency change event to recalculate all transaction in database which might consume time and ressources.
-
-``foreign_amount`` is also recalculated when a ``change`` model is edited.
-
 .. note::
 
 	This structure seams far from being optimum and should be subject to some refactoring.
@@ -99,8 +95,9 @@ DebitsCredits
 .. code-block:: python
 
 	class DebitsCredits(AbstractTransaction):
-	    foreign_amount     = models.FloatField(_(u'Reference Amount'), null=True, blank=True, editable=False, help_text=_(u"Value based on account curency."))
-	    foreign_currency   = models.ForeignKey(Currency, null=True, blank=True)
+	    # Nothing more than AbstractTransaction.
+	    # Was at first storing calculated data basde on Account currency
+	    # but that has been moved to client side.
 
 Change
 ------

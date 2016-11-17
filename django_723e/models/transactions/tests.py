@@ -9,7 +9,7 @@ from django_723e.models.categories.models import Category
 from django_723e.models.transactions.models import AbstractTransaction, DebitsCredits, Change
 import datetime
 
-class AccountTest(TransactionTestCase):
+class TransactionsTest(TransactionTestCase):
 
     def setUp(self):
         """
@@ -100,12 +100,8 @@ class AccountTest(TransactionTestCase):
         self.assertNotEqual(trans2, None)
 
         # Check if disabled transaction are used in sum
-        self.assertEqual(self.cat1.sum_between(datetime.date.today(), datetime.date.today()-datetime.timedelta(days=3)), 69.3)
-
-        # Check if disabled transaction are used in sum
         trans2.active = False
         trans2.save()
-        self.assertEqual(self.cat1.sum_between(datetime.date.today(), datetime.date.today()-datetime.timedelta(days=3)), 49.3)
 
 
     def test_Change(self):
@@ -144,7 +140,6 @@ class AccountTest(TransactionTestCase):
         # After this point, transaction 1 Should have no reference Value
         transaction1 = DebitsCredits.objects.get(pk=transaction1.pk)
         self.assertEqual(transaction1.local_amount, 6)
-        self.assertEqual(transaction1.foreign_amount, None)
 
         # We define a change rate after the transaction 1
         # and check if there is still no foreign_amount
@@ -157,7 +152,6 @@ class AccountTest(TransactionTestCase):
                                new_currency=self.chf)
         transaction1 = DebitsCredits.objects.get(pk=transaction1.pk)
         self.assertEqual(transaction1.local_amount, 6)
-        self.assertEqual(transaction1.foreign_amount, None)
 
         # We define a change rate BEFORE transaction 1
         # To check if trsnaction foreign_amount has been edited
@@ -171,7 +165,6 @@ class AccountTest(TransactionTestCase):
 
         transaction1 = DebitsCredits.objects.get(pk=transaction1.pk)
         self.assertEqual(transaction1.local_amount, 6)
-        self.assertEqual(transaction1.foreign_amount, 8)
 
         # We now create a transaction in THB.
         # App should not be able to define an exchange rate
@@ -182,7 +175,6 @@ class AccountTest(TransactionTestCase):
                                             local_currency=self.thb)
         transaction2 = DebitsCredits.objects.get(pk=transaction2.pk)
         self.assertEqual(transaction2.local_amount, 60)
-        self.assertEqual(transaction2.foreign_amount, None)
 
         # Now we had a change rate from CHF to THB
         # Should be able to define a EUR > THB exchange rate from
@@ -198,7 +190,6 @@ class AccountTest(TransactionTestCase):
 
         transaction2 = DebitsCredits.objects.get(pk=transaction2.pk)
         self.assertEqual(transaction2.local_amount, 60)
-        self.assertEqual(transaction2.foreign_amount, 40)
 
         # If I buy a new item using THB, I should have refernce_amount using Euro exchange rate
         transaction3 = DebitsCredits.objects.create(account=self.account,
@@ -208,7 +199,6 @@ class AccountTest(TransactionTestCase):
                                             local_currency=self.thb)
         transaction3 = DebitsCredits.objects.get(pk=transaction3.pk)
         self.assertEqual(transaction3.local_amount, 600)
-        self.assertEqual(transaction3.foreign_amount, 400)
 
         # Now we test with a fourth transaction, from THB to USD
         # We had a change rate from CHF to THB
@@ -229,7 +219,6 @@ class AccountTest(TransactionTestCase):
                                             local_currency=self.usd)
         transaction4 = DebitsCredits.objects.get(pk=transaction4.pk)
         self.assertEqual(transaction4.local_amount, 240)
-        self.assertEqual(transaction4.foreign_amount, 80)
 
     def test_Edit_Change_Propagation(self):
         """
@@ -264,7 +253,6 @@ class AccountTest(TransactionTestCase):
                                             local_currency=self.usd)
         transaction = DebitsCredits.objects.get(pk=transaction.pk)
         self.assertEqual(transaction.local_amount, 240)
-        self.assertEqual(transaction.foreign_amount, 80)
 
         # Now we change the mount of change 2
         change2 = Change.objects.get(pk=change2.pk)
@@ -273,7 +261,6 @@ class AccountTest(TransactionTestCase):
         # 80€ > 60 CHF > 240 THB > 240 USD so a 240 USD item should be 40
         transaction = DebitsCredits.objects.get(pk=transaction.pk)
         self.assertEqual(transaction.local_amount, 240)
-        self.assertEqual(transaction.foreign_amount, 40)
 
         # Now we change the amount of change 1
         change1 = Change.objects.get(pk=change1.pk)
@@ -282,7 +269,6 @@ class AccountTest(TransactionTestCase):
         # 80€ > 120 CHF > 240 THB > 240 USD so a 240 USD item should be 20
         transaction = DebitsCredits.objects.get(pk=transaction.pk)
         self.assertEqual(transaction.local_amount, 240)
-        self.assertEqual(transaction.foreign_amount, 20)
 
         # We create a second transaction before actually changing USD
         # transaction_rate will not be calculable
@@ -293,7 +279,6 @@ class AccountTest(TransactionTestCase):
                                             local_currency=self.usd)
         transaction2 = DebitsCredits.objects.get(pk=transaction2.pk)
         self.assertEqual(transaction2.local_amount, 1)
-        self.assertEqual(transaction2.foreign_amount, None)
 
         # Now we change the date of change 3
         change3 = Change.objects.get(pk=change3.pk)
@@ -302,4 +287,3 @@ class AccountTest(TransactionTestCase):
 
         transaction2 = DebitsCredits.objects.get(pk=transaction2.pk)
         self.assertEqual(transaction2.local_amount, 1)
-        self.assertEqual(transaction2.foreign_amount, 0.08)
