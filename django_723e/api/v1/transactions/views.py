@@ -27,6 +27,11 @@ class api_categories(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.request.user.categories.all()
 
+    def destroy(self, request, pk=None):
+        category = self.get_object()
+        category.delete()
+        serializer = self.get_serializer(category, many=False)
+        return Response(serializer.data, status=200)
 
 @permission_classes((IsAuthenticated,))
 class api_debitscredits(viewsets.ModelViewSet):
