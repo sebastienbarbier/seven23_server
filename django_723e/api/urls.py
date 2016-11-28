@@ -1,8 +1,13 @@
+"""
+	urls.py : routes from api/
+"""
+
 from django.conf.urls import include, url
 from django.contrib import admin
-from django_723e.api.views import api_init
 
 from rest_framework.authtoken import views
+
+from django_723e.api.views import api_init
 
 admin.autodiscover()
 

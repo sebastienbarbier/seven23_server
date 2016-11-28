@@ -1,7 +1,8 @@
-# -*- coding: utf-8 -*-
+"""
+    Currency models
+"""
 from django.db import models
 from django.utils.translation import ugettext as _
-
 
 class Currency(models.Model):
     """
@@ -22,6 +23,9 @@ class Currency(models.Model):
         return u'%s (%s)' % (self.name, self.sign)
 
     def verbose(self, amount):
+        """
+            Return buildel value
+        """
         res = ""
         if not self.after_amount:
             res += self.sign
@@ -31,6 +35,6 @@ class Currency(models.Model):
         else:
             res += "%0.2f" % amount
             if self.space:
-                    res += " "
+                res += " "
             res += self.sign
         return res

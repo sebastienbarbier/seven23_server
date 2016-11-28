@@ -10,6 +10,8 @@ MarkupSafe
 pathtools
 Pygments
 PyMySQL
+pylint
+pylint-django
 snowballstemmer
 Sphinx
 sphinx-autobuild

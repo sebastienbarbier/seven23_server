@@ -1,32 +1,27 @@
-# -*- coding: utf-8 -*-
+"""
+    api/va/accounts views
+"""
 
-import json
-from django.http import HttpResponse, Http404
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 
-from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.authentication import TokenAuthentication
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AuthenticationForm
 from rest_framework.decorators import permission_classes
-
-from django_723e.models.accounts.models import Account
-from django_723e.models.accounts.serializers import AccountSerializer, UserSerializer, InvitationRequestSerializer
-from django_723e.models.currency.models import Currency
-
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import viewsets
-from rest_framework.permissions import IsAdminUser
-from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 
 from django_723e import settings
+from django_723e.models.accounts.models import Account
+from django_723e.models.accounts.serializers import AccountSerializer, UserSerializer
+from django_723e.models.currency.models import Currency
 
 @permission_classes((IsAuthenticated,))
 class api_accounts(viewsets.ModelViewSet):
+    """
+        Distribute Account model object
+    """
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
 
@@ -38,7 +33,7 @@ class api_users(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    def retrieve(self, request, pk=None):
+    def retrieve(self):
         user = self.get_object()
         if self.request.user.is_staff or self.request.user.id == user.id:
             serializer = self.get_serializer(user, many=False)
@@ -52,7 +47,7 @@ class api_users(viewsets.ModelViewSet):
     def partial_update(self, request, pk=None):
         pass
 
-    def destroy(self, request, pk=None):
+    def destroy(self):
         user = self.get_object()
         if self.request.user.is_staff:
             user.delete()
@@ -77,21 +72,26 @@ def subscription(request):
 
         try:
             user = User.objects.get(username=args.get('username'))
-            return Response({'field': 'username', 'errorMsg': 'This user already exist'}, status=400)
+            return Response(
+                {'field': 'username', 'errorMsg': 'This user already exist'},
+                status=400)
         except User.DoesNotExist:
             # Create User
-            user = User.objects.create_user(args.get('username'), args.get('email'), args.get('password'))
+            user = User.objects.create_user(
+                args.get('username'),
+                args.get('email'),
+                args.get('password'))
             user.save()
             # Create Account
             currency = Currency.objects.get(id=args.get('currency'))
-            account = Account.objects.create(user=user, name=args.get('name'), currency=currency)
+            Account.objects.create(user=user, name=args.get('name'), currency=currency)
 
             token = Token.objects.get_or_create(user=user)
             # Log user with Token
             return Response({'code': 200, 'token': token[0].key}, status=200)
 
     if request.method == 'PUT':
-        
+
         user = request.user
         args = request.data
 

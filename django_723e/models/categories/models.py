@@ -1,29 +1,30 @@
 # -*- coding: utf-8 -*-
-from django.db import models
+"""
+    Models for categories module
+"""
 from mptt.models import MPTTModel, TreeForeignKey
+from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
-from django.db.models import Sum
-from django.db.models.signals import pre_delete
-from django.dispatch.dispatcher import receiver
 
 from colorfield.fields import ColorField
-
-import calendar
-import datetime
 
 class Category(MPTTModel):
     """
         Category of transaction.
     """
-    user        = models.ForeignKey(User, related_name='categories')
-    name        = models.CharField(_(u'Name'), max_length=128)
+    user = models.ForeignKey(User, related_name='categories')
+    name = models.CharField(_(u'Name'), max_length=128)
     description = models.TextField(_(u'Description'), blank=True, null=True)
-    color       = ColorField(default='#ffffff')
-    icon        = models.TextField(_(u'Icon'))
-    parent      = TreeForeignKey('self', null=True, blank=True, related_name='children')
-    selectable  = models.BooleanField(_(u'Selectable'), default=True, help_text=_(u"Can be link to a transaction"))
-    active      = models.BooleanField(_(u'Enable'), default=True, help_text=_(u"Delete a category only disable it"))
+    color = ColorField(default='#ffffff')
+    icon = models.TextField(_(u'Icon'))
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
+    selectable = models.BooleanField(_(u'Selectable'),
+                                     default=True,
+                                     help_text=_(u"Can be link to a transaction"))
+    active = models.BooleanField(_(u'Enable'),
+                                 default=True,
+                                 help_text=_(u"Delete a category only disable it"))
 
     def __unicode__(self):
         return u'%s' % (self.name)
@@ -39,15 +40,18 @@ class Category(MPTTModel):
                 i.save()
 
     def enable(self):
+        """ Enable """
         self.active = True
         self.save()
 
     def disable(self):
+        """ Disable """
         self.move_children_right()
         self.active = False
         self.save()
 
     def toggle(self):
+        """ Toggle """
         if self.active:
             self.disable()
         else:

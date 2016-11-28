@@ -1,33 +1,29 @@
-# -*- coding: utf-8 -*-
-
-import json
-from django.http import HttpResponse, Http404
-
-from rest_framework.authentication import TokenAuthentication
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AuthenticationForm
-from rest_framework.decorators import permission_classes
+"""
+    Views for api/va/transactions
+"""
 
 from django_723e.models.categories.models import Category
-from django_723e.models.transactions.models import DebitsCredits, Change
 from django_723e.models.categories.serializers import CategorySerializer
+from django_723e.models.transactions.models import DebitsCredits, Change
 from django_723e.models.transactions.serializers import DebitsCreditsSerializer, ChangeSerializer
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import viewsets
+from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
-from django.contrib.auth.models import User
+from rest_framework.response import Response
 
 @permission_classes((IsAuthenticated,))
 class api_categories(viewsets.ModelViewSet):
+    """
+        Deliver Categor model object
+    """
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
     def get_queryset(self):
         return self.request.user.categories.all()
 
-    def destroy(self, request, pk=None):
+    def destroy(self):
         category = self.get_object()
         category.delete()
         serializer = self.get_serializer(category, many=False)
@@ -35,6 +31,9 @@ class api_categories(viewsets.ModelViewSet):
 
 @permission_classes((IsAuthenticated,))
 class api_debitscredits(viewsets.ModelViewSet):
+    """
+        Deliver DebitsCredits model object
+    """
     queryset = DebitsCredits.objects.all()
     serializer_class = DebitsCreditsSerializer
 
@@ -45,7 +44,10 @@ class api_debitscredits(viewsets.ModelViewSet):
     def list(self, request):
         account = self.request.user.accounts.all()[0]
         if request.GET.get('month') and request.GET.get('year'):
-            queryset = DebitsCredits.objects.filter(account__exact=account, date__year=request.GET.get('year'), date__month=request.GET.get('month'))
+            queryset = DebitsCredits.objects.filter(
+                account__exact=account,
+                date__year=request.GET.get('year'),
+                date__month=request.GET.get('month'))
         else:
             queryset = DebitsCredits.objects.filter(account__exact=account)
         serializer = DebitsCreditsSerializer(queryset, many=True, context={'request': request})
@@ -53,10 +55,11 @@ class api_debitscredits(viewsets.ModelViewSet):
 
 @permission_classes((IsAuthenticated,))
 class api_change(viewsets.ModelViewSet):
+    """
+        Deliver Change objects
+    """
     queryset = Change.objects.all()
     serializer_class = ChangeSerializer
 
     def get_queryset(self):
         return Change.objects.filter(account__exact=self.request.user.accounts.all()[0])
-
-

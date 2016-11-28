@@ -1,20 +1,19 @@
-# -*- coding: utf-8 -*-
+"""
+    Root views of api
+"""
 
 import json
 from django.http import HttpResponse
 
-from django.contrib.auth.forms import AuthenticationForm
-from rest_framework.authtoken.models import Token
-
-from django.core import serializers
+from rest_framework.decorators import api_view
 
 from django_723e import settings
 
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import api_view, permission_classes
-
 @api_view(["GET"])
 def api_init(request):
+    """
+        Return status on client initialisation
+    """
     result = {}
 
     # Return API Version.
@@ -34,5 +33,5 @@ def api_init(request):
         result['is_authenticated'] = False
 
     # Return json format string.
-    j = json.dumps(result, separators=(',',':'))
+    j = json.dumps(result, separators=(',', ':'))
     return HttpResponse(j, content_type='application/json')
