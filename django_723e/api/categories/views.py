@@ -13,6 +13,7 @@ from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 
+from django_filters.rest_framework import DjangoFilterBackend
 
 class CanWriteAccount(permissions.BasePermission):
     """
@@ -40,6 +41,8 @@ class ApiCategories(viewsets.ModelViewSet):
     """
     serializer_class = CategorySerializer
     permission_classes = (permissions.IsAuthenticated, CanWriteAccount)
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('account',)
 
     def get_queryset(self):
         return Category.objects.filter(

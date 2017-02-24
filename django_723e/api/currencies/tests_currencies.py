@@ -2,6 +2,7 @@
     Tests Account API
 """
 from django.test import TransactionTestCase
+# Default user model may get swapped out of the system and hence.
 from django.contrib.auth.models import User
 
 from rest_framework.test import APIClient

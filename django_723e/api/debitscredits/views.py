@@ -13,6 +13,8 @@ from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 class CanWriteAccount(permissions.BasePermission):
     """
@@ -33,9 +35,12 @@ class CanWriteAccount(permissions.BasePermission):
 class ApiDebitscredits(viewsets.ModelViewSet):
     """
         Deliver DebitsCredits model object
+
     """
     serializer_class = DebitsCreditsSerializer
     permission_classes = (permissions.IsAuthenticated, CanWriteAccount)
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('account',)
 
     def get_queryset(self):
         return DebitsCredits.objects.filter(

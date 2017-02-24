@@ -3,6 +3,7 @@
 """
 
 from django.contrib.auth import authenticate
+# Default user model may get swapped out of the system and hence.
 from django.contrib.auth.models import User
 
 from rest_framework import viewsets, generics, permissions

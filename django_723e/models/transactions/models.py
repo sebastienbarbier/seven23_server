@@ -31,14 +31,6 @@ class AbstractTransaction(models.Model):
     def __unicode__(self):
         return u"(%d) %s %s" % (self.pk, self.name, self.local_currency.verbose(self.local_amount))
 
-    def update_amount(self, *args, **kwargs):
-        """ Update amount. Deprecated """
-        pass
-
-    def save(self, *args, **kwargs):
-        self.update_amount(*args, **kwargs)
-        super(AbstractTransaction, self).save(*args, **kwargs) # Call the "real" save() method
-
     def value(self):
         """ Return a stringify currency base value """
         return self.local_currency.verbose(self.local_amount)

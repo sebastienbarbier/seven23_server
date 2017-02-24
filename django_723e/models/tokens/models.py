@@ -2,6 +2,7 @@
     Profile models
 """
 from django.db import models
+# Default user model may get swapped out of the system and hence.
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 

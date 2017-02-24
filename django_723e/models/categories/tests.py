@@ -3,6 +3,7 @@
     Testing categories modules
 """
 from django.test import TransactionTestCase
+# Default user model may get swapped out of the system and hence.
 from django.contrib.auth.models import User
 
 from django_723e.models.accounts.models import Account
