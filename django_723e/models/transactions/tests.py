@@ -35,20 +35,23 @@ class TransactionsTest(TransactionTestCase):
         self.chf = Currency.objects.create(name="Franc suisse", sign="CHF")
         self.thb = Currency.objects.create(name=u"Bahts Thaïlandais", sign="BHT")
         self.usd = Currency.objects.create(name=u"US Dollars", sign="USD")
-        self.account = Account.objects.create(user=self.user,
-                                              name="User Account",
+        self.account = Account.objects.create(name="User Account",
                                               currency=self.euro)
-        self.cat1 = Category.objects.create(user=self.user, name="Category 1")
-        self.cat2 = Category.objects.create(user=self.user, name="Category 2")
+        self.cat1 = Category.objects.create(account=self.account, name="Category 1")
+        self.cat2 = Category.objects.create(account=self.account, name="Category 2")
 
-    def test_CategoriesMoveRight(self):
+    def test_categories_move_right(self):
         """
             Create sub-categories and try to move them from one level up.
             Using MPTT to keep an organized structure
         """
         # Check is move_children_right properly moved children's category one level up.
-        cat1_1 = Category.objects.create(user=self.user, name="Category 1.1", parent=self.cat1)
-        cat1_2 = Category.objects.create(user=self.user, name="Category 1.2", parent=self.cat1)
+        cat1_1 = Category.objects.create(account=self.account,
+                                         name="Category 1.1",
+                                         parent=self.cat1)
+        cat1_2 = Category.objects.create(account=self.account,
+                                         name="Category 1.2",
+                                         parent=self.cat1)
         self.cat1.move_children_right()
         self.assertEqual(self.cat1.get_children().count(), 0)
 
@@ -61,7 +64,7 @@ class TransactionsTest(TransactionTestCase):
         self.assertEqual(self.cat1.get_children().count(), 0)
 
 
-    def test_CategoriesDelete(self):
+    def test_categories_delete(self):
         """
             Try to delete a Category.
             If it has transaction, it is just disable to keep trace,
@@ -82,7 +85,7 @@ class TransactionsTest(TransactionTestCase):
         self.assertEqual(Category.objects.all().count(), 1)
 
 
-    def test_CategoriesSum(self):
+    def test_categories_sum(self):
         """
             Create a serie of transaction and verify calculated data
 
@@ -114,7 +117,7 @@ class TransactionsTest(TransactionTestCase):
         trans2.save()
 
 
-    def test_Change(self):
+    def test_change(self):
         """
             Test if Change object calculate well the exchange_rate
         """
@@ -140,7 +143,7 @@ class TransactionsTest(TransactionTestCase):
         self.assertNotEqual(change2, None)
         self.assertEqual(change2.exchange_rate(), 1.0769230769230769)
 
-    def test_Change_Transactions(self):
+    def test_change_transactions(self):
         """
             Test if editing change update transaction new_Amount
         """
@@ -236,7 +239,7 @@ class TransactionsTest(TransactionTestCase):
         transaction4 = DebitsCredits.objects.get(pk=transaction4.pk)
         self.assertEqual(transaction4.local_amount, 240)
 
-    def test_Edit_Change_Propagation(self):
+    def test_edit_change_propagation(self):
         """
             We need to evaluate if editing a Change propagate well to all transactions
             80€ > 60 CHF > 120 THB > 240 USD so a 240 USD item should be 80

@@ -17,18 +17,12 @@ def api_init(request):
     result = {}
 
     # Return API Version.
-    result['api_version'] = [1, 1, 0]
+    result['api_version'] = settings.API_VERSION
     result['allow_account_creation'] = settings.ALLOW_ACCOUNT_CREATION
 
     if request.user.is_authenticated():
         result['is_authenticated'] = True
-        # If user is authentificated, we return some details which might
-        # be usefull like displaying name, or sending mail.
         result['id'] = request.user.id
-        # result['username'] = request.user.username
-        # result['first_name'] = request.user.first_name
-        # result['last_name'] = request.user.last_name
-        # result['email'] = request.user.email
     else:
         result['is_authenticated'] = False
 

@@ -2,19 +2,19 @@
     Adminitration to accounts module
 """
 from django.contrib import admin
-from django_723e.models.accounts.models import Account, InvitationRequest
+from django_723e.models.accounts.models import Account, AccountGuests
 
 class AccountAdmin(admin.ModelAdmin):
     """
         Admin object
     """
-    list_display = ('user', 'name', 'currency', 'create', 'archived')
+    list_display = ('owner', 'name', 'currency', 'create', 'archived')
 
-class InvitationRequestAdmin(admin.ModelAdmin):
+class AccountGuestsAdmin(admin.ModelAdmin):
     """
-        Invitation object
+        Admin object
     """
-    list_display = ('create', 'email')
+    list_display = ('account', 'user', 'permissions')
 
 admin.site.register(Account, AccountAdmin)
-admin.site.register(InvitationRequest, InvitationRequestAdmin)
+admin.site.register(AccountGuests, AccountGuestsAdmin)

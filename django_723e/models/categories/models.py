@@ -4,20 +4,17 @@
 """
 from mptt.models import MPTTModel, TreeForeignKey
 from django.db import models
-from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 
-from colorfield.fields import ColorField
+from django_723e.models.accounts.models import Account
 
 class Category(MPTTModel):
     """
         Category of transaction.
     """
-    user = models.ForeignKey(User, related_name='categories')
+    account = models.ForeignKey(Account, related_name='categories', blank=True, null=True)
     name = models.CharField(_(u'Name'), max_length=128)
     description = models.TextField(_(u'Description'), blank=True, null=True)
-    color = ColorField(default='#ffffff')
-    icon = models.TextField(_(u'Icon'))
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
     selectable = models.BooleanField(_(u'Selectable'),
                                      default=True,

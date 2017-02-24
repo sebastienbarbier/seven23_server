@@ -9,6 +9,6 @@ class CategoryAdmin(admin.ModelAdmin):
     """
         Deliver category model
     """
-    list_display = ('user', 'name', 'description', 'color', 'icon', 'parent', 'active')
+    list_display = ('account', 'name', 'description', 'parent', 'active')
 
 admin.site.register(Category, CategoryAdmin)

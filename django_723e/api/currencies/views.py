@@ -6,7 +6,7 @@ from django_723e.models.currency.serializers import CurrencySerializer
 
 from rest_framework import viewsets
 
-class api_currencies(viewsets.ModelViewSet):
+class CurrenciesList(viewsets.ReadOnlyModelViewSet):
     """
         CRUD access to Currency models
     """

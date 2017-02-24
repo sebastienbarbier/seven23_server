@@ -7,6 +7,9 @@ start:
 stop:
 	launchctl unload /usr/local/opt/postgresql/homebrew.mxcl.postgresql.plist
 
+test:
+	python manage.py test
+
 docs:
 	sphinx-autobuild docs/ docs/_build/html
 

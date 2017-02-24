@@ -8,7 +8,7 @@ import datetime
 from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 
-from django_723e.models.accounts.models import Account
+from django_723e.models.accounts.models import Account, AccountGuests
 from django_723e.models.currency.models import Currency
 from django_723e.models.categories.models import Category
 from django_723e.models.transactions.models import DebitsCredits, Change
@@ -25,7 +25,7 @@ class AccountTest(TransactionTestCase):
             categories category1, category2
         """
         self.user = User.objects.create()
-        self.user.login = "foo"
+        self.user.username = "foo"
         self.user.save()
 
         self.euro = Currency.objects.create(
@@ -33,24 +33,27 @@ class AccountTest(TransactionTestCase):
         self.chf = Currency.objects.create(name="Franc suisse", sign="CHF")
         self.thb = Currency.objects.create(name=u"Bahts Thaïlandais", sign="BHT")
         self.usd = Currency.objects.create(name=u"US Dollars", sign="USD")
-        self.cat1 = Category.objects.create(user=self.user, name="Category 1")
-        self.cat2 = Category.objects.create(user=self.user, name="Category 2")
-        self.account = None
+        self.account = Account.objects.create(owner=self.user,
+                                              name="Compte courant",
+                                              currency=self.euro)
+        self.cat1 = Category.objects.create(account=self.account, name="Category 1")
+        self.cat2 = Category.objects.create(account=self.account, name="Category 2")
 
-    def test_createAccount(self):
+    def test_create_account(self):
         """
             Create a profile, and a standard account in euro currency.
         """
-        self.account = Account.objects.create(
-            user=self.user, name="Compte courant", currency=self.euro)
         self.assertNotEqual(self.account, None)
+        AccountGuests.objects.create(account=self.account, user=self.user, permissions='A')
+        self.assertEqual(len(self.account.guests.all()), 1)
 
-    def test_Change_Currency(self):
+    def test_change_currency(self):
         """
             Test is changing an account currency propagate well to all transactions.
         """
-        self.account = Account.objects.create(
-            user=self.user, name="Compte courant", currency=self.euro)
+        self.account = Account.objects.create(owner=self.user,
+                                              name="Compte courant",
+                                              currency=self.euro)
 
         # Transaction in Eur will have no difference between amount and foreign_amount
         transaction1 = DebitsCredits.objects.create(account=self.account,

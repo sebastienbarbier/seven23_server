@@ -4,8 +4,9 @@ django-colorfield
 django-cors-headers
 django-grappelli
 django-mptt
-django-rest-auth==0.7.0
+django-rest-auth[with_social]
 djangorestframework
+django-rest-swagger
 gunicorn
 newrelic
 psycopg2

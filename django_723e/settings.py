@@ -25,25 +25,27 @@ SECRET_KEY = 'k3-=2r(yq-towhfr-$@am&p%ze_&1!m!n7h2p%6*=fn4nr$=d^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+API_VERSION = [1, 0, 0, 'beta']
+
 # Allow public account creation
-ALLOW_ACCOUNT_CREATION = False
+ALLOW_ACCOUNT_CREATION = DEBUG or os.environ.get('ALLOW_ACCOUNT_CREATION') == 'True'
 
 APPEND_SLASH = False
 
 ALLOWED_HOSTS = []
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/home/media/media.lawrence.com/media/"
+# Example: '/home/media/media.lawrence.com/media/'
 MEDIA_ROOT = BASE_DIR + '/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
-# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+# Examples: 'http://media.lawrence.com/media/', 'http://example.com/media/'
 MEDIA_URL = '/_media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/home/media/media.lawrence.com/static/"
+# in apps' 'static/' subdirectories and in STATICFILES_DIRS.
+# Example: '/home/media/media.lawrence.com/static/'
 STATIC_ROOT = BASE_DIR + '/collectstatic/'
 
 # Static files (CSS, JavaScript, Images)
@@ -54,10 +56,7 @@ STATIC_URL = '/static/'
 LOGIN_URL = '/'
 
 # Database confugration using environment variable DATABASES_URL
-if os.environ.get('DATABASE_URL'):
-    DATABASE_URL = os.environ.get('DATABASE_URL')
-else:
-    DATABASE_URL = 'postgres://localhost/723e5'
+DATABASE_URL = os.environ.get('DATABASE_URL') or 'postgres://localhost/723e5'
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
@@ -89,14 +88,24 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'rest_framework',
+    'rest_framework_swagger',
     'rest_framework.authtoken', # Token Authentification
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'rest_auth.registration',
     'rest_auth',
     'django_723e.models.accounts',
     'django_723e.models.categories',
     'django_723e.models.currency',
+    'django_723e.models.tokens',
     'django_723e.models.transactions'
 )
+
+SITE_ID = 1
 
 MIDDLEWARE_CLASSES = (
     'corsheaders.middleware.CorsMiddleware',
@@ -112,6 +121,18 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
+}
+
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    },
 }
 
 ROOT_URLCONF = 'django_723e.urls'

@@ -26,6 +26,7 @@ class AbstractTransaction(models.Model):
                                  help_text=_(u"A disabled transaction will be save as a "\
                                  "draft and not use in any report."))
     category = models.ForeignKey(Category, related_name='transactions', blank=True, null=True)
+    last_edited = models.DateTimeField(_(u'Last edited'), auto_now=True)
 
     def __unicode__(self):
         return u"(%d) %s %s" % (self.pk, self.name, self.local_currency.verbose(self.local_amount))
@@ -49,6 +50,10 @@ class DebitsCredits(AbstractTransaction):
     def save(self, *args, **kwargs):
         super(DebitsCredits, self).save(*args, **kwargs) # Call the "real" save() method
 
+    class Meta:
+        verbose_name = _(u'DebitsCredit')
+        verbose_name_plural = _(u'DebitsCredits')
+
     def __unicode__(self):
         return u"%s" % (self.name)
 
@@ -67,6 +72,10 @@ class Change(AbstractTransaction):
                                       self.name,
                                       self.local_currency.verbose(self.amount),
                                       self.new_currency.verbose(self.new_amount))
+
+    class Meta:
+        verbose_name = _(u'Change')
+        verbose_name_plural = _(u'Changes')
 
     def force_save(self, *args, **kwargs):
         """ Force saving """

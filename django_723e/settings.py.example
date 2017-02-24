@@ -103,11 +103,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_swagger',
     'rest_framework.authtoken', # Token Authentification
     'rest_auth',
     'django_723e.models.accounts',
     'django_723e.models.categories',
     'django_723e.models.currency',
+    'django_723e.models.tokens',
     'django_723e.models.transactions'
 )
 

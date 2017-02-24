@@ -3,7 +3,6 @@
     Testing categories modules
 """
 from django.test import TransactionTestCase
-from django.contrib.auth.models import User
 
 from django_723e.models.accounts.models import Account
 from django_723e.models.currency.models import Currency
@@ -16,12 +15,6 @@ class CategoriesTest(TransactionTestCase):
     """
 
     def setUp(self):
-        """
-            Create a user
-        """
-        self.user = User.objects.create()
-        self.user.login = "foo"
-        self.user.save()
         self.euro = Currency.objects.create(name="Euro",
                                             sign=u"\u20AC",
                                             space=True,
@@ -29,19 +22,22 @@ class CategoriesTest(TransactionTestCase):
         self.chf = Currency.objects.create(name="Franc suisse", sign="CHF")
         self.thb = Currency.objects.create(name=u"Bahts Thaïlandais", sign="BHT")
 
-        self.account = Account.objects.create(user=self.user,
-                                              name="Compte courant",
+        self.account = Account.objects.create(name="Compte courant",
                                               currency=self.euro)
-        self.cat1 = Category.objects.create(user=self.user, name="Category 1")
-        self.cat2 = Category.objects.create(user=self.user, name="Category 2")
+        self.cat1 = Category.objects.create(account=self.account, name="Category 1")
+        self.cat2 = Category.objects.create(account=self.account, name="Category 2")
 
-    def test_CategoriesMoveRight(self):
+    def test_categories_move_right(self):
         """
             Create sub-categories and try to move them from one level up.
         """
         # Check is move_children_right properly moved children's category one level up.
-        cat1_1 = Category.objects.create(user=self.user, name="Category 1.1", parent=self.cat1)
-        cat1_2 = Category.objects.create(user=self.user, name="Category 1.2", parent=self.cat1)
+        cat1_1 = Category.objects.create(account=self.account,
+                                         name="Category 1.1",
+                                         parent=self.cat1)
+        cat1_2 = Category.objects.create(account=self.account,
+                                         name="Category 1.2",
+                                         parent=self.cat1)
         self.cat1.move_children_right()
         self.assertEqual(self.cat1.get_children().count(), 0)
 
@@ -53,8 +49,7 @@ class CategoriesTest(TransactionTestCase):
         self.cat1.disable()
         self.assertEqual(self.cat1.get_children().count(), 0)
 
-
-    def test_CategoriesDelete(self):
+    def test_categories_delete(self):
         """
             Try to delete a Category. If it has transaction, is just disable to keep trace,
             and if not, is delete.
