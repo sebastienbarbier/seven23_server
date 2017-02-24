@@ -29,6 +29,7 @@ API_VERSION = [1, 0, 0, 'beta']
 
 # Allow public account creation
 ALLOW_ACCOUNT_CREATION = DEBUG or os.environ.get('ALLOW_ACCOUNT_CREATION') == 'True'
+OLD_PASSWORD_FIELD_ENABLED = True
 
 APPEND_SLASH = False
 
