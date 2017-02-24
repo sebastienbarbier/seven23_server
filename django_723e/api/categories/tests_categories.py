@@ -75,23 +75,13 @@ class ApiCategoryTest(TransactionTestCase):
         self.client.force_authenticate(user=self.user)
         response = self.client.post('/api/v1/categories',
                                     {'account':self.account.id,
-                                     'name':'Category 3',
-                                     'icon': 'circle'
+                                     'name':'Category 3'
                                     })
         assert response.status_code == status.HTTP_201_CREATED
 
         response = self.client.post('/api/v1/categories',
-                                    {'account':self.account.id,
-                                     'name':'Category 4'
-                                    })
-        data = response.json()
-        assert response.status_code == status.HTTP_400_BAD_REQUEST
-        assert data['icon'] != None
-
-        response = self.client.post('/api/v1/categories',
                                     {'account':self.account2.id,
-                                     'name':'Category 5',
-                                     'icon': 'circle'
+                                     'name':'Category 5'
                                     })
         assert response.status_code == status.HTTP_201_CREATED
 

@@ -3,6 +3,7 @@
     Testing categories modules
 """
 from django.test import TransactionTestCase
+from django.contrib.auth.models import User
 
 from django_723e.models.accounts.models import Account
 from django_723e.models.currency.models import Currency
@@ -15,6 +16,11 @@ class CategoriesTest(TransactionTestCase):
     """
 
     def setUp(self):
+
+        self.user = User.objects.create()
+        self.user.login = "foo"
+        self.user.save()
+
         self.euro = Currency.objects.create(name="Euro",
                                             sign=u"\u20AC",
                                             space=True,
@@ -23,7 +29,8 @@ class CategoriesTest(TransactionTestCase):
         self.thb = Currency.objects.create(name=u"Bahts Thaïlandais", sign="BHT")
 
         self.account = Account.objects.create(name="Compte courant",
-                                              currency=self.euro)
+                                              currency=self.euro,
+                                              owner=self.user)
         self.cat1 = Category.objects.create(account=self.account, name="Category 1")
         self.cat2 = Category.objects.create(account=self.account, name="Category 2")
 

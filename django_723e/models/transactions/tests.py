@@ -36,7 +36,8 @@ class TransactionsTest(TransactionTestCase):
         self.thb = Currency.objects.create(name=u"Bahts Thaïlandais", sign="BHT")
         self.usd = Currency.objects.create(name=u"US Dollars", sign="USD")
         self.account = Account.objects.create(name="User Account",
-                                              currency=self.euro)
+                                              currency=self.euro,
+                                              owner=self.user)
         self.cat1 = Category.objects.create(account=self.account, name="Category 1")
         self.cat2 = Category.objects.create(account=self.account, name="Category 2")
 
