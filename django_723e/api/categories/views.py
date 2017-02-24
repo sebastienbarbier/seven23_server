@@ -26,7 +26,7 @@ class CanWriteAccount(permissions.BasePermission):
         # so we'll always allow GET, HEAD or OPTIONS requests.
 
         # Instance must have an attribute named `owner`.
-        return obj.account in list(chain(
+        return obj.account.id in list(chain(
             request.user.accounts.values_list('id', flat=True),
             request.user.guests.values_list('account__id', flat=True)
         ))

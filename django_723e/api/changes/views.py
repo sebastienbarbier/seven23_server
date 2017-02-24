@@ -13,6 +13,7 @@ from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 
+import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
 
 class CanWriteAccount(permissions.BasePermission):
@@ -26,10 +27,17 @@ class CanWriteAccount(permissions.BasePermission):
         # so we'll always allow GET, HEAD or OPTIONS requests.
 
         # Instance must have an attribute named `owner`.
-        return obj.account in list(chain(
+        return obj.account.id in list(chain(
             request.user.accounts.values_list('id', flat=True),
             request.user.guests.values_list('account__id', flat=True)
         ))
+
+
+class ChangesFilter(django_filters.rest_framework.FilterSet):
+    last_edited = django_filters.IsoDateTimeFilter(name="last_edited", lookup_expr='gte')
+    class Meta:
+        model = Change
+        fields = ['account', 'last_edited']
 
 #
 # List of entry points Category, DebitsCredits, Change
@@ -42,7 +50,7 @@ class ApiChange(viewsets.ModelViewSet):
     serializer_class = ChangeSerializer
     permission_classes = (permissions.IsAuthenticated, CanWriteAccount)
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('account',)
+    filter_class = ChangesFilter
 
     def get_queryset(self):
         return Change.objects.filter(

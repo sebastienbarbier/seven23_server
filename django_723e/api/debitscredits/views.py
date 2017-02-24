@@ -13,6 +13,7 @@ from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 
+import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
 
 
@@ -25,12 +26,17 @@ class CanWriteAccount(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # Read permissions are allowed to any request,
         # so we'll always allow GET, HEAD or OPTIONS requests.
-
         # Instance must have an attribute named `owner`.
-        return obj.account in list(chain(
+        return obj.account.id in list(chain(
             request.user.accounts.values_list('id', flat=True),
             request.user.guests.values_list('account__id', flat=True)
         ))
+
+class DebitscreditsFilter(django_filters.rest_framework.FilterSet):
+    last_edited = django_filters.IsoDateTimeFilter(name="last_edited", lookup_expr='gte')
+    class Meta:
+        model = DebitsCredits
+        fields = ['account', 'last_edited']
 
 class ApiDebitscredits(viewsets.ModelViewSet):
     """
@@ -40,7 +46,7 @@ class ApiDebitscredits(viewsets.ModelViewSet):
     serializer_class = DebitsCreditsSerializer
     permission_classes = (permissions.IsAuthenticated, CanWriteAccount)
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('account',)
+    filter_class = DebitscreditsFilter
 
     def get_queryset(self):
         return DebitsCredits.objects.filter(
