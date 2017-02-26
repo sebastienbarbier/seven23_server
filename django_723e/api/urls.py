@@ -1,7 +1,6 @@
 """
 	urls.py : routes from api/
 """
-
 from django.conf.urls import include, url
 from django.contrib import admin
 
@@ -27,7 +26,7 @@ urlpatterns = [
     url(r'^v1/changes',       include('django_723e.api.changes.urls', namespace='v1')),
     url(r'^v1/currencies',    include('django_723e.api.currencies.urls', namespace='v1')),
     url(r'^v1/debitscredits', include('django_723e.api.debitscredits.urls', namespace='v1')),
-    # URL used to send mail
+
     url(r'^v1/rest-auth/',    include('rest_auth.urls', namespace='v1')),
 ]
 
