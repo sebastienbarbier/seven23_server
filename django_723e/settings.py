@@ -148,6 +148,8 @@ WSGI_APPLICATION = 'django_723e.wsgi.application'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL')
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Internationalization

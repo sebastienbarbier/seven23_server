@@ -19,6 +19,7 @@ def api_init(request):
     # Return API Version.
     result['api_version'] = settings.API_VERSION
     result['allow_account_creation'] = settings.ALLOW_ACCOUNT_CREATION
+    result['contact'] = settings.CONTACT_EMAIL
 
     if request.user.is_authenticated():
         result['is_authenticated'] = True
