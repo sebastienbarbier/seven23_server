@@ -23,17 +23,17 @@ PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 SECRET_KEY = 'k3-=2r(yq-towhfr-$@am&p%ze_&1!m!n7h2p%6*=fn4nr$=d^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG') != 'False'
 
 API_VERSION = [1, 0, 0, 'beta']
 
 # Allow public account creation
-ALLOW_ACCOUNT_CREATION = DEBUG or os.environ.get('ALLOW_ACCOUNT_CREATION') == 'True'
+ALLOW_ACCOUNT_CREATION = os.environ.get('ALLOW_ACCOUNT_CREATION') == 'True'
 OLD_PASSWORD_FIELD_ENABLED = True
 
 APPEND_SLASH = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: '/home/media/media.lawrence.com/media/'
 MEDIA_ROOT = BASE_DIR + '/media/'
