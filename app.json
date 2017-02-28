@@ -1,13 +1,13 @@
 {
-  "name": "723 Server",
+  "name": "seven23 Server",
   "description": "Manage your expenses.",
   "keywords": [
-    "723e",
+    "seven23",
     "Django",
     "Python"
   ],
-  "website": "https://723e.com/",
-  "repository": "https://github.com/sebastienbarbier/723e_server",
+  "website": "https://seven23.io/",
+  "repository": "https://github.com/sebastienbarbier/seven23_server",
   "addons": [
     "heroku-postgresql",
     "newrelic"
