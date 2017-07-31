@@ -1,0 +1,6 @@
+ {
+      "deploy": {
+         "module": "seven23.wsgi:application",
+         "managetasks": [ "migrate", "collectstatic --no-input" ]
+      }
+   }
