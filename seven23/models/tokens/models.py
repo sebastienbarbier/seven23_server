@@ -18,7 +18,7 @@ class AbstractToken(models.Model):
     class Meta:
         ordering = ('creationDate', 'token')
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % (self.token)
 
 class DiscountCode(AbstractToken):
@@ -43,7 +43,7 @@ class DiscountCode(AbstractToken):
                                        blank=True,
                                        null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % (self.token)
 
 class EmailVerificationToken(AbstractToken):
@@ -53,7 +53,7 @@ class EmailVerificationToken(AbstractToken):
     user = models.ForeignKey(User)
     newEmail = models.EmailField(_(u'New email'), blank=False, null=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % (self.token)
 
 class AllowAccountAccessToken(AbstractToken):
@@ -65,5 +65,5 @@ class AllowAccountAccessToken(AbstractToken):
     email = models.EmailField(_(u'User email'), blank=False, null=False)
     permission = models.CharField(max_length=1, choices=PERMISSIONS, null=False, blank=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % (self.token)
