@@ -16,7 +16,6 @@ from rest_framework import status
 import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
 
-
 class CanWriteAccount(permissions.BasePermission):
     """
         Object-level permission to only allow owners of an object to edit it.
