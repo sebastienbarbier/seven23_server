@@ -36,7 +36,7 @@ class DebitscreditsFilter(django_filters.rest_framework.FilterSet):
     last_edited = django_filters.IsoDateTimeFilter(name="last_edited", lookup_expr='gte')
     class Meta:
         model = DebitsCredits
-        fields = ['account', 'last_edited']
+        fields = ['account', 'event', 'last_edited']
 
 class ApiDebitscredits(viewsets.ModelViewSet):
     """
