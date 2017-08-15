@@ -1,6 +1,7 @@
 """
     Profile models
 """
+import uuid
 from django.db import models
 # Default user model may get swapped out of the system and hence.
 from django.contrib.auth.models import User
@@ -12,13 +13,13 @@ class AbstractToken(models.Model):
     """
         Abstract Token object.
     """
-    token = models.TextField(_(u'Token'), max_length=256, unique=True)
+    token = models.CharField(_(u'Token'), default=uuid.uuid4, max_length=32, unique=True, editable=False)
     creationDate = models.DateField(_(u''), auto_now_add=True)
 
     class Meta:
         ordering = ('creationDate', 'token')
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % (self.token)
 
 class DiscountCode(AbstractToken):
@@ -43,7 +44,7 @@ class DiscountCode(AbstractToken):
                                        blank=True,
                                        null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % (self.token)
 
 class EmailVerificationToken(AbstractToken):
@@ -53,7 +54,7 @@ class EmailVerificationToken(AbstractToken):
     user = models.ForeignKey(User)
     newEmail = models.EmailField(_(u'New email'), blank=False, null=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % (self.token)
 
 class AllowAccountAccessToken(AbstractToken):
@@ -65,5 +66,5 @@ class AllowAccountAccessToken(AbstractToken):
     email = models.EmailField(_(u'User email'), blank=False, null=False)
     permission = models.CharField(max_length=1, choices=PERMISSIONS, null=False, blank=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % (self.token)

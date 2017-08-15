@@ -2,7 +2,7 @@
     Admin transactions module
 """
 from django.contrib import admin
-from seven23.models.transactions.models import DebitsCredits, Change
+from seven23.models.transactions.models import DebitsCredits, Change, PaidBy
 
 class DebitsCreditsAdmin(admin.ModelAdmin):
     """ DebitsCredits model """
@@ -17,3 +17,4 @@ class ChangeAdmin(admin.ModelAdmin):
 
 admin.site.register(DebitsCredits, DebitsCreditsAdmin)
 admin.site.register(Change, ChangeAdmin)
+admin.site.register(PaidBy)

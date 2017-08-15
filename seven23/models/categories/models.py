@@ -23,7 +23,7 @@ class Category(MPTTModel):
                                  default=True,
                                  help_text=_(u"Delete a category only disable it"))
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % (self.name)
 
     class MPTTMeta:

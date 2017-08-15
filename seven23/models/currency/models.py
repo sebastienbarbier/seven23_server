@@ -19,7 +19,7 @@ class Currency(models.Model):
         ordering = ('name',)
         verbose_name = _(u'Currency')
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s (%s)' % (self.name, self.sign)
 
     def verbose(self, amount):
