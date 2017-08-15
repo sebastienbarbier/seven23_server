@@ -33,7 +33,7 @@ class Account(models.Model):
         # First save to have correct value
         super(Account, self).save(*args, **kwargs) # Call the "real" save() method
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s - %s' % (self.owner, self.name)
 
 class AccountGuests(models.Model):
@@ -50,5 +50,5 @@ class AccountGuests(models.Model):
         verbose_name_plural = _(u'Guests')
         verbose_name = _(u'Guest')
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % (self.permissions)

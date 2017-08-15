@@ -20,7 +20,7 @@ PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'k3-=2r(yq-towhfr-$@am&p%ze_&1!m!n7h2p%6*=fn4nr$=d^'
+SECRET_KEY = os.environ.get('SECRET_KEY') or 'k3-=2r(yq-towhfr-$@am&p%ze_&1!m!n7h2p%6*=fn4nr$=d^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG') != 'False'
@@ -102,6 +102,7 @@ INSTALLED_APPS = (
     'seven23.models.accounts',
     'seven23.models.categories',
     'seven23.models.currency',
+    'seven23.models.events',
     'seven23.models.tokens',
     'seven23.models.transactions'
 )

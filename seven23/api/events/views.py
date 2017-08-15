@@ -3,10 +3,8 @@
 """
 from itertools import chain
 
-from seven23.models.categories.models import Category
-from seven23.models.categories.serializers import CategorySerializer
-from seven23.models.transactions.models import DebitsCredits, Change
-from seven23.models.transactions.serializers import DebitsCreditsSerializer, ChangeSerializer
+from seven23.models.events.models import Event
+from seven23.models.events.serializers import EventSerializer
 
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import permission_classes
@@ -25,30 +23,32 @@ class CanWriteAccount(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # Read permissions are allowed to any request,
         # so we'll always allow GET, HEAD or OPTIONS requests.
+
         # Instance must have an attribute named `owner`.
         return obj.account.id in list(chain(
             request.user.accounts.values_list('id', flat=True),
             request.user.guests.values_list('account__id', flat=True)
         ))
 
-class DebitscreditsFilter(django_filters.rest_framework.FilterSet):
-    last_edited = django_filters.IsoDateTimeFilter(name="last_edited", lookup_expr='gte')
+class EventFilter(django_filters.rest_framework.FilterSet):
     class Meta:
-        model = DebitsCredits
-        fields = ['account', 'event', 'last_edited']
+        model = Event
+        fields = ['account']
 
-class ApiDebitscredits(viewsets.ModelViewSet):
+#
+# List of entry points Category, DebitsCredits, Change
+#
+class ApiEvent(viewsets.ModelViewSet):
     """
-        Deliver DebitsCredits model object
-
+        Deliver Change objects
     """
-    serializer_class = DebitsCreditsSerializer
+    serializer_class = EventSerializer
     permission_classes = (permissions.IsAuthenticated, CanWriteAccount)
     filter_backends = (DjangoFilterBackend,)
-    filter_class = DebitscreditsFilter
+    filter_class = EventFilter
 
     def get_queryset(self):
-        return DebitsCredits.objects.filter(
+        return Event.objects.filter(
             account__in=list(chain(
                 self.request.user.accounts.values_list('id', flat=True),
                 self.request.user.guests.values_list('account__id', flat=True)

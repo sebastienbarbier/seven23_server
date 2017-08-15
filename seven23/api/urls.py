@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^v1/changes',       include('seven23.api.changes.urls', namespace='v1')),
     url(r'^v1/currencies',    include('seven23.api.currencies.urls', namespace='v1')),
     url(r'^v1/debitscredits', include('seven23.api.debitscredits.urls', namespace='v1')),
+    url(r'^v1/events',        include('seven23.api.events.urls', namespace='v1')),
 
     url(r'^v1/rest-auth/',    include('rest_auth.urls', namespace='v1')),
 ]
