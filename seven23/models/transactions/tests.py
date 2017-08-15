@@ -345,3 +345,17 @@ class TransactionsTest(TransactionTestCase):
         # Check is move_children_right properly moved children's category one level up.
         self.assertEqual(pb.amount, 10.0)
         self.assertRaises(ValidationError, PaidBy.objects.create, transaction=transaction, attendee=self.att2, amount=10.0)
+
+    def test_paid_by_cascade_deletion(self):
+
+        transaction = DebitsCredits.objects.create(account=self.account,
+                                                   date=datetime.datetime.today() -
+                                                   datetime.timedelta(days=20),
+                                                   name="Buy a 240 USD item",
+                                                   local_amount=240,
+                                                   local_currency=self.usd,
+                                                   event=self.event1)
+        obj = PaidBy.objects.create(transaction=transaction, attendee=self.att1, amount=9.6)
+        self.assertNotEqual(obj.pk, None)
+        transaction.delete();
+        self.assertRaises(PaidBy.DoesNotExist, PaidBy.objects.get, pk=obj.pk)

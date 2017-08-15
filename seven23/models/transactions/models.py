@@ -98,14 +98,14 @@ class Change(AbstractTransaction):
         """ New value stringified """
         return self.new_currency.verbose(self.new_amount)
 
-
 class PaidBy(models.Model):
-    transaction = models.ForeignKey(DebitsCredits, blank=False, null=False)
-    attendee = models.ForeignKey(Attendee, blank=False, null=False)
+    transaction = models.ForeignKey(DebitsCredits, related_name='payments', on_delete=models.CASCADE, blank=False, null=False)
+    attendee = models.ForeignKey(Attendee, related_name='payments', blank=False, null=False)
     amount = models.FloatField(_(u'Amount'),
                              null=False,
                              blank=False,
                              help_text=_(u"Amount paid for this shared transaction"))
+
     def clean(self, *args, **kwargs):
         # add custom validation here
         if self.attendee not in list(self.transaction.event.attendees.all()):
