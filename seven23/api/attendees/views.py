@@ -3,8 +3,8 @@
 """
 from itertools import chain
 
-from seven23.models.events.models import Event, Attendee
-from seven23.models.events.serializers import EventSerializer, AttendeeSerializer
+from seven23.models.events.models import Attendee
+from seven23.models.events.serializers import AttendeeSerializer
 
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import permission_classes
@@ -14,7 +14,7 @@ from rest_framework import status
 import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
 
-class CanWriteEvent(permissions.BasePermission):
+class CanWriteAttendee(permissions.BasePermission):
     """
         Object-level permission to only allow owners of an object to edit it.
         Assumes the model instance has an `owner` attribute.
@@ -25,33 +25,32 @@ class CanWriteEvent(permissions.BasePermission):
         # so we'll always allow GET, HEAD or OPTIONS requests.
 
         # Instance must have an attribute named `owner`.
-        return obj.account.id in list(chain(
+        return obj.event.account.id in list(chain(
             request.user.accounts.values_list('id', flat=True),
             request.user.guests.values_list('account__id', flat=True)
         ))
 
-class EventFilter(django_filters.rest_framework.FilterSet):
+class AttendeeFilter(django_filters.rest_framework.FilterSet):
     class Meta:
-        model = Event
-        fields = ['account']
+        model = Attendee
+        fields = ['event']
 
 #
 # List of entry points Category, DebitsCredits, Change
 #
-class ApiEvent(viewsets.ModelViewSet):
+class ApiAttendee(viewsets.ModelViewSet):
     """
         Deliver Change objects
     """
-    serializer_class = EventSerializer
-    permission_classes = (permissions.IsAuthenticated, CanWriteEvent)
+    serializer_class = AttendeeSerializer
+    permission_classes = (permissions.IsAuthenticated, CanWriteAttendee)
     filter_backends = (DjangoFilterBackend,)
-    filter_class = EventFilter
+    filter_class = AttendeeFilter
 
     def get_queryset(self):
-        return Event.objects.filter(
-            account__in=list(chain(
+        return Attendee.objects.filter(
+            event__account__in=list(chain(
                 self.request.user.accounts.values_list('id', flat=True),
                 self.request.user.guests.values_list('account__id', flat=True)
             ))
         )
-

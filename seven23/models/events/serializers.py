@@ -19,7 +19,7 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
     """
         Serialize Event model
     """
-    account = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all(), required=False)
+    account = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all())
     attendees = AttendeeSerializer(many=True, required=False)
 
     class Meta:
