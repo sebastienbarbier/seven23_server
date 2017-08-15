@@ -28,12 +28,13 @@ class DebitsCreditsSerializer(serializers.HyperlinkedModelSerializer):
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), required=False)
     local_currency = serializers.PrimaryKeyRelatedField(queryset=Currency.objects.all())
 
-    payments = PaidBySerializer(many=True)
+    used_by = serializers.PrimaryKeyRelatedField(queryset=Attendee.objects.all(), many=True)
+    payments = PaidBySerializer(many=True, required=False)
 
     class Meta:
         model = DebitsCredits
         fields = ('id', 'account', 'name', 'local_amount', 'local_currency', 'date', 'active',
-                  'category', 'last_edited', 'payments')
+                  'category', 'last_edited', 'payments', 'used_by')
 
 
 class ChangeSerializer(serializers.HyperlinkedModelSerializer):

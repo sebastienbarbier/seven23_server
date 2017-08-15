@@ -30,10 +30,14 @@ class CanWriteAccount(permissions.BasePermission):
             request.user.guests.values_list('account__id', flat=True)
         ))
 
+class EventFilter(django_filters.rest_framework.FilterSet):
+    class Meta:
+        model = Event
+        fields = ['account']
+
 #
 # List of entry points Category, DebitsCredits, Change
 #
-
 class ApiEvent(viewsets.ModelViewSet):
     """
         Deliver Change objects
@@ -41,6 +45,7 @@ class ApiEvent(viewsets.ModelViewSet):
     serializer_class = EventSerializer
     permission_classes = (permissions.IsAuthenticated, CanWriteAccount)
     filter_backends = (DjangoFilterBackend,)
+    filter_class = EventFilter
 
     def get_queryset(self):
         return Event.objects.filter(

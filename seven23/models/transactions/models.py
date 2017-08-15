@@ -100,7 +100,7 @@ class Change(AbstractTransaction):
 
 class PaidBy(models.Model):
     transaction = models.ForeignKey(DebitsCredits, related_name='payments', on_delete=models.CASCADE, blank=False, null=False)
-    attendee = models.ForeignKey(Attendee, related_name='payments', blank=False, null=False)
+    attendee = models.ForeignKey(Attendee, related_name='payments', on_delete=models.CASCADE, blank=False, null=False)
     amount = models.FloatField(_(u'Amount'),
                              null=False,
                              blank=False,
