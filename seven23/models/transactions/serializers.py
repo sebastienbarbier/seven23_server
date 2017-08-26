@@ -34,7 +34,7 @@ class DebitsCreditsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = DebitsCredits
         fields = ('id', 'account', 'name', 'local_amount', 'local_currency', 'date', 'active',
-                  'category', 'last_edited', 'payments', 'used_by')
+                  'category', 'last_edited')
 
 
 class ChangeSerializer(serializers.HyperlinkedModelSerializer):
