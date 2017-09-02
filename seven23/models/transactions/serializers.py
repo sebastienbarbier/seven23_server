@@ -28,8 +28,8 @@ class DebitsCreditsSerializer(serializers.HyperlinkedModelSerializer):
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), required=False)
     local_currency = serializers.PrimaryKeyRelatedField(queryset=Currency.objects.all())
 
-    used_by = serializers.PrimaryKeyRelatedField(queryset=Attendee.objects.all(), many=True, required=False)
-    payments = PaidBySerializer(many=True, required=False)
+    # used_by = serializers.PrimaryKeyRelatedField(queryset=Attendee.objects.all(), many=True, required=False)
+    # payments = PaidBySerializer(many=True, required=False)
 
     class Meta:
         model = DebitsCredits
