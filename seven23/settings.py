@@ -34,6 +34,7 @@ OLD_PASSWORD_FIELD_ENABLED = True
 APPEND_SLASH = False
 
 ALLOWED_HOSTS = ['*']
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: '/home/media/media.lawrence.com/media/'
 MEDIA_ROOT = BASE_DIR + '/media/'
@@ -49,9 +50,11 @@ MEDIA_URL = '/_media/'
 # Example: '/home/media/media.lawrence.com/static/'
 STATIC_ROOT = BASE_DIR + '/collectstatic/'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
+STATICFILES_DIRS = (
+  os.path.join(BASE_DIR, 'seven23/static/'),
+)
 
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 
 LOGIN_URL = '/'
