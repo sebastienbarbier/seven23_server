@@ -2,10 +2,10 @@ all:
 	python manage.py runserver 0.0.0.0:8000
 
 start:
-	launchctl load /usr/local/opt/postgresql/homebrew.mxcl.postgresql.plist
+	brew services start postgresql
 
 stop:
-	launchctl unload /usr/local/opt/postgresql/homebrew.mxcl.postgresql.plist
+	brew services stop postgresql
 
 test:
 	python manage.py test

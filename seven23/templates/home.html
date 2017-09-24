@@ -1,10 +1,58 @@
 <html>
 	<head>
-		<meta charset="utf-8">
-		<title>seven23.io</title>
+		<meta charset="utf-8" />
+		<title>seven23, a personnal budget app for nomads</title>
 	</head>
 	<body>
-		<h1>seven23</h1>
-		<p>Coming soon</p>
+        <header>
+    		<h1>seven23</h1>
+    		<p>A personnal budget app for nomads, but not only!</p>
+        </header>
+        <main>
+            <h2>Features</h2>
+
+            <p>All you transactions are saved and assigned to a category in there original currency. If you register your exchange rates, you can switch currency and see how much you paid.</p>
+
+            <p>We tried to keep everything simple. We do not connect to your bank account, and currency exchange rate can be slighly different from the real one you used but our goal here is to identify patterns and changes in your expenses, not to manage your capital.</p>
+
+            <p>Right now you have access to:</p>
+            <ul>
+                <li>List of transactions</li>
+                <li>Categories</li>
+                <li>Multi currency</li>
+                <li>Designed for desktop, tablet, and phone</li>
+            </ul>
+
+            <p>Hopefully coming soon:</p>
+            <ul>
+                <li>Shared budget for events</li>
+                <li>Chatbot over Facebook Messenger</li>
+            </ul>
+
+            <p>Seven23 is open by designed, and powered by a completely transparent gouvernance shared in regular posts on our blog.</p>
+
+            <h2>Hosting / Pricing</h2>
+
+            <h3>Self-hosted</h3>
+
+            <p>You can deploy and use your own instance of seven23 at no cost other than your hosting. Seven23 is open-source and licensed under the MIT Licence so feel free to edit, change, and constribute with your changes on our github page. You can also contribute with a donation.</p>
+
+            <h3>Seven23 hosting</h3>
+
+            <p>We provide a main instance as seven23.io where we handle all the hosting for you, that include backup, security issues, and keep it up to date.</p>
+
+            <p>Subscription will be opening later this year with a <strong>three months free trial period</strong>, then 29€ / year..</p>
+
+            <h2>Newsletter</h2>
+
+            <p>Our newsletter will keep you inform of our latest evolution.</p>
+
+            {% include 'newsletter/horizontalForm.html' %}
+
+        </main>
+
+        <footer>
+            <p>Developped with ❤️ by <a href="https://sebastienbarbier.com">Sebastien Barbier</a></p>
+        </footer>
 	</body>
 </html>
