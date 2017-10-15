@@ -3,7 +3,6 @@ Django
 django-colorfield
 django-cors-headers
 django-grappelli
-django-mptt
 django-filter
 django-rest-auth[with_social]
 djangorestframework
