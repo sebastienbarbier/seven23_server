@@ -55,30 +55,6 @@ class TransactionsTest(TransactionTestCase):
                                             fullname="Attendee 2",
                                             email="b@ab.com")
 
-    def test_categories_move_right(self):
-        """
-            Create sub-categories and try to move them from one level up.
-            Using MPTT to keep an organized structure
-        """
-        # Check is move_children_right properly moved children's category one level up.
-        cat1_1 = Category.objects.create(account=self.account,
-                                         name="Category 1.1",
-                                         parent=self.cat1)
-        cat1_2 = Category.objects.create(account=self.account,
-                                         name="Category 1.2",
-                                         parent=self.cat1)
-        self.cat1.move_children_right()
-        self.assertEqual(self.cat1.get_children().count(), 0)
-
-        # Check if disabled function properly moved children's category one level up.
-        cat1_1.parent = self.cat1
-        cat1_1.save()
-        cat1_2.parent = self.cat1
-        cat1_2.save()
-        self.cat1.disable()
-        self.assertEqual(self.cat1.get_children().count(), 0)
-
-
     def test_categories_delete(self):
         """
             Try to delete a Category.
