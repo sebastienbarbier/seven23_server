@@ -27,7 +27,7 @@ def api_init(request):
 
     try:
         terms = TermsAndConditions.objects.latest('date')
-        result['terms_and_conditions_date'] = terms.date
+        result['terms_and_conditions_date'] = terms.date.strftime("%Y-%m-%d")
         result['terms_and_conditions'] = markdown2.markdown(terms.markdown)
     except TermsAndConditions.DoesNotExist:
        result['terms_and_conditions_date'] = None
