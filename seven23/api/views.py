@@ -3,11 +3,15 @@
 """
 
 import json
+import os
+import markdown2
 from django.http import HttpResponse
 
+from django.db import models
 from rest_framework.decorators import api_view
 
 from seven23 import settings
+from seven23.models.terms.models import TermsAndConditions
 
 @api_view(["GET"])
 def api_init(request):
@@ -20,6 +24,15 @@ def api_init(request):
     result['api_version'] = settings.API_VERSION
     result['allow_account_creation'] = settings.ALLOW_ACCOUNT_CREATION
     result['contact'] = settings.CONTACT_EMAIL
+
+    try:
+        terms = TermsAndConditions.objects.latest('date')
+        result['terms_and_conditions_date'] = terms.date
+        result['terms_and_conditions'] = markdown2.markdown(terms.markdown)
+    except TermsAndConditions.DoesNotExist:
+       result['terms_and_conditions_date'] = None
+       result['terms_and_conditions'] = None
+
 
     if request.user.is_authenticated():
         result['is_authenticated'] = True

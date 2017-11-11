@@ -105,6 +105,7 @@ INSTALLED_APPS = (
     'seven23.models.categories',
     'seven23.models.currency',
     'seven23.models.events',
+    'seven23.models.terms',
     'seven23.models.tokens',
     'seven23.models.transactions'
 )
