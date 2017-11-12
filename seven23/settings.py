@@ -97,8 +97,6 @@ INSTALLED_APPS = (
     'rest_framework.authtoken', # Token Authentification
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
     'rest_auth.registration',
     'rest_auth',
     'seven23.models.accounts',
@@ -110,7 +108,7 @@ INSTALLED_APPS = (
     'seven23.models.transactions'
 )
 
-SITE_ID = 1
+SITE_ID = 1 # Required by rest_auth
 
 MIDDLEWARE_CLASSES = (
     'corsheaders.middleware.CorsMiddleware',
@@ -131,6 +129,7 @@ REST_FRAMEWORK = {
 }
 
 REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'seven23.models.rest_auth.serializers.UserSerializer',
     'PASSWORD_RESET_SERIALIZER': 'seven23.models.rest_auth.serializers.PasswordResetSerializer',
 }
 

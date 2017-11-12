@@ -12,6 +12,16 @@ from rest_framework.exceptions import ValidationError
 # Get the UserModel
 UserModel = get_user_model()
 
+class UserSerializer(serializers.ModelSerializer):
+    """
+    User model w/o password
+    """
+
+    class Meta:
+        model = UserModel
+        fields = ('pk', 'username', 'email')
+        read_only_fields = ('email',)
+
 class PasswordResetSerializer(serializers.Serializer):
     """
     Serializer for requesting a password reset e-mail.
