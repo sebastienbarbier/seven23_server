@@ -133,6 +133,7 @@ REST_AUTH_SERIALIZERS = {
     'PASSWORD_RESET_SERIALIZER': 'seven23.models.rest_auth.serializers.PasswordResetSerializer',
 }
 
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 
 SWAGGER_SETTINGS = {
     'USE_SESSION_AUTH': False,

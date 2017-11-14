@@ -8,6 +8,16 @@ from django.utils.encoding import force_text
 
 from rest_framework import serializers, exceptions
 from rest_framework.exceptions import ValidationError
+from allauth.account.models import EmailAddress
+
+try:
+    from allauth.account import app_settings as allauth_settings
+    from allauth.utils import (email_address_exists,
+                               get_username_max_length)
+    from allauth.account.adapter import get_adapter
+    from allauth.account.utils import setup_user_email
+except ImportError:
+    raise ImportError("allauth needs to be added to INSTALLED_APPS.")
 
 # Get the UserModel
 UserModel = get_user_model()
@@ -16,11 +26,18 @@ class UserSerializer(serializers.ModelSerializer):
     """
     User model w/o password
     """
+    verified = serializers.SerializerMethodField()
 
     class Meta:
         model = UserModel
-        fields = ('pk', 'username', 'email')
+        fields = ('pk', 'username', 'email', 'verified')
         read_only_fields = ('email',)
+
+    def get_verified(self, obj):
+        try:
+            return EmailAddress.objects.get(user=obj).verified
+        except:
+            return False
 
 class PasswordResetSerializer(serializers.Serializer):
     """
