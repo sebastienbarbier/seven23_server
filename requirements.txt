@@ -4,11 +4,11 @@ django-colorfield
 django-cors-headers
 django-grappelli
 django-filter
+django-mptt
 django-rest-auth[with_social]
 djangorestframework
 django-rest-swagger
 gunicorn
-mptt
 markdown2
 newrelic
 psycopg2
