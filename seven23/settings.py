@@ -83,6 +83,7 @@ TEMPLATES = [
 
 # Application definition
 INSTALLED_APPS = (
+    'mptt',
     'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',

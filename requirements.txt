@@ -8,6 +8,7 @@ django-rest-auth[with_social]
 djangorestframework
 django-rest-swagger
 gunicorn
+mptt
 markdown2
 newrelic
 psycopg2
