@@ -2,7 +2,6 @@
 """
     Models for categories module
 """
-from mptt.models import MPTTModel, TreeForeignKey
 from django.db import models
 from django.utils.translation import ugettext as _
 
@@ -25,9 +24,6 @@ class Category(models.Model):
 
     def __str__(self):
         return u'%s' % (self.name)
-
-    class MPTTMeta:
-        order_insertion_by = ['name']
 
     def enable(self):
         """ Enable """
