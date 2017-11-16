@@ -14,6 +14,8 @@ from rest_framework.authtoken.models import Token
 from seven23 import settings
 from seven23.models.terms.models import TermsAndConditions
 
+from allauth.account.models import EmailAddress
+
 @api_view(["GET"])
 def api_init(request):
     """
@@ -37,16 +39,3 @@ def api_init(request):
     # Return json format string.
     j = json.dumps(result, separators=(',', ':'))
     return HttpResponse(j, content_type='application/json')
-
-@api_view(["DELETE"])
-def revoke_token(request):
-    """
-        Revoke user token
-    """
-    try:
-        token = Token.objects.get(user=request.user)
-        token.delete()
-    except:
-        return HttpResponse(status=404)
-
-    return HttpResponse(status=200)
