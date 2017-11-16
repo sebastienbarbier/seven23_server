@@ -9,6 +9,7 @@ from django.http import HttpResponse
 
 from django.db import models
 from rest_framework.decorators import api_view
+from rest_framework.authtoken.models import Token
 
 from seven23 import settings
 from seven23.models.terms.models import TermsAndConditions
@@ -33,13 +34,19 @@ def api_init(request):
        result['terms_and_conditions_date'] = None
        result['terms_and_conditions'] = None
 
-
-    if request.user.is_authenticated():
-        result['is_authenticated'] = True
-        result['id'] = request.user.id
-    else:
-        result['is_authenticated'] = False
-
     # Return json format string.
     j = json.dumps(result, separators=(',', ':'))
     return HttpResponse(j, content_type='application/json')
+
+@api_view(["DELETE"])
+def revoke_token(request):
+    """
+        Revoke user token
+    """
+    try:
+        token = Token.objects.get(user=request.user)
+        token.delete()
+    except:
+        return HttpResponse(status=404)
+
+    return HttpResponse(status=200)

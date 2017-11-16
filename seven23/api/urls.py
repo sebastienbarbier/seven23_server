@@ -7,7 +7,7 @@ from django.contrib import admin
 from rest_framework.authtoken import views
 from rest_framework import routers
 
-from seven23.api.views import api_init
+from seven23.api.views import api_init, revoke_token
 
 from seven23 import settings
 
@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^v1/debitscredits', include('seven23.api.debitscredits.urls', namespace='v1')),
     url(r'^v1/events',        include('seven23.api.events.urls', namespace='v1')),
     url(r'^v1/attendees',     include('seven23.api.attendees.urls', namespace='v1')),
+    url(r'^v1/token/revoke$', revoke_token, name='token.revoke'),
 
     url(r'^v1/rest-auth/',    include('rest_auth.urls', namespace='v1')),
 ]
