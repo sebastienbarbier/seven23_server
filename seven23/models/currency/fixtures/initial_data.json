@@ -1,37 +1,92 @@
-[{
-	"model": "currency.currency",
-	"pk": 1,
-	"fields": {
-		"name": "Euro",
-		"sign": "\u20ac",
-		"space": true,
-		"after_amount": true
-	}
-}, {
-	"model": "currency.currency",
-	"pk": 2,
-	"fields": {
-		"name": "Swiss Franc",
-		"sign": "CHF",
-		"space": true,
-		"after_amount": true
-	}
-}, {
-	"model": "currency.currency",
-	"pk": 3,
-	"fields": {
-		"name": "Hungarian Forint",
-		"sign": "Ft",
-		"space": true,
-		"after_amount": true
-	}
-}, {
-	"model": "currency.currency",
-	"pk": 4,
-	"fields": {
-		"name": "Thai Baths",
-		"sign": "THB",
-		"space": true,
-		"after_amount": true
-	}
-}]
+[
+    {
+        "model": "currency.currency",
+        "pk": 1,
+        "fields": {
+            "name": "Euro",
+            "sign": "\u20ac",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 2,
+        "fields": {
+            "name": "Swiss Franc",
+            "sign": "CHF",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 3,
+        "fields": {
+            "name": "Hungarian Forint",
+            "sign": "Ft",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 4,
+        "fields": {
+            "name": "Thai Baths",
+            "sign": "THB",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 5,
+        "fields": {
+            "name": "Malaysia Ringgits",
+            "sign": "MYR",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 6,
+        "fields": {
+            "name": "Philippine Peso",
+            "sign": "PHP",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 7,
+        "fields": {
+            "name": "US Dollars",
+            "sign": "$",
+            "space": true,
+            "after_amount": false
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 8,
+        "fields": {
+            "name": "Japanese yen",
+            "sign": "\u00a5",
+            "space": true,
+            "after_amount": false
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 9,
+        "fields": {
+            "name": "British Pounds",
+            "sign": "\u00a3",
+            "space": true,
+            "after_amount": false
+        }
+    }
+]

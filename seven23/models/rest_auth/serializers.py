@@ -22,15 +22,19 @@ except ImportError:
 # Get the UserModel
 UserModel = get_user_model()
 
+from seven23.models.currency.models import Currency
+from seven23.models.currency.serializers import CurrencySerializer
+
 class UserSerializer(serializers.ModelSerializer):
     """
     User model w/o password
     """
+    favoritesCurrencies = serializers.PrimaryKeyRelatedField(many=True, queryset=Currency.objects.all())
     verified = serializers.SerializerMethodField()
 
     class Meta:
         model = UserModel
-        fields = ('pk', 'username', 'email', 'verified')
+        fields = ('pk', 'username', 'email', 'verified', 'favoritesCurrencies')
         read_only_fields = ('email',)
 
     def get_verified(self, obj):

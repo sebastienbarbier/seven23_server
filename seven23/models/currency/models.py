@@ -3,6 +3,7 @@
 """
 from django.db import models
 from django.utils.translation import ugettext as _
+from django.contrib.auth.models import User
 
 class Currency(models.Model):
     """
@@ -14,6 +15,7 @@ class Currency(models.Model):
     sign = models.CharField(_('Sign'), max_length=6)
     space = models.BooleanField(_(u'Add a space between amount and sign'), default=True)
     after_amount = models.BooleanField(_(u'Sign position'), choices=CHOICES, default=True)
+    favorite = models.ManyToManyField(User, related_name="favoritesCurrencies")
 
     class Meta:
         ordering = ('name',)
@@ -38,3 +40,5 @@ class Currency(models.Model):
                 res += " "
             res += self.sign
         return res
+
+
