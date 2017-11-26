@@ -10,4 +10,4 @@ class CurrencySerializer(serializers.HyperlinkedModelSerializer):
     """
     class Meta:
         model = Currency
-        fields = ('id', 'name', 'sign', 'space', 'after_amount')
+        fields = ('id', 'name', 'code','sign', 'space', 'after_amount')

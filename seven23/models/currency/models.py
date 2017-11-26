@@ -12,6 +12,7 @@ class Currency(models.Model):
     CHOICES = ((False, _(u'Before the amount')), (True, _(u'After the amount')))
 
     name = models.CharField(_('Name'), max_length=128)
+    code = models.CharField(_('Code'), max_length=6, blank=True)
     sign = models.CharField(_('Sign'), max_length=6)
     space = models.BooleanField(_(u'Add a space between amount and sign'), default=True)
     after_amount = models.BooleanField(_(u'Sign position'), choices=CHOICES, default=True)
