@@ -88,5 +88,15 @@
             "space": true,
             "after_amount": false
         }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 10,
+        "fields": {
+            "name": "Bitcoin",
+            "sign": "BTC",
+            "space": true,
+            "after_amount": true
+        }
     }
 ]

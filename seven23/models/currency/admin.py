@@ -9,6 +9,6 @@ class CurrencyAdmin(admin.ModelAdmin):
     """
         Administrate Currency model
     """
-    list_display = ('name', 'sign', 'space', 'after_amount',)
+    list_display = ('name', 'code', 'sign', 'space', 'after_amount',)
 
 admin.site.register(Currency, CurrencyAdmin)
