@@ -19,8 +19,7 @@
             "code": "CHF",
             "sign": "CHF",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -31,8 +30,7 @@
             "code": "HUF",
             "sign": "Ft",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -55,8 +53,7 @@
             "code": "MYR",
             "sign": "MYR",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -67,8 +64,7 @@
             "code": "PHP",
             "sign": "PHP",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -79,8 +75,7 @@
             "code": "USD",
             "sign": "$",
             "space": true,
-            "after_amount": false,
-            "favorite": []
+            "after_amount": false
         }
     },
     {
@@ -91,8 +86,7 @@
             "code": "JPY",
             "sign": "\u00a5",
             "space": true,
-            "after_amount": false,
-            "favorite": []
+            "after_amount": false
         }
     },
     {
@@ -103,8 +97,7 @@
             "code": "GBP",
             "sign": "\u00a3",
             "space": true,
-            "after_amount": false,
-            "favorite": []
+            "after_amount": false
         }
     },
     {
@@ -115,8 +108,7 @@
             "code": "BTC",
             "sign": "BTC",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -127,8 +119,7 @@
             "code": "AED",
             "sign": "AED",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -139,8 +130,7 @@
             "code": "AFN",
             "sign": "AFN",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -151,8 +141,7 @@
             "code": "ALL",
             "sign": "ALL",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -163,8 +152,7 @@
             "code": "AMD",
             "sign": "AMD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -175,8 +163,7 @@
             "code": "ANG",
             "sign": "ANG",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -187,8 +174,7 @@
             "code": "AOA",
             "sign": "AOA",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -199,8 +185,7 @@
             "code": "ARS",
             "sign": "ARS",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -211,8 +196,7 @@
             "code": "AUD",
             "sign": "AUD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -223,8 +207,7 @@
             "code": "AWG",
             "sign": "AWG",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -235,8 +218,7 @@
             "code": "AZN",
             "sign": "AZN",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -247,8 +229,7 @@
             "code": "BAM",
             "sign": "BAM",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -259,8 +240,7 @@
             "code": "BBD",
             "sign": "BBD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -271,8 +251,7 @@
             "code": "BDT",
             "sign": "BDT",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -283,8 +262,7 @@
             "code": "BGN",
             "sign": "BGN",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -295,8 +273,7 @@
             "code": "BHD",
             "sign": "BHD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -307,8 +284,7 @@
             "code": "BIF",
             "sign": "BIF",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -319,8 +295,7 @@
             "code": "BMD",
             "sign": "BMD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -331,8 +306,7 @@
             "code": "BND",
             "sign": "BND",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -343,8 +317,7 @@
             "code": "BOB",
             "sign": "BOB",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -355,8 +328,7 @@
             "code": "BOV",
             "sign": "BOV",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -367,8 +339,7 @@
             "code": "BRL",
             "sign": "BRL",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -379,8 +350,7 @@
             "code": "BSD",
             "sign": "BSD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -391,8 +361,7 @@
             "code": "BTN",
             "sign": "BTN",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -403,8 +372,7 @@
             "code": "BWP",
             "sign": "BWP",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -415,8 +383,7 @@
             "code": "BYN",
             "sign": "BYN",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -427,8 +394,7 @@
             "code": "BZD",
             "sign": "BZD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -439,8 +405,7 @@
             "code": "CAD",
             "sign": "CAD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -451,8 +416,7 @@
             "code": "CDF",
             "sign": "CDF",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -463,8 +427,7 @@
             "code": "CHE",
             "sign": "CHE",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -475,8 +438,7 @@
             "code": "CHW",
             "sign": "CHW",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -487,8 +449,7 @@
             "code": "CLF",
             "sign": "CLF",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -499,8 +460,7 @@
             "code": "CLP",
             "sign": "CLP",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -511,8 +471,7 @@
             "code": "CNY",
             "sign": "CNY",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -523,8 +482,7 @@
             "code": "COP",
             "sign": "COP",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -535,8 +493,7 @@
             "code": "COU",
             "sign": "COU",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -547,8 +504,7 @@
             "code": "CRC",
             "sign": "CRC",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -559,8 +515,7 @@
             "code": "CUC",
             "sign": "CUC",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -571,8 +526,7 @@
             "code": "CUP",
             "sign": "CUP",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -583,8 +537,7 @@
             "code": "CVE",
             "sign": "CVE",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -595,8 +548,7 @@
             "code": "CZK",
             "sign": "CZK",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -607,8 +559,7 @@
             "code": "DJF",
             "sign": "DJF",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -619,8 +570,7 @@
             "code": "DKK",
             "sign": "DKK",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -631,8 +581,7 @@
             "code": "DOP",
             "sign": "DOP",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -643,8 +592,7 @@
             "code": "DZD",
             "sign": "DZD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -655,8 +603,7 @@
             "code": "EGP",
             "sign": "EGP",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -667,8 +614,7 @@
             "code": "ERN",
             "sign": "ERN",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -679,8 +625,7 @@
             "code": "ETB",
             "sign": "ETB",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -691,8 +636,7 @@
             "code": "FJD",
             "sign": "FJD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -703,8 +647,7 @@
             "code": "FKP",
             "sign": "FKP",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -715,8 +658,7 @@
             "code": "GBP",
             "sign": "GBP",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -727,8 +669,7 @@
             "code": "GEL",
             "sign": "GEL",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -739,8 +680,7 @@
             "code": "GHS",
             "sign": "GHS",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -751,8 +691,7 @@
             "code": "GIP",
             "sign": "GIP",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -763,8 +702,7 @@
             "code": "GMD",
             "sign": "GMD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -775,8 +713,7 @@
             "code": "GNF",
             "sign": "GNF",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -787,8 +724,7 @@
             "code": "GTQ",
             "sign": "GTQ",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -799,8 +735,7 @@
             "code": "GYD",
             "sign": "GYD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -811,8 +746,7 @@
             "code": "HKD",
             "sign": "HKD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -823,8 +757,7 @@
             "code": "HNL",
             "sign": "HNL",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -835,8 +768,7 @@
             "code": "HRK",
             "sign": "HRK",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -847,8 +779,7 @@
             "code": "HTG",
             "sign": "HTG",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -859,8 +790,7 @@
             "code": "IDR",
             "sign": "IDR",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -871,8 +801,7 @@
             "code": "ILS",
             "sign": "ILS",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -883,8 +812,7 @@
             "code": "INR",
             "sign": "INR",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -895,8 +823,7 @@
             "code": "IQD",
             "sign": "IQD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -907,8 +834,7 @@
             "code": "IRR",
             "sign": "IRR",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -919,8 +845,7 @@
             "code": "ISK",
             "sign": "ISK",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -931,8 +856,7 @@
             "code": "JMD",
             "sign": "JMD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -943,8 +867,7 @@
             "code": "JOD",
             "sign": "JOD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -955,8 +878,7 @@
             "code": "KES",
             "sign": "KES",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -967,8 +889,7 @@
             "code": "KGS",
             "sign": "KGS",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -979,8 +900,7 @@
             "code": "KHR",
             "sign": "KHR",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -991,8 +911,7 @@
             "code": "KMF",
             "sign": "KMF",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1003,8 +922,7 @@
             "code": "KPW",
             "sign": "KPW",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1015,8 +933,7 @@
             "code": "KRW",
             "sign": "KRW",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1027,8 +944,7 @@
             "code": "KWD",
             "sign": "KWD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1039,8 +955,7 @@
             "code": "KYD",
             "sign": "KYD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1051,8 +966,7 @@
             "code": "KZT",
             "sign": "KZT",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1063,8 +977,7 @@
             "code": "LAK",
             "sign": "LAK",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1075,8 +988,7 @@
             "code": "LBP",
             "sign": "LBP",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1087,8 +999,7 @@
             "code": "LKR",
             "sign": "LKR",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1099,8 +1010,7 @@
             "code": "LRD",
             "sign": "LRD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1111,8 +1021,7 @@
             "code": "LSL",
             "sign": "LSL",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1123,8 +1032,7 @@
             "code": "LYD",
             "sign": "LYD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1135,8 +1043,7 @@
             "code": "MAD",
             "sign": "MAD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1147,8 +1054,7 @@
             "code": "MDL",
             "sign": "MDL",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1159,8 +1065,7 @@
             "code": "MGA",
             "sign": "MGA",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1171,8 +1076,7 @@
             "code": "MKD",
             "sign": "MKD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1183,8 +1087,7 @@
             "code": "MMK",
             "sign": "MMK",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1195,8 +1098,7 @@
             "code": "MNT",
             "sign": "MNT",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1207,8 +1109,7 @@
             "code": "MOP",
             "sign": "MOP",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1219,8 +1120,7 @@
             "code": "MRO",
             "sign": "MRO",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1231,8 +1131,7 @@
             "code": "MUR",
             "sign": "MUR",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1243,8 +1142,7 @@
             "code": "MVR",
             "sign": "MVR",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1255,8 +1153,7 @@
             "code": "MWK",
             "sign": "MWK",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1267,8 +1164,7 @@
             "code": "MXN",
             "sign": "MXN",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1279,8 +1175,7 @@
             "code": "MXV",
             "sign": "MXV",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1291,8 +1186,7 @@
             "code": "MZN",
             "sign": "MZN",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1303,8 +1197,7 @@
             "code": "NAD",
             "sign": "NAD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1315,8 +1208,7 @@
             "code": "NGN",
             "sign": "NGN",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1327,8 +1219,7 @@
             "code": "NIO",
             "sign": "NIO",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1339,8 +1230,7 @@
             "code": "NOK",
             "sign": "NOK",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1351,8 +1241,7 @@
             "code": "NPR",
             "sign": "NPR",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1363,8 +1252,7 @@
             "code": "NZD",
             "sign": "NZD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1375,8 +1263,7 @@
             "code": "OMR",
             "sign": "OMR",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1387,8 +1274,7 @@
             "code": "PAB",
             "sign": "PAB",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1399,8 +1285,7 @@
             "code": "PEN",
             "sign": "PEN",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1411,8 +1296,7 @@
             "code": "PGK",
             "sign": "PGK",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1423,8 +1307,7 @@
             "code": "PKR",
             "sign": "PKR",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1435,8 +1318,7 @@
             "code": "PLN",
             "sign": "PLN",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1447,8 +1329,7 @@
             "code": "PYG",
             "sign": "PYG",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1459,8 +1340,7 @@
             "code": "QAR",
             "sign": "QAR",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1471,8 +1351,7 @@
             "code": "RON",
             "sign": "RON",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1483,8 +1362,7 @@
             "code": "RSD",
             "sign": "RSD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1495,8 +1373,7 @@
             "code": "RUB",
             "sign": "RUB",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1507,8 +1384,7 @@
             "code": "RWF",
             "sign": "RWF",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1519,8 +1395,7 @@
             "code": "SAR",
             "sign": "SAR",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1531,8 +1406,7 @@
             "code": "SBD",
             "sign": "SBD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1543,8 +1417,7 @@
             "code": "SCR",
             "sign": "SCR",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1555,8 +1428,7 @@
             "code": "SDG",
             "sign": "SDG",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1567,8 +1439,7 @@
             "code": "SEK",
             "sign": "SEK",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1579,8 +1450,7 @@
             "code": "SGD",
             "sign": "SGD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1591,8 +1461,7 @@
             "code": "SHP",
             "sign": "SHP",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1603,8 +1472,7 @@
             "code": "SLL",
             "sign": "SLL",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1615,8 +1483,7 @@
             "code": "SOS",
             "sign": "SOS",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1627,8 +1494,7 @@
             "code": "SRD",
             "sign": "SRD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1639,8 +1505,7 @@
             "code": "SSP",
             "sign": "SSP",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1651,8 +1516,7 @@
             "code": "STD",
             "sign": "STD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1663,8 +1527,7 @@
             "code": "SVC",
             "sign": "SVC",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1675,8 +1538,7 @@
             "code": "SYP",
             "sign": "SYP",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1687,8 +1549,7 @@
             "code": "SZL",
             "sign": "SZL",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1699,8 +1560,7 @@
             "code": "TJS",
             "sign": "TJS",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1711,8 +1571,7 @@
             "code": "TMT",
             "sign": "TMT",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1723,8 +1582,7 @@
             "code": "TND",
             "sign": "TND",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1735,8 +1593,7 @@
             "code": "TOP",
             "sign": "TOP",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1747,8 +1604,7 @@
             "code": "TRY",
             "sign": "TRY",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1759,8 +1615,7 @@
             "code": "TTD",
             "sign": "TTD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1771,8 +1626,7 @@
             "code": "TWD",
             "sign": "TWD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1783,8 +1637,7 @@
             "code": "TZS",
             "sign": "TZS",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1795,8 +1648,7 @@
             "code": "UAH",
             "sign": "UAH",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1807,8 +1659,7 @@
             "code": "UGX",
             "sign": "UGX",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1819,8 +1670,7 @@
             "code": "USN",
             "sign": "USN",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1832,8 +1682,7 @@
             "code": "UYI",
             "sign": "UYI",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1844,8 +1693,7 @@
             "code": "UYU",
             "sign": "UYU",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1856,8 +1704,7 @@
             "code": "UZS",
             "sign": "UZS",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1868,8 +1715,7 @@
             "code": "VEF",
             "sign": "VEF",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1880,8 +1726,7 @@
             "code": "VND",
             "sign": "VND",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1892,8 +1737,7 @@
             "code": "VUV",
             "sign": "VUV",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1904,8 +1748,7 @@
             "code": "WST",
             "sign": "WST",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1916,8 +1759,7 @@
             "code": "XAF",
             "sign": "XAF",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1928,8 +1770,7 @@
             "code": "XCD",
             "sign": "XCD",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1940,8 +1781,7 @@
             "code": "XOF",
             "sign": "XOF",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1952,8 +1792,7 @@
             "code": "XPF",
             "sign": "XPF",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1964,8 +1803,7 @@
             "code": "YER",
             "sign": "YER",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1976,8 +1814,7 @@
             "code": "ZAR",
             "sign": "ZAR",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -1988,8 +1825,7 @@
             "code": "ZMW",
             "sign": "ZMW",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
         }
     },
     {
@@ -2000,8 +1836,139 @@
             "code": "ZWL",
             "sign": "ZWL",
             "space": true,
-            "after_amount": true,
-            "favorite": []
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 168,
+        "fields": {
+            "name": "Ethereum",
+            "code": "ETH",
+            "sign": "ETH",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 169,
+        "fields": {
+            "name": "Dash",
+            "code": "DASH",
+            "sign": "DASH",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 170,
+        "fields": {
+            "name": "Bitcoin Cash",
+            "code": "BTH",
+            "sign": "BTH",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 171,
+        "fields": {
+            "name": "Stellar Lumen",
+            "code": "XLM",
+            "sign": "XLM",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 172,
+        "fields": {
+            "name": "Zcash",
+            "code": "ZEC",
+            "sign": "ZEC",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 173,
+        "fields": {
+            "name": "Ripple",
+            "code": "XRP",
+            "sign": "XRP",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 174,
+        "fields": {
+            "name": "IOTA",
+            "code": "IOT",
+            "sign": "IOT",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 175,
+        "fields": {
+            "name": "Bitcoin Gold",
+            "code": "BTG",
+            "sign": "BTG",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 176,
+        "fields": {
+            "name": "Neo",
+            "code": "NEO",
+            "sign": "NEO",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 177,
+        "fields": {
+            "name": "Ethereum Classic",
+            "code": "ETC",
+            "sign": "ETC",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 178,
+        "fields": {
+            "name": "Litecoin",
+            "code": "LTC",
+            "sign": "LTC",
+            "space": true,
+            "after_amount": true
+        }
+    },
+    {
+        "model": "currency.currency",
+        "pk": 179,
+        "fields": {
+            "name": "OmiseGO",
+            "code": "OMG",
+            "sign": "OMG",
+            "space": true,
+            "after_amount": true
         }
     }
 ]
