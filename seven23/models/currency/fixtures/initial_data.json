@@ -71,7 +71,7 @@
         "model": "currency.currency",
         "pk": 7,
         "fields": {
-            "name": "US dollars",
+            "name": "United States dollar",
             "code": "USD",
             "sign": "$",
             "space": true,
