@@ -29,6 +29,7 @@ API_VERSION = [1, 0, 0, 'beta']
 
 # Allow public account creation
 ALLOW_ACCOUNT_CREATION = os.environ.get('ALLOW_ACCOUNT_CREATION') == 'True'
+SASS = os.environ.get('SASS') == 'True'
 OLD_PASSWORD_FIELD_ENABLED = True
 
 APPEND_SLASH = False
