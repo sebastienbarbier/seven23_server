@@ -1,5 +1,5 @@
 dj_database_url
-Django
+Django<2
 django-colorfield
 django-cors-headers
 django-grappelli
