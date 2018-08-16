@@ -13,7 +13,7 @@ from seven23.models.categories.models import Category
 from seven23.models.transactions.models import DebitsCredits
 from seven23.models.currency.models import Currency
 
-class ApiCategoryTest(TransactionTestCase):
+class ApiDebitsCreditsTest(TransactionTestCase):
     """ Account retrieve """
 
     def setUp(self):

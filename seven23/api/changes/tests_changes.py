@@ -15,3 +15,46 @@ from seven23.models.currency.models import Currency
 
 class ApiChangesTest(TransactionTestCase):
     """ Changes retrieve """
+
+    def setUp(self):
+
+        self.client = APIClient()
+
+        self.usd = Currency.objects.create(name=u"US Dollars", sign="USD")
+
+        self.user = User.objects.create_user(username='foo', email='old@723e.com')
+        self.account = Account.objects.create(owner=self.user,
+                                              name="Private Account",
+                                              currency=self.usd)
+
+        self.category = Category.objects.create(account=self.account,
+                                                name='Category 1')
+
+        self.user2 = User.objects.create_user(username='foo2')
+        self.account2 = Account.objects.create(owner=self.user2,
+                                               name="Private Account 2",
+                                               currency=self.usd)
+
+        self.category2 = Category.objects.create(account=self.account2,
+                                                 name='Category 2')
+
+        DebitsCredits.objects.create(account=self.account,
+                                     name='Spending',
+                                     local_amount=10,
+                                     local_currency=self.usd)
+
+        DebitsCredits.objects.create(account=self.account2,
+                                     name='Spending',
+                                     local_amount=20,
+                                     local_currency=self.usd)
+
+    def test_changes_retrieve(self):
+        """
+            Retrieve data with a user owning an account and being gest in an other one.
+        """
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get('/api/v1/changes')
+        data = response.json()
+        # Verify data structure
+        assert response.status_code == status.HTTP_200_OK
+        assert len(data) == 0
