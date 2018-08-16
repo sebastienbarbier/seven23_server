@@ -34,7 +34,7 @@ class CanWriteAccount(permissions.BasePermission):
 
 
 class ChangesFilter(django_filters.rest_framework.FilterSet):
-    last_edited = django_filters.IsoDateTimeFilter(name="last_edited", lookup_expr='gte')
+    last_edited = django_filters.IsoDateTimeFilter(lookup_expr='gte')
     class Meta:
         model = Change
         fields = ['account', 'last_edited']
