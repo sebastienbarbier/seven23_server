@@ -8,7 +8,7 @@ stop:
 	brew services stop postgresql
 
 test:
-	python manage.py test
+	python manage.py test --settings seven23.settings_tests
 
 docs:
 	sphinx-autobuild docs/ docs/_build/html

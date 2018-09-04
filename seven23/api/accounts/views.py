@@ -2,9 +2,11 @@
     api/va/accounts views
 """
 
+import json
 from django.contrib.auth import authenticate
 # Default user model may get swapped out of the system and hence.
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 
 from rest_framework import viewsets, generics, permissions
 from rest_framework.authtoken.models import Token
@@ -30,3 +32,4 @@ class AccountsList(viewsets.ModelViewSet,
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+

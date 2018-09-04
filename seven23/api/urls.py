@@ -20,19 +20,19 @@ urlpatterns = [
     # Get server instance configurations: api_version, allow_account_creation, id, is_authenticated
     url(r'init$', api_init, name='api.init'),
     # Accounts from allauth
-    url(r'^accounts/',        include('allauth.urls', namespace='v1')),
+    url(r'^accounts/',        include('allauth.urls')),
     # Set of entrypoint for v1
-    url(r'^v1/accounts',      include('seven23.api.accounts.urls', namespace='v1')),
-    url(r'^v1/categories',    include('seven23.api.categories.urls', namespace='v1')),
-    url(r'^v1/changes',       include('seven23.api.changes.urls', namespace='v1')),
-    url(r'^v1/currencies',    include('seven23.api.currencies.urls', namespace='v1')),
-    url(r'^v1/debitscredits', include('seven23.api.debitscredits.urls', namespace='v1')),
-    url(r'^v1/events',        include('seven23.api.events.urls', namespace='v1')),
-    url(r'^v1/attendees',     include('seven23.api.attendees.urls', namespace='v1')),
+    url(r'^v1/accounts',      include('seven23.api.accounts.urls')),
+    url(r'^v1/categories',    include('seven23.api.categories.urls')),
+    url(r'^v1/changes',       include('seven23.api.changes.urls')),
+    url(r'^v1/currencies',    include('seven23.api.currencies.urls')),
+    url(r'^v1/debitscredits', include('seven23.api.debitscredits.urls')),
+    # url(r'^v1/events',        include('seven23.api.events.urls')),
+    # url(r'^v1/attendees',     include('seven23.api.attendees.urls')),
     url(r'^v1/users/token$', revoke_token, name='api.token'),
     url(r'^v1/users/email$', email, name='api.email'),
 
-    url(r'^v1/rest-auth/',    include('rest_auth.urls', namespace='v1')),
+    url(r'^v1/rest-auth/',    include('rest_auth.urls')),
 ]
 
 # If creation creation is allowed
