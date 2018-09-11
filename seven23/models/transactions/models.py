@@ -15,20 +15,20 @@ class AbstractTransaction(models.Model):
     """
         Money transaction.
     """
-    account = models.ForeignKey(Account, related_name='transactions')
+    account = models.ForeignKey(Account, related_name='transactions', on_delete=models.CASCADE)
     name = models.CharField(_(u'Name'), max_length=255)
     local_amount = models.FloatField(_(u'Amount'),
                                      null=False,
                                      blank=False,
                                      help_text=_(u"Credit and debit are represented by "\
                                      "positive and negative value."))
-    local_currency = models.ForeignKey(Currency, related_name='transactions')
+    local_currency = models.ForeignKey(Currency, related_name='transactions', on_delete=models.CASCADE)
     date = models.DateField(_(u'Date'), editable=True, default=timezone.now)
     active = models.BooleanField(_(u'Enable'),
                                  default=True,
                                  help_text=_(u"A disabled transaction will be save as a "\
                                  "draft and not use in any report."))
-    category = models.ForeignKey(Category, related_name='transactions', blank=True, null=True)
+    category = models.ForeignKey(Category, related_name='transactions', blank=True, null=True, on_delete=models.CASCADE)
     last_edited = models.DateTimeField(_(u'Last edited'), auto_now=True)
 
     def __str__(self):
@@ -43,7 +43,7 @@ class DebitsCredits(AbstractTransaction):
         Simpliest transaction model
     """
 
-    event = models.ForeignKey(Event, related_name='transactions', blank=True, null=True)
+    event = models.ForeignKey(Event, related_name='transactions', blank=True, null=True, on_delete=models.CASCADE)
     used_by = models.ManyToManyField(Attendee,
                                      help_text=_(u"Attendee who used this transaction for "\
                                      "shared payment."))
@@ -67,7 +67,7 @@ class Change(AbstractTransaction):
                                    null=False,
                                    blank=False,
                                    help_text=_(u"Amount of cash in the new currency"))
-    new_currency = models.ForeignKey(Currency, related_name="change", blank=True, null=True)
+    new_currency = models.ForeignKey(Currency, related_name="change", blank=True, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return u"%d %s (%s -> %s)" % (self.pk,

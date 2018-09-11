@@ -17,10 +17,10 @@ class Account(models.Model):
     """
         An account is considere as a bank account. Name is just a label for the user interface.
     """
-    owner = models.ForeignKey(User, related_name="accounts", null=False, blank=False)
+    owner = models.ForeignKey(User, related_name="accounts", null=False, blank=False, on_delete=models.CASCADE)
     name = models.CharField(_(u'Name'), max_length=255)
     create = models.DateField(_(u'Creation date'), auto_now_add=True, editable=False)
-    currency = models.ForeignKey(Currency, related_name='accounts')
+    currency = models.ForeignKey(Currency, related_name='accounts', on_delete=models.CASCADE)
     archived = models.BooleanField(_(u'Is archived'), default=False)
     public = models.BooleanField(_(u'Is public'), default=False)
 
@@ -40,10 +40,10 @@ class AccountGuests(models.Model):
     """
         Define what a user can do to an account.
     """
-    account = models.ForeignKey(Account, related_name="guests")
-    user = models.ForeignKey(User, related_name="guests")
+    account = models.ForeignKey(Account, related_name="guests", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="guests", on_delete=models.CASCADE)
     permissions = models.CharField(max_length=1, choices=PERMISSIONS, null=False, blank=False)
-    currency = models.ForeignKey(Currency, related_name="guests", null=True, blank=True)
+    currency = models.ForeignKey(Currency, related_name="guests", null=True, blank=True, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('account', 'user')

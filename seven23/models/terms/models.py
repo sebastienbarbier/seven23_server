@@ -23,7 +23,7 @@ class TermsAndConditions(models.Model):
 
 class SignedTermsAndConditions(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    terms = models.ForeignKey(TermsAndConditions, help_text=_(u'Terms agreed with user'))
+    terms = models.ForeignKey(TermsAndConditions, help_text=_(u'Terms agreed with user'), on_delete=models.CASCADE)
 
     def __str__(self):
         return u'%s %s' % (self.user.username, self.terms.date)

@@ -34,7 +34,7 @@ class DiscountCode(AbstractToken):
                                                default=0)
     referee = models.ForeignKey(User,
                                 blank=True,
-                                null=True)
+                                null=True, on_delete=models.CASCADE)
     validUntil = models.DateField(_(u'Valid Until'),
                                   help_text=_(u'Until when can this token be used'),
                                   blank=True,
@@ -51,7 +51,7 @@ class EmailVerificationToken(AbstractToken):
     """
         Token send by email to verify it
     """
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     newEmail = models.EmailField(_(u'New email'), blank=False, null=False)
 
     def __str__(self):
@@ -61,8 +61,8 @@ class AllowAccountAccessToken(AbstractToken):
     """
         Token send by email to share access to an account
     """
-    sendBy = models.ForeignKey(User)
-    account = models.ForeignKey(Account, blank=False, null=False)
+    sendBy = models.ForeignKey(User, on_delete=models.CASCADE)
+    account = models.ForeignKey(Account, blank=False, null=False, on_delete=models.CASCADE)
     email = models.EmailField(_(u'User email'), blank=False, null=False)
     permission = models.CharField(max_length=1, choices=PERMISSIONS, null=False, blank=False)
 

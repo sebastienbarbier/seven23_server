@@ -13,7 +13,7 @@ class Event(models.Model):
     """
         Token send by email to share access to an account
     """
-    account = models.ForeignKey(Account, related_name='events', blank=False, null=False)
+    account = models.ForeignKey(Account, related_name='events', blank=False, null=False, on_delete=models.CASCADE)
     title = models.CharField(_(u'Name'), max_length=255)
     date_begin = models.DateField(_(u'Date'), editable=True, default=timezone.now)
     date_end = models.DateField(_(u'Date'), editable=True, default=timezone.now)
@@ -30,7 +30,7 @@ class Event(models.Model):
         return u'%s' % (self.title)
 
 class Attendee(models.Model):
-    event = models.ForeignKey(Event, related_name='attendees', blank=False, null=False)
+    event = models.ForeignKey(Event, related_name='attendees', blank=False, null=False, on_delete=models.CASCADE)
     fullname = models.CharField(_(u'Fullname'), max_length=255, blank=False, null=False)
     email = models.EmailField(_(u'Email'), blank=False, null=False)
 
@@ -46,7 +46,7 @@ class EventToken(AbstractToken):
     """
         Token send by email to verify it
     """
-    attendee = models.ForeignKey(Attendee, related_name='token', blank=False, null=False)
+    attendee = models.ForeignKey(Attendee, related_name='token', blank=False, null=False, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _(u'EventToken')
