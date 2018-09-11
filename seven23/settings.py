@@ -111,7 +111,7 @@ INSTALLED_APPS = (
 
 SITE_ID = 1 # Required by rest_auth
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     #'django.middleware.csrf.CsrfViewMiddleware',
