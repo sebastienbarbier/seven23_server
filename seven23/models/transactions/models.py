@@ -16,6 +16,14 @@ class AbstractTransaction(models.Model):
         Money transaction.
     """
     account = models.ForeignKey(Account, related_name='transactions', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='transactions', blank=True, null=True, on_delete=models.CASCADE)
+    last_edited = models.DateTimeField(_(u'Last edited'), auto_now=True)
+    active = models.BooleanField(_(u'Enable'),
+                                 default=True,
+                                 help_text=_(u"A disabled transaction will be save as a "\
+                                 "draft and not use in any report."))
+
+    # Bundle as encrypted blob
     name = models.CharField(_(u'Name'), max_length=255)
     local_amount = models.FloatField(_(u'Amount'),
                                      null=False,
@@ -24,12 +32,7 @@ class AbstractTransaction(models.Model):
                                      "positive and negative value."))
     local_currency = models.ForeignKey(Currency, related_name='transactions', on_delete=models.CASCADE)
     date = models.DateField(_(u'Date'), editable=True, default=timezone.now)
-    active = models.BooleanField(_(u'Enable'),
-                                 default=True,
-                                 help_text=_(u"A disabled transaction will be save as a "\
-                                 "draft and not use in any report."))
-    category = models.ForeignKey(Category, related_name='transactions', blank=True, null=True, on_delete=models.CASCADE)
-    last_edited = models.DateTimeField(_(u'Last edited'), auto_now=True)
+
 
     def __str__(self):
         return u"(%d) %s %s" % (self.pk, self.name, self.local_currency.verbose(self.local_amount))
@@ -89,10 +92,6 @@ class Change(AbstractTransaction):
 
     def delete(self, *args, **kwargs):
         super(Change, self).delete(*args, **kwargs) # Call the "real" save() method
-
-    def exchange_rate(self):
-        """ Return exchange rate """
-        return float(self.new_amount) / float(self.local_amount)
 
     def new_value(self):
         """ New value stringified """

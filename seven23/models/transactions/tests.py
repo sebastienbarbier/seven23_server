@@ -121,7 +121,8 @@ class TransactionsTest(TransactionTestCase):
                                        new_amount=140,
                                        new_currency=self.chf)
         self.assertNotEqual(change, None)
-        self.assertEqual(change.exchange_rate(), 1.1666666666666667)
+        exchange_rate = float(change.new_amount) / float(change.local_amount)
+        self.assertEqual(exchange_rate, 1.1666666666666667)
 
         change2 = Change.objects.create(account=self.account,
                                         date=datetime.datetime.today() -
@@ -132,7 +133,9 @@ class TransactionsTest(TransactionTestCase):
                                         new_amount=140,
                                         new_currency=self.chf)
         self.assertNotEqual(change2, None)
-        self.assertEqual(change2.exchange_rate(), 1.0769230769230769)
+
+        exchange_rate = float(change2.new_amount) / float(change2.local_amount)
+        self.assertEqual(exchange_rate, 1.0769230769230769)
 
     def test_change_transactions(self):
         """

@@ -50,4 +50,4 @@ class ChangeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Change
         fields = ('id', 'account', 'name', 'local_amount', 'local_currency', 'date', 'active',
-                  'category', 'new_amount', 'new_currency', 'exchange_rate', 'last_edited')
+                  'category', 'new_amount', 'new_currency', 'last_edited')
