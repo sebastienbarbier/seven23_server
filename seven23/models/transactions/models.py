@@ -24,7 +24,7 @@ class AbstractTransaction(models.Model):
                                  "draft and not use in any report."))
 
     def __str__(self):
-        return u"(%d) %s %s" % (self.pk, self.blob[:10], self.last_edited)
+        return u"(%d) %s... %s" % (self.pk, self.blob[:10], self.last_edited)
 
 class DebitsCredits(AbstractTransaction):
     """

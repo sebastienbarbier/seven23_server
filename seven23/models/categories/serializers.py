@@ -10,8 +10,7 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
         Serialize Category model
     """
     account = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all(), required=False)
-    parent = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), required=False)
 
     class Meta:
         model = Category
-        fields = ('id', 'account', 'name', 'description', 'parent', 'selectable', 'active')
+        fields = ('id', 'account', 'blob', 'active')
