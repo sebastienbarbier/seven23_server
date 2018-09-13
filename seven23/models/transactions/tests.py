@@ -14,7 +14,7 @@ from seven23.models.accounts.models import Account
 from seven23.models.currency.models import Currency
 from seven23.models.categories.models import Category
 from seven23.models.events.models import Event, Attendee
-from seven23.models.transactions.models import DebitsCredits, Change, PaidBy
+from seven23.models.transactions.models import DebitsCredits, Change
 
 class TransactionsTest(TransactionTestCase):
     """
@@ -306,35 +306,3 @@ class TransactionsTest(TransactionTestCase):
         transaction2 = DebitsCredits.objects.get(pk=transaction2.pk)
         self.assertEqual(transaction2.local_amount, 1)
 
-    def test_paid_by_not_in_event(self):
-        """
-            Create sub-categories and try to move them from one level up.
-            Using MPTT to keep an organized structure
-        """
-
-        transaction = DebitsCredits.objects.create(account=self.account,
-                                                   date=datetime.datetime.today() -
-                                                   datetime.timedelta(days=20),
-                                                   name="Buy a 240 USD item",
-                                                   local_amount=240,
-                                                   local_currency=self.usd,
-                                                   event=self.event1)
-
-        pb = PaidBy.objects.create(transaction=transaction, attendee=self.att1, amount=10.0)
-        # Check is move_children_right properly moved children's category one level up.
-        self.assertEqual(pb.amount, 10.0)
-        self.assertRaises(ValidationError, PaidBy.objects.create, transaction=transaction, attendee=self.att2, amount=10.0)
-
-    def test_paid_by_cascade_deletion(self):
-
-        transaction = DebitsCredits.objects.create(account=self.account,
-                                                   date=datetime.datetime.today() -
-                                                   datetime.timedelta(days=20),
-                                                   name="Buy a 240 USD item",
-                                                   local_amount=240,
-                                                   local_currency=self.usd,
-                                                   event=self.event1)
-        obj = PaidBy.objects.create(transaction=transaction, attendee=self.att1, amount=9.6)
-        self.assertNotEqual(obj.pk, None)
-        transaction.delete();
-        self.assertRaises(PaidBy.DoesNotExist, PaidBy.objects.get, pk=obj.pk)
