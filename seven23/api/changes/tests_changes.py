@@ -28,7 +28,7 @@ class ApiChangesTest(TransactionTestCase):
                                               currency=self.usd)
 
         self.category = Category.objects.create(account=self.account,
-                                                name='Category 1')
+                                                blob='asdukfjhrsgdv')
 
         self.user2 = User.objects.create_user(username='foo2')
         self.account2 = Account.objects.create(owner=self.user2,
@@ -36,17 +36,13 @@ class ApiChangesTest(TransactionTestCase):
                                                currency=self.usd)
 
         self.category2 = Category.objects.create(account=self.account2,
-                                                 name='Category 2')
+                                                 blob='asdukfjhrsgdv')
 
         DebitsCredits.objects.create(account=self.account,
-                                     name='Spending',
-                                     local_amount=10,
-                                     local_currency=self.usd)
+                                     blob='asdukfjhrsgdv')
 
         DebitsCredits.objects.create(account=self.account2,
-                                     name='Spending',
-                                     local_amount=20,
-                                     local_currency=self.usd)
+                                     blob='asdukfjhrsgdv')
 
     def test_changes_retrieve(self):
         """

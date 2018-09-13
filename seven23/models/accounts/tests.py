@@ -37,8 +37,8 @@ class AccountTest(TransactionTestCase):
         self.account = Account.objects.create(owner=self.user,
                                               name="Compte courant",
                                               currency=self.euro)
-        self.cat1 = Category.objects.create(account=self.account, name="Category 1")
-        self.cat2 = Category.objects.create(account=self.account, name="Category 2")
+        self.cat1 = Category.objects.create(account=self.account, blob="Category 1")
+        self.cat2 = Category.objects.create(account=self.account, blob="Category 2")
 
     def test_create_account(self):
         """
@@ -48,38 +48,3 @@ class AccountTest(TransactionTestCase):
         AccountGuests.objects.create(account=self.account, user=self.user, permissions='A')
         self.assertEqual(len(self.account.guests.all()), 1)
 
-    def test_change_currency(self):
-        """
-            Test is changing an account currency propagate well to all transactions.
-        """
-        self.account = Account.objects.create(owner=self.user,
-                                              name="Compte courant",
-                                              currency=self.euro)
-
-        # Transaction in Eur will have no difference between amount and foreign_amount
-        transaction1 = DebitsCredits.objects.create(account=self.account,
-                                                    date=datetime.datetime.today() -
-                                                    datetime.timedelta(days=20),
-                                                    name="Buy a 6 EUR item",
-                                                    local_amount=6,
-                                                    local_currency=self.euro)
-        # After this point, transaction 1 Should have no reference Value
-        transaction1 = DebitsCredits.objects.get(pk=transaction1.pk)
-        self.assertEqual(transaction1.local_amount, 6)
-
-        # Now we had a Change rate before the transaction 1, and change the account currency
-        Change.objects.create(account=self.account,
-                              date=datetime.datetime.today() - datetime.timedelta(days=30),
-                              name="Withdraw",
-                              local_amount=6,
-                              local_currency=self.euro,
-                              new_amount=4,
-                              new_currency=self.chf)
-
-        self.account = Account.objects.get(pk=self.account.pk)
-        self.account.currency = self.chf
-        self.account.save()
-
-        # After this point, transaction 1 Should have no reference Value
-        transaction1 = DebitsCredits.objects.get(pk=transaction1.pk)
-        self.assertEqual(transaction1.local_amount, 6)

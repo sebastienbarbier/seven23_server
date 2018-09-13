@@ -28,7 +28,7 @@ class ApiDebitsCreditsTest(TransactionTestCase):
                                               currency=self.usd)
 
         self.category = Category.objects.create(account=self.account,
-                                                name='Category 1')
+                                                blob='Category 1')
 
         self.user2 = User.objects.create_user(username='foo2')
         self.account2 = Account.objects.create(owner=self.user2,
@@ -36,17 +36,13 @@ class ApiDebitsCreditsTest(TransactionTestCase):
                                                currency=self.usd)
 
         self.category2 = Category.objects.create(account=self.account2,
-                                                 name='Category 2')
+                                                 blob='Category 2')
 
         DebitsCredits.objects.create(account=self.account,
-                                     name='Spending',
-                                     local_amount=10,
-                                     local_currency=self.usd)
+                                     blob='Spending')
 
         DebitsCredits.objects.create(account=self.account2,
-                                     name='Spending',
-                                     local_amount=20,
-                                     local_currency=self.usd)
+                                     blob='Spending')
 
 
     def test_debitscredits_retrieve(self):
@@ -59,7 +55,7 @@ class ApiDebitsCreditsTest(TransactionTestCase):
         # Verify data structure
         assert response.status_code == status.HTTP_200_OK
         assert len(data) == 1
-        assert data[0]['local_amount'] == 10
+        assert data[0]['blob'] == 'Spending'
 
         self.client.force_authenticate(user=self.user2)
         response = self.client.get('/api/v1/debitscredits')
@@ -67,7 +63,7 @@ class ApiDebitsCreditsTest(TransactionTestCase):
         # Verify data structure
         assert response.status_code == status.HTTP_200_OK
         assert len(data) == 1
-        assert data[0]['local_amount'] == 20
+        assert data[0]['blob'] == 'Spending'
 
         response = self.client.get('/api/v1/categories')
         # Verify data structure

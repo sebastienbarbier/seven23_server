@@ -1,6 +1,8 @@
 """
     Tests Account API
 """
+import json
+
 from django.test import TransactionTestCase
 # Default user model may get swapped out of the system and hence.
 from django.contrib.auth.models import User
@@ -27,26 +29,24 @@ class ApiCategoryTest(TransactionTestCase):
                                               name="Private Account",
                                               currency=self.usd)
 
+        blob1 = { 'name': 'Category 2' }
         self.category = Category.objects.create(account=self.account,
-                                                name='Category 1')
+                                                blob=json.dumps(blob1))
 
         self.user2 = User.objects.create_user(username='foo2')
         self.account2 = Account.objects.create(owner=self.user2,
                                                name="Private Account 2",
                                                currency=self.usd)
 
+        blob2 = { 'name': 'Category 2' }
         self.category2 = Category.objects.create(account=self.account2,
-                                                 name='Category 2')
+                                                 blob=json.dumps(blob2))
 
         DebitsCredits.objects.create(account=self.account,
-                                     name='Spending',
-                                     local_amount=10,
-                                     local_currency=self.usd)
+                                     blob='sadkjhfgsdaf')
 
         DebitsCredits.objects.create(account=self.account2,
-                                     name='Spending',
-                                     local_amount=20,
-                                     local_currency=self.usd)
+                                     blob='sadkjhfgsdaf')
 
     def test_categories_retrieve(self):
         """
@@ -73,16 +73,18 @@ class ApiCategoryTest(TransactionTestCase):
         """
             We try to create a new category object
         """
+
+        blob = { 'name': 'Category post' }
         self.client.force_authenticate(user=self.user)
         response = self.client.post('/api/v1/categories',
-                                    {'account':self.account.id,
-                                     'name':'Category 3'
+                                    {'account': self.account.id,
+                                     'blob': json.dumps(blob)
                                     })
         assert response.status_code == status.HTTP_201_CREATED
 
         response = self.client.post('/api/v1/categories',
                                     {'account':self.account2.id,
-                                     'name':'Category 5'
+                                     'blob': json.dumps(blob)
                                     })
         assert response.status_code == status.HTTP_201_CREATED
 

@@ -16,6 +16,7 @@ class AbstractTransaction(models.Model):
         Money transaction.
     """
     account = models.ForeignKey(Account, related_name='transactions', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='transactions', blank=True, null=True, on_delete=models.CASCADE)
     blob = models.TextField(_('blob'), blank=True, null=False)
     last_edited = models.DateTimeField(_(u'Last edited'), auto_now=True)
     active = models.BooleanField(_(u'Enable'),
