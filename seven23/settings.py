@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY') or 'k3-=2r(yq-towhfr-$@am&p%ze_&1!m!n7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG') != 'False'
 
-API_VERSION = [1, 0, 0, 'beta']
+API_VERSION = [2, 0, 0, 'beta']
 
 # Allow public account creation
 ALLOW_ACCOUNT_CREATION = os.environ.get('ALLOW_ACCOUNT_CREATION') == 'True'
