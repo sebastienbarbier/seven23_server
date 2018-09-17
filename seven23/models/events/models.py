@@ -54,6 +54,3 @@ class EventToken(AbstractToken):
 
     def __str__(self):
         return u'%s' % (self.token)
-
-# TO DO
-# Include chat ?
