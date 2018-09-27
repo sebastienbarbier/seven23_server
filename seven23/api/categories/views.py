@@ -13,6 +13,7 @@ from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 
+import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
 
 class CanWriteAccount(permissions.BasePermission):
@@ -34,6 +35,11 @@ class CanWriteAccount(permissions.BasePermission):
 #
 # List of entry points Category, DebitsCredits, Change
 #
+class CategoriesFilter(django_filters.rest_framework.FilterSet):
+    last_edited = django_filters.IsoDateTimeFilter(lookup_expr='gt')
+    class Meta:
+        model = Category
+        fields = ['account', 'last_edited']
 
 class ApiCategories(viewsets.ModelViewSet):
     """
@@ -42,7 +48,7 @@ class ApiCategories(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     permission_classes = (permissions.IsAuthenticated, CanWriteAccount)
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('account',)
+    filter_class = CategoriesFilter
 
     def get_queryset(self):
         return Category.objects.filter(

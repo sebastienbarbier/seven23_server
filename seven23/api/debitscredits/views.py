@@ -32,7 +32,7 @@ class CanWriteAccount(permissions.BasePermission):
         ))
 
 class DebitscreditsFilter(django_filters.rest_framework.FilterSet):
-    last_edited = django_filters.IsoDateTimeFilter(lookup_expr='gte')
+    last_edited = django_filters.IsoDateTimeFilter(lookup_expr='gt')
     class Meta:
         model = DebitsCredits
         fields = ['account', 'last_edited']

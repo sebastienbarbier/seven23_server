@@ -2,6 +2,7 @@
     Tests Account API
 """
 import json
+import datetime
 
 from django.test import TransactionTestCase
 # Default user model may get swapped out of the system and hence.
@@ -88,14 +89,17 @@ class ApiCategoryTest(TransactionTestCase):
                                     })
         assert response.status_code == status.HTTP_201_CREATED
 
+        response = self.client.get('/api/v1/categories')
+        data = response.json()
+        # Verify data structure
+        assert response.status_code == status.HTTP_200_OK
+        assert len(data) == 2
 
-    # def test_categories_delete(self):
-    #     """
-    #         Retrieve data with a user owning an account and being gest in an other one.
-    #     """
-    #     self.client.force_authenticate(user=self.user)
-    #     response = self.client.delete('/api/v1/categories/%d' % self.category.id)
-    #     print(response)
-    #     data = response.json()
-    #     # Verify data structure
-    #     assert response.status_code == status.HTTP_200_OK
+        minDate = datetime.datetime.now()
+        for category in data:
+            if datetime.datetime.strptime(category['last_edited'], '%Y-%m-%dT%H:%M:%S.%fZ') < minDate:
+                minDate = datetime.datetime.strptime(category['last_edited'], '%Y-%m-%dT%H:%M:%S.%fZ')
+
+        response = self.client.get('/api/v1/categories?last_edited=%s' % minDate)
+        data = response.json()
+        assert len(response.json()) == 1

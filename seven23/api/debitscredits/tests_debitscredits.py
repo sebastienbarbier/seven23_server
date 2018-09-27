@@ -1,6 +1,7 @@
 """
     Tests Account API
 """
+import datetime
 from django.test import TransactionTestCase
 # Default user model may get swapped out of the system and hence.
 from django.contrib.auth.models import User
@@ -12,6 +13,7 @@ from seven23.models.accounts.models import Account, AccountGuests
 from seven23.models.categories.models import Category
 from seven23.models.transactions.models import DebitsCredits
 from seven23.models.currency.models import Currency
+
 
 class ApiDebitsCreditsTest(TransactionTestCase):
     """ Account retrieve """
@@ -41,6 +43,9 @@ class ApiDebitsCreditsTest(TransactionTestCase):
         DebitsCredits.objects.create(account=self.account,
                                      blob='Spending')
 
+        DebitsCredits.objects.create(account=self.account,
+                                     blob='Spending2')
+
         DebitsCredits.objects.create(account=self.account2,
                                      blob='Spending')
 
@@ -54,7 +59,7 @@ class ApiDebitsCreditsTest(TransactionTestCase):
         data = response.json()
         # Verify data structure
         assert response.status_code == status.HTTP_200_OK
-        assert len(data) == 1
+        assert len(data) == 2
         assert data[0]['blob'] == 'Spending'
 
         self.client.force_authenticate(user=self.user2)
@@ -76,7 +81,7 @@ class ApiDebitsCreditsTest(TransactionTestCase):
 
         self.client.force_authenticate(user=self.user)
         response = self.client.get('/api/v1/debitscredits')
-        assert len(response.json()) == 2
+        assert len(response.json()) == 3
 
         self.client.force_authenticate(user=self.user2)
         response = self.client.get('/api/v1/debitscredits')
@@ -89,32 +94,12 @@ class ApiDebitsCreditsTest(TransactionTestCase):
         self.client.force_authenticate(user=self.user)
         response = self.client.get('/api/v1/debitscredits')
         data = response.json()
-        # Verify data structure
-        assert response.status_code == status.HTTP_200_OK
-        assert len(data) == 1
-        assert data[0]['blob'] == 'Spending'
 
-        self.client.force_authenticate(user=self.user2)
-        response = self.client.get('/api/v1/debitscredits')
+        minDate = datetime.datetime.now()
+        for transaction in data:
+            if datetime.datetime.strptime(transaction['last_edited'], '%Y-%m-%dT%H:%M:%S.%fZ') < minDate:
+                minDate = datetime.datetime.strptime(transaction['last_edited'], '%Y-%m-%dT%H:%M:%S.%fZ')
+
+        response = self.client.get('/api/v1/debitscredits?last_edited=%s' % minDate)
         data = response.json()
-        # Verify data structure
-        assert response.status_code == status.HTTP_200_OK
-        assert len(data) == 1
-        assert data[0]['blob'] == 'Spending'
-
-        response = self.client.get('/api/v1/categories')
-        # Verify data structure
-        assert response.status_code == status.HTTP_200_OK
-        assert len(response.json()) == 1
-
-        AccountGuests.objects.create(account=self.account2,
-                                     user=self.user,
-                                     permissions='W')
-
-        self.client.force_authenticate(user=self.user)
-        response = self.client.get('/api/v1/debitscredits')
-        assert len(response.json()) == 2
-
-        self.client.force_authenticate(user=self.user2)
-        response = self.client.get('/api/v1/debitscredits')
         assert len(response.json()) == 1
