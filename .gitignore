@@ -7,6 +7,7 @@ docs/_static
 docs/_templates
 collectstatic
 apps
+.clever.json
 .DS_Store
 logfile
 seven23_server.sublime-workspace

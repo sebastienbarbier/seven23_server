@@ -81,3 +81,40 @@ class ApiDebitsCreditsTest(TransactionTestCase):
         self.client.force_authenticate(user=self.user2)
         response = self.client.get('/api/v1/debitscredits')
         assert len(response.json()) == 1
+
+    def test_debitscredits_since_last_edited(self):
+        """
+            Retrieve data with a user owning an account and being gest in an other one.
+        """
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get('/api/v1/debitscredits')
+        data = response.json()
+        # Verify data structure
+        assert response.status_code == status.HTTP_200_OK
+        assert len(data) == 1
+        assert data[0]['blob'] == 'Spending'
+
+        self.client.force_authenticate(user=self.user2)
+        response = self.client.get('/api/v1/debitscredits')
+        data = response.json()
+        # Verify data structure
+        assert response.status_code == status.HTTP_200_OK
+        assert len(data) == 1
+        assert data[0]['blob'] == 'Spending'
+
+        response = self.client.get('/api/v1/categories')
+        # Verify data structure
+        assert response.status_code == status.HTTP_200_OK
+        assert len(response.json()) == 1
+
+        AccountGuests.objects.create(account=self.account2,
+                                     user=self.user,
+                                     permissions='W')
+
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get('/api/v1/debitscredits')
+        assert len(response.json()) == 2
+
+        self.client.force_authenticate(user=self.user2)
+        response = self.client.get('/api/v1/debitscredits')
+        assert len(response.json()) == 1

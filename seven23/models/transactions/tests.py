@@ -13,7 +13,6 @@ from django.core.exceptions import ValidationError
 from seven23.models.accounts.models import Account
 from seven23.models.currency.models import Currency
 from seven23.models.categories.models import Category
-from seven23.models.events.models import Event, Attendee
 from seven23.models.transactions.models import DebitsCredits, Change
 
 class TransactionsTest(TransactionTestCase):
