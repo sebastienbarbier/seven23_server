@@ -86,6 +86,7 @@ TEMPLATES = [
 INSTALLED_APPS = (
     'mptt',
     'colorfield',
+    'reset_migrations',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

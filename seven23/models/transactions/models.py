@@ -22,9 +22,19 @@ class AbstractTransaction(models.Model):
                                  default=True,
                                  help_text=_(u"A disabled transaction will be save as a "\
                                  "draft and not use in any report."))
+    deleted = models.BooleanField(_(u'Deleted'),
+                                 default=True,
+                                 help_text=_(u"If true, this entry has been deleted "\
+                                 "and we keep this is as deleted as a tombstone."))
 
     def __str__(self):
         return u"(%d) %s... %s" % (self.pk, self.blob[:10], self.last_edited)
+
+    def delete(self):
+        self.deleted = True
+        self.blob = ''
+        self.category = None
+        self.save()
 
 class DebitsCredits(AbstractTransaction):
     """

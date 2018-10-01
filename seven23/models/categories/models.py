@@ -17,6 +17,10 @@ class Category(models.Model):
                                  default=True,
                                  help_text=_(u"Delete a category only disable it"))
     last_edited = models.DateTimeField(_(u'Last edited'), auto_now=True)
+    deleted = models.BooleanField(_(u'Deleted'),
+                                 default=True,
+                                 help_text=_(u"If true, this entry has been deleted "\
+                                 "and we keep this is as deleted as a tombstone."))
 
     def __str__(self):
         return u'(%d) %s...' % (self.pk, self.blob[:10])
@@ -46,4 +50,6 @@ class Category(models.Model):
         if self.transactions.all():
             self.toggle()
         else:
-            super(Category, self).delete()
+            self.deleted = True
+            self.blob = ''
+            self.save()
