@@ -18,7 +18,7 @@ class Category(models.Model):
                                  help_text=_(u"Delete a category only disable it"))
     last_edited = models.DateTimeField(_(u'Last edited'), auto_now=True)
     deleted = models.BooleanField(_(u'Deleted'),
-                                 default=True,
+                                 default=False,
                                  help_text=_(u"If true, this entry has been deleted "\
                                  "and we keep this is as deleted as a tombstone."))
 

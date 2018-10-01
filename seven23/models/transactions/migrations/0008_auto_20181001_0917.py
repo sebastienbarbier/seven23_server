@@ -58,7 +58,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='abstracttransaction',
             name='deleted',
-            field=models.BooleanField(default=True, help_text='If true, this entry has been deleted and we keep this is as deleted as a tombstone.', verbose_name='Deleted'),
+            field=models.BooleanField(default=False, help_text='If true, this entry has been deleted and we keep this is as deleted as a tombstone.', verbose_name='Deleted'),
         ),
         migrations.DeleteModel(
             name='PaidBy',

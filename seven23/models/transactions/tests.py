@@ -61,7 +61,14 @@ class TransactionsTest(TransactionTestCase):
         self.assertEqual(self.cat1.transactions.all().count(), 0)
 
         self.cat1.delete()
-        self.assertEqual(Category.objects.all().count(), 1)
+        self.assertEqual(Category.objects.all().count(), 2)
+
+        none_deleted_categories = []
+        for category in Category.objects.all():
+            if category.deleted == False:
+                none_deleted_categories.append(category)
+
+        self.assertEqual(len(none_deleted_categories), 1)
 
 
     def test_categories_sum(self):
