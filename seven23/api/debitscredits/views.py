@@ -48,9 +48,13 @@ class ApiDebitscredits(viewsets.ModelViewSet):
     filter_class = DebitscreditsFilter
 
     def get_queryset(self):
-        return DebitsCredits.objects.filter(
+        queryset = DebitsCredits.objects.filter(
             account__in=list(chain(
                 self.request.user.accounts.values_list('id', flat=True),
                 self.request.user.guests.values_list('account__id', flat=True)
             ))
         )
+        last_edited = self.request.query_params.get('last_edited', None)
+        if last_edited is None:
+            queryset = queryset.filter(deleted=False)
+        return queryset
