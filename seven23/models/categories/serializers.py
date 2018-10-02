@@ -13,4 +13,4 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Category
-        fields = ('id', 'account', 'blob', 'active', 'last_edited')
+        fields = ('id', 'account', 'blob', 'active', 'last_edited', 'deleted')

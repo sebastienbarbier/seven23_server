@@ -16,7 +16,7 @@ class DebitsCreditsSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = DebitsCredits
-        fields = ('id', 'account', 'blob', 'active', 'last_edited')
+        fields = ('id', 'account', 'blob', 'active', 'last_edited', 'deleted')
 
 
 class ChangeSerializer(serializers.HyperlinkedModelSerializer):
@@ -27,4 +27,4 @@ class ChangeSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Change
-        fields = ('id', 'account', 'blob', 'active', 'last_edited')
+        fields = ('id', 'account', 'blob', 'active', 'last_edited', 'deleted')
