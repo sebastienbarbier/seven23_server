@@ -4,12 +4,12 @@
 
 from django.conf.urls import url, include
 
-from rest_framework import routers
+from rest_framework_bulk.routes import BulkRouter
 
 from seven23 import settings
 from seven23.api.debitscredits.views import ApiDebitscredits
 
-ROUTER = routers.DefaultRouter(trailing_slash=False)
+ROUTER = BulkRouter(trailing_slash=False)
 ROUTER.register(r'^', ApiDebitscredits, base_name='debitscredits')
 
 urlpatterns = ROUTER.urls
