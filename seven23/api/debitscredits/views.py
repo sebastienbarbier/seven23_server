@@ -6,7 +6,7 @@ from itertools import chain
 from seven23.models.categories.models import Category
 from seven23.models.categories.serializers import CategorySerializer
 from seven23.models.transactions.models import DebitsCredits, Change
-from seven23.models.transactions.serializers import DebitsCreditsSerializer, DebitsCreditsSerializerList, ChangeSerializer
+from seven23.models.transactions.serializers import DebitsCreditsSerializer, ChangeSerializer
 
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import permission_classes
@@ -16,11 +16,7 @@ from rest_framework import status
 import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
 
-from rest_framework_bulk import (
-    ListBulkCreateUpdateDestroyAPIView,
-    BulkModelViewSet,
-)
-
+from rest_framework_bulk import BulkModelViewSet
 
 class CanWriteAccount(permissions.BasePermission):
     """
@@ -45,7 +41,7 @@ class DebitscreditsFilter(django_filters.rest_framework.FilterSet):
 
 
 class ApiDebitscredits(BulkModelViewSet):
-    serializer_class = DebitsCreditsSerializerList
+    serializer_class = DebitsCreditsSerializer
     permission_classes = (permissions.IsAuthenticated, CanWriteAccount)
     filter_backends = (DjangoFilterBackend,)
     filter_class = DebitscreditsFilter

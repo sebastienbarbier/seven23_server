@@ -16,6 +16,8 @@ from rest_framework import status
 import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
 
+from rest_framework_bulk import BulkModelViewSet
+
 class CanWriteAccount(permissions.BasePermission):
     """
         Object-level permission to only allow owners of an object to edit it.
@@ -43,7 +45,7 @@ class ChangesFilter(django_filters.rest_framework.FilterSet):
 # List of entry points Category, DebitsCredits, Change
 #
 
-class ApiChange(viewsets.ModelViewSet):
+class ApiChange(BulkModelViewSet):
     """
         Deliver Change objects
     """

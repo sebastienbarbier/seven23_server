@@ -10,21 +10,9 @@ from seven23.models.transactions.models import DebitsCredits, Change
 from rest_framework_bulk import (
     BulkListSerializer,
     BulkSerializerMixin,
-    ListBulkCreateUpdateDestroyAPIView,
 )
 
-class DebitsCreditsSerializer(serializers.HyperlinkedModelSerializer):
-    """
-        Serialized for DebitsCredits model
-    """
-    account = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all())
-
-    class Meta:
-        model = DebitsCredits
-        fields = ('id', 'account', 'blob', 'active', 'last_edited', 'deleted')
-
-
-class DebitsCreditsSerializerList(BulkSerializerMixin, serializers.HyperlinkedModelSerializer):
+class DebitsCreditsSerializer(BulkSerializerMixin, serializers.HyperlinkedModelSerializer):
     """
         Serialized for DebitsCredits model
     """
@@ -36,8 +24,7 @@ class DebitsCreditsSerializerList(BulkSerializerMixin, serializers.HyperlinkedMo
         fields = ('id', 'account', 'blob', 'active', 'last_edited', 'deleted')
 
 
-
-class ChangeSerializer(serializers.HyperlinkedModelSerializer):
+class ChangeSerializer(BulkSerializerMixin, serializers.HyperlinkedModelSerializer):
     """
         Serializer for Change model
     """
@@ -45,4 +32,5 @@ class ChangeSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Change
+        list_serializer_class = BulkListSerializer
         fields = ('id', 'account', 'blob', 'active', 'last_edited', 'deleted')
