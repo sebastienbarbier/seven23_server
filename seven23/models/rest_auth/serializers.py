@@ -67,6 +67,8 @@ class PasswordResetSerializer(serializers.Serializer):
     def save(self):
         request = self.context.get('request')
 
+        user = UserModel.objects.get(email=self.initial_data['email'])
+        self.initial_data['username'] = user.username
         # Set some values to trigger the send_email method.
         opts = {
             'use_https': request.is_secure(),
@@ -74,6 +76,8 @@ class PasswordResetSerializer(serializers.Serializer):
             'request': request,
             'extra_email_context': self.initial_data
         }
+
+        print(request.user, self.initial_data)
 
         opts.update(self.get_email_options())
         self.reset_form.save(**opts)
