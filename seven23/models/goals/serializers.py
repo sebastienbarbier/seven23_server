@@ -19,4 +19,4 @@ class GoalsSerializer(BulkSerializerMixin, serializers.HyperlinkedModelSerialize
     class Meta:
         model = Goals
         list_serializer_class = BulkListSerializer
-        fields = ('id', 'account', 'blob', 'last_edited')
+        fields = ('id', 'account', 'blob', 'last_edited', 'deleted')
