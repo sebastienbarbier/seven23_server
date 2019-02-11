@@ -28,8 +28,8 @@ psycopg2==2.7.5
 psycopg2-binary==2.7.5
 python3-openid==3.1.0
 pytz==2018.5
-PyYAML==3.13
-requests==2.19.1
+PyYAML==4.2b1
+requests==2.20.0
 requests-oauthlib==1.0.0
 simplejson==3.16.0
 six==1.11.0
