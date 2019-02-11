@@ -34,7 +34,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserModel
-        fields = ('pk', 'username', 'email', 'verified', 'favoritesCurrencies')
+        fields = ('pk', 'username', 'first_name', 'email', 'verified', 'favoritesCurrencies')
         read_only_fields = ('email',)
 
     def get_verified(self, obj):
