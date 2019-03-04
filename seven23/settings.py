@@ -99,6 +99,7 @@ INSTALLED_APPS = (
     'rest_framework.authtoken', # Token Authentification
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
     'rest_auth.registration',
     'rest_auth',
     'seven23.models.accounts',
