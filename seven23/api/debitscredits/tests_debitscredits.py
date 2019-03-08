@@ -103,7 +103,7 @@ class ApiDebitsCreditsTest(TransactionTestCase):
 
         item['blob'] = 'New Blob'
 
-        self.client.put('/api/v1/debitscredits/' + str(item['id']), item)
+        res = self.client.put('/api/v1/debitscredits/' + str(item['id']), item)
 
         response = self.client.get('/api/v1/debitscredits')
         assert response.json()[0]['blob'] == 'New Blob'
