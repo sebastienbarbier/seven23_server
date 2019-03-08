@@ -17,11 +17,12 @@ class DebitsCreditsSerializer(BulkSerializerMixin, serializers.HyperlinkedModelS
         Serialized for DebitsCredits model
     """
     account = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all())
+    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), required=False)
 
     class Meta:
         model = DebitsCredits
         list_serializer_class = BulkListSerializer
-        fields = ('id', 'account', 'blob', 'active', 'last_edited', 'deleted')
+        fields = ('id', 'account', 'category', 'blob', 'active', 'last_edited', 'deleted')
 
 
 class ChangeSerializer(BulkSerializerMixin, serializers.HyperlinkedModelSerializer):
