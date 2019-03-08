@@ -6,7 +6,7 @@ from seven23.models.transactions.models import DebitsCredits, Change
 
 class DebitsCreditsAdmin(admin.ModelAdmin):
     """ DebitsCredits model """
-    list_display = ('account', 'last_edited', 'active')
+    list_display = ('account', 'category', 'last_edited', 'active')
     list_filter = ('account', 'active')
 
 class ChangeAdmin(admin.ModelAdmin):
