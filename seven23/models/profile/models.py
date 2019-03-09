@@ -20,11 +20,8 @@ class Profile(models.Model):
                                 auto_now_add=True,
                                 editable=False)
 
-    @receiver(post_save, sender=User)
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
-
+    def save(self, *args, **kwargs):
+        if self.pk is None:
             now = datetime.now()
             # Add it as active user
             monthlyActiveUser = MonthlyActiveUser.objects.get_or_create(year=now.year, month=now.month)[0]
@@ -34,6 +31,13 @@ class Profile(models.Model):
             dailyActiveUser = DailyActiveUser.objects.get_or_create(year=now.year, month=now.month, day=now.day)[0]
             dailyActiveUser.counter += 1
             dailyActiveUser.save()
+
+        super(Profile, self).save(*args, **kwargs) # Call the "real" save() method
+
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
