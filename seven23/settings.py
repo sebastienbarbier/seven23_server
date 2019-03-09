@@ -107,6 +107,8 @@ INSTALLED_APPS = (
     'seven23.models.currency',
     'seven23.models.events',
     'seven23.models.goals',
+    'seven23.models.profile',
+    'seven23.models.stats',
     'seven23.models.terms',
     'seven23.models.tokens',
     'seven23.models.transactions'
@@ -122,6 +124,7 @@ MIDDLEWARE = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'seven23.models.stats.middleware.active_user_middleware',
 )
 
 REST_FRAMEWORK = {
