@@ -6,7 +6,9 @@ from itertools import chain
 from seven23.models.goals.models import Goals
 from seven23.models.goals.serializers import GoalsSerializer
 
-from rest_framework import viewsets, permissions
+from seven23.api.permissions import CanWriteAccount
+
+from rest_framework import permissions
 from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 from rest_framework import status
@@ -15,21 +17,6 @@ import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework_bulk import BulkModelViewSet
-
-class CanWriteAccount(permissions.BasePermission):
-    """
-        Object-level permission to only allow owners of an object to edit it.
-        Assumes the model instance has an `owner` attribute.
-    """
-
-    def has_object_permission(self, request, view, obj):
-        # Read permissions are allowed to any request,
-        # so we'll always allow GET, HEAD or OPTIONS requests.
-        # Instance must have an attribute named `owner`.
-        return obj.account.id in list(chain(
-            request.user.accounts.values_list('id', flat=True),
-            request.user.guests.values_list('account__id', flat=True)
-        ))
 
 class GoalsFilter(django_filters.rest_framework.FilterSet):
     last_edited = django_filters.IsoDateTimeFilter(lookup_expr='gt')

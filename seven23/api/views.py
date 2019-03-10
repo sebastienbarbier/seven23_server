@@ -29,6 +29,10 @@ def api_init(request):
     result['allow_account_creation'] = settings.ALLOW_ACCOUNT_CREATION
     result['contact'] = settings.CONTACT_EMAIL
 
+    result['price_year'] = settings.PRICE_YEAR
+    result['price_month'] = settings.PRICE_MONTH
+    result['stripe_key'] = settings.STRIPE_KEY
+
     try:
         terms = TermsAndConditions.objects.latest('date')
         result['terms_and_conditions_date'] = terms.date.strftime("%Y-%m-%d")

@@ -6,16 +6,11 @@ import json
 import os
 import markdown2
 from django.http import HttpResponse
-
-from django.db import models
 from rest_framework.decorators import api_view
 from rest_framework.authtoken.models import Token
-
-from seven23 import settings
-from seven23.models.terms.models import TermsAndConditions
-from seven23.models.rest_auth.serializers import UserSerializer
-
 from allauth.account.models import EmailAddress
+
+from seven23.models.rest_auth.serializers import UserSerializer
 
 @api_view(['POST'])
 def email(request):

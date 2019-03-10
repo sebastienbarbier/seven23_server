@@ -16,9 +16,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY') or 'k3-=2r(yq-towhfr-$@am&p%ze_&1!m!n7h2p%6*=fn4nr$=d^'
 
@@ -29,12 +26,15 @@ API_VERSION = [1, 0, 0]
 
 # Allow public account creation
 ALLOW_ACCOUNT_CREATION = os.environ.get('ALLOW_ACCOUNT_CREATION') == 'True'
-SAAS = os.environ.get('SAAS') == 'True'
 OLD_PASSWORD_FIELD_ENABLED = True
 
 APPEND_SLASH = False
-
 ALLOWED_HOSTS = ['*']
+
+SAAS = os.environ.get('SAAS') == 'True'
+PRICE_YEAR = 45
+PRICE_MONTH = 4.5
+STRIPE_KEY = os.environ.get('STRIPE_KEY')
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: '/home/media/media.lawrence.com/media/'
