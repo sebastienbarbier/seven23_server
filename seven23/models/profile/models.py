@@ -1,7 +1,7 @@
 """
     Terms and Conditions models
 """
-from datetime import datetime
+import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
@@ -19,10 +19,13 @@ class Profile(models.Model):
                                 help_text=_(u'Last call on the API as a registered user'),
                                 auto_now_add=True,
                                 editable=False)
+    valid_until = models.DateTimeField(_(u'Valid until'),
+                                help_text=_(u'On SASS, this is the validation date'),
+                                default=datetime.datetime.now() + datetime.timedelta(days=30))
 
     def save(self, *args, **kwargs):
         if self.pk is None:
-            now = datetime.now()
+            now = datetime.datetime.now()
             # Add it as active user
             monthlyActiveUser = MonthlyActiveUser.objects.get_or_create(year=now.year, month=now.month)[0]
             monthlyActiveUser.counter += 1
