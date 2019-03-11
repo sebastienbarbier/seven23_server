@@ -31,10 +31,11 @@ class UserSerializer(serializers.ModelSerializer):
     """
     favoritesCurrencies = serializers.PrimaryKeyRelatedField(many=True, queryset=Currency.objects.all())
     verified = serializers.SerializerMethodField()
+    valid_until = serializers.SerializerMethodField()
 
     class Meta:
         model = UserModel
-        fields = ('pk', 'username', 'first_name', 'email', 'verified', 'favoritesCurrencies')
+        fields = ('pk', 'username', 'first_name', 'email', 'verified', 'favoritesCurrencies', 'valid_until')
         read_only_fields = ('email',)
 
     def get_verified(self, obj):
@@ -42,6 +43,9 @@ class UserSerializer(serializers.ModelSerializer):
             return EmailAddress.objects.get(user=obj).verified
         except:
             return False
+
+    def get_valid_until(self, obj):
+        return obj.profile.valid_until
 
 class PasswordResetSerializer(serializers.Serializer):
     """
