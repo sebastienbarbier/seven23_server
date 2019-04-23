@@ -6,12 +6,10 @@ from itertools import chain
 from seven23.models.goals.models import Goals
 from seven23.models.goals.serializers import GoalsSerializer
 
-from seven23.api.permissions import CanWriteAccount
+from seven23.api.permissions import CanWriteAccount, IsPaid
 
 from rest_framework import permissions
 from rest_framework.decorators import permission_classes
-from rest_framework.response import Response
-from rest_framework import status
 
 import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
@@ -27,7 +25,7 @@ class GoalsFilter(django_filters.rest_framework.FilterSet):
 
 class ApiGoals(BulkModelViewSet):
     serializer_class = GoalsSerializer
-    permission_classes = (permissions.IsAuthenticated, CanWriteAccount)
+    permission_classes = (permissions.IsAuthenticated, CanWriteAccount, IsPaid)
     filter_backends = (DjangoFilterBackend,)
     filter_class = GoalsFilter
 

@@ -28,13 +28,14 @@ API_VERSION = [1, 0, 0]
 ALLOW_ACCOUNT_CREATION = os.environ.get('ALLOW_ACCOUNT_CREATION') == 'True'
 OLD_PASSWORD_FIELD_ENABLED = True
 
-APPEND_SLASH = False
+APPEND_SLASH = True
 ALLOWED_HOSTS = ['*']
 
 SAAS = os.environ.get('SAAS') == 'True'
 PRICE_YEAR = 45
 PRICE_MONTH = 4.5
-STRIPE_KEY = os.environ.get('STRIPE_KEY')
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_KEY') or 'pk_test_CSOinVQkYDyHH5SohltMEzAV'
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_KEY') or 'sk_test_7MZNxfejw2SAzeyEpXVCVOFL'
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: '/home/media/media.lawrence.com/media/'
@@ -109,6 +110,7 @@ INSTALLED_APPS = (
     'seven23.models.goals',
     'seven23.models.profile',
     'seven23.models.stats',
+    'seven23.models.saas',
     'seven23.models.terms',
     'seven23.models.tokens',
     'seven23.models.transactions'

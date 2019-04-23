@@ -13,6 +13,8 @@ from rest_framework.authtoken.models import Token
 
 from seven23 import settings
 from seven23.models.terms.models import TermsAndConditions
+from seven23.models.saas.serializers import ProductSerializer
+from seven23.models.saas.models import Product
 
 from allauth.account.models import EmailAddress
 
@@ -31,7 +33,10 @@ def api_init(request):
 
     result['price_year'] = settings.PRICE_YEAR
     result['price_month'] = settings.PRICE_MONTH
-    result['stripe_key'] = settings.STRIPE_KEY
+    result['stripe_key'] = settings.STRIPE_PUBLIC_KEY
+
+    if result['saas']:
+        result['products'] = ProductSerializer(list(Product.objects.all()), many=True).data
 
     try:
         terms = TermsAndConditions.objects.latest('date')

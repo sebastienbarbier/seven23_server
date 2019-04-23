@@ -4,7 +4,7 @@ coreapi==2.3.3
 coreschema==0.0.4
 defusedxml==0.5.0
 dj-database-url==0.5.0
-Django==2.1.7
+Django==2.1
 django-allauth==0.38.0
 django-colorfield==0.1.15
 django-cors-headers==2.4.0
@@ -31,9 +31,10 @@ psycopg2-binary==2.7.5
 python3-openid==3.1.0
 pytz==2018.5
 PyYAML==4.2b1
-requests==2.20.0
+requests==2.21.0
 requests-oauthlib==1.0.0
 simplejson==3.16.0
 six==1.11.0
+stripe==2.21.0
 uritemplate==3.0.0
 urllib3==1.23

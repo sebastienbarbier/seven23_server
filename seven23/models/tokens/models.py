@@ -22,49 +22,12 @@ class AbstractToken(models.Model):
     def __str__(self):
         return u'%s' % (self.token)
 
-class DiscountCode(AbstractToken):
-    """
-        Discount token on puschase in SAS mode.
-    """
-    pourcentageUser = models.IntegerField(_(u'User pourcentage'),
-                                          help_text=_(u'Pourcentage of discount for buyer'),
-                                          default=0)
-    pourcentageAffiliate = models.IntegerField(_(u'Affiliate pourcentage'),
-                                               help_text=_(u'Pourcentage credited to referee user'),
-                                               default=0)
-    referee = models.ForeignKey(User,
-                                blank=True,
-                                null=True, on_delete=models.CASCADE)
-    validUntil = models.DateField(_(u'Valid Until'),
-                                  help_text=_(u'Until when can this token be used'),
-                                  blank=True,
-                                  null=True)
-    validCounter = models.IntegerField(_(u'How many use'),
-                                       help_text=_(u'How many times can this token be used'),
-                                       blank=True,
-                                       null=True)
-
-    def __str__(self):
-        return u'%s' % (self.token)
-
 class EmailVerificationToken(AbstractToken):
     """
         Token send by email to verify it
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     newEmail = models.EmailField(_(u'New email'), blank=False, null=False)
-
-    def __str__(self):
-        return u'%s' % (self.token)
-
-class AllowAccountAccessToken(AbstractToken):
-    """
-        Token send by email to share access to an account
-    """
-    sendBy = models.ForeignKey(User, on_delete=models.CASCADE)
-    account = models.ForeignKey(Account, blank=False, null=False, on_delete=models.CASCADE)
-    email = models.EmailField(_(u'User email'), blank=False, null=False)
-    permission = models.CharField(max_length=1, choices=PERMISSIONS, null=False, blank=False)
 
     def __str__(self):
         return u'%s' % (self.token)

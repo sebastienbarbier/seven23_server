@@ -24,6 +24,7 @@ UserModel = get_user_model()
 
 from seven23.models.currency.models import Currency
 from seven23.models.currency.serializers import CurrencySerializer
+from seven23.models.saas.serializers import ChargeSerializer
 
 class UserSerializer(serializers.ModelSerializer):
     """
@@ -32,10 +33,11 @@ class UserSerializer(serializers.ModelSerializer):
     favoritesCurrencies = serializers.PrimaryKeyRelatedField(many=True, queryset=Currency.objects.all())
     verified = serializers.SerializerMethodField()
     valid_until = serializers.SerializerMethodField()
+    charges = ChargeSerializer(many=True)
 
     class Meta:
         model = UserModel
-        fields = ('pk', 'username', 'first_name', 'email', 'verified', 'favoritesCurrencies', 'valid_until')
+        fields = ('pk', 'username', 'first_name', 'email', 'verified', 'favoritesCurrencies', 'valid_until', 'charges')
         read_only_fields = ('email',)
 
     def get_verified(self, obj):
@@ -46,6 +48,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_valid_until(self, obj):
         return obj.profile.valid_until
+
 
 class PasswordResetSerializer(serializers.Serializer):
     """

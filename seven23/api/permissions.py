@@ -1,5 +1,7 @@
+
 from itertools import chain
 from rest_framework import permissions
+from django.utils import timezone
 from seven23 import settings
 
 class CanWriteAccount(permissions.BasePermission):
@@ -22,7 +24,7 @@ class IsPaid(permissions.BasePermission):
         Check if user has a paid formula
     """
 
-    def has_object_permission(self, request, view, obj):
+    def has_permission(self, request, view):
         # Read permissions are allowed to any request,
         # so we'll always allow GET, HEAD or OPTIONS requests.
 
@@ -32,4 +34,4 @@ class IsPaid(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return True
+        return request.user.profile.valid_until > timezone.now()
