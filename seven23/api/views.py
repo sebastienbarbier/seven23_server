@@ -33,6 +33,7 @@ def api_init(request):
 
     result['price_year'] = settings.PRICE_YEAR
     result['price_month'] = settings.PRICE_MONTH
+    result['trial_period'] = settings.TRIAL_PERIOD
     result['stripe_key'] = settings.STRIPE_PUBLIC_KEY
 
     if result['saas']:

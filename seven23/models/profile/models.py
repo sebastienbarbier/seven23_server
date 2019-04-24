@@ -10,6 +10,8 @@ from django.dispatch import receiver
 
 from seven23.models.stats.models import MonthlyActiveUser, DailyActiveUser
 
+from django.conf import settings
+
 class Profile(models.Model):
     """
         Discount token on puschase in SAS mode.
@@ -21,7 +23,7 @@ class Profile(models.Model):
                                 editable=False)
     valid_until = models.DateTimeField(_(u'Valid until'),
                                 help_text=_(u'On SASS, this is the validation date'),
-                                default=datetime.datetime.now() + datetime.timedelta(days=30))
+                                default=datetime.datetime.now() + datetime.timedelta(days=settings.TRIAL_PERIOD))
 
     def save(self, *args, **kwargs):
         if self.pk is None:
