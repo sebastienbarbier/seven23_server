@@ -6,7 +6,9 @@ defusedxml==0.5.0
 dj-database-url==0.5.0
 Django==2.1.5
 django-allauth==0.38.0
+django-appconf==1.0.3
 django-colorfield==0.1.15
+django-compressor==2.2
 django-cors-headers==2.4.0
 django-filter==2.0.0
 django-grappelli==2.11.1
@@ -15,12 +17,14 @@ django-mptt==0.9.1
 django-reset-migrations==0.3.1
 django-rest-auth==0.9.3
 django-rest-swagger==2.2.0
+django-sass-processor==0.7.3
 djangorestframework==3.8.2
 djangorestframework-bulk==0.2.1
 gunicorn==19.9.0
 idna==2.7
 itypes==1.1.0
 Jinja2==2.10
+libsass==0.18.0
 markdown2==2.3.5
 MarkupSafe==1.0
 newrelic==4.2.0.100
@@ -31,8 +35,10 @@ psycopg2-binary==2.7.5
 python3-openid==3.1.0
 pytz==2018.5
 PyYAML==4.2b1
+rcssmin==1.0.6
 requests==2.21.0
 requests-oauthlib==1.0.0
+rjsmin==1.0.12
 simplejson==3.16.0
 six==1.11.0
 stripe==2.21.0

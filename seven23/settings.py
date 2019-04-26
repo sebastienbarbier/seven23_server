@@ -54,7 +54,7 @@ MEDIA_URL = '/_media/'
 STATIC_ROOT = BASE_DIR + '/collectstatic/'
 
 STATICFILES_DIRS = (
-  os.path.join(BASE_DIR, 'seven23/static/'),
+  os.path.join(BASE_DIR, 'seven23/static'),
 )
 
 # Static files (CSS, JavaScript, Images)
@@ -66,6 +66,13 @@ LOGIN_URL = '/'
 DATABASE_URL = os.environ.get('DATABASE_URL') or 'postgres://sbarbier:abcdef@localhost/seven23'
 DATABASES = {}
 DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+]
+
 
 TEMPLATES = [
     {
@@ -88,6 +95,7 @@ TEMPLATES = [
 INSTALLED_APPS = (
     'mptt',
     'colorfield',
+    'sass_processor',
     'reset_migrations',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -165,7 +173,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL')
 DEFAULT_FROM_EMAIL = CONTACT_EMAIL
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
