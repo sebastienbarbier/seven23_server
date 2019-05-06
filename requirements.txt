@@ -6,7 +6,7 @@ coreapi==2.3.3
 coreschema==0.0.4
 defusedxml==0.5.0
 dj-database-url==0.5.0
-Django==2.1.5
+Django==2.1.8
 django-allauth==0.38.0
 django-appconf==1.0.3
 django-colorfield==0.1.15
@@ -27,7 +27,7 @@ docutils==0.14
 gunicorn==19.9.0
 idna==2.7
 itypes==1.1.0
-Jinja2==2.10
+Jinja2==2.10.1
 jmespath==0.9.4
 libsass==0.18.0
 markdown2==2.3.5
@@ -50,4 +50,4 @@ simplejson==3.16.0
 six==1.11.0
 stripe==2.21.0
 uritemplate==3.0.0
-urllib3==1.23
+urllib3==1.24.2

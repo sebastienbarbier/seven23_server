@@ -5,6 +5,4 @@ seven23 server
     :target: https://seven23-server.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-Fully manual budget app to track your expenses.
-
-Completely opensource, with privacy by design.
+Fully manual budget app to track your expenses. Completely opensource, with privacy by design.
