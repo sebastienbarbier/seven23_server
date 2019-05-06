@@ -1,69 +1,162 @@
-@font-face {
-    font-family: 'open_sansbold';
-    src: url('../fonts/OpenSans-Bold.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+@import "./variables";
+@import "./fonts";
+
+* {
+    box-sizing: border-box;
 }
 
-@font-face {
-    font-family: 'open_sansregular';
-    src: url('../fonts/OpenSans-Regular.ttf') format('truetype'),;
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'open_sanslight';
-    src: url('../fonts/OpenSans-Light.ttf') format('truetype'),;
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'open_sanssemibold';
-    src: url('../fonts/OpenSans-SemiBold.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-
-html, body {
+html{
     font-family: 'open_sansregular', sans-serif;
     font-size: 14px;
-    margin: 0;
-    pading: 0;
+
+    @media screen and (max-width: $smallScreen - 1px) {
+        font-size: 14px;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
 }
 
 header {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-sizing: border-box;
-    padding-left: 100px;
-    padding-bottom: 10vh;
-    h1 {
-        font-size: 120px;
-        padding: 0;
-        margin: 0em 0 0;
-        letter-spacing: -3px;
-        font-family: 'open_sansbold', sans-serif;
+
+    @media screen and (min-width: $mediumScreen) {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column-reverse;
     }
-    p {
-        font-family: 'open_sanslight', sans-serif;
-        font-size: 22px;
-        font-weight: 200;
-        margin: 0 0 0 10px;
-        letter-spacing: -0.5px;
-        line-height: 1.1em;
-        strong {
-            font-family: 'open_sansbold', sans-serif;
-            font-size: 1.1em;
+
+    @media screen and (min-width: $smallScreen)  and (max-width: $mediumScreen - 1px) {
+        min-height: 100vh;
+    }
+
+    @media screen and (max-width: $smallScreen - 1px) {
+        min-height: 100vh;
+    }
+
+    div#title {
+        display: flex;
+        flex-grow: 1;
+        max-width: 1400px;
+        margin: auto;
+
+        @media screen and (max-width: $mediumScreen - 1px) {
+            display: block;
+        }
+
+        div#title_text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5vh 10vh 20vh 5vh;
+            @media screen and (max-width: $mediumScreen - 1px) {
+                padding: 10vh 5vw 5vh;
+            }
+
+            h1 {
+                font-size: 6rem;
+                padding: 0;
+                margin: 0em 0 0;
+                letter-spacing: -3px;
+                font-family: 'open_sansbold', sans-serif;
+
+                @media screen and (max-width: $mediumScreen - 1px) {
+                    font-size: 50px;
+                    letter-spacing: -2px;
+                }
+            }
+            p {
+                font-family: 'open_sanslight', sans-serif;
+                font-size: 1.4rem;
+                font-weight: 200;
+                margin: 0 0 0 .3rem;
+                letter-spacing: -0.5px;
+                line-height: 1.1em;
+
+                @media screen and (max-width: $mediumScreen - 1px) {
+                    font-size: 16px;
+                    line-height: 1.3em;
+                    margin: 0;
+                }
+
+                strong {
+                    font-family: 'open_sansbold', sans-serif;
+                    font-size: 1.1em;
+                    letter-spacing: -1px;
+                }
+            }
+            p + p {
+                padding-top: 4px;
+            }
+        }
+
+
+        aside {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            flex: 50%;
+            padding: 0 10px 10vh;
+
+            @media screen and (max-width: $mediumScreen - 1px) {
+
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+
+            img {
+                max-width: 700px;
+                max-height: 80vh;
+                color: transparent;
+            }
         }
     }
+
+    nav {
+        padding: 20px 17px;
+        ul {
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            li {
+                a {
+                    display: flex;
+                    align-items: center;
+                    color: black;
+                    text-decoration: none;
+                    padding: 0px 20px;
+
+                    svg { margin-left: 10px; }
+                }
+            }
+        }
+    }
+
 }
 
+
 footer {
-    display: none;
+    width: 100vw;
+    background: #EFEFEF;
+    padding: 0;
+    p {
+        padding: 40px;
+        margin: 0;
+        text-align: right;
+        font-family: 'open_sanslight', sans-serif;
+        line-height: 1.6rem;
+        a {
+            color: black;
+            text-decoration: none;
+            font-family: 'open_sansbold', sans-serif;
+            font-size: 2em;
+            letter-spacing: -1px;
+        }
+    }
 }
