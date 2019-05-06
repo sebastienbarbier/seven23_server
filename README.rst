@@ -1,6 +1,10 @@
 seven23 server
 ==============
 
-Manage your daily expenses. Categorize and analyze to improve the way you manage them.
+.. image:: https://readthedocs.org/projects/seven23-server/badge/?version=latest
+:target: https://seven23-server.readthedocs.io/en/latest/?badge=latest
+:alt: Documentation Status
 
-	"What gets measured gets managed"
+Fully manual budget app to track your expenses.
+
+Completely opensource, with privacy by design.
