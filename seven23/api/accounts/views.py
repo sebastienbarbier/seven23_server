@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets, generics, permissions
 
 from seven23.api.permissions import IsPaid
+from seven23.models.accounts.models import Account
 from seven23.models.accounts.serializers import AccountSerializer
 
 class AccountsList(viewsets.ModelViewSet,
@@ -20,6 +21,9 @@ class AccountsList(viewsets.ModelViewSet,
     permission_classes = (permissions.IsAuthenticated, IsPaid)
 
     def get_queryset(self):
+        if self.request.user.is_anonymous:
+            return Account.objects.none()
+
         return self.request.user.accounts.all()
 
     def perform_create(self, serializer):

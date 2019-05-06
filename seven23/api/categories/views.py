@@ -29,6 +29,10 @@ class ApiCategories(BulkModelViewSet):
     filter_class = CategoriesFilter
 
     def get_queryset(self):
+
+        if self.request.user.is_anonymous:
+            return Category.objects.none()
+
         queryset = Category.objects.filter(
             account__in=list(chain(
                 self.request.user.accounts.values_list('id', flat=True),

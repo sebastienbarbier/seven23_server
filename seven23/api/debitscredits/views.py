@@ -26,6 +26,9 @@ class ApiDebitscredits(BulkModelViewSet):
     filter_class = DebitscreditsFilter
 
     def get_queryset(self):
+        if self.request.user.is_anonymous:
+            return DebitsCredits.objects.none()
+
         queryset = DebitsCredits.objects.filter(
             account__in=list(chain(
                 self.request.user.accounts.values_list('id', flat=True),

@@ -32,6 +32,9 @@ class ApiChange(BulkModelViewSet):
     filter_class = ChangesFilter
 
     def get_queryset(self):
+        if self.request.user.is_anonymous:
+            return Change.objects.none()
+
         queryset = Change.objects.filter(
             account__in=list(chain(
                 self.request.user.accounts.values_list('id', flat=True),

@@ -123,8 +123,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'rest_framework',
-    'rest_framework_swagger',
     'rest_framework.authtoken', # Token Authentification
+    'drf_yasg',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -182,6 +182,8 @@ SWAGGER_SETTINGS = {
         }
     },
 }
+
+LOGIN_URL = '/admin/'
 
 ROOT_URLCONF = 'seven23.urls'
 

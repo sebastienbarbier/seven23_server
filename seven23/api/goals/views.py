@@ -30,6 +30,9 @@ class ApiGoals(BulkModelViewSet):
     filter_class = GoalsFilter
 
     def get_queryset(self):
+        if self.request.user.is_anonymous:
+            return Goals.objects.none()
+
         queryset = Goals.objects.filter(
             account__in=list(chain(
                 self.request.user.accounts.values_list('id', flat=True),
