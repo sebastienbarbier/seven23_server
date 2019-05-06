@@ -51,14 +51,32 @@ MEDIA_URL = '/_media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' 'static/' subdirectories and in STATICFILES_DIRS.
 # Example: '/home/media/media.lawrence.com/static/'
-STATIC_ROOT = BASE_DIR + '/collectstatic/'
+
+# Static files (CSS, JavaScript, Images)
+if DEBUG:
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
+else:
+    # aws settings
+    AWS_S3_ENDPOINT_URL = "https://cellar-c2.services.clever-cloud.com"
+    S3_USE_SIGV4 = False
+    AWS_S3_SIGNATURE_VERSION = "s3"
+    AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+    AWS_DEFAULT_ACL = 'public-read'
+    AWS_S3_CUSTOM_DOMAIN = os.getenv('AWS_S3_CUSTOM_DOMAIN')
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+    # s3 static settings
+    AWS_LOCATION = 'static'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
 
 STATICFILES_DIRS = (
   os.path.join(BASE_DIR, 'seven23/static'),
 )
 
-# Static files (CSS, JavaScript, Images)
-STATIC_URL = '/static/'
 
 LOGIN_URL = '/'
 
@@ -112,6 +130,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
     'rest_auth.registration',
     'rest_auth',
+    'storages',
     'seven23.models.accounts',
     'seven23.models.categories',
     'seven23.models.currency',
