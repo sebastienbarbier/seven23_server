@@ -10,7 +10,7 @@ Seven23 server
 
 Fully manual budget app to track your expenses. Completely opensource, with privacy by design.
 
-- Public instance: `seven23.io <https://seven23.io/>`_
+- Seven23 official website: `seven23.io <https://seven23.io/>`_
 - Documentation: `readthedocs.io <https://seven23-server.readthedocs.io/en/latest/>`_
 - API specifications: `swagger <https://seven23.io/swagger/>`_ and `redoc <https://seven23.io/redoc/>`_
 - Code repository: `github <https://github.com/sebastienbarbier/seven23_server>`_
