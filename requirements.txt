@@ -31,7 +31,7 @@ itypes==1.1.0
 Jinja2==2.10.1
 jmespath==0.9.4
 libsass==0.18.0
-markdown2==2.3.5
+markdown2==2.3.6
 MarkupSafe==1.0
 newrelic==4.2.0.100
 oauthlib==2.1.0
