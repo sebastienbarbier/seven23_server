@@ -16,4 +16,4 @@ Fully manual budget app to track your expenses. Completely opensource, with priv
 - Code repository: `github <https://github.com/sebastienbarbier/seven23_server>`_
 
 Seven23 server instance is powered by `django <https://www.djangoproject.com/>`_ and `django-rest-framework <https://www.django-rest-framework.org/>`_ to manage and expose a restful API.
-**It does not include a user interface**, which is managed as a totally independant project like `seven23_webappp <https://github.com/sebastienbarbier/seven23_webapp>`_ .
+**It does not include a user interface**, which is managed as a totally independant project like `seven23_webapp <https://github.com/sebastienbarbier/seven23_webapp>`_ .
