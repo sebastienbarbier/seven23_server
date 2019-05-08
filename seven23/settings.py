@@ -35,8 +35,8 @@ SAAS = os.environ.get('SAAS') == 'True'
 PRICE_YEAR = 45
 PRICE_MONTH = 4.5
 TRIAL_PERIOD = 30
-STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_KEY') or 'pk_test_CSOinVQkYDyHH5SohltMEzAV'
-STRIPE_SECRET_KEY = os.environ.get('STRIPE_KEY') or 'sk_test_7MZNxfejw2SAzeyEpXVCVOFL'
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY') or 'pk_test_CSOinVQkYDyHH5SohltMEzAV'
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY') or 'sk_test_7MZNxfejw2SAzeyEpXVCVOFL'
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: '/home/media/media.lawrence.com/media/'
