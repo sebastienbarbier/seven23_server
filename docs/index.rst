@@ -9,7 +9,6 @@ Fully manual budget app to track your expenses. Completely opensource, with priv
 - `Issue tracker <https://github.com/sebastienbarbier/seven23_server/issues>`_
 - `Code repository <https://github.com/sebastienbarbier/seven23_server>`_
 
-
 .. note::
    **This project does not include a user interface**, which is managed as a totally independant project like `seven23_webapp <https://github.com/sebastienbarbier/seven23_webapp>`_ .
 

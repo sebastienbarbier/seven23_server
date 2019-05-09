@@ -201,7 +201,7 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = '723edoc'
+htmlhelp_basename = 'Seven23doc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -223,7 +223,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  (master_doc, '723e.tex', u'723e Documentation',
+  (master_doc, 'Seven23.tex', u'Seven23 Documentation',
    u'Sébastien BARBIER', 'manual'),
 ]
 
