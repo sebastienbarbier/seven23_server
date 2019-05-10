@@ -47,3 +47,6 @@ class ApiChange(BulkModelViewSet):
             queryset = queryset.filter(deleted=False)
 
         return queryset
+
+    def allow_bulk_destroy(self, qs, filtered):
+        return False

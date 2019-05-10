@@ -176,3 +176,24 @@ class ApiDebitsCreditsTest(TransactionTestCase):
         response = self.client.get('/api/v1/debitscredits?last_edited=%s' % minDate)
         data = response.json()
         assert len(response.json()) == 1
+
+
+
+    def test_categories_bulk_delete(self):
+        """
+            Retrieve data with a user owning an account and being gest in an other one.
+        """
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get('/api/v1/debitscredits')
+        data = response.json()
+        # Verify data structure
+        assert response.status_code == status.HTTP_200_OK
+        assert len(data) == 2
+
+        # Make sure bulk delete with no param is disabled
+        response = self.client.delete('/api/v1/debitscredits')
+        response = self.client.get('/api/v1/debitscredits')
+        data = response.json()
+        # Verify data structure
+        assert response.status_code == status.HTTP_200_OK
+        assert len(data) == 2

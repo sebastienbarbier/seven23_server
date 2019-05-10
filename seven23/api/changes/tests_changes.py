@@ -85,3 +85,35 @@ class ApiChangesTest(TransactionTestCase):
         response = self.client.get('/api/v1/changes?last_edited=%s' % minDate)
         data = response.json()
         assert len(response.json()) == 0
+
+    def test_changes_bulk_delete(self):
+        """
+            Retrieve data with a user owning an account and being gest in an other one.
+        """
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get('/api/v1/changes')
+        data = response.json()
+        # Verify data structure
+        assert response.status_code == status.HTTP_200_OK
+        assert len(data) == 0
+
+        change1 = Change.objects.create(account=self.account,
+                               blob='change 1')
+
+        Change.objects.create(account=self.account,
+                               blob='change 2')
+
+        response = self.client.get('/api/v1/changes')
+        data = response.json()
+        # Verify data structure
+        assert response.status_code == status.HTTP_200_OK
+        assert len(data) == 2
+
+        # Make sure bulk delete with no param is disabled
+        response = self.client.delete('/api/v1/changes')
+
+        response = self.client.get('/api/v1/changes')
+        data = response.json()
+        # Verify data structure
+        assert response.status_code == status.HTTP_200_OK
+        assert len(data) == 2

@@ -39,3 +39,6 @@ class ApiDebitscredits(BulkModelViewSet):
         if last_edited is None:
             queryset = queryset.filter(deleted=False)
         return queryset
+
+    def allow_bulk_destroy(self, qs, filtered):
+        return False
