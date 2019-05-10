@@ -117,3 +117,11 @@ class ApiChangesTest(TransactionTestCase):
         # Verify data structure
         assert response.status_code == status.HTTP_200_OK
         assert len(data) == 2
+
+        # Make sure bulk delete with no param is disabled
+        response = self.client.delete('/api/v1/changes', [change1.id], format='json')
+        response = self.client.get('/api/v1/changes')
+        data = response.json()
+        # Verify data structure
+        assert response.status_code == status.HTTP_200_OK
+        assert len(data) == 1

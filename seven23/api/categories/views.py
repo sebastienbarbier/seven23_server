@@ -44,9 +44,15 @@ class ApiCategories(BulkModelViewSet):
         if last_edited is None:
             queryset = queryset.filter(deleted=False)
 
+        if self.request.method == 'DELETE' and isinstance(self.request.data, list):
+            queryset = queryset.filter(id__in=self.request.data)
+
         return queryset
 
     def allow_bulk_destroy(self, qs, filtered):
+
+        if isinstance(self.request.data, list):
+            return True
         return False
 
     def destroy(self, request, *args, **kwargs):
