@@ -16,7 +16,17 @@ class Profile(models.Model):
     """
         Discount token on puschase in SAS mode.
     """
+    AVATAR_OPTIONS = (
+        ('NONE', 'None'),
+        ('GRAVATAR', 'Gravatar'),
+    )
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.CharField(_(u'Avatar'),
+                                default='NONE',
+                                max_length=20,
+                                choices=AVATAR_OPTIONS,
+                                help_text=_(u'Select between different origins.'))
     last_api_call = models.DateField(_(u'Last API call'),
                                 help_text=_(u'Last call on the API as a registered user'),
                                 auto_now_add=True,
