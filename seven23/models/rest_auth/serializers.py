@@ -36,13 +36,13 @@ class UserSerializer(WritableNestedModelSerializer):
     favoritesCurrencies = serializers.PrimaryKeyRelatedField(many=True, queryset=Currency.objects.all())
     verified = serializers.SerializerMethodField()
     valid_until = serializers.SerializerMethodField()
-    charges = ChargeSerializer(many=True)
+    charges = serializers.SerializerMethodField()
     profile = ProfileSerializer()
 
     class Meta:
         model = UserModel
         fields = ('pk', 'username', 'first_name', 'email', 'verified', 'favoritesCurrencies', 'profile', 'valid_until', 'charges')
-        read_only_fields = ('email',)
+        read_only_fields = ('email', 'charges')
 
     def get_verified(self, obj):
         try:
@@ -52,6 +52,9 @@ class UserSerializer(WritableNestedModelSerializer):
 
     def get_valid_until(self, obj):
         return obj.profile.valid_until
+
+    def get_charges(self, obj):
+        return [ChargeSerializer(charge).data for charge in obj.charges.all()]
 
 
 class PasswordResetSerializer(serializers.Serializer):
