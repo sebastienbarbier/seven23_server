@@ -25,20 +25,23 @@ UserModel = get_user_model()
 from seven23.models.currency.models import Currency
 from seven23.models.currency.serializers import CurrencySerializer
 from seven23.models.saas.serializers import ChargeSerializer
+from seven23.models.profile.serializers import ProfileSerializer
 
-class UserSerializer(serializers.ModelSerializer):
+from drf_writable_nested import WritableNestedModelSerializer
+
+class UserSerializer(WritableNestedModelSerializer):
     """
     User model w/o password
     """
     favoritesCurrencies = serializers.PrimaryKeyRelatedField(many=True, queryset=Currency.objects.all())
     verified = serializers.SerializerMethodField()
-    avatar = serializers.SerializerMethodField()
     valid_until = serializers.SerializerMethodField()
     charges = ChargeSerializer(many=True)
+    profile = ProfileSerializer()
 
     class Meta:
         model = UserModel
-        fields = ('pk', 'username', 'first_name', 'email', 'verified', 'favoritesCurrencies', 'avatar', 'valid_until', 'charges')
+        fields = ('pk', 'username', 'first_name', 'email', 'verified', 'favoritesCurrencies', 'profile', 'valid_until', 'charges')
         read_only_fields = ('email',)
 
     def get_verified(self, obj):
@@ -46,9 +49,6 @@ class UserSerializer(serializers.ModelSerializer):
             return EmailAddress.objects.get(user=obj).verified
         except:
             return False
-
-    def get_avatar(self, obj):
-        return obj.profile.avatar
 
     def get_valid_until(self, obj):
         return obj.profile.valid_until
@@ -87,8 +87,6 @@ class PasswordResetSerializer(serializers.Serializer):
             'request': request,
             'extra_email_context': self.initial_data
         }
-
-        print(request.user, self.initial_data)
 
         opts.update(self.get_email_options())
         self.reset_form.save(**opts)
