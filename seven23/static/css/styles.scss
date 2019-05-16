@@ -157,6 +157,36 @@ main {
         }
     }
 
+    #screenshots {
+        background: rgba(180, 185, 190, 0.1);
+        padding: 40px 20px 30px;
+
+        h2, ul {
+            max-width: 1400px;
+            margin: auto;
+        }
+    }
+
+    #pricing {
+        background: rgba(180, 185, 190, 0.15);
+        padding: 40px 20px 30px;
+
+        h2, ul {
+            max-width: 1400px;
+            margin: auto;
+        }
+    }
+
+    #faq {
+        background: rgba(180, 185, 190, 0.2);
+        padding: 40px 20px 30px;
+
+        h2, ul {
+            max-width: 1400px;
+            margin: auto;
+        }
+    }
+
     h2 {
         font-size: 3.2rem;
         padding: 0 0 20px 38px;
@@ -261,7 +291,7 @@ main {
 
 footer {
     width: 100vw;
-    background: rgba(180, 185, 190, 0.2 );
+    background: rgba(180, 185, 190, 0.1 );
     padding: 0;
     p {
         padding: 40px;
