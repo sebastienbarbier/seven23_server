@@ -4,6 +4,7 @@
         "managetasks": [
             "test --settings seven23.settings_tests",
             "migrate",
+            "compilescss",
             "collectstatic --no-input",
             "loaddata seven23/models/currency/fixtures/initial_data.json"
         ]
