@@ -177,12 +177,16 @@ main {
             @media screen and (max-width: $mediumScreen - 1px) {
                 padding: 0 0 0px 58px;
             }
+            @media screen and (max-width: $smallScreen - 1px) {
+                padding: 0 0 0 20px;
+            }
         }
         ul {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: center;
+            padding-bottom: 40px;
 
             @media screen and (max-width: $mediumScreen - 1px) {
                 flex-wrap: nowrap;
@@ -190,6 +194,9 @@ main {
                 padding: 10px 10px 30px 38px;
                 margin: 0;
                 justify-content: flex-start;
+            }
+            @media screen and (max-width: $smallScreen - 1px) {
+                padding: 10px 10px 30px 10px;
             }
 
             li {
