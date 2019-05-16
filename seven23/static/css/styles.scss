@@ -149,7 +149,7 @@ main {
 
     #features {
         background: rgba(180, 185, 190, 0.05);
-        padding: 40px 20px 0;
+        padding: 40px 20px 30px;
 
         h2, ul {
             max-width: 1400px;
@@ -167,6 +167,10 @@ main {
         @media screen and (max-width: $mediumScreen - 1px) {
             font-size: 36px;
             letter-spacing: -2px;
+            padding: 0 0 0px 38px;
+        }
+
+        @media screen and (max-width: $smallScreen - 1px) {
             padding: 0;
         }
     }
@@ -194,18 +198,24 @@ main {
             @media screen and (min-width: $smallScreen) and (max-width: $mediumScreen - 1px) {
                 flex: 100%;
                 padding: 30px 40px;
+
+                &:nth-child(2) { padding-bottom: 60px; }
+                &:last-child { padding-top: 60px; }
             }
 
             @media screen and (max-width: $smallScreen - 1px) {
                 flex: 100%;
                 padding: 20px 0px;
                 font-size: 1rem;
+
+                &:nth-child(2) { padding-bottom: 60px; }
+                &:last-child { padding-top: 60px; }
             }
 
 
             h3 {
                 font-size: 1.8em;
-                padding: 0 0 .6em;
+                padding: 0 0 0.8em;
                 margin: 0em 0 0;
                 letter-spacing: -1px;
                 font-family: 'open_sansbold', sans-serif;
@@ -234,6 +244,9 @@ main {
                     font-size: 1.1em;
                     letter-spacing: -1px;
                 }
+            }
+            p + p {
+                margin-top: 4px;
             }
             img {
                 width: 100%;
