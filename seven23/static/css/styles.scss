@@ -318,8 +318,32 @@ main {
             max-width: 1400px;
             margin: auto;
             padding-left: 38px;
+
+            @media screen and (max-width: $smallScreen - 1px) {
+                padding-left: 0px;
+            }
+
         }
         h3 { padding-top: 30px; padding-bottom: 16px; }
+    }
+
+    #contact {
+        background: rgba(180, 185, 190, 0.25);
+        padding: 40px 20px 30px;
+
+        h2, p {
+            max-width: 1400px;
+            margin: auto;
+            padding-left: 38px;
+
+            @media screen and (max-width: $smallScreen - 1px) {
+                padding-left: 0px;
+            }
+        }
+        h2 { padding-bottom: 20px; }
+        a {
+            color: inherit;
+        }
     }
 
     h2 {
@@ -420,7 +444,7 @@ main {
 
 footer {
     width: 100vw;
-    background: rgba(180, 185, 190, 0.25);
+    background: rgba(180, 185, 190, 0.3);
     padding: 0;
     p {
         padding: 40px;
