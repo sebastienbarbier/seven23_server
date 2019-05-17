@@ -191,6 +191,7 @@ main {
             @media screen and (max-width: $mediumScreen - 1px) {
                 flex-wrap: nowrap;
                 overflow: auto;
+                -webkit-overflow-scrolling: touch;
                 padding: 10px 10px 30px 38px;
                 margin: 0;
                 justify-content: flex-start;
