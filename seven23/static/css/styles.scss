@@ -190,8 +190,9 @@ main {
 
             @media screen and (max-width: $mediumScreen - 1px) {
                 flex-wrap: nowrap;
-                overflow: auto;
                 -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+                overflow-x: scroll;
                 padding: 10px 10px 30px 38px;
                 margin: 0;
                 justify-content: flex-start;
@@ -206,6 +207,7 @@ main {
                 flex-grow: 1;
                 display: flex;
                 justify-content: center;
+                scroll-snap-align: center;
                 a {
                     img {
                         height: 250px;
