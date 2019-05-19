@@ -1,156 +1,158 @@
+{% extends 'base.html' %}
 {% load static sass_tags %}
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<title>Seven23 - Budget app</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-        <link href="{% sass_src 'css/styles.scss' %}" rel="stylesheet" type="text/css" />
-	</head>
-	<body>
-        <header>
-            <div id="title">
-                <div id="title_text">
-            		<h1>Seven23</h1>
-            		<p>Fully manual budget app to track your expenses.</p>
-                    <p>Completely <strong>opensource</strong>, with <strong>privacy by design</strong>.</p>
-                </div>
-                <aside>
-                    <img
-                        src="{% static "images/transactions-light.png" %}"
-                        alt="iPhone visual of Seven23" />
-                </aside>
+
+
+{% block content %}
+    <header class="homepage" id="top">
+        <div id="title">
+            <div id="title_text">
+                <h1>Seven23</h1>
+                <p>Fully manual budget app to track your expenses.</p>
+                <p>Completely <strong>opensource</strong>, with <strong>privacy by design</strong>.</p>
             </div>
-        </header>
+            <aside>
+                <img
+                    src="{% static "images/transactions-light.png" %}"
+                    alt="iPhone visual of Seven23" />
+            </aside>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/#features">Features</a></li>
+                <li><a href="/#gallery">Gallery</a></li>
+                <li><a href="/#pricing">Pricing</a></li>
+                <li><a href="/#faq">FAQ</a></li>
+                <li><a href="/#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <main>
-            <section id="features">
-                <h2>Features</h2>
-                <ul>
-                    <li>
-                        <h3>Monthly based transactions</h3>
-                        <p><strong>Categorize your transactions</strong> and review as a <strong>monthly timeline</strong> to manage your budget. You can then <strong>review them per category</strong> to help understand where your money goes</p>
-                        <img src="{% static "images/01-transactions-desktop-light.png" %}" alt="" />
-                    </li>
-                    <li>
-                        <h3>Multi currency</h3>
-                        <p>Each transaction is registered using <strong>its original currency</strong>, then based on a list of past exchanges the app <strong>automatically convert</strong> them in the currency of your choice. You can <strong>switch currency</strong> as you wish.</p>
-                        <img src="{% static "images/01-change-desktop-light.png" %}" alt="" />
-                    </li>
-                    <li>
-                        <h3>Privacy by design</h3>
-                        <p><strong>End-to-end encryption</strong> with an <strong>opensource</strong> code base to  guaranty confidentiality of your data..</p>
-                    </li>
-                    <li>
-                        <h3>Sync across devices</h3>
-                        <p>This is a web application which works on <strong>phone, tablet and desktop</strong>. Can also be used <strong>offline</strong> then synced.</p>
-                    </li>
-                    <li>
-                        <h3>Reporting</h3>
-                        <p><strong>Browse and analyse</strong> your data to generate a report and <strong>compare</strong> different budgets.</p>
-                    </li>
-                    <li>
-                        <p><strong>Also include</strong>: 👥 multi-account, 🌗 dark mode, 📥 import/export, 💚 opensource, 👩‍💻 API access, 🏠 Self-hostable.</p>
-                        <p><strong>And more to come</strong>: 🔑 Two-factor authentication, 💱 Convertor, 🗄 tags, 🖇 attached files, 👬👬 shared budget, 📊 public profile, 🌏 locations, 🐑 social networks, and 🇫🇷 multi-langage.</p>
-                    </li>
-                </ul>
-            </section>
-            <section id="gallery">
-                <h2>Gallery</h2>
-                <ul>
-                    <li>
-                        <a href="{% static "images/screenshots/large/01-dashboard-desktop-light.png" %}">
-                            <img src="{% static "images/screenshots/small/01-dashboard-desktop-light.png" %}" alt="Seven23 dashboard desktop" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% static "images/screenshots/large/01-dashboard-mobile-light.png" %}">
-                            <img src="{% static "images/screenshots/small/01-dashboard-mobile-light.png" %}" alt="Seven23 dashboard mobile" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% static "images/screenshots/large/01-transactions-desktop-light.png" %}">
-                            <img src="{% static "images/screenshots/small/01-transactions-desktop-light.png" %}" alt="Seven23 transactions desktop" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% static "images/screenshots/large/01-transactions-mobile-light.png" %}">
-                            <img src="{% static "images/screenshots/small/01-transactions-mobile-light.png" %}" alt="Seven23 transactions mobile" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% static "images/screenshots/large/01-categories-desktop-light.png" %}">
-                            <img src="{% static "images/screenshots/small/01-categories-desktop-light.png" %}" alt="Seven23 categories desktop" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% static "images/screenshots/large/01-categories-mobile-light.png" %}">
-                            <img src="{% static "images/screenshots/small/01-categories-mobile-light.png" %}" alt="Seven23 categories mobile" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% static "images/screenshots/large/01-change-desktop-light.png" %}">
-                            <img src="{% static "images/screenshots/small/01-change-desktop-light.png" %}" alt="Seven23 change desktop" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% static "images/screenshots/large/01-change-mobile-light.png" %}">
-                            <img src="{% static "images/screenshots/small/01-change-mobile-light.png" %}" alt="Seven23 change mobile" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% static "images/screenshots/large/01-report-desktop-light.png" %}">
-                            <img src="{% static "images/screenshots/small/01-report-desktop-light.png" %}" alt="Seven23 report desktop" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% static "images/screenshots/large/01-report-mobile-light.png" %}">
-                            <img src="{% static "images/screenshots/small/01-report-mobile-light.png" %}" alt="Seven23 report mobile" />
-                        </a>
-                    </li>
-                </ul>
-            </section>
+    <main>
+        <section id="features">
+            <h2>Features</h2>
+            <ul>
+                <li>
+                    <h3>Monthly based transactions</h3>
+                    <p><strong>Categorize your transactions</strong> and review as a <strong>monthly timeline</strong> to manage your budget. You can then <strong>review them per category</strong> to help understand where your money goes</p>
+                    <img src="{% static "images/01-transactions-desktop-light.png" %}" alt="" />
+                </li>
+                <li>
+                    <h3>Multi currency</h3>
+                    <p>Each transaction is registered using <strong>its original currency</strong>, then based on a list of past exchanges the app <strong>automatically convert</strong> them in the currency of your choice. You can <strong>switch currency</strong> as you wish.</p>
+                    <img src="{% static "images/01-change-desktop-light.png" %}" alt="" />
+                </li>
+                <li>
+                    <h3>Privacy by design</h3>
+                    <p><strong>End-to-end encryption</strong> with an <strong>opensource</strong> code base to  guaranty confidentiality of your data..</p>
+                </li>
+                <li>
+                    <h3>Sync across devices</h3>
+                    <p>This is a web application which works on <strong>phone, tablet and desktop</strong>. Can also be used <strong>offline</strong> then synced.</p>
+                </li>
+                <li>
+                    <h3>Reporting</h3>
+                    <p><strong>Browse and analyse</strong> your data to generate a report and <strong>compare</strong> different budgets.</p>
+                </li>
+                <li>
+                    <p><strong>Also include</strong>: 👥 multi-account, 🌗 dark mode, 📥 import/export, 💚 opensource, 👩‍💻 API access, 🏠 Self-hostable.</p>
+                    <p><strong>And more to come</strong>: 🔑 Two-factor authentication, 💱 Convertor, 🗄 tags, 🖇 attached files, 👬👬 shared budget, 📊 public profile, 🌏 locations, 🐑 social networks, and 🇫🇷 multi-langage.</p>
+                </li>
+            </ul>
+        </section>
+        <section id="gallery">
+            <h2>Gallery</h2>
+            <ul>
+                <li>
+                    <a href="{% static "images/screenshots/large/01-dashboard-desktop-light.png" %}">
+                        <img src="{% static "images/screenshots/small/01-dashboard-desktop-light.png" %}" alt="Seven23 dashboard desktop" />
+                    </a>
+                </li>
+                <li>
+                    <a href="{% static "images/screenshots/large/01-dashboard-mobile-light.png" %}">
+                        <img src="{% static "images/screenshots/small/01-dashboard-mobile-light.png" %}" alt="Seven23 dashboard mobile" />
+                    </a>
+                </li>
+                <li>
+                    <a href="{% static "images/screenshots/large/01-transactions-desktop-light.png" %}">
+                        <img src="{% static "images/screenshots/small/01-transactions-desktop-light.png" %}" alt="Seven23 transactions desktop" />
+                    </a>
+                </li>
+                <li>
+                    <a href="{% static "images/screenshots/large/01-transactions-mobile-light.png" %}">
+                        <img src="{% static "images/screenshots/small/01-transactions-mobile-light.png" %}" alt="Seven23 transactions mobile" />
+                    </a>
+                </li>
+                <li>
+                    <a href="{% static "images/screenshots/large/01-categories-desktop-light.png" %}">
+                        <img src="{% static "images/screenshots/small/01-categories-desktop-light.png" %}" alt="Seven23 categories desktop" />
+                    </a>
+                </li>
+                <li>
+                    <a href="{% static "images/screenshots/large/01-categories-mobile-light.png" %}">
+                        <img src="{% static "images/screenshots/small/01-categories-mobile-light.png" %}" alt="Seven23 categories mobile" />
+                    </a>
+                </li>
+                <li>
+                    <a href="{% static "images/screenshots/large/01-change-desktop-light.png" %}">
+                        <img src="{% static "images/screenshots/small/01-change-desktop-light.png" %}" alt="Seven23 change desktop" />
+                    </a>
+                </li>
+                <li>
+                    <a href="{% static "images/screenshots/large/01-change-mobile-light.png" %}">
+                        <img src="{% static "images/screenshots/small/01-change-mobile-light.png" %}" alt="Seven23 change mobile" />
+                    </a>
+                </li>
+                <li>
+                    <a href="{% static "images/screenshots/large/01-report-desktop-light.png" %}">
+                        <img src="{% static "images/screenshots/small/01-report-desktop-light.png" %}" alt="Seven23 report desktop" />
+                    </a>
+                </li>
+                <li>
+                    <a href="{% static "images/screenshots/large/01-report-mobile-light.png" %}">
+                        <img src="{% static "images/screenshots/small/01-report-mobile-light.png" %}" alt="Seven23 report mobile" />
+                    </a>
+                </li>
+            </ul>
+        </section>
 
-            <section id="pricing">
-                <h2>Pricing</h2>
-                <ul>
-                    <li>
-                        <h3>Self hosted</h3>
-                        <p>Install on your own server at <strong>no extra cost</strong> and use the <strong>official app</strong> to access it. We even provide a <strong>one-click install</strong> for a few cloud plateform to make the process easier.</p>
-                        <div>
-                            <p>0<span>€</span><small>/ forever</small></p>
-                            <a href="https://seven23-server.readthedocs.io/en/latest/index.html">See documentation</a>
-                        </div>
-                    </li>
-                    <li>
-                        <h3>As a Service</h3>
-                        <p>If you do not want to be in change of your own instance, we provide an <strong>official version</strong> as this website. We will perform <strong>maintenance</strong> and <strong>backups</strong> for you in exchange of a <strong>yearly subscription</strong>.</p>
-                        <p class="trial_period">After a 30-day trial period</p>
-                        <div>
-                            <p>45<span>€</span><small>/ year</small></p>
-                            <a class="disabled">Coming soon</a>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-            <section id="faq">
-                <h2>FAQ</h2>
-                <h3>Who is behing Seven23 ?</h3>
-                <p>My name is <strong>Sébastien Barbier</strong>, I am a french developer and worked on Seven23 as a <strong>side-project</strong> to help me track my expenses. After many years of work, as the application was taking shapes I decided to open it and  build an hosting offer to help financing its development. <strong>I still use it on daily basis</strong> so you can be sure <strong>I will take good care of it</strong>.</p>
-                <h3>Can I connect and automatically sync my bank account ?</h3>
-                <p><strong>No</strong>, this features is not implemented and there is currently no plans to do so.</p>
-                <h3>Are my data encrypted locally ?</h3>
-                <p>Your data are encrypted on our <strong>server</strong> using JSON Web Encryption (JWE), and in <strong>all communication</strong> using HTTPS, but need to be stored <strong>unencrypted on your device</strong> to run in-app. Meaning if someone access your device, this personn can access your data.</p>
-                <h3>Can I help and constribute ?</h3>
-                <p><strong>We love community feedback</strong> and are glad to review contributions of any size - from typos in the documentation to critical bug fixes - so don’t be shy!</p>
-            </section>
-            <section id="contact">
-                <h2>Contact</h2>
-                <p>If any questions or any needs, you can reach to me by <a href="mailto:seven23@sebastienbarbier.com">email</a> or over <a href="https://twitter.com/SebBarbier">twitter</a>.</p>
-            </section>
-        </main>
-        <footer>
-            <p>Developed by<br /><a href="https://sebastienbarbier.com" target="_blank">sebastienbarbier</a></p>
-        </footer>
-	</body>
-</html>
+        <section id="pricing">
+            <h2>Pricing</h2>
+            <ul>
+                <li>
+                    <h3>Self hosted</h3>
+                    <p>Install on your own server at <strong>no extra cost</strong> and use the <strong>official app</strong> to access it. We even provide a <strong>one-click install</strong> for a few cloud plateform to make the process easier.</p>
+                    <div>
+                        <p>0<span>€</span><small>/ forever</small></p>
+                        <a href="https://seven23-server.readthedocs.io/en/latest/index.html">See documentation</a>
+                    </div>
+                </li>
+                <li>
+                    <h3>As a Service</h3>
+                    <p>If you do not want to be in change of your own instance, we provide an <strong>official version</strong> as this website. We will perform <strong>maintenance</strong> and <strong>backups</strong> for you in exchange of a <strong>yearly subscription</strong>.</p>
+                    <p class="trial_period">After a 30-day trial period</p>
+                    <div>
+                        <p>45<span>€</span><small>/ year</small></p>
+                        <a class="disabled">Coming soon</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section id="faq">
+            <h2>FAQ</h2>
+            <h3>Who is behing Seven23 ?</h3>
+            <p>My name is <strong>Sébastien Barbier</strong>, I am a french developer who developed Seven23 as a <strong>side-project</strong> to help me track my expenses. After way too many years of work, as the application was taking shapes I decided to open it and build an hosting offer to help financing its development. <strong>I personnaly use it on daily basis</strong> so you can be sure <strong>I will take good care of it</strong>.</p>
+            <h3>Can I connect and automatically sync my bank account ?</h3>
+            <p><strong>No</strong>, this is the main request from users, but our philisophy is to keep the app fully manual.</p>
+            <h3>Are my data encrypted locally ?</h3>
+            <p>Your data are encrypted on our <strong>server</strong> using JSON Web Encryption (JWE), and in <strong>all communication</strong> using HTTPS, but need to be stored <strong>unencrypted on your device</strong> to run in-app. Meaning if someone access your device, this personn can access your data.</p>
+            <h3>Can I help and constribute ?</h3>
+            <p><strong>We love community feedback</strong> and are glad to review contributions of any size - from typos in the documentation to critical bug fixes - so don’t be shy!</p>
+        </section>
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>If any questions or any needs, you can reach to me by <a href="mailto:seven23@sebastienbarbier.com">email</a> or over <a target="_blank" href="https://twitter.com/SebBarbier">twitter</a>.</p>
+        </section>
+    </main>
+
+{% endblock %}

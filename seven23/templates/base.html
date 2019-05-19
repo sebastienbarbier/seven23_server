@@ -1,10 +1,30 @@
+{% load static sass_tags %}
 <html>
-<head>
-	<title>Seven23</title>
-</head>
-<body>
-	{% block content %}
+    <head>
+        <meta charset="utf-8" />
+        <title>Seven23 - Budget app</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link href="{% sass_src 'css/styles.scss' %}" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+    	{% block content %}
 
-	{% endblock %}
-</body>
+    	{% endblock %}
+        <footer>
+            <div class="wrapper">
+                <div>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a target="_blank" href="https://github.com/sebastienbarbier/seven23_server">Github</a></li>
+                        <li><a target="_blank" href="https://seven23-server.readthedocs.io/en/latest/">Documentation</a></li>
+                        <li><a target="_blank" href="https://github.com/sebastienbarbier/seven23_server/issues">Issue tracker</a></li>
+
+                        <li><a href="/legals/">Legals</a></li>
+                    </ul>
+                </div>
+                <p>Developed by<br /><a href="https://sebastienbarbier.com" target="_blank">sebastienbarbier</a></p>
+            </div>
+        </footer>
+    </body>
 </html>

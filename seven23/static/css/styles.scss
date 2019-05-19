@@ -26,12 +26,18 @@ html{
 
 header {
 
+    border-top: solid 3px $colorTransactions;
+
     @media screen and (min-width: $mediumScreen) {
         width: 100vw;
-        height: 100vh;
         display: flex;
         justify-content: space-between;
         flex-direction: column-reverse;
+
+        &.homepage {
+            height: 100vh;
+        }
+
     }
 
     @media screen and (min-width: $smallScreen)  and (max-width: $mediumScreen - 1px) {
@@ -41,6 +47,7 @@ header {
     @media screen and (max-width: $smallScreen - 1px) {
         // min-height: 100vh;
     }
+
 
     div#title {
         display: flex;
@@ -122,20 +129,24 @@ header {
     }
 
     nav {
+        width: 100%;
         padding: 20px 17px;
+        max-width: 1400px;
+        margin: auto;
         ul {
             padding: 0;
             list-style: none;
             display: flex;
             justify-content: flex-end;
             align-items: center;
+            flex-wrap: wrap;
             li {
                 a {
                     display: flex;
                     align-items: center;
                     color: black;
                     text-decoration: none;
-                    padding: 0px 20px;
+                    padding: 4px 20px;
 
                     svg { margin-left: 10px; }
                 }
@@ -346,8 +357,22 @@ main {
         }
     }
 
+    #terms {
+        padding: 50px 20px;
+
+        max-width: 1400px;
+        margin: auto;
+        h2 {
+            padding-left: 0;
+            padding-top: 40px;
+        }
+        h3 {
+            padding-top: 20px;
+        }
+    }
+
     h2 {
-        font-size: 3.2rem;
+        font-size: 3.2em;
         padding: 0 0 20px 38px;
         margin: 0em 0 0;
         letter-spacing: -2px;
@@ -393,7 +418,7 @@ main {
 
         strong {
             font-family: 'open_sansbold', sans-serif;
-            font-size: 1.1em;
+            font-size: 1.05em;
             letter-spacing: -1px;
         }
     }
@@ -446,6 +471,38 @@ footer {
     width: 100vw;
     background: rgba(180, 185, 190, 0.3);
     padding: 0;
+    div.wrapper {
+        max-width: 1400px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding-left: 38px;
+
+        @media screen and (max-width: $smallScreen - 1px) {
+            flex-direction: column;
+        align-items: flex-start;
+            padding-left: 20px;
+            p {
+                text-align: left;
+                padding: 40px 40px 40px 0;
+            }
+        }
+    }
+    ul {
+        display: flex;
+        list-style: none;
+        flex-wrap: wrap;
+        padding: 0;
+
+        li {
+            padding-right: 20px;
+            a {
+                color: inherit;
+            }
+        }
+    }
     p {
         padding: 40px;
         margin: 0;
