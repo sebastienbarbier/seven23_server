@@ -53,7 +53,7 @@ MEDIA_URL = '/_media/'
 # Example: '/home/media/media.lawrence.com/static/'
 
 # Static files (CSS, JavaScript, Images)
-if DEBUG:
+if os.environ.get('STORAGE') != 'S3':
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
 else:
