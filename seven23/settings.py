@@ -17,10 +17,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY') or 'k3-=2r(yq-towhfr-$@am&p%ze_&1!m!n7h2p%6*=fn4nr$=d^'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG') != 'False'
+DEBUG = os.environ.get('DEBUG') == 'True'
 
 API_VERSION = [1, 0, 0]
 
@@ -35,8 +35,8 @@ SAAS = os.environ.get('SAAS') == 'True'
 PRICE_YEAR = 45
 PRICE_MONTH = 4.5
 TRIAL_PERIOD = 30
-STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY') or 'pk_test_CSOinVQkYDyHH5SohltMEzAV'
-STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY') or 'sk_test_7MZNxfejw2SAzeyEpXVCVOFL'
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: '/home/media/media.lawrence.com/media/'
@@ -66,7 +66,7 @@ else:
     AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
     AWS_DEFAULT_ACL = 'public-read'
     AWS_S3_CUSTOM_DOMAIN = os.getenv('AWS_S3_CUSTOM_DOMAIN')
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=0'}
     AWS_S3_FILE_OVERWRITE = True
     # s3 static settings
     AWS_LOCATION = 'static'
@@ -82,7 +82,7 @@ STATICFILES_DIRS = (
 LOGIN_URL = '/'
 
 # Database confugration using environment variable DATABASES_URL
-DATABASE_URL = os.environ.get('DATABASE_URL') or 'postgres://sbarbier:abcdef@localhost/seven23'
+DATABASE_URL = os.environ.get('DATABASE_URL')
 DATABASES = {}
 DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
 
