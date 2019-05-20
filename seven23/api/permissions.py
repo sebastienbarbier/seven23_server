@@ -34,4 +34,4 @@ class IsPaid(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return request.user.profile.valid_until > datetime.today()
+        return request.user.profile.valid_until.replace(tzinfo=None) > datetime.now()
