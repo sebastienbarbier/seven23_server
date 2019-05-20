@@ -195,8 +195,15 @@ CORS_ORIGIN_ALLOW_ALL = True
 CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL')
 DEFAULT_FROM_EMAIL = CONTACT_EMAIL
 
+
 if os.environ.get('EMAIL_BACKEND_CONSOLE') == 'True':
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
