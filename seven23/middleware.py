@@ -4,8 +4,6 @@ from django.http import HttpResponse
 from rest_framework.authentication import TokenAuthentication
 
 from seven23 import settings
-from seven23.models.profile.models import Profile
-from seven23.models.stats.models import MonthlyActiveUser, DailyActiveUser
 
 def maintenance_middleware(get_response):
 
