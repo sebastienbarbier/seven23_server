@@ -50,6 +50,7 @@ requests-oauthlib==1.0.0
 rjsmin==1.0.12
 ruamel.yaml==0.15.94
 s3transfer==0.2.0
+sentry-sdk==0.8.0
 simplejson==3.16.0
 six==1.11.0
 stripe==2.21.0
