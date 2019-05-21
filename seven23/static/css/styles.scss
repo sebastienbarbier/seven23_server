@@ -369,6 +369,15 @@ main {
         h3 {
             padding-top: 20px;
         }
+        ul {
+            list-style: disc;
+            display: block;
+            padding: 10px 0 20px 30px;
+            font-family: 'open_sanslight', sans-serif;
+            font-size: 1em;
+            li { padding: 0 0 0 5px; }
+        }
+        ol { li { padding-bottom: 4px; }}
     }
 
     h2 {
