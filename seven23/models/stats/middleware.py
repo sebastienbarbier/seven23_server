@@ -24,15 +24,11 @@ def active_user_middleware(get_response):
                 udpate_user = False
 
                 if now.year != last_api_call.year or now.month != last_api_call.month :
-                    monthlyActiveUser = MonthlyActiveUser.objects.get_or_create(year=now.year, month=now.month)[0]
-                    monthlyActiveUser.counter += 1
-                    monthlyActiveUser.save()
+                    MonthlyActiveUser.objects.update_or_create(year=now.year, month=now.month)
                     udpate_user = True
 
                 if now.year != last_api_call.year or now.month != last_api_call.month or now.day != last_api_call.day :
-                    dailyActiveUser = DailyActiveUser.objects.get_or_create(year=now.year, month=now.month, day=now.day)[0]
-                    dailyActiveUser.counter += 1
-                    dailyActiveUser.save()
+                    DailyActiveUser.objects.update_or_create(year=now.year, month=now.month, day=now.day)
                     udpate_user = True
 
                 if udpate_user:

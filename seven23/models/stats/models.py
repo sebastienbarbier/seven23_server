@@ -19,6 +19,10 @@ class MonthlyActiveUser(models.Model):
     class Meta:
         ordering = ('year', 'month')
 
+    def save(self, *args, **kwargs):
+        self.counter += 1
+        super(MonthlyActiveUser, self).save(*args, **kwargs)
+
     def __str__(self):
         return u'%i-%i' % (self.year, self.month)
 
@@ -33,6 +37,10 @@ class DailyActiveUser(models.Model):
 
     class Meta:
         ordering = ('year', 'month', 'day')
+
+    def save(self, *args, **kwargs):
+        self.counter += 1
+        super(DailyActiveUser, self).save(*args, **kwargs)
 
     def __str__(self):
         return u'%i-%i-%i' % (self.year, self.month, self.day)
