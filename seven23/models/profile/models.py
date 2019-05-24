@@ -7,7 +7,8 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from seven23.models.stats.models import MonthlyActiveUser, DailyActiveUser
 
 from django.conf import settings
@@ -37,6 +38,15 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         if self.pk is None:
+
+            send_mail(
+                '[seven23.io] New user',
+                render_to_string('registration/new_user.txt', {"user": self.user}),
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.CONTACT_EMAIL],
+                fail_silently=False
+            )
+
             now = datetime.datetime.now()
             # Add it as active user
             monthlyActiveUser = MonthlyActiveUser.objects.get_or_create(year=now.year, month=now.month)[0]

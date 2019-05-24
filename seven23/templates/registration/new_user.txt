@@ -1,0 +1,1 @@
+New user on seven23.io : {{ user.username }} {{ user.first_name }} {{ user.email }}
