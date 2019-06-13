@@ -2,7 +2,7 @@
 from datetime import datetime
 from seven23.models.profile.models import Profile
 from rest_framework.authentication import TokenAuthentication
-from seven23.models.stats.models import MonthlyActiveUser, DailyActiveUser
+# from seven23.models.stats.models import MonthlyActiveUser, DailyActiveUser
 
 def active_user_middleware(get_response):
 
@@ -24,11 +24,11 @@ def active_user_middleware(get_response):
                 udpate_user = False
 
                 if now.year != last_api_call.year or now.month != last_api_call.month :
-                    MonthlyActiveUser.objects.update_or_create(year=now.year, month=now.month)
+                    # MonthlyActiveUser.objects.update_or_create(year=now.year, month=now.month)
                     udpate_user = True
 
                 if now.year != last_api_call.year or now.month != last_api_call.month or now.day != last_api_call.day :
-                    DailyActiveUser.objects.update_or_create(year=now.year, month=now.month, day=now.day)
+                    # DailyActiveUser.objects.update_or_create(year=now.year, month=now.month, day=now.day)
                     udpate_user = True
 
                 if udpate_user:
