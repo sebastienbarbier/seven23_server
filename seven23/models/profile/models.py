@@ -47,15 +47,15 @@ class Profile(models.Model):
                 fail_silently=False
             )
 
-            now = datetime.datetime.now()
+            # now = datetime.datetime.now()
             # Add it as active user
-            monthlyActiveUser = MonthlyActiveUser.objects.get_or_create(year=now.year, month=now.month)[0]
-            monthlyActiveUser.counter += 1
-            monthlyActiveUser.save()
+            # monthlyActiveUser = MonthlyActiveUser.objects.get_or_create(year=now.year, month=now.month)[0]
+            # monthlyActiveUser.counter += 1
+            # monthlyActiveUser.save()
 
-            dailyActiveUser = DailyActiveUser.objects.get_or_create(year=now.year, month=now.month, day=now.day)[0]
-            dailyActiveUser.counter += 1
-            dailyActiveUser.save()
+            # dailyActiveUser = DailyActiveUser.objects.get_or_create(year=now.year, month=now.month, day=now.day)[0]
+            # dailyActiveUser.counter += 1
+            # dailyActiveUser.save()
 
         super(Profile, self).save(*args, **kwargs) # Call the "real" save() method
 
