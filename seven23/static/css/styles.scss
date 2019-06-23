@@ -1,5 +1,6 @@
 @import "./variables";
 @import "./fonts";
+@import "./gallery";
 
 * {
     box-sizing: border-box;
@@ -75,7 +76,7 @@ html{
 
 }
 
-header {
+header.homepage {
 
     border-top: solid 3px $colorTransactions;
 
@@ -234,7 +235,7 @@ main {
         background: rgba(180, 185, 190, 0.1);
         padding: 40px 0px 0px;
 
-        h2, ul {
+        h2, ul.thumbnails {
             max-width: 1400px;
             margin: auto;
         }
@@ -247,7 +248,7 @@ main {
                 padding: 0 0 0 20px;
             }
         }
-        ul {
+        ul.thumbnails {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
@@ -274,7 +275,8 @@ main {
                 display: flex;
                 justify-content: center;
                 scroll-snap-align: center;
-                a {
+                label {
+                    cursor: pointer;
                     img {
                         height: 250px;
                         color: transparent;
