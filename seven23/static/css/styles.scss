@@ -6,12 +6,8 @@
 }
 
 html{
-    font-family: 'open_sansregular', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 14px;
-
-    @media screen and (max-width: $smallScreen - 1px) {
-        font-size: 14px;
-    }
 
     body {
         margin: 0;
@@ -22,6 +18,61 @@ html{
         }
         background: rgb(249, 250, 252);
     }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: #111;
+      small {
+      font-weight: 300;
+        font-size: 0.8em;
+      }
+    }
+
+    h1 {
+      font-size: 2.2em;
+      line-height: 1.125;
+    }
+    h2 {
+      font-size: 2em;
+      line-height: 1.125;
+    }
+    h3 {
+      font-size: 1.6em;
+      line-height: 1.125;
+    }
+    h4 {
+      font-size: 1.4em;
+      line-height: 1.2;
+    }
+    h5 {
+      font-size: 1.3em;
+      line-height: 1.3;
+    }
+    h6 {
+      font-size: 1.2em;
+      line-height: 1.4;
+    }
+
+    p, li {
+      font-weight: 300;
+      line-height: 1.5;
+      font-size: 1em;
+      letter-spacing: -0.01em;
+
+      strong {
+        font-weight: 600;
+        font-size: 1.05em;
+        letter-spacing: -0.04em;
+      }
+      a {
+        color: #666;
+        &:hover {
+          color: black;
+        }
+      }
+    }
+
 }
 
 header {
@@ -70,10 +121,10 @@ header {
 
             h1 {
                 font-size: 6rem;
-                padding: 0;
+                padding: 0 0 8px 0;
                 margin: 0em 0 0;
                 letter-spacing: -3px;
-                font-family: 'open_sansbold', sans-serif;
+                font-weight: 700;
 
                 @media screen and (max-width: $mediumScreen - 1px) {
                     font-size: 50px;
@@ -81,27 +132,26 @@ header {
                 }
             }
             p {
-                font-family: 'open_sanslight', sans-serif;
+                font-weight: 300;
                 font-size: 1.4rem;
                 font-weight: 200;
+                line-height: 1.2em;
                 margin: 0 0 0 .3rem;
                 letter-spacing: -0.5px;
-                line-height: 1.1em;
 
                 @media screen and (max-width: $mediumScreen - 1px) {
                     font-size: 16px;
-                    line-height: 1.3em;
                     margin: 0;
                 }
 
                 strong {
-                    font-family: 'open_sansbold', sans-serif;
+                font-weight: 700;
                     font-size: 1.1em;
                     letter-spacing: -1px;
                 }
             }
             p + p {
-                padding-top: 4px;
+                padding-top: 2px;
             }
         }
 
@@ -265,7 +315,7 @@ main {
             p.trial_period {
                 text-align: right;
                 padding-right: 20px;
-                font-family: 'open_sansregular', sans-serif;
+                font-weight: 400;
                 padding-top: 14px;
 
                 @media screen and (max-width: $smallScreen - 1px) {
@@ -287,19 +337,18 @@ main {
 
                 p {
                     font-size: 3.7em;
-                    font-weight: 500;
-                    font-family: 'open_sansregular', sans-serif;
+                    font-weight: 400;
                     position: relative;
                     padding-right: 20px;
                     span {
                         font-size: 0.5em;
                         position: absolute;
-                        top: -4px;
+                        top: .6em;
+                        margin-left: 2px;
                     }
                     small {
                         padding-left: 0.65em;
-                        font-weight: 200;
-                        font-family: 'open_sanslight', sans-serif;
+                        font-weight: 300;
                         font-size: 0.6em;
                     }
                 }
@@ -308,7 +357,7 @@ main {
                     text-decoration: none;
                     color: inherit;
                     color: white;
-                    font-family: 'open_sansbold', sans-serif;
+                font-weight: 700;
                     background: rgba(0, 0, 0, 0.3);
                     border-radius: 6px;
                     padding: 8px 14px;
@@ -373,7 +422,7 @@ main {
             list-style: disc;
             display: block;
             padding: 10px 0 20px 30px;
-            font-family: 'open_sanslight', sans-serif;
+            font-weight: 300;
             font-size: 1em;
             li { padding: 0 0 0 5px; }
         }
@@ -385,7 +434,7 @@ main {
         padding: 0 0 20px 38px;
         margin: 0em 0 0;
         letter-spacing: -2px;
-        font-family: 'open_sansbold', sans-serif;
+                font-weight: 700;
 
         @media screen and (max-width: $mediumScreen - 1px) {
             font-size: 36px;
@@ -403,7 +452,7 @@ main {
         padding: 0 0 0.8em;
         margin: 0em 0 0;
         letter-spacing: -1px;
-        font-family: 'open_sansbold', sans-serif;
+                font-weight: 700;
 
         @media screen and (max-width: $mediumScreen - 1px) {
             font-size: 22px;
@@ -412,21 +461,19 @@ main {
     }
 
     p {
-        font-family: 'open_sanslight', sans-serif;
+        font-weight: 300;
         font-size: 1.1em;
         font-weight: 300;
         margin: 0 0 0 0;
-        line-height: 1.2em;
         letter-spacing: -0.3px;
 
         @media screen and (max-width: $mediumScreen - 1px) {
             font-size: 1em;
-            line-height: 1.3em;
             margin: 0;
         }
 
         strong {
-            font-family: 'open_sansbold', sans-serif;
+                font-weight: 700;
             font-size: 1.05em;
             letter-spacing: -1px;
         }
@@ -516,12 +563,11 @@ footer {
         padding: 40px;
         margin: 0;
         text-align: right;
-        font-family: 'open_sanslight', sans-serif;
-        line-height: 1.6rem;
+        font-weight: 300;
         a {
             color: black;
             text-decoration: none;
-            font-family: 'open_sansbold', sans-serif;
+                font-weight: 700;
             font-size: 2em;
             letter-spacing: -1px;
         }
