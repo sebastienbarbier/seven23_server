@@ -650,17 +650,6 @@
     },
     {
         "model": "currency.currency",
-        "pk": 60,
-        "fields": {
-            "name": "Pound sterling",
-            "code": "GBP",
-            "sign": "GBP",
-            "space": true,
-            "after_amount": true
-        }
-    },
-    {
-        "model": "currency.currency",
         "pk": 61,
         "fields": {
             "name": "Georgian lari",
