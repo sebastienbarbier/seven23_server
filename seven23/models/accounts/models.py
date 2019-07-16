@@ -21,6 +21,7 @@ class Account(models.Model):
     name = models.CharField(_(u'Name'), max_length=255)
     create = models.DateField(_(u'Creation date'), auto_now_add=True, editable=False)
     currency = models.ForeignKey(Currency, related_name='accounts', on_delete=models.CASCADE)
+    currencies = models.ManyToManyField(Currency)
     archived = models.BooleanField(_(u'Is archived'), default=False)
     public = models.BooleanField(_(u'Is public'), default=False)
 

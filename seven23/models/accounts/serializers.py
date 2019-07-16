@@ -12,10 +12,11 @@ class AccountSerializer(serializers.HyperlinkedModelSerializer):
         Account serializer
     """
     currency = serializers.PrimaryKeyRelatedField(queryset=Currency.objects.all())
+    currencies = serializers.PrimaryKeyRelatedField(queryset=Currency.objects.all(), many=True, required=False)
 
     class Meta:
         model = Account
-        fields = ('id', 'name', 'create', 'currency', 'archived', 'public')
+        fields = ('id', 'name', 'create', 'currency', 'currencies', 'archived', 'public')
 
 class AccountGuestsSerializer(serializers.ModelSerializer):
     """
