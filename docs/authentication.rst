@@ -1,7 +1,7 @@
 Authentication
 ==============
 
-API use Django’s Token-based authentication threw the `django-rest-auth <https://github.com/Tivix/django-rest-auth>`_ library which also provide a set of endpoints to handle User Registration and Authentication tasks.
+API use Django’s Token-based authentication through the `django-rest-auth <https://github.com/Tivix/django-rest-auth>`_ library which also provide a set of endpoints to handle User Registration and Authentication tasks.
 
 Retrieve token
 --------------
