@@ -4,7 +4,7 @@ Deployment
 One-command deployment
 ----------------------
 
-Seven23 implement a one-command deployment configuration to allow dynamic scaling on cloud plateforms.
+Seven23 implement a one-command deployment configuration to allow dynamic scaling on cloud platforms.
 
 .. code:: shell
 
