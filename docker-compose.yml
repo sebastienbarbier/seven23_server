@@ -21,7 +21,5 @@ services:
      - "8000:8000"
     environment:
       - DATABASE_URL=postgresql://seven23:password@postgres:5432/seven23
-      - CONTACT_EMAI=admin@seven23.io
-      - SECRET_KEY="MY-SECRET_KEY"
-      - ALLOW_ACCOUNT_CREATION="True"
-      - DEBUG="True"
+      - CONTACT_EMAIL=admin@seven23.io
+      - ALLOW_ACCOUNT_CREATION=True
