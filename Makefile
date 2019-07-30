@@ -1,4 +1,4 @@
-all:
+serve:
 	python manage.py runserver 0.0.0.0:8000
 
 start:
@@ -22,3 +22,17 @@ docs:
 clean:
 	find . -name '*.pyc' -delete
 	find . -name '*~' -delete
+
+docker-build:
+	docker build --pull -t seven23_server .
+
+docker-run:
+	docker-compose -p seven23 -f docker-compose.yml up -d
+
+shell:
+	docker exec -ti seven23_seven23_server_1 /bin/sh
+
+docker-stop:
+	docker-compose stop
+
+.PHONY: start stop shell test docs clean build serve
