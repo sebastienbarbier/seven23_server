@@ -29,7 +29,7 @@ docker-build:
 docker-run:
 	docker-compose -p seven23 -f docker-compose.yml up -d
 
-shell:
+docker-shell:
 	docker exec -ti seven23_seven23_server_1 /bin/sh
 
 docker-stop:
