@@ -1,8 +1,9 @@
 #!/bin/sh
 
 if [ -z "$SECRET_KEY" ]; then
-	echo "WARNING: No SECRET_KEY set - generating radom key..."
-  export SECRET_KEY="$(tr -dc 'a-z0-9!@#$%^&*(-_=+)' < /dev/urandom | head -c50)"
+  echo "ERROR: No SECRET_KEY set. Please generate one and export it as SECRET_KEY env variable."
+  echo "export SECRET_KEY=$(tr -dc 'a-z0-9!@#$%^&*(-_=+)' < /dev/urandom | head -c50)"
+  exit 1
 fi
 
 export COMPRESS_OFFLINE=True
