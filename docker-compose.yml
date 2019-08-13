@@ -4,7 +4,7 @@ services:
 
   postgres:
     restart: always
-    image: postgres:11.4-alpine
+    image: postgres:11-alpine
     expose:
       - "5432"
     environment:
@@ -21,5 +21,9 @@ services:
      - "8000:8000"
     environment:
       - DATABASE_URL=postgresql://seven23:password@postgres:5432/seven23
-      - CONTACT_EMAIL=admin@seven23.io
       - ALLOW_ACCOUNT_CREATION=True
+      - DEBUG=True
+      - EMAIL_PORT=${EMAIL_PORT-25}
+      - SECRET_KEY=${SECRET_KEY-!!please-set-your-own-secret!!}
+      - CONTACT_EMAIL=${CONTACT_EMAIL-admin@seven23.com}
+      - EMAIL_HOST=${EMAIL_HOST-smtp.example.com}

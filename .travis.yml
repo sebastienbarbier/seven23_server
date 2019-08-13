@@ -7,4 +7,4 @@ install:
 script:
   - python manage.py test --settings seven23.settings_tests
 env:
-  - SECRET_KEY="JFs\5@])7<<7#aRL6!l3g>)Lj+Ix(<c!e>qr091=ox7K:[.x#Z"
+  - SECRET_KEY="0nlyUsedforTesting0nlyUsedforTesting0nlyUsedforTes"
