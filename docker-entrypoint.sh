@@ -13,5 +13,4 @@ python manage.py collectstatic --noinput
 python manage.py migrate
 python manage.py loaddata seven23/models/currency/fixtures/initial_data.json
 
-echo Starting Gunicorn...
 gunicorn seven23.wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers 3
