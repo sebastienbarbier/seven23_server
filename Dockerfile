@@ -1,9 +1,11 @@
 FROM python:3.7-alpine
 
 WORKDIR /app
+RUN mkdir /app/collectstatic
 
 RUN adduser -D seven23
-RUN chown seven23:seven23 /app
+RUN chown seven23:seven23 /app /app/collectstatic
+VOLUME /app/collectstatic
 
 COPY --chown=seven23 . .
 

@@ -7,9 +7,11 @@ if [ -z "$SECRET_KEY" ]; then
 fi
 
 export COMPRESS_OFFLINE=True
+
 python manage.py compilescss
 python manage.py collectstatic --noinput
 python manage.py migrate
 python manage.py loaddata seven23/models/currency/fixtures/initial_data.json
 
-gunicorn seven23.wsgi:application --bind 0.0.0.0:${PORT:-8000}
+echo Starting Gunicorn...
+gunicorn seven23.wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers 3
