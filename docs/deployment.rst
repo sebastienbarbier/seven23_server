@@ -10,7 +10,7 @@ Seven23 implement a one-command deployment configuration to allow dynamic scalin
 
     make build
 
-This is acutally a script running four commands :
+This is actually a script running four commands:
 
 .. code:: shell
 
