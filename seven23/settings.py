@@ -68,6 +68,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
 
 if os.environ.get('STORAGE') == 'whitenoise':
+    COMPRESS_OFFLINE=True
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
     MIDDLEWARE = MIDDLEWARE + ('whitenoise.middleware.WhiteNoiseMiddleware',)
 elif os.environ.get('STORAGE') == 'S3':
