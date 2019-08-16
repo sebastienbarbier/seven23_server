@@ -29,7 +29,8 @@
       "description": "Enable/Disable signin for new user.",
       "value": "True"
     },
-    "STORAGE": "whitenoise"
+    "STORAGE": "whitenoise",
+    "DISABLE_COLLECTSTATIC": "1"
   },
   "scripts": {
     "postdeploy": "python manage.py compilescss; python manage.py collectstatic --noinput; python manage.py migrate; python manage.py loaddata initial_data.json"
