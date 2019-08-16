@@ -66,7 +66,7 @@ MIDDLEWARE = ()
 if os.environ.get('STORAGE') == 'whitenoise':
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     MIDDLEWARE = MIDDLEWARE + ('whitenoise.middleware.WhiteNoiseMiddleware',)
-else if os.environ.get('STORAGE') == 'S3':
+elif os.environ.get('STORAGE') == 'S3':
     # aws settings
     AWS_S3_ENDPOINT_URL = "https://cellar-c2.services.clever-cloud.com"
     S3_USE_SIGV4 = False
