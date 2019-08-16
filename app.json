@@ -23,7 +23,7 @@
   "env": {
     "SECRET_KEY": {
       "description": "A secret key for verifying the integrity of signed cookies.",
-      "generator": "!!please-set-your-own-secret!!"
+      "generator": "secret"
     },
     "ALLOW_ACCOUNT_CREATION": {
       "description": "Enable/Disable signin for new user.",
