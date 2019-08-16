@@ -78,7 +78,10 @@ def legals(request):
         Home page when trying to open server URL.
         Should confirm everything is ok, and provide a link to a client.
     """
+    try:
+        terms = TermsAndConditions.objects.latest('date')
+        terms = markdown2.markdown(terms.markdown)
+    except:
+        terms = None
 
-    terms = TermsAndConditions.objects.latest('date')
-
-    return render(request, 'legals.html', {"terms": markdown2.markdown(terms.markdown)})
+    return render(request, 'legals.html', {"terms": terms})

@@ -43,9 +43,11 @@
 
             <p>Application and website is licensed under a MIT licence.</p>
 
+            {% if terms %}
             <div style="font-size: 0.9em;">
                 {{ terms|safe }}
             </div>
+            {% endif %}
 
         </section>
     </main>

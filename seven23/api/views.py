@@ -31,13 +31,12 @@ def api_init(request):
     result['allow_account_creation'] = settings.ALLOW_ACCOUNT_CREATION
     result['contact'] = settings.CONTACT_EMAIL
 
-    result['price_year'] = settings.PRICE_YEAR
-    result['price_month'] = settings.PRICE_MONTH
-    result['trial_period'] = settings.TRIAL_PERIOD
-    result['stripe_key'] = settings.STRIPE_PUBLIC_KEY
-
     if result['saas']:
         result['products'] = ProductSerializer(list(Product.objects.all()), many=True).data
+        result['price_year'] = settings.PRICE_YEAR
+        result['price_month'] = settings.PRICE_MONTH
+        result['trial_period'] = settings.TRIAL_PERIOD
+        result['stripe_key'] = settings.STRIPE_PUBLIC_KEY
 
     try:
         terms = TermsAndConditions.objects.latest('date')
