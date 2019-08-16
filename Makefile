@@ -1,12 +1,6 @@
 all:
 	python manage.py runserver 0.0.0.0:8000
 
-start:
-	brew services start postgresql
-
-stop:
-	brew services stop postgresql
-
 build:
 	python manage.py test --settings seven23.settings_tests
 	python manage.py migrate

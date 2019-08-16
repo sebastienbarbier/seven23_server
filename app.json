@@ -1,18 +1,33 @@
 {
   "name": "Seven23 Server",
-  "description": "Manage your expenses.",
+  "description": "Fully manual budget app to track your expenses. Completely opensource, with privacy by design.",
   "keywords": [
-    "Seven23",
-    "Django",
-    "Python"
+    "budget",
+    "budgeting",
+    "budget-manager",
+    "budget-app",
+    "privacy",
+    "end-to-end-encryption",
+    "opensource",
+    "python3",
+    "django",
+    "django-rest-framework",
+    "api-server",
+    "self-hosted-api"
   ],
   "website": "https://seven23.io/",
   "repository": "https://github.com/sebastienbarbier/seven23_server",
   "addons": [
-    "heroku-postgresql",
-    "newrelic"
+    "heroku-postgresql"
   ],
   "scripts": {
-    "postdeploy": "python manage.py migrate;python manage.py loaddata initial_data.json"
+    "postdeploy": "python manage.py migrate; python manage.py collectstatic --no-input; python manage.py loaddata initial_data.json"
+  },
+  "environments": {
+    "test": {
+      "scripts": {
+        "test": "python manage.py test --settings seven23.settings_tests"
+      }
+    }
   }
 }
