@@ -35,4 +35,4 @@ docker-shell:
 docker-stop:
 	docker-compose stop
 
-.PHONY: start stop shell test docs clean build serve
+.PHONY: start stop shell test docs clean build serve docker-build docker-run docker-shell docker-stop
