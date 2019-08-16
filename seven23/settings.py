@@ -66,8 +66,9 @@ MIDDLEWARE = ()
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
+
 if os.environ.get('STORAGE') == 'whitenoise':
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
     MIDDLEWARE = MIDDLEWARE + ('whitenoise.middleware.WhiteNoiseMiddleware',)
 elif os.environ.get('STORAGE') == 'S3':
     # aws settings
