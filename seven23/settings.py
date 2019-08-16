@@ -63,6 +63,9 @@ MEDIA_URL = '/_media/'
 # Static files (CSS, JavaScript, Images)
 
 MIDDLEWARE = ()
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
 if os.environ.get('STORAGE') == 'whitenoise':
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     MIDDLEWARE = MIDDLEWARE + ('whitenoise.middleware.WhiteNoiseMiddleware',)
@@ -83,10 +86,6 @@ elif os.environ.get('STORAGE') == 'S3':
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
-else:
-    STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
-
 
 STATICFILES_DIRS = (
   os.path.join(BASE_DIR, 'seven23/static'),
