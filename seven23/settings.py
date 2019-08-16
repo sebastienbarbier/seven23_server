@@ -67,7 +67,7 @@ if os.environ.get('STORAGE') != 'S3':
     STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
 else:
     # aws settings
-    AWS_S3_ENDPOINT_URL = "https://cellar-c2.services.clever-cloud.com"
+    AWS_S3_ENDPOINT_URL = os.getenv('AWS_S3_ENDPOINT_URL', "https://cellar-c2.services.clever-cloud.com")
     S3_USE_SIGV4 = False
     AWS_S3_SIGNATURE_VERSION = "s3"
     AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')

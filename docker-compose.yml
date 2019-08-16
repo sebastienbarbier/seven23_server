@@ -34,7 +34,7 @@ services:
     image: nginx
     volumes:
       - ./docker-build/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
-      - static-content:/usr/src/seven23-static
+      - static-content:/usr/src/seven23-static:ro
     depends_on:
      - app
     ports:
