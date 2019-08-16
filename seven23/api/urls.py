@@ -27,7 +27,6 @@ urlpatterns = [
     path(r'v1/categories',    include('seven23.api.categories.urls')),
     path(r'v1/changes',       include('seven23.api.changes.urls')),
     path(r'v1/currencies',    include('seven23.api.currencies.urls')),
-    path(r'v1/goals',         include('seven23.api.goals.urls')),
     path(r'v1/debitscredits', include('seven23.api.debitscredits.urls')),
     path(r'v1/users/token', revoke_token, name='api.token'),
     path(r'v1/users/email', email, name='api.email'),
