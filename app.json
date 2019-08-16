@@ -30,7 +30,7 @@
       "value": "True"
     },
     "STORAGE": "whitenoise",
-    "DEBUG_COLLECTSTATIC": "1"
+    "DISABLE_COLLECTSTATIC": "1"
   },
   "scripts": {
     "postdeploy": "python manage.py compilescss; python manage.py collectstatic --ignore=*.scss; python manage.py migrate; python manage.py loaddata initial_data.json"
