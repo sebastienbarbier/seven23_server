@@ -56,3 +56,4 @@ six==1.11.0
 stripe==2.21.0
 uritemplate==3.0.0
 urllib3==1.24.2
+whitenoise==4.1.3

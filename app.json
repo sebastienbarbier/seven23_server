@@ -28,7 +28,8 @@
     "ALLOW_ACCOUNT_CREATION": {
       "description": "Enable/Disable signin for new user.",
       "value": "True"
-    }
+    },
+    "STORAGE": "whitenoise"
   },
   "scripts": {
     "postdeploy": "python manage.py migrate; python manage.py loaddata initial_data.json"

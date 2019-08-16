@@ -55,17 +55,18 @@ MEDIA_ROOT = BASE_DIR + '/media/'
 # trailing slash.
 # Examples: 'http://media.lawrence.com/media/', 'http://example.com/media/'
 MEDIA_URL = '/_media/'
-
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' 'static/' subdirectories and in STATICFILES_DIRS.
 # Example: '/home/media/media.lawrence.com/static/'
 
 # Static files (CSS, JavaScript, Images)
-if os.environ.get('STORAGE') != 'S3':
-    STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
-else:
+
+MIDDLEWARE = ()
+if os.environ.get('STORAGE') == 'whitenoise':
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    MIDDLEWARE = MIDDLEWARE + ('whitenoise.middleware.WhiteNoiseMiddleware',)
+else if os.environ.get('STORAGE') == 'S3':
     # aws settings
     AWS_S3_ENDPOINT_URL = "https://cellar-c2.services.clever-cloud.com"
     S3_USE_SIGV4 = False
@@ -82,6 +83,10 @@ else:
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
+else:
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
+
 
 STATICFILES_DIRS = (
   os.path.join(BASE_DIR, 'seven23/static'),
@@ -157,7 +162,7 @@ INSTALLED_APPS = (
 
 SITE_ID = 1 # Required by rest_auth
 
-MIDDLEWARE = (
+MIDDLEWARE = MIDDLEWARE + (
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     #'django.middleware.csrf.CsrfViewMiddleware',
