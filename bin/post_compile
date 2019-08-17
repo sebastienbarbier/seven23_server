@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
 cd "$1" || exit 1
-echo "-----> Compiling SCSS"
-python manage.py compilescss --traceback
-echo "-----> Collecting static files"
-python manage.py collectstatic --noinput --traceback
+echo "-----> Compiling SCSS to collectstatic"
+python manage.py compilescss --use-processor-root --traceback
