@@ -16,6 +16,7 @@
     "self-hosted-api"
   ],
   "website": "https://seven23.io/",
+  "logo": "https://app.seven23.io/images/icons/apple-touch-icon.png",
   "repository": "https://github.com/sebastienbarbier/seven23_server",
   "addons": [
     "heroku-postgresql"
@@ -30,7 +31,7 @@
       "value": "True"
     },
     "CONTACT_EMAIL": {
-      "description": "Administrator's email to receive notifications",
+      "description": "Administrator's email to receive notifications"
     },
     "STORAGE": "whitenoise"
   },
