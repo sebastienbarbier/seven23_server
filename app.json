@@ -29,6 +29,9 @@
       "description": "Enable/Disable signin for new user.",
       "value": "True"
     },
+    "CONTACT_EMAIL": {
+      "description": "Administrator's email to receive notifications",
+    },
     "STORAGE": "whitenoise"
   },
   "scripts": {
