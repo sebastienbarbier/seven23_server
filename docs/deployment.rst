@@ -5,7 +5,7 @@ Heroku
 ------
 
 .. image:: https://www.herokucdn.com/deploy/button.svg
-    :target: https://heroku.com/deploy?template=https://github.com/sebastienbarbier/seven23_server/tree/heroku
+    :target: https://heroku.com/deploy?template=https://github.com/sebastienbarbier/seven23_server
 
 
 One-command deployment
