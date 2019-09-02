@@ -48,3 +48,6 @@ Run server
 
 .. note::
     Because local instance do not support https, you cannot access the API using a https application.
+
+.. hint::
+    See :ref:`docker_deployment` for Docker based deployments and configuration options.

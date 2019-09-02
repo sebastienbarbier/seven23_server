@@ -1,0 +1,12 @@
+clevercloud
+docs
+README.*
+CHANGELOG.*
+Procfile
+Dockerfile
+docker-compose.yml
+.git
+.gitignore
+.editorconfig
+.travis.yml
+.dockerignore

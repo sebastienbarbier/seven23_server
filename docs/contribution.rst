@@ -1,4 +1,4 @@
-Constribution
+Contribution
 =============
 
 How to contribute

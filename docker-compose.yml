@@ -1,0 +1,45 @@
+version: '3.1'
+
+services:
+
+  postgres:
+    restart: always
+    image: postgres:11-alpine
+    expose:
+      - "5432"
+    environment:
+      - POSTGRES_USER=seven23
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=seven23
+
+  app:
+    build: .
+    image: seven23_server:latest
+    volumes:
+      - static-content:/app/collectstatic
+    depends_on:
+     - postgres
+    expose:
+     - "8000"
+    environment:
+      - DATABASE_URL=postgresql://seven23:password@postgres:5432/seven23
+      - ALLOW_ACCOUNT_CREATION=True
+      - EMAIL_PORT=${EMAIL_PORT-25}
+      - SECRET_KEY=${SECRET_KEY-!!please-set-your-own-secret!!}
+      - CONTACT_EMAIL=${CONTACT_EMAIL-admin@seven23.com}
+      - EMAIL_HOST=${EMAIL_HOST-smtp.example.com}
+
+  nginx:
+    restart: always
+    image: nginx
+    volumes:
+      - ./docker-build/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+      - static-content:/usr/src/seven23-static:ro
+    depends_on:
+     - app
+    ports:
+      - "8000:8000"
+    command: [nginx-debug, '-g', 'daemon off;']
+
+volumes:
+  static-content:
