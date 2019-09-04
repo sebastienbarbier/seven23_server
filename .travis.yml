@@ -6,3 +6,5 @@ install:
   - pip install -r requirements.txt
 script:
   - python manage.py test --settings seven23.settings_tests
+env:
+  - SECRET_KEY="0nlyUsedforTesting0nlyUsedforTesting0nlyUsedforTes"
