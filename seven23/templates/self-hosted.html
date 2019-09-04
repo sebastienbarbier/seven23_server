@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static sass_tags %}
+
+{% block content %}
+<div class="selfhosted">
+    <header id="top">
+        <h1>Seven23<br/><small>Self-hosted</small></h1>
+    </header>
+
+    <main>
+        {% comment %}
+        <div class="wrapper">
+            <h2 class="ok">Everything seams to be running smoothly </h2>
+
+            <input type="checkbox" id="show_diagnostic" hidden />
+            <label for="show_diagnostic"></label>
+
+            <ul>
+                <li class="ok">Everything seams to be running smoothly</li>
+                <li class="ko">An error occured and create bugs</li>
+                <li class="warn">Warning, it works but not really</li>
+            </ul>
+        </div>
+        {% endcomment %}
+        <a href="https://app.seven23.io/">Go to app.seven23.io</a>
+    </main>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

@@ -1,5 +1,6 @@
 @import "./variables";
 @import "./fonts";
+@import "./self-hosted";
 @import "./gallery";
 
 * {
@@ -74,7 +75,6 @@ html{
         }
       }
     }
-
 }
 
 header.homepage, header.legals {
