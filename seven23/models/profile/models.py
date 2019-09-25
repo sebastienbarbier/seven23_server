@@ -20,6 +20,7 @@ class Profile(models.Model):
     AVATAR_OPTIONS = (
         ('NONE', 'None'),
         ('GRAVATAR', 'Gravatar'),
+        ('NOMADLIST', 'Nomadlist'),
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
