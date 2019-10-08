@@ -1,3 +1,4 @@
+import datetime
 from django.contrib.auth import get_user_model, authenticate
 from django.conf import settings
 from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
@@ -25,9 +26,12 @@ UserModel = get_user_model()
 from seven23.models.currency.models import Currency
 from seven23.models.currency.serializers import CurrencySerializer
 from seven23.models.saas.serializers import ChargeSerializer
-from seven23.models.profile.serializers import ProfileSerializer
+from seven23.models.profile.serializers import DatetimeSerializer, ProfileSerializer
+
+from rest_framework import serializers
 
 from drf_writable_nested import WritableNestedModelSerializer
+
 
 class UserSerializer(WritableNestedModelSerializer):
     """
@@ -51,7 +55,7 @@ class UserSerializer(WritableNestedModelSerializer):
             return False
 
     def get_valid_until(self, obj):
-        return obj.profile.valid_until
+        return DatetimeSerializer(obj.profile).data['valid_until']
 
     def get_charges(self, obj):
         return [ChargeSerializer(charge).data for charge in obj.charges.all()]

@@ -10,6 +10,7 @@ from rest_framework import status
 
 from seven23.models.accounts.models import Account
 from seven23.models.currency.models import Currency
+from seven23.models.transactions.models import DebitsCredits
 
 class ApiAccountTest(TransactionTestCase):
     """ Account retrieve """
@@ -25,6 +26,12 @@ class ApiAccountTest(TransactionTestCase):
         self.account = Account.objects.create(owner=self.user,
                                               name="Private Account",
                                               currency=self.usd)
+
+        DebitsCredits.objects.create(account=self.account,
+                                     blob='Spending')
+
+        DebitsCredits.objects.create(account=self.account,
+                                     blob='Spending2')
 
         self.account2 = Account.objects.create(owner=self.user2,
                                                name="Private Account 2",
@@ -102,6 +109,10 @@ class ApiAccountTest(TransactionTestCase):
             We try to edit an account object
         """
         self.client.force_authenticate(user=self.user)
+
+        response = self.client.get('/api/v1/accounts/%d' % self.account.id)
+        assert response.status_code == status.HTTP_200_OK
+
         response = self.client.delete('/api/v1/accounts/%d' % self.account.id)
         assert response.status_code == status.HTTP_204_NO_CONTENT
 
@@ -113,5 +124,3 @@ class ApiAccountTest(TransactionTestCase):
 
         response = self.client.delete('/api/v1/accounts/%d' % self.account2.id)
         assert response.status_code == status.HTTP_404_NOT_FOUND
-
-
