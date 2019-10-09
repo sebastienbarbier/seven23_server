@@ -36,7 +36,7 @@ class Profile(models.Model):
                                 editable=False)
     valid_until = models.DateTimeField(_(u'Valid until'),
                                 help_text=_(u'On SASS, this is the validation date'),
-                                default=datetime.datetime.now() + datetime.timedelta(days=settings.TRIAL_PERIOD))
+                                default=datetime.datetime.now)
 
     def save(self, *args, **kwargs):
         if self.pk is None:
@@ -48,6 +48,8 @@ class Profile(models.Model):
                 [settings.CONTACT_EMAIL],
                 fail_silently=False
             )
+
+            self.valid_until = datetime.datetime.now() + datetime.timedelta(days=settings.TRIAL_PERIOD)
 
             # now = datetime.datetime.now()
             # Add it as active user
