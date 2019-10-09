@@ -11,14 +11,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RemoveField(
-            model_name='paidby',
-            name='attendee',
-        ),
-        migrations.RemoveField(
-            model_name='paidby',
-            name='transaction',
-        ),
-        migrations.RemoveField(
             model_name='abstracttransaction',
             name='date',
         ),
@@ -42,14 +34,6 @@ class Migration(migrations.Migration):
             model_name='change',
             name='new_currency',
         ),
-        migrations.RemoveField(
-            model_name='debitscredits',
-            name='event',
-        ),
-        migrations.RemoveField(
-            model_name='debitscredits',
-            name='used_by',
-        ),
         migrations.AddField(
             model_name='abstracttransaction',
             name='blob',
@@ -59,8 +43,5 @@ class Migration(migrations.Migration):
             model_name='abstracttransaction',
             name='deleted',
             field=models.BooleanField(default=False, help_text='If true, this entry has been deleted and we keep this is as deleted as a tombstone.', verbose_name='Deleted'),
-        ),
-        migrations.DeleteModel(
-            name='PaidBy',
         ),
     ]

@@ -13,14 +13,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='paidby',
-            name='attendee',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='payments', to='events.Attendee'),
-        ),
-        migrations.AlterField(
-            model_name='paidby',
-            name='transaction',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='payments', to='transactions.DebitsCredits'),
-        ),
     ]
