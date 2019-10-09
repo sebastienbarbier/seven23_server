@@ -150,7 +150,6 @@ INSTALLED_APPS = (
     'seven23.models.accounts',
     'seven23.models.categories',
     'seven23.models.currency',
-    'seven23.models.events',
     'seven23.models.profile',
     'seven23.models.saas',
     'seven23.models.terms',
