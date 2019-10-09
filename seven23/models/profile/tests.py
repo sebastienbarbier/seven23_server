@@ -3,6 +3,7 @@
     Test currency
 """
 import datetime
+from django.utils import timezone
 from django.test import TransactionTestCase
 # Default user model may get swapped out of the system and hence.
 from django.contrib.auth.models import User
@@ -22,6 +23,6 @@ class ProfileTest(TransactionTestCase):
         self.user.login = "foo"
         self.user.save()
 
-        expected_date = datetime.datetime.now() + datetime.timedelta(days=settings.TRIAL_PERIOD)
+        expected_date = timezone.now() + datetime.timedelta(days=settings.TRIAL_PERIOD)
 
         self.assertEqual(self.user.profile.valid_until.day, expected_date.day)

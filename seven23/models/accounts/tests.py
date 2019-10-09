@@ -3,8 +3,6 @@
     Tests for accounts module
 
 """
-import datetime
-
 from django.test import TransactionTestCase
 # Default user model may get swapped out of the system and hence.
 from django.contrib.auth.models import User
@@ -47,4 +45,3 @@ class AccountTest(TransactionTestCase):
         self.assertNotEqual(self.account, None)
         AccountGuests.objects.create(account=self.account, user=self.user, permissions='A')
         self.assertEqual(len(self.account.guests.all()), 1)
-

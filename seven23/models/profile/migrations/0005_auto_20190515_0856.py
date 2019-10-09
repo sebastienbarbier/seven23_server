@@ -16,9 +16,4 @@ class Migration(migrations.Migration):
             name='avatar',
             field=models.CharField(choices=[('NONE', 'None'), ('GRAVATAR', 'Gravatar')], default='NONE', help_text='Select between different origins.', max_length=20, verbose_name='Avatar'),
         ),
-        migrations.AlterField(
-            model_name='profile',
-            name='valid_until',
-            field=models.DateTimeField(default=datetime.datetime(2019, 6, 14, 8, 56, 1, 998008), help_text='On SASS, this is the validation date', verbose_name='Valid until'),
-        ),
     ]

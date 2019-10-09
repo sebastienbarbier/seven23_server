@@ -11,9 +11,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='profile',
-            name='valid_until',
-            field=models.DateTimeField(default=datetime.datetime(2019, 8, 5, 3, 59, 38, 528577), help_text='On SASS, this is the validation date', verbose_name='Valid until'),
-        ),
     ]

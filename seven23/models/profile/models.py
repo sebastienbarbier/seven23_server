@@ -3,13 +3,14 @@
 """
 import datetime
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from seven23.models.stats.models import MonthlyActiveUser, DailyActiveUser
+# from seven23.models.stats.models import MonthlyActiveUser, DailyActiveUser
 
 from django.conf import settings
 
@@ -36,7 +37,7 @@ class Profile(models.Model):
                                 editable=False)
     valid_until = models.DateTimeField(_(u'Valid until'),
                                 help_text=_(u'On SASS, this is the validation date'),
-                                default=datetime.datetime.now)
+                                default=timezone.now)
 
     def save(self, *args, **kwargs):
         if self.pk is None:
@@ -49,7 +50,7 @@ class Profile(models.Model):
                 fail_silently=False
             )
 
-            self.valid_until = datetime.datetime.now() + datetime.timedelta(days=settings.TRIAL_PERIOD)
+            self.valid_until = timezone.now() + datetime.timedelta(days=settings.TRIAL_PERIOD)
 
             # now = datetime.datetime.now()
             # Add it as active user

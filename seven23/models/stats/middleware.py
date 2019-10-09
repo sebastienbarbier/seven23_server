@@ -1,5 +1,5 @@
 
-from datetime import datetime
+from django.utils import timezone
 from seven23.models.profile.models import Profile
 from rest_framework.authentication import TokenAuthentication
 # from seven23.models.stats.models import MonthlyActiveUser, DailyActiveUser
@@ -19,7 +19,7 @@ def active_user_middleware(get_response):
                 if not hasattr(user, 'profile'):
                     Profile.objects.create(user=user)
 
-                now = datetime.now()
+                now = timezone.now()
                 last_api_call = user.profile.last_api_call
                 udpate_user = False
 
