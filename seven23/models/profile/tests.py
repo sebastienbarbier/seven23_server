@@ -25,4 +25,5 @@ class ProfileTest(TransactionTestCase):
 
         expected_date = timezone.now() + datetime.timedelta(days=settings.TRIAL_PERIOD)
 
-        self.assertEqual(self.user.profile.valid_until.day, expected_date.day)
+        self.assertEqual(self.user.profile.valid_until > timezone.now(), True)
+        self.assertEqual(self.user.profile.valid_until < expected_date, True)

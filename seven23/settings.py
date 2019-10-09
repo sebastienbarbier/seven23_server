@@ -169,7 +169,7 @@ MIDDLEWARE = MIDDLEWARE + (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'seven23.middleware.maintenance_middleware',
-    'seven23.models.stats.middleware.active_user_middleware',
+    'seven23.middleware.active_user_middleware',
 )
 
 REST_FRAMEWORK = {

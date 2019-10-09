@@ -1,7 +1,7 @@
 
 from itertools import chain
 from rest_framework import permissions
-from datetime import datetime
+from django.utils import timezone
 from seven23 import settings
 
 class CanWriteAccount(permissions.BasePermission):
@@ -34,4 +34,4 @@ class IsPaid(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return request.user.profile.valid_until.replace(tzinfo=None) > datetime.now()
+        return request.user.profile.valid_until > timezone.now()
