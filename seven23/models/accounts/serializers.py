@@ -16,7 +16,7 @@ class AccountSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Account
-        fields = ('id', 'name', 'create', 'currency', 'currencies', 'archived', 'public')
+        fields = ('id', 'name', 'create', 'currency', 'currencies', 'archived', 'public', 'preferences')
 
 class AccountGuestsSerializer(serializers.ModelSerializer):
     """

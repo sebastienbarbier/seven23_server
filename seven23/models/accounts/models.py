@@ -23,6 +23,7 @@ class Account(models.Model):
     currency = models.ForeignKey(Currency, related_name='accounts', on_delete=models.CASCADE)
     currencies = models.ManyToManyField(Currency)
     archived = models.BooleanField(_(u'Is archived'), default=False)
+    preferences = models.TextField(_('blob'), blank=True, null=False)
     public = models.BooleanField(_(u'Is public'), default=False)
 
     class Meta:
