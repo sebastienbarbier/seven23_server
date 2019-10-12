@@ -7,7 +7,13 @@ from rest_framework import serializers
 from seven23.models.accounts.models import Account, AccountGuests
 from seven23.models.currency.models import Currency
 
-class AccountSerializer(serializers.HyperlinkedModelSerializer):
+
+from rest_framework_bulk import (
+    BulkListSerializer,
+    BulkSerializerMixin
+)
+
+class AccountSerializer(BulkSerializerMixin, serializers.HyperlinkedModelSerializer):
     """
         Account serializer
     """
@@ -16,6 +22,7 @@ class AccountSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Account
+        list_serializer_class = BulkListSerializer
         fields = ('id', 'name', 'create', 'currency', 'currencies', 'archived', 'public', 'preferences')
 
 class AccountGuestsSerializer(serializers.ModelSerializer):
