@@ -41,8 +41,6 @@ APPEND_SLASH = True
 ALLOWED_HOSTS = ['*']
 
 SAAS = os.environ.get('SAAS') == 'True'
-PRICE_YEAR = 45
-PRICE_MONTH = 4.5
 TRIAL_PERIOD = 30
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')

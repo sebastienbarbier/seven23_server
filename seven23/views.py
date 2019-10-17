@@ -6,6 +6,7 @@ from seven23 import settings
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from seven23.models.saas.models import Product
 from seven23.models.terms.models import TermsAndConditions
 
 def home(request):
@@ -69,7 +70,7 @@ def home(request):
         ]
 
         return render(request, 'home.html', {
-            "price": settings.PRICE_YEAR,
+            "price": Product.objects.all()[0].price,
             "trial": settings.TRIAL_PERIOD,
             "photos": photos
         })

@@ -33,8 +33,6 @@ def api_init(request):
 
     if result['saas']:
         result['products'] = ProductSerializer(list(Product.objects.all()), many=True).data
-        result['price_year'] = settings.PRICE_YEAR
-        result['price_month'] = settings.PRICE_MONTH
         result['trial_period'] = settings.TRIAL_PERIOD
         result['stripe_key'] = settings.STRIPE_PUBLIC_KEY
 
