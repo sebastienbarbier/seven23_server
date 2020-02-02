@@ -19,8 +19,7 @@ from seven23.models.terms.models import TermsAndConditions
 from seven23.models.saas.models import Charge, Product, Coupon
 from seven23.models.saas.serializers import ChargeSerializer
 
-stripe.api_key = "sk_test_7MZNxfejw2SAzeyEpXVCVOFL"
-
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 @api_view(['GET'])
 def ApiCoupon(request, product_id, coupon_code):
