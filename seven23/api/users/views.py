@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.authtoken.models import Token
 from allauth.account.models import EmailAddress
-
+from django.contrib.auth import authenticate
 from seven23.models.rest_auth.serializers import UserSerializer
 
 @api_view(['POST'])
@@ -38,7 +38,6 @@ def email(request):
     j = json.dumps(UserSerializer(request.user).data, separators=(',', ':'))
     return HttpResponse(j, content_type='application/json')
 
-
 @api_view(["DELETE"])
 def revoke_token(request):
     """
@@ -51,3 +50,14 @@ def revoke_token(request):
         return HttpResponse(status=404)
 
     return HttpResponse(status=200)
+
+@api_view(["DELETE"])
+def delete_user(request):
+    """
+        Permanently delete a user
+    """
+    if authenticate(username=request.user.username, password=request.data['password']):
+        request.user.delete()
+        return HttpResponse(status=200)
+    else:
+        return HttpResponse(status=400)
