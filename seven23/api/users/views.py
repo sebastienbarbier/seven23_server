@@ -15,7 +15,7 @@ from seven23.models.rest_auth.serializers import UserSerializer
 @api_view(['POST'])
 def email(request):
     """
-        Revoke user token
+        Update user email adress
     """
     try:
         email = EmailAddress.objects.get(user=request.user)

@@ -41,14 +41,14 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         if self.pk is None:
-
-            send_mail(
-                '[seven23.io] New user',
-                render_to_string('registration/new_user.txt', {"user": self.user}),
-                settings.DEFAULT_FROM_EMAIL,
-                [settings.CONTACT_EMAIL],
-                fail_silently=False
-            )
+            if not self.user.email.endswith('seven23.io'):
+                send_mail(
+                    '[seven23.io] New user',
+                    render_to_string('registration/new_user.txt', {"user": self.user}),
+                    settings.DEFAULT_FROM_EMAIL,
+                    [settings.CONTACT_EMAIL],
+                    fail_silently=False
+                )
 
             self.valid_until = timezone.now() + datetime.timedelta(days=settings.TRIAL_PERIOD)
 
