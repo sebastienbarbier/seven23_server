@@ -11,6 +11,8 @@ from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 # from seven23.models.stats.models import MonthlyActiveUser, DailyActiveUser
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 
 from django.conf import settings
 
@@ -52,16 +54,6 @@ class Profile(models.Model):
 
             self.valid_until = timezone.now() + datetime.timedelta(days=settings.TRIAL_PERIOD)
 
-            # now = datetime.datetime.now()
-            # Add it as active user
-            # monthlyActiveUser = MonthlyActiveUser.objects.get_or_create(year=now.year, month=now.month)[0]
-            # monthlyActiveUser.counter += 1
-            # monthlyActiveUser.save()
-
-            # dailyActiveUser = DailyActiveUser.objects.get_or_create(year=now.year, month=now.month, day=now.day)[0]
-            # dailyActiveUser.counter += 1
-            # dailyActiveUser.save()
-
         super(Profile, self).save(*args, **kwargs) # Call the "real" save() method
 
     @receiver(post_save, sender=User)
@@ -78,3 +70,14 @@ class Profile(models.Model):
 
     def __str__(self):
         return u'%s' % (self.user)
+
+@receiver(pre_delete, sender=Profile)
+def on_delete_profile(sender, instance, **kwargs):
+    if not instance.user.email.endswith('seven23.io'):
+        send_mail(
+            '[seven23.io] Deleted user',
+            render_to_string('registration/delete_user.txt', {"user": instance.user}),
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.CONTACT_EMAIL],
+            fail_silently=False
+        )

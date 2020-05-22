@@ -1,0 +1,1 @@
+Deleted user on seven23.io : {{ user.pk }} {{ user.username }} {{ user.first_name }} {{ user.email }}
