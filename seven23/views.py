@@ -69,8 +69,12 @@ def home(request):
             }
         ]
 
+        price = 0
+        if Product.objects.all():
+            price = Product.objects.all()[0].price
+
         return render(request, 'home.html', {
-            "price": Product.objects.all()[0].price,
+            "price": price,
             "trial": settings.TRIAL_PERIOD,
             "photos": photos
         })
