@@ -18,6 +18,7 @@ if os.environ.get('SENTRY_DSN'):
 
     sentry_sdk.init(
         dsn=os.environ.get('SENTRY_DSN'),
+        environment= os.getenv('SENTRY_ENVIRONMENT', 'undefined'),
         integrations=[DjangoIntegration()]
     )
 
