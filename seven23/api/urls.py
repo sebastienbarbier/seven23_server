@@ -9,7 +9,7 @@ from rest_framework import routers
 
 from seven23.api.views import api_init
 from seven23.api.users.views import revoke_token, email, delete_user
-from seven23.api.saas.views import ApiCharge, ApiCoupon
+from seven23.api.saas.views import ApiCoupon, StripeGenerateSession, StripeWebhook
 
 from seven23 import settings
 
@@ -44,6 +44,7 @@ if settings.ALLOW_ACCOUNT_CREATION:
 
 if settings.SAAS:
     urlpatterns = urlpatterns + [
-        path(r'v1/payment', ApiCharge, name='api.payment'),
+        path(r'v1/stripe/session', StripeGenerateSession, name='api.stripe.session'),
+        path(r'v1/stripe/webhook', StripeWebhook, name='api.stripe.webhook'),
         path(r'v1/coupon/<int:product_id>/<slug:coupon_code>', ApiCoupon, name='api.coupon'),
     ]

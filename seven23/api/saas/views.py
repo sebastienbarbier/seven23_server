@@ -5,7 +5,9 @@ import stripe
 import json
 import os
 import markdown2
+import urllib.parse
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework import status
 
@@ -28,7 +30,7 @@ def ApiCoupon(request, product_id, coupon_code):
     product = Product.objects.get(pk=product_id)
     coupon = Coupon.objects.get(code=coupon_code)
 
-    if not product or not coupon or not coupon.is_active:
+    if not product or not coupon or not coupon.is_active():
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     res['coupon_id'] = coupon.id
@@ -38,115 +40,100 @@ def ApiCoupon(request, product_id, coupon_code):
     j = json.dumps(res, separators=(',', ':'))
     return HttpResponse(j, content_type='application/json')
 
-@api_view(['POST'])
-def ApiCharge(request):
+@api_view(['GET'])
+def StripeGenerateSession(request):
 
-    """
-        Return status on client initialisation
-    """
-    result = {}
-    coupon = None
     product = None
-    charge = None
+    coupon = None
 
-    if request.data.get("coupon_code"):
-        coupon = Coupon.objects.get(code=request.data['coupon_code'])
-
-    if request.data.get("product_id"):
-        product = Product.objects.get(pk=request.data['product_id'])
+    if request.GET.get("product_id") and request.GET.get("success_url") and request.GET.get("cancel_url"):
+        product = Product.objects.get(pk=request.GET.get("product_id"))
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    price = product.apply_coupon(request.data.get('coupon_code')) * 100
-    try:
-        if price > 0:
-            # Use Stripe's library to make requests...
-            result = stripe.Charge.create(
-              amount=int(price),
-              currency="eur",
-              source=request.data['token'],
-              description=request.data.get("description")
-            )
+    if not product.stripe_product_id:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
-            charge = Charge.objects.create(
-                user=request.user,
-                product=product,
-                coupon=coupon,
-                paiment_method='STRIPE',
-                reference_id=result['id'],
-                status='SUCCESS'
-            )
+    coupon = Coupon.objects.get(code=request.GET.get('coupon_code'))
 
-        else:
-            charge = Charge.objects.create(
-                user=request.user,
-                product=product,
-                coupon=coupon,
-                paiment_method='COUPON',
-                status='SUCCESS'
-            )
-
+    if coupon.is_active and product.apply_coupon(request.GET.get('coupon_code')) == 0:
+        charge = Charge.objects.create(
+            user=request.user,
+            product=product,
+            coupon=coupon,
+            paiment_method='COUPON',
+            status='SUCCESS'
+        )
         j = json.dumps(ChargeSerializer(charge).data, separators=(',', ':'))
         return HttpResponse(j, content_type='application/json')
 
-    except stripe.error.CardError as e:
-        # Since it's a decline, stripe.error.CardError will be caught
-        body = e.json_body
-        err  = body.get('error', {})
+    price = stripe.Price.create(
+      product=product.stripe_product_id,
+      unit_amount=int(product.apply_coupon(request.GET.get('coupon_code')) * 100),
+      active=True,
+      currency='eur'
+    )
 
-        # print("Status is: %s" % e.http_status)
-        # print("Type is: %s" % err.get('type'))
-        # print("Code is: %s" % err.get('code'))
-        # # param is '' in this case
-        # print("Param is: %s" % err.get('param'))
-        # print("Message is: %s" % err.get('message'))
-    except stripe.error.RateLimitError as e:
-        # Too many requests made to the API too quickly
-        body = e.json_body
-        err  = body.get('error', {})
-        pass
-    except stripe.error.InvalidRequestError as e:
-        # Invalid parameters were supplied to Stripe's API
-        body = e.json_body
-        err  = body.get('error', {})
-        pass
-    except stripe.error.AuthenticationError as e:
-        # Authentication with Stripe's API failed
-        # (maybe you changed API keys recently)
-        body = e.json_body
-        err  = body.get('error', {})
-        pass
-    except stripe.error.APIConnectionError as e:
-        # Network communication with Stripe failed
-        body = e.json_body
-        err  = body.get('error', {})
-        pass
-    except stripe.error.StripeError as e:
-        # Display a very generic error to the user, and maybe send
-        # yourself an email
-        body = e.json_body
-        err  = body.get('error', {})
-        pass
-    except Exception as e:
-        # Something else happened, completely unrelated to Stripe
-        body = e.json_body
-        err  = body.get('error', {})
-        pass
+    stripe_customer_id = request.user.profile.stripe_customer_id
+    session = stripe.checkout.Session.create(
+      customer=request.user.profile.stripe_customer_id,
+      customer_email=request.user.email if not stripe_customer_id else None,
+      payment_method_types=['card'],
+      line_items=[{
+        'price': price.id,
+        'quantity': 1,
+      }],
+      mode='payment',
+      # success_url='https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
+      # cancel_url='https://example.com/cancel',
+      success_url=urllib.parse.urljoin(request.GET.get("success_url"), 'success'),
+      cancel_url=request.GET.get("cancel_url"),
+    )
 
-    try:
-        charge.delete()
-    except Exception as e:
-        pass
-
-    charge = Charge.objects.create(
+    Charge.objects.create(
         user=request.user,
         product=product,
         coupon=coupon,
         paiment_method='STRIPE',
-        reference_id=result.get("id"),
-        status='FAILED',
-        comment=err.get('message')
+        reference_id=session.id,
+        stripe_session_id=session.id,
+        status='PENDING'
     )
 
-    j = json.dumps(ChargeSerializer(charge).data, separators=(',', ':'))
-    return Response(j, status=status.HTTP_402_PAYMENT_REQUIRED)
+    j = json.dumps({
+        'session_id': session
+    }, separators=(',', ':'))
+    return HttpResponse(j, content_type='application/json')
+
+@csrf_exempt
+@api_view(['POST'])
+def StripeWebhook(request):
+    payload = request.body
+    print(payload)
+    try:
+        event = stripe.Event.construct_from(
+          json.loads(payload), stripe.api_key
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    # Handle the event
+    if event.type == 'checkout.session.completed':
+        checkout = event.data.object # contains a stripe.PaymentIntent
+
+        charge = Charge.objects.get(reference_id=checkout.id)
+        if charge:
+            charge.status = 'SUCCESS'
+            charge.save()
+
+            charge.user.profile.stripe_customer_id = checkout.customer
+            charge.user.profile.save()
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return HttpResponse(status=400)
+        print(checkout)
+        print('checkout was completed!')
+    else:
+        # Unexpected event type
+        return HttpResponse(status=400)
+    return Response(status=status.HTTP_200_OK)
