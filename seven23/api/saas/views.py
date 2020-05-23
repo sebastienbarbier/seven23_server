@@ -54,9 +54,12 @@ def StripeGenerateSession(request):
     if not product.stripe_product_id:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    coupon = Coupon.objects.get(code=request.GET.get('coupon_code'))
+    try:
+        coupon = Coupon.objects.get(code=request.GET.get('coupon_code'))
+    except:
+        pass
 
-    if coupon.is_active and product.apply_coupon(request.GET.get('coupon_code')) == 0:
+    if coupon and coupon.is_active() and product.apply_coupon(request.GET.get('coupon_code')) == 0:
         charge = Charge.objects.create(
             user=request.user,
             product=product,
