@@ -10,6 +10,6 @@ from seven23 import settings
 from seven23.api.debitscredits.views import ApiDebitscredits
 
 ROUTER = BulkRouter(trailing_slash=False)
-ROUTER.register(r'^', ApiDebitscredits, base_name='debitscredits')
+ROUTER.register(r'^', ApiDebitscredits, basename='debitscredits')
 
 urlpatterns = ROUTER.urls

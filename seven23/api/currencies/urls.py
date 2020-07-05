@@ -10,6 +10,6 @@ from seven23 import settings
 from seven23.api.currencies.views import CurrenciesList
 
 ROUTER = routers.DefaultRouter(trailing_slash=False)
-ROUTER.register(r'^', CurrenciesList, base_name='currencies')
+ROUTER.register(r'^', CurrenciesList, basename='currencies')
 
 urlpatterns = ROUTER.urls

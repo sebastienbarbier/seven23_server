@@ -10,6 +10,6 @@ from seven23 import settings
 from seven23.api.categories.views import ApiCategories
 
 ROUTER = BulkRouter(trailing_slash=False)
-ROUTER.register(r'^', ApiCategories, base_name='categories')
+ROUTER.register(r'^', ApiCategories, basename='categories')
 
 urlpatterns = ROUTER.urls
