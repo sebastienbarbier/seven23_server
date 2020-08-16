@@ -16,6 +16,8 @@ from rest_framework.decorators import api_view
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
+from django.shortcuts import get_object_or_404
+
 from seven23 import settings
 from seven23.models.terms.models import TermsAndConditions
 from seven23.models.saas.models import Charge, Product, Coupon
@@ -27,10 +29,10 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def ApiCoupon(request, product_id, coupon_code):
     res = {}
 
-    product = Product.objects.get(pk=product_id)
-    coupon = Coupon.objects.get(code=coupon_code)
+    product = get_object_or_404(Product, pk=product_id)
+    coupon = get_object_or_404(Coupon, code=coupon_code)
 
-    if not product or not coupon or not coupon.is_active():
+    if not coupon.is_active():
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     res['coupon_id'] = coupon.id
