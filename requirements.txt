@@ -21,7 +21,7 @@ django-reset-migrations==0.4.0
 django-rest-auth==0.9.5
 django-sass-processor==0.8
 django-storages==1.9.1
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 djangorestframework-bulk==0.2.1
 docutils==0.16
 drf-writable-nested==0.6.0
