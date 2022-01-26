@@ -172,6 +172,7 @@ MIDDLEWARE = MIDDLEWARE + (
 )
 
 CSRF_TRUSTED_ORIGINS = [
+    'https://seven23.io',
     'https://*.seven23.io',
 ]
 
