@@ -171,6 +171,10 @@ MIDDLEWARE = MIDDLEWARE + (
     'seven23.middleware.active_user_middleware',
 )
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.seven23.io',
+]
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
