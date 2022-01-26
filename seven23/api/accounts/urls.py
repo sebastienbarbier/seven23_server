@@ -2,7 +2,7 @@
     Define urls for api/v1
 """
 
-from django.conf.urls import url, include
+from django.urls import include
 
 from rest_framework_bulk.routes import BulkRouter
 

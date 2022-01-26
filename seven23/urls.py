@@ -1,8 +1,8 @@
 """
     Main parth.
 """
+from django.urls import re_path, include
 from django.conf import settings
-from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 
@@ -30,15 +30,15 @@ schema_view = get_schema_view(
 urlpatterns = [
 
     # Examples:
-    # url(r'^$', 'seven23.views.home', name='home'),
-    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # re_path(r'^$', 'seven23.views.home', name='home'),
+    # re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
-    url(r'^$', views.home, name='home'),
-    url(r'^legals/$', views.legals, name='legals'),
-    url(r'^admin/', admin.site.urls),
-    url(r'^api/', include("seven23.api.urls")),
-    url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    url(r'^robots.txt$', views.robots, name='robots'),
+    re_path(r'^$', views.home, name='home'),
+    re_path(r'^legals/$', views.legals, name='legals'),
+    re_path(r'^admin/', admin.site.urls),
+    re_path(r'^api/', include("seven23.api.urls")),
+    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    re_path(r'^robots.txt$', views.robots, name='robots'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

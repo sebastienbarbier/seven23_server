@@ -5,7 +5,7 @@ import uuid
 from django.db import models
 # Default user model may get swapped out of the system and hence.
 from django.contrib.auth.models import User
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext_lazy as _
 
 from seven23.models.accounts.models import Account, PERMISSIONS
 

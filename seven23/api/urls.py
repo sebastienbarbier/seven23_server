@@ -32,14 +32,14 @@ urlpatterns = [
     path(r'v1/users/token', revoke_token, name='api.token'),
     path(r'v1/users/email', email, name='api.email'),
 
-    path(r'v1/rest-auth/',    include('rest_auth.urls')),
+    path(r'v1/rest-auth/',    include('dj_rest_auth.urls')),
 ]
 
 # If creation creation is allowed
 if settings.ALLOW_ACCOUNT_CREATION:
 
     urlpatterns = urlpatterns + [
-        path(r'v1/rest-auth/registration/', include('rest_auth.registration.urls')),
+        path(r'v1/rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     ]
 
 if settings.SAAS:
