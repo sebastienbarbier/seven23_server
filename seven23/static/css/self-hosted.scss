@@ -32,15 +32,11 @@ div.selfhosted {
         h1 {
             font-size: 8rem;
             position: relative;
-            padding: 0.4em 0.4em 0 1.6em;
+            padding: 0.4em 0.4em 0.4em 1.8em;
             background: url("../images/svg/seven23_round.svg") left center no-repeat;
             background-size: 1.4em;
             text-align: right;
-
-            small {
-                font-size: 0.3em;
-                letter-spacing: -0.05em;
-            }
+            vertical-align: middle;
         }
     }
     main {
