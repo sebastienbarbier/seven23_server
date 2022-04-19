@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static sass_tags %}
+
+{% block content %}
+<div class="paid">
+    <header id="top">
+        <h1>Seven23</h1>
+    </header>
+
+    <main>
+        <p>Thanks for trusting seven23, we are not able to receive payment at the moment, and will offer you six months for now. Your account is now activated until {{ user.profile.valid_until }}, enjoy.</p>
+        <a href="{{ url }}">Back to the app</a>
+    </main>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

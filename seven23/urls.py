@@ -34,6 +34,7 @@ urlpatterns = [
     # re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     re_path(r'^$', views.home, name='home'),
+    re_path(r'^paid/', views.paid, name='paid'),
     re_path(r'^admin/', admin.site.urls),
     re_path(r'^api/', include("seven23.api.urls")),
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
