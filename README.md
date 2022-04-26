@@ -6,7 +6,7 @@ This project is **alpha** quality. We don't yet guarantee stability, data integr
 
 [![Documentation Status](https://readthedocs.org/projects/seven23-server/badge/?version=latest)](https://seven23-server.readthedocs.io/en/latest/?badge=latest)
 
-[![Documentation Status](https://travis-ci.org/sebastienbarbier/seven23_server.svg?branch=master)](https://travis-ci.org/sebastienbarbier/seven23_server)
+[![Documentation Status](https://travis-ci.org/sebastienbarbier/seven23_server.svg?branch=main)](https://travis-ci.org/sebastienbarbier/seven23_server)
 
 Fully manual budget app to track your expenses. Completely opensource, with privacy by design.
 
