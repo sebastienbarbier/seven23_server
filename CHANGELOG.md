@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog-emoji/master/CHANGELOG.md
 -->
 
+## [1.0.1] - 2022-04-07
+### 🔒 Security
+- **Django** Security update ([#46](https://github.com/sebastienbarbier/seven23_server/issues/46))
+
 ## [1.0.0] - 2022-06-08
 ### ✨ Feature
 - Initial **data model**
