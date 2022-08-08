@@ -32,4 +32,4 @@ jobs:
       env: # Set the secret as an input
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
       run: |
-        python manage.py test
+        python manage.py test --settings seven23.settings_tests
