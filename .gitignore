@@ -13,3 +13,5 @@ apps
 logfile
 seven23_server.sublime-workspace
 *.db
+*.sqlite
+*.sqlite3

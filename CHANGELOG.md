@@ -24,6 +24,8 @@ See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog
 ## [1.1.0] - YYYYY-MM-DD
 ### ✨ Feature
 - Allow **SQLite** for data storage ([#49](https://github.com/sebastienbarbier/seven23_server/issues/49))
+### 🔒 Security
+- Update dependencies ([#52](https://github.com/sebastienbarbier/seven23_server/issues/52))
 ### 🏗 Chore
 - Migrate **Continous Integration** from travis-ci to **Github actions** ([#40](https://github.com/sebastienbarbier/seven23_server/issues/40))
 - Run within **Docker** ([#48](https://github.com/sebastienbarbier/seven23_server/issues/48))
