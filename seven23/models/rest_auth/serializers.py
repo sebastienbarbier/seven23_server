@@ -2,7 +2,7 @@ import datetime
 from django.contrib.auth import get_user_model, authenticate
 from django.conf import settings
 from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
-from django.contrib.auth.tokens import default_token_generator
+# from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_decode as uid_decoder
 from django.utils.translation import gettext_lazy as _
 from django.utils.encoding import force_str
@@ -10,6 +10,8 @@ from django.utils.encoding import force_str
 from rest_framework import serializers, exceptions
 from rest_framework.exceptions import ValidationError
 from allauth.account.models import EmailAddress
+
+from allauth.account.forms import default_token_generator
 
 try:
     from allauth.account import app_settings as allauth_settings
@@ -32,6 +34,9 @@ from rest_framework import serializers
 
 from drf_writable_nested import WritableNestedModelSerializer
 
+from allauth.account.utils import user_pk_to_url_str
+
+from django.utils.http import base36_to_int, int_to_base36, urlencode
 
 class UserSerializer(WritableNestedModelSerializer):
     """
@@ -84,15 +89,17 @@ class PasswordResetSerializer(serializers.Serializer):
 
     def save(self):
         request = self.context.get('request')
-
         user = UserModel.objects.get(email=self.initial_data['email'])
         self.initial_data['username'] = user.username
+        self.initial_data['uidb36'] = int_to_base36(user.pk)
+
         # Set some values to trigger the send_email method.
         opts = {
             'use_https': request.is_secure(),
             'from_email': getattr(settings, 'DEFAULT_FROM_EMAIL'),
             'request': request,
-            'extra_email_context': self.initial_data
+            'extra_email_context': self.initial_data,
+            'token_generator': default_token_generator,
         }
 
         opts.update(self.get_email_options())
