@@ -21,6 +21,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog-emoji/master/CHANGELOG.md
 -->
 
+## [1.1.0] - 2022-12-13
+### ✨ Feature
+- Allow **SQLite** for data storage ([#49](https://github.com/sebastienbarbier/seven23_server/issues/49))
+### 🔒 Security
+- Update dependencies ([#52](https://github.com/sebastienbarbier/seven23_server/issues/52))
+### 🐛 Bug Fixes
+- Fix broken password/reset/confirm API ([#60](https://github.com/sebastienbarbier/seven23_server/issues/60))
+### 🏗 Chore
+- Migrate **Continous Integration** from travis-ci to **Github actions** ([#40](https://github.com/sebastienbarbier/seven23_server/issues/40))
+- Run within **Docker** ([#48](https://github.com/sebastienbarbier/seven23_server/issues/48))
+
 ## [1.0.1] - 2022-04-07
 ### 🔒 Security
 - **Django** Security update ([#46](https://github.com/sebastienbarbier/seven23_server/issues/46))

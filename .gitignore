@@ -12,3 +12,6 @@ apps
 .DS_Store
 logfile
 seven23_server.sublime-workspace
+*.db
+*.sqlite
+*.sqlite3

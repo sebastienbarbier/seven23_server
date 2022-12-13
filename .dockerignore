@@ -10,3 +10,4 @@ docker-compose.yml
 .editorconfig
 .travis.yml
 .dockerignore
+*.db
