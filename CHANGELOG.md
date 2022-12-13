@@ -21,9 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog-emoji/master/CHANGELOG.md
 -->
 
-## [1.1.0] - YYYYY-MM-DD
-
-
+## [1.1.0] - 2022-12-13
 ### ✨ Feature
 - Allow **SQLite** for data storage ([#49](https://github.com/sebastienbarbier/seven23_server/issues/49))
 ### 🔒 Security
