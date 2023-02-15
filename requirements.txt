@@ -12,7 +12,7 @@ cryptography==38.0.4
 defusedxml==0.7.1
 dj-database-url==1.1.0
 dj-rest-auth==2.2.5
-Django==4.0.7
+Django==4.1.7
 django-allauth==0.51.0
 django-appconf==1.0.5
 django-colorfield==0.8.0
