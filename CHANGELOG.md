@@ -20,6 +20,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog-emoji/master/CHANGELOG.md
 -->
+## [1.2.0] - 2023-MM-DD
+### 📚 Documentation
+- Fix broken links to swagger and redoc ([#68](https://github.com/sebastienbarbier/seven23_server/issues/68))
 
 ## [1.1.0] - 2022-12-13
 ### ✨ Feature
