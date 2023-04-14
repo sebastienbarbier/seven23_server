@@ -11,7 +11,7 @@ Fully manual budget app to track your expenses. Completely opensource, with priv
 
 - [Seven23 official website](https://seven23.io/)
 - [Online documentation](https://seven23-server.readthedocs.io/en/latest/)
-- API specifications [swagger](https://seven23.io/swagger/) and [redoc](https://seven23.io/redoc/)
+- API specifications [swagger](https://api.seven23.io/swagger/) and [redoc](https://api.seven23.io/redoc/)
 - [Issue tracker](https://github.com/sebastienbarbier/seven23_server/issues)
 - [Code repository](https://github.com/sebastienbarbier/seven23_server)
 
