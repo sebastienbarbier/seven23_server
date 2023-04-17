@@ -12,7 +12,7 @@ Virtual env (optional)
 
 .. code:: shell
 
-    virtualenv -p python3 apps
+    python3 -m venv apps
     source apps/bin/activate
 
 Dependencies
