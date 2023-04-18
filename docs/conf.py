@@ -57,7 +57,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Seven23 server'
-copyright = u'2022, Sébastien BARBIER'
+copyright = u'2023, Sébastien BARBIER'
 author = u'Sébastien BARBIER'
 
 # The version info for the project you're documenting, acts as replacement for
