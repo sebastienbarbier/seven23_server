@@ -1,5 +1,5 @@
 Seven23 server
-==============
+--------------
 
 Fully manual budget app to track your expenses. Completely opensource, with privacy by design.
 
@@ -19,6 +19,7 @@ Summary
    :maxdepth: 1
 
    installation
+   configuration
    authentication
    models_and_api
    tests
