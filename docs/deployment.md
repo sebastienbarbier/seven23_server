@@ -2,8 +2,6 @@
 
 Self-hosted instance are a big part of this project, and we want to make it as easy as possible to deploy your own instance.
 
-To so do, we recommand using docker-compose, but you can also use the provided Dockerfile to build your own image.
-
 (docker_deployment)=
 
 ## Using Docker
