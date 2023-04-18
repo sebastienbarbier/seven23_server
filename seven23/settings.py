@@ -68,10 +68,7 @@ MIDDLEWARE = ()
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
 
-if os.environ.get('STORAGE') == 'whitenoise':
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-    MIDDLEWARE = MIDDLEWARE + ('whitenoise.middleware.WhiteNoiseMiddleware',)
-elif os.environ.get('STORAGE') == 'S3':
+if os.environ.get('STORAGE') == 'S3':
     # aws settings
     AWS_S3_ENDPOINT_URL = os.getenv('AWS_S3_ENDPOINT_URL', "https://cellar-c2.services.clever-cloud.com")
     S3_USE_SIGV4 = False
@@ -88,6 +85,9 @@ elif os.environ.get('STORAGE') == 'S3':
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
+elif not DEBUG or os.environ.get('STORAGE') == 'whitenoise':
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+    MIDDLEWARE = MIDDLEWARE + ('whitenoise.middleware.WhiteNoiseMiddleware',)
 
 STATICFILES_DIRS = (
   os.path.join(BASE_DIR, 'seven23/static'),
