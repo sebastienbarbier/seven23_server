@@ -10,6 +10,10 @@
     <main>
         <a href="https://app.seven23.io/">Go to app.seven23.io</a>
     </main>
+
+    <footer>
+        <p><a href="{% url 'schema-redoc' %}">Redoc</a> - <a href="{% url 'schema-swagger-ui' %}"">Swagger</a> - {{ settings.VERSION.0 }}.{{ settings.VERSION.1 }}.{{ settings.VERSION.2 }} </p>
+    </footer>
 </div>
 {% endblock %}
 

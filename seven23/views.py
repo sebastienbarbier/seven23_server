@@ -14,7 +14,7 @@ from seven23.models.saas.models import Product
 from seven23.models.terms.models import TermsAndConditions
 
 def home(request):
-    return render(request, 'self-hosted.html', {})
+    return render(request, 'self-hosted.html', {'settings': settings})
 
 def paid(request):
 

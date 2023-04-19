@@ -22,6 +22,9 @@ if os.environ.get('SENTRY_DSN'):
         integrations=[DjangoIntegration()]
     )
 
+VERSION = [1, 2, 0]
+API_VERSION = [1, 0, 0]
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
@@ -32,7 +35,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG') == 'True'
 MAINTENANCE = os.environ.get('MAINTENANCE') == 'True'
-API_VERSION = [1, 0, 0]
 
 # Allow public account creation
 ALLOW_ACCOUNT_CREATION = os.environ.get('ALLOW_ACCOUNT_CREATION') == 'True'
