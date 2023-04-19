@@ -12,9 +12,33 @@ from django.utils import timezone
 
 from seven23.models.saas.models import Product
 from seven23.models.terms.models import TermsAndConditions
+from seven23.models.currency.models import Currency
 
 def home(request):
-    return render(request, 'self-hosted.html', {'settings': settings})
+    is_database_ready = True
+    is_fixtures_loaded = None
+    is_superuser_created = None
+
+    # We check is user objects exist,otherwise raise Exception Value: no such table: auth_user
+    try:
+        User.objects.all().exists()
+    except:
+        is_database_ready = False
+
+    # If currencies exits, we assume that fixtures are loaded
+    if is_database_ready:
+        is_fixtures_loaded = Currency.objects.count() != 0
+
+    # If there is no user, it means that no superuser has been created
+    if is_database_ready and is_fixtures_loaded:
+        is_superuser_created = User.objects.count() != 0
+
+    return render(request, 'self-hosted.html', {
+        'settings': settings,
+        'is_database_ready': is_database_ready,
+        'is_fixtures_loaded': is_fixtures_loaded,
+        'is_superuser_created': is_superuser_created,
+    })
 
 def paid(request):
 

@@ -8,7 +8,24 @@
     </header>
 
     <main>
+        {% if not is_superuser_created %}
+        <ul class="checklist">
+            <li class="{% if is_database_ready %}success{% else %}error{% endif %}">
+                <h2>Generate database</h2>
+                <p>Solve by running: <code>python manage.py migrate</code></p>
+            </li>
+            <li class="{% if is_fixtures_loaded == True %}success{% elif is_fixtures_loaded == False %}error{% else %}disabled{% endif %}">
+                <h2>Load fixtures</h2>
+                <p>Solve by running: <code>python manage.py loaddata seven23/models/currency/fixtures/initial_data.json</code></p>
+            </li>
+            <li class="{% if is_superuser_created == True %}success{% elif is_superuser_created == False %}error{% else %}disabled{% endif %}">
+                <h2>Create superuser</h2>
+                <p>Solve by running: <code>python manage.py createsuperuser</code></p>
+            </li>
+        </ul>
+        {% else %}
         <a href="https://app.seven23.io/">Go to app.seven23.io</a>
+        {% endif %}
     </main>
 
     <footer>

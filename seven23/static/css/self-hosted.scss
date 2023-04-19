@@ -45,34 +45,47 @@ div.selfhosted {
         align-items: center;
         padding-bottom: 10vh;
 
-        .ok, .ko, .valid, .error, .warn {
+        .ok, .ko, .success, .valid, .error, .warn, .disabled {
             text-align: left;
             font-weight: 600;
             position: relative;
             padding-top: .3em;
             padding-left: calc(-2em - 10px);
 
-            animation-name: appear2;
-            animation-duration: $duration;
-
             &:before {
                 content: '';
                 width: 2em;
                 height: 2em;
                 position: absolute;
-                top: 0;
+                top: 5px;
                 left: calc(-2em - 10px);
                 border-radius: 50%;
             }
         }
+        // Make animation for valid states. Disabled one will not be animated
+        .ok, .ko, .success, .valid, .error, .warn {
+            animation-name: appear2;
+            animation-duration: $duration;
+        }
 
-        .ok, .valid {
+        .ok, .valid, .success {
             color: rgb(137, 174, 59);
             &:before {
                 background: url("../images/svg/baseline-check-24px_white.svg") rgb(137, 174, 59) no-repeat;
-                background-position: .2em 0;
+                background-position: center center;
+                background-size: 1.7em;
             }
         }
+
+        .disabled {
+            color: rgb(128, 128, 128);
+            &:before {
+                background: url("../images/svg/baseline-check-24px_white.svg") rgb(128, 128, 128) no-repeat;
+                background-position: center center;
+                background-size: 1.7em;
+            }
+        }
+
         .ko, .error {
             color: rgb(229, 115, 115);
             &:before {
@@ -81,6 +94,7 @@ div.selfhosted {
                 background-size: 1.7em;
             }
         }
+
         .warn {
             color: rgb(212, 177, 85);
             &:before {
@@ -90,69 +104,38 @@ div.selfhosted {
             }
         }
 
+        ul.checklist {
+            li {
+                display: block;
+                list-style: none;
 
-        div.wrapper {
-            position: relative;
-            padding: 0 5em;
-            h2 {
-                font-weight: 600;
-                line-height: 1.5;
-                font-size: 1.2em;
-                letter-spacing: -0.01em;
-                padding: 4px 0 0;
-            }
-
-            label {
-                width: 2.5em;
-                height: 2.5em;
-                background: #DDD;
-                border-radius: 50%;
-                position: relative;
-                cursor: pointer;
-
-
-                position: absolute;
-                top: 0; right: 0;
-
-                &:before, &:after {
-                    content: '';
-                    background: url("../images/svg/baseline-expand_more-24px.svg") no-repeat;
-                    position: absolute;
-                    top: 10%; left: 10%; right: 10%; bottom: 10%;
-                    transition: transform .4s;
+                h2 {
+                    margin-top: 0;
+                    font-weight: 600;
+                    line-height: 1.5;
+                    font-size: 1.2em;
+                    letter-spacing: -0.01em;
                 }
-            }
-            input[type="checkbox"]:checked + label {
-                &:before {
-                    transform: rotate(90deg) translateY(-3px);
-                }
-                &:after {
-                    transform: rotate(-90deg) translateY(-3px);
-                }
-            }
-            input[type="checkbox"]:checked + label + ul {
-                opacity: 1;
-                transform: scaleY(1);
-                transform-origin: top;
-                transition: opacity .4s .2s, transform .4s;
-            }
 
-            ul {
-                opacity: 0;
-                display: flex;
-                flex-wrap: nowrap;
-                padding: 40px 0 40px 40px; margin: 0;
-                flex-direction: column;
-                transform: scaleY(0);
-                transform-origin: top;
-                overflow: hidden;
-                transition: opacity .2s, transform .4s .1s;
-                li {
-                    padding: 10px 0;
-                    &:before { top: 6px; }
+                &.success {
+                    p, form {
+                        display: none;
+                    }
+                }
+
+                &.disabled {
+                    opacity: 0.4;
+                    p, form {
+                        display: none;
+                    }
+                }
+
+                p {
+
                 }
             }
         }
+
 
         a, button {
             color: white;
