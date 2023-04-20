@@ -69,7 +69,7 @@ div.selfhosted {
         }
 
         .ok, .valid, .success {
-            color: rgb(137, 174, 59);
+            // color: rgb(137, 174, 59);
             &:before {
                 background: url("../images/svg/baseline-check-24px_white.svg") rgb(137, 174, 59) no-repeat;
                 background-position: center center;
@@ -78,7 +78,7 @@ div.selfhosted {
         }
 
         .disabled {
-            color: rgb(128, 128, 128);
+            // color: rgb(128, 128, 128);
             &:before {
                 background: url("../images/svg/baseline-check-24px_white.svg") rgb(128, 128, 128) no-repeat;
                 background-position: center center;
@@ -87,7 +87,7 @@ div.selfhosted {
         }
 
         .ko, .error {
-            color: rgb(229, 115, 115);
+            // color: rgb(229, 115, 115);
             &:before {
                 background: url("../images/svg/baseline-clear-24px_white.svg") rgb(229, 115, 115) no-repeat;
                 background-position: center center;
@@ -104,7 +104,27 @@ div.selfhosted {
             }
         }
 
+        div.wrapper {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            &.links {
+                flex-direction: row;
+                a {
+                    margin: 2px 4px;
+                }
+            }
+        }
+
         ul.checklist {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             li {
                 display: block;
                 list-style: none;
@@ -136,6 +156,16 @@ div.selfhosted {
             }
         }
 
+        form {
+            label {
+                display: block;
+                color: black;
+            }
+            input[type="text"], input[type="email"], input[type="password"] {
+                width: 100%;
+                padding: 2px 4px;
+            }
+        }
 
         a, button {
             color: white;
@@ -150,7 +180,9 @@ div.selfhosted {
             font-weight: 600;
             border: none;
             font-size: 1rem;
-
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             animation-name: appear2;
             animation-duration: $duration;
