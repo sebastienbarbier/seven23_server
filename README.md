@@ -1,7 +1,3 @@
-> **Warning**  
-> 
-> This project is a one person project, currently in **alpha** quality. We don't yet guarantee stability, data integrity or a clean upgrade path. Only use this project if you are interested in experimenting with it.
-
 # Seven23 server
 
 [![Build action badge](https://github.com/sebastienbarbier/seven23_server/actions/workflows/django.yml/badge.svg?branch=main)](https://github.com/sebastienbarbier/seven23_server/actions/) [![Documentation Status](https://readthedocs.org/projects/seven23-server/badge/?version=latest)](https://seven23-server.readthedocs.io/en/latest/?badge=latest) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/sebastienbarbier/seven23_server/blob/main/LICENSE)
