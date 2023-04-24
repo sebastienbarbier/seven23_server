@@ -5,6 +5,7 @@ div.selfhosted {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    width: 100%;
 
     @keyframes appear {
       0% { opacity: 0; }
@@ -32,18 +33,26 @@ div.selfhosted {
         h1 {
             font-size: 8rem;
             position: relative;
-            padding: 0.4em 0.4em 0.4em 1.8em;
-            background: url("../images/svg/seven23_round.svg") left center no-repeat;
-            background-size: 1.4em;
             text-align: right;
             vertical-align: middle;
+
+            // Media query for table
+            @media (min-width: 769px) {
+                background: url("../images/svg/seven23_round.svg") left center no-repeat;
+                background-size: 1.4em;
+                padding: 0.4em 0.4em 0.4em 1.8em;
+            }
+
+            @media (max-width: 768px) {
+                font-size: 5rem;
+            }
         }
     }
     main {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-bottom: 10vh;
+        padding: 12px 20px 10vh 20px;
 
         .ok, .ko, .success, .valid, .error, .warn, .disabled {
             text-align: left;

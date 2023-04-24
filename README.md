@@ -13,3 +13,17 @@ Fully manual budget app to track your expenses. Completely opensource, with priv
 
 Seven23 server instance is powered by [django](https://www.djangoproject.com/) and [django-rest-framework](https://www.django-rest-framework.org/) to manage and expose a restful API.
 **It does not include a user interface**, which is managed as a totally independant project like [seven23_webapp](https://github.com/sebastienbarbier/seven23_webapp).
+
+## Commands
+
+```shell
+make serve
+make build
+make test
+make docs
+make clean
+make docker-build
+make docker-run
+make docker-shell
+make docker-stop
+```
