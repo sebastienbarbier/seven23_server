@@ -18,15 +18,15 @@ clean:
 	find . -name '*~' -delete
 
 docker-build:
-	docker build --pull -t seven23_server .
+	docker build --pull -t seven23 .
 
 docker-run:
-	docker-compose -f docker-compose.yml up -d
+	docker run -p 8000:8000 --name seven23 -ti seven23
 
 docker-shell:
-	docker exec -ti seven23_server_app_1 /bin/sh
+	docker exec -ti seven23 /bin/sh
 
 docker-stop:
-	docker-compose stop
+	docker stop seven23
 
 .PHONY: start stop shell test docs clean build serve docker-build docker-run docker-shell docker-stop
