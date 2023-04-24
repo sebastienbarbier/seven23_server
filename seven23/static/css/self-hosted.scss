@@ -120,8 +120,19 @@ div.selfhosted {
             flex-direction: column;
             justify-content: center;
 
+            h2 {
+                @media (max-width: 768px) {
+                    font-size: 1.6em;
+                }
+            }
+
             &.links {
                 flex-direction: row;
+
+                @media (max-width: 460px) {
+                    flex-direction: column;
+                }
+
                 a {
                     margin: 2px 4px;
                 }
@@ -144,6 +155,7 @@ div.selfhosted {
                     line-height: 1.5;
                     font-size: 1.2em;
                     letter-spacing: -0.01em;
+
                 }
 
                 &.success {

@@ -12,7 +12,7 @@
 
             {% if form.is_valid %}
             <div class="wrapper">
-                <h2>🎉 Congratulations! 🎉</h2>
+                <h2>🎉 Congratulations !</h2>
                 <p>Your instance is now fully configured and ready to use. You can access the administration panel to create users and manage your instance. You're all set to connect directly through the app and start exploring its features. Thanks for choosing our platform! 💪</p>
             </div>
             {% endif %}
@@ -41,14 +41,14 @@
             {% if form.is_valid %}
             <div class="wrapper links">
                 <a href="/admin/">Administration</a>
-                <a href="https://app.seven23.io/">Go to app.seven23.io</a>
+                <a href="https://app.seven23.io/">Go to the app</a>
             </div>
             {% endif %}
 
         {% else %}
             <div class="wrapper links">
                 {% if user and user.is_staff %}<a href="/admin/">Administration</a>{% endif %}
-                <a href="https://app.seven23.io/">Go to app.seven23.io</a>
+                <a href="https://app.seven23.io/">Go to the app</a>
             </div>
         {% endif %}
     </main>
