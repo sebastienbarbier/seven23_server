@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog-emoji/master/CHANGELOG.md
 -->
 
-## [1.2.0] - 2023-MM-DD
+## [1.2.0] - 2023-04-24
 ### ✨ Feature
 - Publish **docker** image ([#69](https://github.com/sebastienbarbier/seven23_server/issues/69))
 - Improve **self-hosted experience** ([#66](https://github.com/sebastienbarbier/seven23_server/issues/66))
