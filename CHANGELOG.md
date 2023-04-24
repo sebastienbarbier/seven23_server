@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
  
- <!---
+<!---
 ## [Unreleased] - yyyy-mm-dd
 
 ### ✨ Feature – for new features
@@ -20,15 +20,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog-emoji/master/CHANGELOG.md
 -->
-
-## [1.2.0] - 2023-04-24
-### ✨ Feature
-- Publish **docker** image ([#69](https://github.com/sebastienbarbier/seven23_server/issues/69))
-- Improve **self-hosted experience** ([#66](https://github.com/sebastienbarbier/seven23_server/issues/66))
-### 📚 Documentation
-- Fix broken links to **swagger** and **redoc** ([#68](https://github.com/sebastienbarbier/seven23_server/issues/68))
-### 🔒 Security
-- Security updates ([#67](https://github.com/sebastienbarbier/seven23_server/issues/67))
 
 ## [1.1.0] - 2022-12-13
 ### ✨ Feature
