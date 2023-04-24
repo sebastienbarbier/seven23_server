@@ -22,9 +22,6 @@ if os.environ.get('SENTRY_DSN'):
         integrations=[DjangoIntegration()]
     )
 
-VERSION = [1, 2, 0]
-API_VERSION = [1, 0, 0]
-
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
@@ -35,6 +32,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG') == 'True'
 MAINTENANCE = os.environ.get('MAINTENANCE') == 'True'
+API_VERSION = [1, 0, 0]
 
 # Allow public account creation
 ALLOW_ACCOUNT_CREATION = os.environ.get('ALLOW_ACCOUNT_CREATION') == 'True'
@@ -70,7 +68,10 @@ MIDDLEWARE = ()
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
 
-if os.environ.get('STORAGE') == 'S3':
+if os.environ.get('STORAGE') == 'whitenoise':
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+    MIDDLEWARE = MIDDLEWARE + ('whitenoise.middleware.WhiteNoiseMiddleware',)
+elif os.environ.get('STORAGE') == 'S3':
     # aws settings
     AWS_S3_ENDPOINT_URL = os.getenv('AWS_S3_ENDPOINT_URL', "https://cellar-c2.services.clever-cloud.com")
     S3_USE_SIGV4 = False
@@ -87,9 +88,6 @@ if os.environ.get('STORAGE') == 'S3':
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
-elif not DEBUG or os.environ.get('STORAGE') == 'whitenoise':
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-    MIDDLEWARE = MIDDLEWARE + ('whitenoise.middleware.WhiteNoiseMiddleware',)
 
 STATICFILES_DIRS = (
   os.path.join(BASE_DIR, 'seven23/static'),

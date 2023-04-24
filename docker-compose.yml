@@ -4,7 +4,7 @@ services:
 
   postgres:
     restart: always
-    image: postgres:12-alpine
+    image: postgres:11-alpine
     expose:
       - "5432"
     environment:
@@ -12,8 +12,11 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=seven23
 
-  seven23:
-    image: sebastienbarbier/seven23:latest
+  app:
+    build: .
+    image: seven23_server:latest
+    volumes:
+      - static-content:/app/collectstatic
     depends_on:
      - postgres
     expose:
@@ -30,9 +33,10 @@ services:
     restart: always
     image: nginx
     volumes:
-      - ./nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./docker-build/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+      - static-content:/usr/src/seven23-static:ro
     depends_on:
-     - seven23
+     - app
     ports:
       - "8000:8000"
     command: [nginx-debug, '-g', 'daemon off;']
