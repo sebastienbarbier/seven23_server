@@ -1,7 +1,7 @@
 Documentation
 =============
 
-This official documentation is maintained in GitHub. The docs folder contains the documentation sources in reStructuredText format. And you can generate the docs locally with:
+This official documentation is maintained in GitHub. The docs folder contains the documentation sources in reStructuredText format or markdown. And you can generate the docs locally with:
 
 .. code:: shell
 

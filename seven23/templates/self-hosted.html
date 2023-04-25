@@ -8,8 +8,54 @@
     </header>
 
     <main>
-        <a href="https://app.seven23.io/">Go to app.seven23.io</a>
+        {% if form.is_valid or not is_superuser_created %}
+
+            {% if form.is_valid %}
+            <div class="wrapper">
+                <h2>🎉 Congratulations !</h2>
+                <p>Your instance is now fully configured and ready to use. You can access the administration panel to create users and manage your instance. You're all set to connect directly through the app and start exploring its features. Thanks for choosing our platform! 💪</p>
+            </div>
+            {% endif %}
+
+            <ul class="checklist">
+                <li class="{% if is_database_ready %}success{% else %}error{% endif %}">
+                    <h2>Generate database</h2>
+                    <p>Solve by running: <code>python manage.py migrate</code></p>
+                </li>
+                <li class="{% if is_fixtures_loaded == True %}success{% elif is_fixtures_loaded == False %}error{% else %}disabled{% endif %}">
+                    <h2>Load fixtures</h2>
+                    <p>Solve by running: <code>python manage.py loaddata seven23/models/currency/fixtures/initial_data.json</code></p>
+                </li>
+                <li class="{% if is_superuser_created == True %}success{% elif is_superuser_created == False %}error{% else %}disabled{% endif %}">
+                    <h2>Create superuser</h2>
+                    <p>To manage your instance and access the administration section, you'll need to create a super user account with appropriate permissions.</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="Create" />
+                    </form>
+                </li>
+
+            </ul>
+
+            {% if form.is_valid %}
+            <div class="wrapper links">
+                <a href="/admin/">Administration</a>
+                <a href="https://app.seven23.io/">Go to the app</a>
+            </div>
+            {% endif %}
+
+        {% else %}
+            <div class="wrapper links">
+                {% if user and user.is_staff %}<a href="/admin/">Administration</a>{% endif %}
+                <a href="https://app.seven23.io/">Go to the app</a>
+            </div>
+        {% endif %}
     </main>
+
+    <footer>
+        <p><a href="{% url 'schema-redoc' %}">Redoc</a> - <a href="{% url 'schema-swagger-ui' %}"">Swagger</a> - {{ settings.VERSION.0 }}.{{ settings.VERSION.1 }}.{{ settings.VERSION.2 }} </p>
+    </footer>
 </div>
 {% endblock %}
 
