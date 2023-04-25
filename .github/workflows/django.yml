@@ -31,5 +31,6 @@ jobs:
     - name: Run Tests
       env: # Set the secret as an input
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        ALLOW_ACCOUNT_CREATION: True
       run: |
         python manage.py test --settings seven23.settings_tests
