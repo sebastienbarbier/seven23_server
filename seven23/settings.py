@@ -95,7 +95,6 @@ STATICFILES_DIRS = (
   os.path.join(BASE_DIR, 'seven23/static'),
 )
 
-
 LOGIN_URL = '/'
 
 # Database confugration using environment variable DATABASES_URL
@@ -196,7 +195,8 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
 }
 
-REST_AUTH_SERIALIZERS = {
+REST_AUTH = {
+    'SESSION_LOGIN': False,
     'USER_DETAILS_SERIALIZER': 'seven23.models.rest_auth.serializers.UserSerializer',
     'PASSWORD_RESET_SERIALIZER': 'seven23.models.rest_auth.serializers.PasswordResetSerializer',
 }

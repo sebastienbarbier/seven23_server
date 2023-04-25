@@ -56,6 +56,7 @@ def delete_user(request):
     """
         Permanently delete a user
     """
+    # Confirm provided password to be valid to trigger the deletion.
     if authenticate(username=request.user.username, password=request.data['password']):
         request.user.delete()
         return HttpResponse(status=200)
