@@ -33,17 +33,17 @@ PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG') == 'True'
-MAINTENANCE = os.environ.get('MAINTENANCE') == 'True'
+DEBUG = os.environ.get('DEBUG', 'false').lower() == 'true'
+MAINTENANCE = os.environ.get('MAINTENANCE', 'false').lower() == 'true'
 
 # Allow public account creation
-ALLOW_ACCOUNT_CREATION = os.environ.get('ALLOW_ACCOUNT_CREATION') == 'True'
+ALLOW_ACCOUNT_CREATION = os.environ.get('ALLOW_ACCOUNT_CREATION', 'false').lower() == 'true'
 OLD_PASSWORD_FIELD_ENABLED = True
 
 APPEND_SLASH = True
 ALLOWED_HOSTS = ['*']
 
-SAAS = os.environ.get('SAAS') == 'True'
+SAAS = os.environ.get('SAAS', 'false').lower() == 'true'
 TRIAL_PERIOD = 30
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
@@ -70,7 +70,7 @@ MIDDLEWARE = ()
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
 
-if os.environ.get('STORAGE') == 'S3':
+if os.environ.get('STORAGE', 'false').lower() == 's3':
     # aws settings
     AWS_S3_ENDPOINT_URL = os.getenv('AWS_S3_ENDPOINT_URL', "https://cellar-c2.services.clever-cloud.com")
     S3_USE_SIGV4 = False
@@ -87,7 +87,7 @@ if os.environ.get('STORAGE') == 'S3':
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
-elif not DEBUG or os.environ.get('STORAGE') == 'whitenoise':
+elif not DEBUG or os.environ.get('STORAGE').lower() == 'whitenoise':
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
     MIDDLEWARE = MIDDLEWARE + ('whitenoise.middleware.WhiteNoiseMiddleware',)
 
@@ -233,7 +233,7 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
 
-if os.environ.get('EMAIL_BACKEND_CONSOLE') == 'True' or not EMAIL_HOST:
+if os.environ.get('EMAIL_BACKEND_CONSOLE', 'false').lower() == 'true' or not EMAIL_HOST:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Internationalization
