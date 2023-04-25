@@ -26,6 +26,7 @@ def api_init(request):
     result = {}
 
     # Return API Version.
+    result['version'] = settings.VERSION
     result['api_version'] = settings.API_VERSION
     result['saas'] = settings.SAAS
     result['allow_account_creation'] = settings.ALLOW_ACCOUNT_CREATION

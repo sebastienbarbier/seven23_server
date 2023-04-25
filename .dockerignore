@@ -2,7 +2,6 @@ clevercloud
 docs
 README.*
 CHANGELOG.*
-Procfile
 Dockerfile
 docker-compose.yml
 .git
