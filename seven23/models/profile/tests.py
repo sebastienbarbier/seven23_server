@@ -27,3 +27,4 @@ class ProfileTest(TransactionTestCase):
 
         self.assertEqual(self.user.profile.valid_until > timezone.now(), True)
         self.assertEqual(self.user.profile.valid_until < expected_date, True)
+        self.assertEqual(self.user.profile.auto_sync, False)

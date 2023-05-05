@@ -32,6 +32,7 @@ class Profile(models.Model):
                                 max_length=20,
                                 choices=AVATAR_OPTIONS,
                                 help_text=_(u'Select between different origins.'))
+    auto_sync = models.BooleanField(_(u'Auto sync in app'), default=False)
     social_networks = models.TextField(_('social_networks blob'), blank=True, null=False)
     last_api_call = models.DateField(_(u'Last API call'),
                                 help_text=_(u'Last call on the API as a registered user'),

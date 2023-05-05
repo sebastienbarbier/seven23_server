@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog-emoji/master/CHANGELOG.md
 -->
 
-## [1.2.1] - 2023-05-DD
+## [1.3.0] - 2023-05-DD
 ### 🐛 Bug Fixes
 - Toggle autosync fail (#80)
 

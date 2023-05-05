@@ -47,4 +47,6 @@ class ApiUsersTest(TransactionTestCase):
         self.assertEqual(data['username'], 'test')
         self.assertTrue('profile' in data)
         self.assertTrue('avatar' in data['profile'])
+        self.assertTrue('auto_sync' in data['profile'])
         self.assertTrue('social_networks' in data['profile'])
+        self.assertFalse(data['profile']['auto_sync'])
