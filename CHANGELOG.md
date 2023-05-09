@@ -22,8 +22,12 @@ See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog
 -->
 
 ## [1.3.0] - 2023-05-DD
+### 🛠 Improvements
+- Apply **auto_sync settings for all accounts** instead of individual one (#81)
+- **Log config** for easier deployment (#83)
 ### 🐛 Bug Fixes
-- Toggle autosync fail (#80)
+- Settings **autosync** fails (#80)
+- **Registration**  returing 204 instead of 201 (#82)
 
 ## [1.2.0] - 2023-04-24
 ### ✨ Feature

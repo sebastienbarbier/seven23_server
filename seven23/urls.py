@@ -11,8 +11,12 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
 from . import views
+from .logs import print_settings_report
 
 admin.autodiscover()
+
+# Print settings errors load for easier deployment
+print_settings_report()
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -25,7 +29,6 @@ schema_view = get_schema_view(
    public=True,
    permission_classes=(permissions.AllowAny,),
 )
-
 
 urlpatterns = [
 
