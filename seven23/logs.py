@@ -5,6 +5,9 @@ def print_settings_report():
     print('#####    Seven23_server     ####')
     print('################################')
 
+    if settings.DEBUG:
+        print('✅ 🔎 🐛 Debug is enabled')
+
     print(f'Version: {settings.VERSION[0]}.{settings.VERSION[1]}.{settings.VERSION[2]}')
 
     if 'SECRET_KEY' in settings.errors:
