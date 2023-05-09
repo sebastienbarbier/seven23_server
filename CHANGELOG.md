@@ -21,6 +21,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog-emoji/master/CHANGELOG.md
 -->
 
+## [1.3.0] - 2023-05-09
+### 🛠 Improvements
+- Apply **auto_sync settings for all accounts** instead of individual one (#81)
+- **Log config** for easier deployment (#83)
+### 🐛 Bug Fixes
+- Settings **autosync** fails (#80)
+- **Registration**  returing 204 instead of 201 (#82)
+
 ## [1.2.0] - 2023-04-24
 ### ✨ Feature
 - Publish **docker** image ([#69](https://github.com/sebastienbarbier/seven23_server/issues/69))

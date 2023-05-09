@@ -12,6 +12,14 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 import dj_database_url
 
+from django.core.management.utils import get_random_secret_key
+
+from seven23.logs import print_settings_report
+
+# Errors is an array of variable name as string
+# to display report at the end of settings
+errors = []
+
 if os.environ.get('SENTRY_DSN'):
     import sentry_sdk
     from sentry_sdk.integrations.django import DjangoIntegration
@@ -22,7 +30,7 @@ if os.environ.get('SENTRY_DSN'):
         integrations=[DjangoIntegration()]
     )
 
-VERSION = [1, 2, 0]
+VERSION = [1, 3, 0]
 API_VERSION = [1, 0, 0]
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -31,13 +39,22 @@ PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
+# If secret Key is empty we generate one
+if not SECRET_KEY:
+    SECRET_KEY = get_random_secret_key()
+    errors.append("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'false').lower() == 'true'
 MAINTENANCE = os.environ.get('MAINTENANCE', 'false').lower() == 'true'
 
 # Allow public account creation
-ALLOW_ACCOUNT_CREATION = os.environ.get('ALLOW_ACCOUNT_CREATION', 'false').lower() == 'true'
+ALLOW_ACCOUNT_CREATION = \
+    os.environ.get('ALLOW_ACCOUNT_CREATION', 'false').lower() == 'true' or\
+    os.environ.get('ALLOW_ACCOUNT_CREATION', '0') == '1'
+if not ALLOW_ACCOUNT_CREATION:
+    errors.append("ALLOW_ACCOUNT_CREATION")
+
 OLD_PASSWORD_FIELD_ENABLED = True
 
 APPEND_SLASH = True
@@ -233,8 +250,11 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
 
-if os.environ.get('EMAIL_BACKEND_CONSOLE', 'false').lower() == 'true' or not EMAIL_HOST:
+if os.environ.get('EMAIL_BACKEND_CONSOLE', 'false').lower() == 'true' or\
+    os.environ.get('EMAIL_BACKEND_CONSOLE', '0') == '1' or\
+    not EMAIL_HOST:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    errors.append('EMAIL_BACKEND')
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

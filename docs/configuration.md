@@ -33,5 +33,5 @@ DEBUG=1
 Disable the creation of new user throught the application.
 
 ```shell
-ALLOW_ACCOUNT_CREATION=0
+ALLOW_ACCOUNT_CREATION=true # or False
 ```

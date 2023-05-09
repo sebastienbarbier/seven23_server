@@ -104,6 +104,23 @@ class ApiAccountTest(TransactionTestCase):
         assert response.status_code == status.HTTP_200_OK
         assert response.json()['name'] == 'Test creation'
 
+    def test_account_patch(self):
+        """
+            We try to edit an account object
+        """
+        self.client.force_authenticate(user=self.user)
+
+        response = self.client.get('/api/v1/accounts/%d' % self.account.id)
+        assert response.status_code == status.HTTP_200_OK
+
+        assert self.account.name == "Private Account"
+        self.account.name = "Public Account"
+        response = self.client.patch('/api/v1/accounts/%d' % self.account.id,
+                                   {'name': self.account.name,
+                                   })
+        assert response.status_code == status.HTTP_200_OK
+        assert response.json()['name'] == "Public Account"
+
     def test_account_destroy(self):
         """
             We try to edit an account object
