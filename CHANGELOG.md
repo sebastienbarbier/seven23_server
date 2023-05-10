@@ -22,6 +22,8 @@ See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog
 -->
 
 ## [1.3.1] - 2023-05-10
+### 🔒 Security
+- Bump django from 4.1.8 to 4.1.9 (#85)
 ### 🐛 Bug Fixes
 - Fix crash settings if debug false (#86)
 
