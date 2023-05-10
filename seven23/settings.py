@@ -30,7 +30,7 @@ if os.environ.get('SENTRY_DSN'):
         integrations=[DjangoIntegration()]
     )
 
-VERSION = [1, 3, 0]
+VERSION = [1, 3, 1]
 API_VERSION = [1, 0, 0]
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -104,7 +104,7 @@ if os.environ.get('STORAGE', 'false').lower() == 's3':
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
-elif not DEBUG or os.environ.get('STORAGE').lower() == 'whitenoise':
+elif not DEBUG or os.environ.get('STORAGE', '').lower() == 'whitenoise':
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
     MIDDLEWARE = MIDDLEWARE + ('whitenoise.middleware.WhiteNoiseMiddleware',)
 

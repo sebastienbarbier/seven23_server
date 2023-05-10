@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog-emoji/master/CHANGELOG.md
 -->
 
+## [1.3.1] - 2023-05-10
+### 🐛 Bug Fixes
+- Fix crash settings if debug false (#86)
+
 ## [1.3.0] - 2023-05-09
 ### 🛠 Improvements
 - Apply **auto_sync settings for all accounts** instead of individual one (#81)
