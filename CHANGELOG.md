@@ -23,7 +23,7 @@ See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog
 
 ## [1.4.0] - 2023-MM-DD
 ### 🛠 Improvements
--  Add boolean to **store if private key has been saved** and verified (#91)
+- Add boolean to **store if private key has been saved** and verified (#91)
 
 ## [1.3.1] - 2023-05-10
 ### 🔒 Security
