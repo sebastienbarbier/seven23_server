@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog-emoji/master/CHANGELOG.md
 -->
 
-## [1.4.0] - 2023-MM-DD
+## [1.4.0] - 2023-06-19
 ### 🛠 Improvements
 - Add boolean to **store if private key has been saved** and verified (#91)
 
