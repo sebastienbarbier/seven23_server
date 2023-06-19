@@ -6,12 +6,11 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
-from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 # from seven23.models.stats.models import MonthlyActiveUser, DailyActiveUser
-from django.db.models.signals import pre_delete
+from django.db.models.signals import pre_delete, pre_save, post_save
 from django.dispatch import receiver
 
 from django.conf import settings
@@ -41,6 +40,9 @@ class Profile(models.Model):
     valid_until = models.DateTimeField(_(u'Valid until'),
                                 help_text=_(u'On SASS, this is the validation date'),
                                 default=timezone.now)
+    key_verified = models.BooleanField(_(u'Key verified'),
+                                help_text=_(u'Private key has been verified and saved by user'),
+                                default=False)
     stripe_customer_id = models.CharField(_(u'Stripe costumer id'),
                                 max_length=128,
                                 null=True,
@@ -73,6 +75,22 @@ class Profile(models.Model):
             instance.profile.save()
         else:
             Profile.objects.create(user=instance)
+
+    @receiver(pre_save, sender=User)
+    def user_updated_password(sender, **kwargs):
+        """
+            When user update his password, we need to reset the key_verified flag
+        """
+        user = kwargs.get('instance', None)
+        if user and hasattr(user, 'profile'):
+            new_password = user.password
+            try:
+                old_password = User.objects.get(pk=user.pk).password
+            except User.DoesNotExist:
+                old_password = None
+            if new_password != old_password:
+                user.profile.key_verified = False
+                user.profile.save()
 
     def __str__(self):
         return u'%s' % (self.user)

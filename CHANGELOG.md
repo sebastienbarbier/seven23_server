@@ -21,11 +21,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog-emoji/master/CHANGELOG.md
 -->
 
+## [1.4.0] - 2023-06-19
+### 🛠 Improvements
+- Add boolean to **store if private key has been saved** and verified (#91)
+
 ## [1.3.1] - 2023-05-10
 ### 🔒 Security
-- Bump django from 4.1.8 to 4.1.9 (#85)
+- **Bump django** from *4.1.8* to *4.1.9* (#85)
 ### 🐛 Bug Fixes
-- Fix crash settings if debug false (#86)
+- **Fix crash** settings if debug false (#86)
 
 ## [1.3.0] - 2023-05-09
 ### 🛠 Improvements
