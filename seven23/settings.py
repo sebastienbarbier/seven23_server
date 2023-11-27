@@ -61,7 +61,8 @@ APPEND_SLASH = True
 ALLOWED_HOSTS = ['*']
 
 SAAS = os.environ.get('SAAS', 'false').lower() == 'true'
-TRIAL_PERIOD = 30
+# Get env TRIAL_PERIOD and set to integer and default value is 7
+TRIAL_PERIOD = int(os.environ.get('TRIAL_PERIOD', 7))
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 

@@ -22,8 +22,10 @@ See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog
 -->
 
 ## [1.5.0] - 2023-11-DD
+### ✨ Feature
+-  Make **trial period** customizable (#98)
 ### 🔒 Security
-- Migrate to Django 4.2+ (#71)
+- Migrate to **Django 4.2+** (#71)
 
 ## [1.4.0] - 2023-06-19
 ### 🛠 Improvements
