@@ -24,6 +24,7 @@ See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog
 ## [1.5.0] - 2023-11-DD
 ### ✨ Feature
 -  Make **trial period** customizable (#98)
+-  Set **auto_Sync to True** by default (#99)
 ### 🔒 Security
 - Migrate to **Django 4.2+** (#71)
 
