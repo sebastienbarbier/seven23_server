@@ -27,7 +27,6 @@ UserModel = get_user_model()
 
 from seven23.models.currency.models import Currency
 from seven23.models.currency.serializers import CurrencySerializer
-from seven23.models.saas.serializers import ChargeSerializer
 from seven23.models.profile.serializers import DatetimeSerializer, ProfileSerializer
 
 from rest_framework import serializers
@@ -45,13 +44,12 @@ class UserSerializer(WritableNestedModelSerializer):
     favoritesCurrencies = serializers.PrimaryKeyRelatedField(many=True, queryset=Currency.objects.all())
     verified = serializers.SerializerMethodField()
     valid_until = serializers.SerializerMethodField()
-    charges = serializers.SerializerMethodField()
     profile = ProfileSerializer()
 
     class Meta:
         model = UserModel
-        fields = ('pk', 'username', 'first_name', 'email', 'verified', 'favoritesCurrencies', 'profile', 'valid_until', 'charges')
-        read_only_fields = ('email', 'charges')
+        fields = ('pk', 'username', 'first_name', 'email', 'verified', 'favoritesCurrencies', 'profile', 'valid_until')
+        read_only_fields = ['email']
 
     def get_verified(self, obj):
         try:
@@ -61,9 +59,6 @@ class UserSerializer(WritableNestedModelSerializer):
 
     def get_valid_until(self, obj):
         return DatetimeSerializer(obj.profile).data['valid_until']
-
-    def get_charges(self, obj):
-        return [ChargeSerializer(charge).data for charge in obj.charges.all()]
 
 
 class PasswordResetSerializer(serializers.Serializer):
