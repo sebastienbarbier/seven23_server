@@ -49,7 +49,7 @@ class Coupon(models.Model):
             super(Coupon, self).save(*args, **kwargs) # Call the "real" save() method
 
 class Product(models.Model):
-    price = models.IntegerField(_(u'Price'))
+    price = models.FloatField(_(u'Price'))
     currency = models.CharField(_(u'Currency'), max_length=3, default='EUR')
     duration = models.IntegerField(_(u'How many month to add'), help_text=_(u'Per month'), default=12)
     valid_until = models.DateField(_(u'Valid until'), null=True, blank=True)
