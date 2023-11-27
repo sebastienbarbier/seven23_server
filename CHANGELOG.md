@@ -26,6 +26,7 @@ See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog
 -  Make **trial period** customizable (#98)
 -  Set **auto_Sync to True** by default (#99)
 -  Make product **price as Float** (#100)
+-  Implement **subscription** model from stripe for Saas application (#101)
 ### 🔒 Security
 - Migrate to **Django 4.2+** (#71)
 

@@ -15,39 +15,6 @@ def add_months(sourcedate, months):
     day = min(sourcedate.day, calendar.monthrange(year,month)[1])
     return timezone.make_aware(datetime.datetime(year, month, day, sourcedate.hour, sourcedate.minute, sourcedate.second))
 
-class Coupon(models.Model):
-
-    """
-        Discount token on puschase in SAAS mode.
-    """
-    code = models.CharField(_(u'id'),
-                            unique=True,
-                            max_length=128,
-                            help_text=_(u'Ex: FALL25OFF'))
-    name = models.CharField(_(u'Name'), help_text=_(u'Max 128 characters'), max_length=128)
-    percent_off = models.IntegerField(_(u'Percentage off'), help_text=_(u'between 0 and 100'), default=0)
-    valid_until = models.DateField(_(u'Valid until'), null=True, blank=True)
-    max_redemptions = models.IntegerField(_(u'Max redemptions'), null=True, blank=True)
-    affiliate = models.ForeignKey(User,
-                    blank=True,
-                    null=True, on_delete=models.CASCADE)
-    affiliate_percent = models.IntegerField(_(u'Affiliate percent'), help_text=_(u'between 0 and 100'), default=0)
-    enabled = models.BooleanField(_(u'Enabled'), default=True)
-
-    def is_active(self):
-        return self.enabled and \
-            (not self.valid_until or self.valid_until < datetime.datetime.now()) and \
-            (not self.max_redemptions or len(self.charges.all()) < self.max_redemptions)
-
-    def __str__(self):
-        return u'%s' % (self.code)
-
-    def save(self, *args, **kwargs):
-        if (self.affiliate_percent + self.percent_off) > 100:
-            raise Exception('Affiliate percent and percent off can\'t make more than 100% ')
-        else:
-            super(Coupon, self).save(*args, **kwargs) # Call the "real" save() method
-
 class Product(models.Model):
     price = models.FloatField(_(u'Price'))
     currency = models.CharField(_(u'Currency'), max_length=3, default='EUR')
@@ -61,12 +28,6 @@ class Product(models.Model):
 
     def __str__(self):
         return u'%s %s' % (self.price, self.currency)
-
-    def apply_coupon(self, coupon_code):
-        if (not coupon_code):
-            return self.price
-        coupon = Coupon.objects.get(code=coupon_code)
-        return self.price - (self.price * coupon.percent_off / 100)
 
     def delete(self, *args, **kwargs):
         """
@@ -86,7 +47,6 @@ class Charge(models.Model):
     """
 
     TYPE = (
-        ('COUPON', 'Coupon'),
         ('STRIPE', 'Stripe'),
     )
 
@@ -98,7 +58,6 @@ class Charge(models.Model):
     )
     user = models.ForeignKey(User, related_name="charges", on_delete=models.CASCADE)
     product = models.ForeignKey(Product, related_name="charges", on_delete=models.CASCADE)
-    coupon = models.ForeignKey(Coupon, related_name="charges", null=True, blank=True, on_delete=models.CASCADE)
     date = models.DateTimeField(_(u'Date'), auto_now_add=True, editable=False)
     paiment_method = models.CharField(_(u'Paiment method'), max_length=20, choices=TYPE)
     reference_id = models.CharField(_(u'Reference ID'), max_length=128, null=True, blank=True)

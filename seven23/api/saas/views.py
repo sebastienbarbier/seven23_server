@@ -20,33 +20,15 @@ from django.shortcuts import get_object_or_404
 
 from seven23 import settings
 from seven23.models.terms.models import TermsAndConditions
-from seven23.models.saas.models import Charge, Product, Coupon
+from seven23.models.saas.models import Charge, Product
 from seven23.models.saas.serializers import ChargeSerializer
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 @api_view(['GET'])
-def ApiCoupon(request, product_id, coupon_code):
-    res = {}
-
-    product = get_object_or_404(Product, pk=product_id)
-    coupon = get_object_or_404(Coupon, code=coupon_code)
-
-    if not coupon.is_active():
-        return Response(status=status.HTTP_404_NOT_FOUND)
-
-    res['coupon_id'] = coupon.id
-    res['percent_off'] = coupon.percent_off
-    res['price'] = product.price - (product.price * coupon.percent_off / 100)
-
-    j = json.dumps(res, separators=(',', ':'))
-    return HttpResponse(j, content_type='application/json')
-
-@api_view(['GET'])
 def StripeGenerateSession(request):
 
     product = None
-    coupon = None
 
     if request.GET.get("product_id") and request.GET.get("success_url") and request.GET.get("cancel_url"):
         product = Product.objects.get(pk=request.GET.get("product_id"))
@@ -56,25 +38,9 @@ def StripeGenerateSession(request):
     if not product.stripe_product_id:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    try:
-        coupon = Coupon.objects.get(code=request.GET.get('coupon_code'))
-    except:
-        pass
-
-    if coupon and coupon.is_active() and product.apply_coupon(request.GET.get('coupon_code')) == 0:
-        charge = Charge.objects.create(
-            user=request.user,
-            product=product,
-            coupon=coupon,
-            paiment_method='COUPON',
-            status='SUCCESS'
-        )
-        j = json.dumps(ChargeSerializer(charge).data, separators=(',', ':'))
-        return HttpResponse(j, content_type='application/json')
-
     price = stripe.Price.create(
       product=product.stripe_product_id,
-      unit_amount=int(product.apply_coupon(request.GET.get('coupon_code')) * 100),
+      unit_amount=int(product.price * 100),
       active=True,
       currency='eur'
     )
@@ -98,7 +64,6 @@ def StripeGenerateSession(request):
     Charge.objects.create(
         user=request.user,
         product=product,
-        coupon=coupon,
         paiment_method='STRIPE',
         reference_id=session.id,
         stripe_session_id=session.id,
