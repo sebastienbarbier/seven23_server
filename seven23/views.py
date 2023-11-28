@@ -11,7 +11,6 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django import forms
 
-from seven23.models.saas.models import Product
 from seven23.models.terms.models import TermsAndConditions
 from seven23.models.currency.models import Currency
 from seven23.models.users.forms import SuperUserForm

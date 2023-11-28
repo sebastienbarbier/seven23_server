@@ -20,34 +20,35 @@ from django.shortcuts import get_object_or_404
 
 from seven23 import settings
 from seven23.models.terms.models import TermsAndConditions
-from seven23.models.saas.models import Product
+from seven23.models.saas.models import Price
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 @api_view(['GET'])
 def StripeGenerateSession(request):
 
-    product = None
+    price = None
 
-    if request.GET.get("product_id") and request.GET.get("success_url") and request.GET.get("cancel_url"):
-        product = Product.objects.get(pk=request.GET.get("product_id"))
+    if request.GET.get("price_id") and request.GET.get("success_url") and request.GET.get("cancel_url"):
+        price = Price.objects.get(pk=request.GET.get("price_id"))
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    if not product.stripe_product_id:
+    if not price.stripe_price_id:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    price = stripe.Price.create(
-      product=product.stripe_product_id,
-    )
+    stripe_customer_id = None
 
-    stripe_customer_id = request.user.profile.stripe_customer_id
+    if hasattr(request.user, 'stripe'):
+        # if user model has stripe foreign object
+        stripe_customer_id = request.user.stripe.stripe_customer_id
+
     session = stripe.checkout.Session.create(
-      customer=request.user.profile.stripe_customer_id,
+      customer=stripe_customer_id,
       customer_email=request.user.email if not stripe_customer_id else None,
       payment_method_types=['card'],
       line_items=[{
-        'price': price.id,
+        'price': price.stripe_price_id,
         'quantity': 1,
       }],
       mode='subscription',

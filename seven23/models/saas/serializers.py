@@ -2,12 +2,20 @@
     Serializer for Currency module
 """
 from rest_framework import serializers
-from seven23.models.saas.models import Product
+from seven23.models.saas.models import Price, StripeCustomer
 
-class ProductSerializer(serializers.HyperlinkedModelSerializer):
+class StripeCustomerSerializer(serializers.HyperlinkedModelSerializer):
     """
         Serialize Currency model
     """
     class Meta:
-        model = Product
-        fields = ('pk', 'price', 'currency', 'duration', 'is_active')
+        model = StripeCustomer
+        fields = ('pk', 'user', 'stripeCustomerId', 'stripeSubscriptionId')
+
+class PriceSerializer(serializers.HyperlinkedModelSerializer):
+    """
+        Serialize Currency model
+    """
+    class Meta:
+        model = Price
+        fields = ('pk', 'stripe_price_id', 'price', 'currency', 'duration', 'enabled')

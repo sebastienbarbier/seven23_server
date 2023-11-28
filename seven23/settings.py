@@ -65,6 +65,14 @@ SAAS = os.environ.get('SAAS', 'false').lower() == 'true'
 TRIAL_PERIOD = int(os.environ.get('TRIAL_PERIOD', 7))
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+STRIPE_PRODUCT = os.environ.get('STRIPE_PRODUCT')
+
+if SAAS and not STRIPE_PUBLIC_KEY:
+    errors.append("STRIPE_PUBLIC_KEY")
+if SAAS and not STRIPE_SECRET_KEY:
+    errors.append("STRIPE_SECRET_KEY")
+if SAAS and not STRIPE_PRODUCT:
+    errors.append("STRIPE_PRODUCT")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
