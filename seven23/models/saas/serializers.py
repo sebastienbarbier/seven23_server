@@ -10,7 +10,7 @@ class StripeCustomerSerializer(serializers.HyperlinkedModelSerializer):
     """
     class Meta:
         model = StripeCustomer
-        fields = ('pk', 'user', 'stripeCustomerId', 'stripeSubscriptionId')
+        fields = ('pk', 'stripe_customer_id', 'stripe_subscription_id', 'is_active')
 
 class PriceSerializer(serializers.HyperlinkedModelSerializer):
     """

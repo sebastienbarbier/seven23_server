@@ -15,16 +15,8 @@ def add_months(sourcedate, months):
     day = min(sourcedate.day, calendar.monthrange(year,month)[1])
     return timezone.make_aware(datetime.datetime(year, month, day, sourcedate.hour, sourcedate.minute, sourcedate.second))
 
-class StripeCustomer(models.Model):
-    user = models.OneToOneField(to=User, related_name="stripe", on_delete=models.CASCADE)
-    stripe_customer_id = models.CharField(max_length=255)
-    stripe_subscription_id = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.user.username
-
 class Price(models.Model):
-    stripe_price_id = models.CharField(_(u'Stripe price id'), max_length=128, help_text=_(u'Looks like price_*'))
+    stripe_price_id = models.CharField(_(u'Stripe price id'), unique=True, max_length=128, help_text=_(u'Looks like price_*'))
     price = models.FloatField(_(u'Price'))
     currency = models.CharField(_(u'Currency'), max_length=3, default='EUR')
     duration = models.IntegerField(_(u'How many month to add'), help_text=_(u'Per month'), default=12)
@@ -32,3 +24,13 @@ class Price(models.Model):
 
     def __str__(self):
         return u'%s %s %s / %s months' % (self.stripe_price_id, self.price, self.currency, self.duration)
+
+class StripeCustomer(models.Model):
+    user = models.OneToOneField(to=User, related_name="stripe", on_delete=models.CASCADE)
+    stripe_customer_id = models.CharField(max_length=255)
+    stripe_subscription_id = models.CharField(max_length=255)
+    price = models.ForeignKey(Price, related_name="customers", null=True, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.user.username
