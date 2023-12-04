@@ -23,7 +23,7 @@ from django.shortcuts import get_object_or_404
 
 from seven23 import settings
 from seven23.models.terms.models import TermsAndConditions
-from seven23.models.saas.models import Price, StripeCustomer
+from seven23.models.saas.models import Price, StripeSubscription
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -36,7 +36,7 @@ def StripeGenerateSession(request):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
         session = stripe.billing_portal.Session.create(
-            customer=request.user.stripe.stripe_customer_id,
+            customer=request.user.profile.stripe_customer_id,
             return_url=request.GET.get("return_url"),
         )
 
@@ -60,7 +60,7 @@ def StripeGenerateSession(request):
 
         if hasattr(request.user, 'stripe'):
             # if user model has stripe foreign object
-            stripe_customer_id = request.user.stripe.stripe_customer_id
+            stripe_customer_id = request.user.profile.stripe_customer_id
 
         trial_end_date = None
 
@@ -68,7 +68,6 @@ def StripeGenerateSession(request):
             trial_end_date = request.user.profile.valid_until
             # Make sure trial_end_date is at least two days in the future
             # (Stripe requirement)
-            print(trial_end_date, timezone.now() + timezone.timedelta(days=2, hours=1))
             if trial_end_date < timezone.now() + timezone.timedelta(days=2, hours=1):
                 trial_end_date = timezone.now() + timezone.timedelta(days=2, hours=1)
 
@@ -109,61 +108,59 @@ def StripeWebhook(request):
         return HttpResponse(status=400)
 
     # Handle the event
-    if event.type == 'customer.subscription.updated':
+    if event.type == 'customer.subscription.created' or event.type == 'customer.subscription.updated':
+
         subscription = event.data.object
 
-        stripeCustomer = get_object_or_404(StripeCustomer, stripe_subscription_id=subscription.id)
+        stripeCustomer, created = StripeSubscription.objects.get_or_create(
+            subscription_id=subscription.id
+        )
+
+        if subscription.trial_end:
+            stripeCustomer.trial_end = timezone.make_aware(datetime.utcfromtimestamp(subscription.trial_end), timezone=timezone.utc)
+        else:
+            stripeCustomer.trial_end = None
+
+        if subscription.current_period_end:
+            stripeCustomer.current_period_end = timezone.make_aware(datetime.utcfromtimestamp(subscription.current_period_end), timezone=timezone.utc)
+        else:
+            stripeCustomer.current_period_end = None
 
         if subscription.cancel_at:
-            stripeCustomer.is_active = False
-            stripeCustomer.user.profile.valid_until = timezone.make_aware(datetime.utcfromtimestamp(subscription.cancel_at), timezone=timezone.utc)
-            stripeCustomer.user.profile.save()
+            stripeCustomer.cancel_at = timezone.make_aware(datetime.utcfromtimestamp(subscription.cancel_at), timezone=timezone.utc)
         else:
-            stripeCustomer.is_active = True
-            stripeCustomer.user.profile.valid_until = timezone.make_aware(datetime.utcfromtimestamp(subscription.current_period_end), timezone=timezone.utc)
-            stripeCustomer.user.profile.save()
+            stripeCustomer.cancel_at = None
 
-        if subscription.trial_end and timezone.make_aware(datetime.utcfromtimestamp(subscription.trial_end), timezone=timezone.utc) > stripeCustomer.user.profile.valid_until:
-            stripeCustomer.user.profile.valid_until = timezone.make_aware(datetime.utcfromtimestamp(subscription.trial_end), timezone=timezone.utc)
-            stripeCustomer.user.profile.save()
-
+        stripeCustomer.status = subscription.status
         stripeCustomer.price = get_object_or_404(Price, stripe_price_id=subscription.plan.id)
+        stripeCustomer.is_active = True
         stripeCustomer.save()
 
         return Response(status=status.HTTP_200_OK)
     elif event.type == 'customer.subscription.deleted':
         subscription = event.data.object
         try:
-            StripeCustomer.objects.filter(stripe_subscription_id=subscription.id).delete()
+            StripeSubscription.objects.filter(subscription_id=subscription.id).delete()
         except:
             pass
         return Response(status=status.HTTP_200_OK)
     elif event.type == 'checkout.session.completed':
-        # We create a StripeCustomer object to store user's data from Strip
+        # We create a StripeCustomer object to store user's data from Stripe
         checkout = event.data.object
+        user = get_object_or_404(User, pk=checkout.client_reference_id)
+
         # checkout.client_reference_id is 1, 2, 4 ... user.pk
         # checkout.subscription is sub_1OHNiZILP1DzcVdZmb3bqdLr
         # checkout.customer is cus_P5Yqm6ZYR1CHFc
 
-        user = get_object_or_404(User, pk=checkout.client_reference_id)
-        subscription = stripe.Subscription.retrieve(checkout.subscription)
-        price = get_object_or_404(Price, stripe_price_id=subscription.plan.id)
-
-        user.profile.valid_until = timezone.make_aware(datetime.utcfromtimestamp(subscription.current_period_end), timezone=timezone.utc)
-        if subscription.trial_end and timezone.make_aware(datetime.utcfromtimestamp(subscription.trial_end), timezone=timezone.utc) > user.profile.valid_until:
-            user.profile.valid_until = timezone.make_aware(datetime.utcfromtimestamp(subscription.trial_end), timezone=timezone.utc)
-        user.profile.save()
-
-        StripeCustomer.objects.filter(user=user).delete()
-
-        sub = StripeCustomer.objects.create(
-            user=user,
-            stripe_customer_id=checkout.customer,
-            stripe_subscription_id=checkout.subscription,
-            price=price,
-            is_active=True,
+        subscription, created = StripeSubscription.objects.get_or_create(
+            subscription_id=checkout.subscription,
         )
-        sub.save()
+        subscription.user = user
+        subscription.save()
+
+        user.profile.stripe_customer_id = checkout.customer
+        user.profile.save()
 
         return Response(status=status.HTTP_200_OK)
     else:

@@ -13,8 +13,8 @@ from rest_framework.authtoken.models import Token
 
 from seven23 import settings
 from seven23.models.terms.models import TermsAndConditions
-from seven23.models.saas.serializers import PriceSerializer, StripeCustomerSerializer
-from seven23.models.saas.models import Price, StripeCustomer
+from seven23.models.saas.serializers import PriceSerializer, StripeSubscriptionSerializer
+from seven23.models.saas.models import Price
 
 from allauth.account.models import EmailAddress
 
@@ -34,7 +34,7 @@ def api_init(request):
     result['subscription'] = False
 
     if hasattr(request.user, 'stripe'):
-        result['subscription'] = StripeCustomerSerializer(request.user.stripe).data
+        result['subscription'] = StripeSubscriptionSerializer(request.user.stripe).data
         result['subscription_price'] = PriceSerializer(request.user.stripe.price).data
 
     if result['saas']:

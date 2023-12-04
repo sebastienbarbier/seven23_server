@@ -25,12 +25,37 @@ class Price(models.Model):
     def __str__(self):
         return u'%s %s %s / %s months' % (self.stripe_price_id, self.price, self.currency, self.duration)
 
-class StripeCustomer(models.Model):
-    user = models.OneToOneField(to=User, related_name="stripe", on_delete=models.CASCADE)
-    stripe_customer_id = models.CharField(max_length=255)
-    stripe_subscription_id = models.CharField(max_length=255)
+class StripeSubscription(models.Model):
+    subscription_id = models.CharField(max_length=255)
+    user = models.OneToOneField(to=User, related_name="stripe", null=True, on_delete=models.CASCADE)
     price = models.ForeignKey(Price, related_name="customers", null=True, on_delete=models.CASCADE)
+    # Dates
+    trial_end = models.DateTimeField(null=True, blank=True)
+    current_period_end = models.DateTimeField(null=True, blank=True)
+    cancel_at = models.DateTimeField(null=True, blank=True)
+    # Status
+    status = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.user.username
+        return u'%s %s' % (self.user, self.subscription_id)
+
+    def is_trial(self):
+        return self.trial_end == self.current_period_end
+
+    def is_canceled(self):
+        return self.cancel_at is not None
+
+    def save(self, *args, **kwargs):
+        if self.user:
+            valid_until = self.user.profile.valid_until
+            if self.cancel_at:
+                self.is_active = False
+                self.user.profile.valid_until = self.cancel_at
+            elif self.trial_end and self.trial_end > self.current_period_end:
+                self.user.profile.valid_until = self.trial_end
+            elif self.current_period_end:
+                self.user.profile.valid_until = self.current_period_end
+            self.user.profile.save()
+
+        super(StripeSubscription, self).save(*args, **kwargs) # Call the "real" save() method

@@ -37,6 +37,7 @@ class Profile(models.Model):
                                 help_text=_(u'Last call on the API as a registered user'),
                                 auto_now_add=True,
                                 editable=False)
+    stripe_customer_id = models.CharField(max_length=255, blank=True)
     valid_until = models.DateTimeField(_(u'Valid until'),
                                 help_text=_(u'On SASS, this is the validation date'),
                                 default=timezone.now)
