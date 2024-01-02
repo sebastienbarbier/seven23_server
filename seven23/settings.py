@@ -30,8 +30,8 @@ if os.environ.get('SENTRY_DSN'):
         integrations=[DjangoIntegration()]
     )
 
-VERSION = [1, 4, 0]
-API_VERSION = [1, 0, 0]
+VERSION = [1, 5, 0]
+API_VERSION = [1, 1, 0]
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -61,9 +61,18 @@ APPEND_SLASH = True
 ALLOWED_HOSTS = ['*']
 
 SAAS = os.environ.get('SAAS', 'false').lower() == 'true'
-TRIAL_PERIOD = 30
+# Get env TRIAL_PERIOD and set to integer and default value is 7
+TRIAL_PERIOD = int(os.environ.get('TRIAL_PERIOD', 7))
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+STRIPE_PRODUCT = os.environ.get('STRIPE_PRODUCT')
+
+if SAAS and not STRIPE_PUBLIC_KEY:
+    errors.append("STRIPE_PUBLIC_KEY")
+if SAAS and not STRIPE_SECRET_KEY:
+    errors.append("STRIPE_SECRET_KEY")
+if SAAS and not STRIPE_PRODUCT:
+    errors.append("STRIPE_PRODUCT")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 

@@ -52,3 +52,14 @@ MAIL_USE_TLS            = false
 EMAIL_PORT              = 25
 DEBUG                   = false
 ```
+
+## Saas
+
+Deploying as Saas require to connect with Strip and add dedicated env var:
+
+
+```shell
+STRIPE_PUBLIC_KEY = YOUR_PUBLIC_KEY
+STRIPE_SECRET_KEY = YOUR_SECRET_KEY
+STRIPE_PRODUCT    = YOUR_PRODUCT_ID_FOR_SUBSCRIPTION
+```
