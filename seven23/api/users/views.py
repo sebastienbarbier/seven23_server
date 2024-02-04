@@ -10,6 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.authtoken.models import Token
 from allauth.account.models import EmailAddress
 from django.contrib.auth import authenticate
+from django.core.validators import validate_email
 from seven23.models.rest_auth.serializers import UserSerializer
 
 @api_view(['POST'])
@@ -19,7 +20,9 @@ def email(request):
     """
     try:
         email = EmailAddress.objects.get(user=request.user)
-        email.email = request.data['email']
+        new_email = request.data.get("email", "")
+        validate_email(new_email)  # Raises a ValidationError if the email is invalid
+        email.email = new_email
         email.primary = True
         email.save()
 
