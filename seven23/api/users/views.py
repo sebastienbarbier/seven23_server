@@ -36,6 +36,8 @@ def email(request):
 
         request.user.email = request.data['email']
         request.user.save()
+    except:
+        return HttpResponse(status=400)
 
     # Return json format string.
     j = json.dumps(UserSerializer(request.user).data, separators=(',', ':'))

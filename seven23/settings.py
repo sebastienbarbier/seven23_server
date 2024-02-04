@@ -30,7 +30,7 @@ if os.environ.get('SENTRY_DSN'):
         integrations=[DjangoIntegration()]
     )
 
-VERSION = [1, 5, 0]
+VERSION = [1, 5, 1]
 API_VERSION = [1, 1, 0]
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
