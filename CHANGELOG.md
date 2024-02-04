@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog-emoji/master/CHANGELOG.md
 -->
 
-## [1.5.0] - 2023-11-DD
+## [1.5.0] - 2024-01-02
 ### ✨ Feature
 -  Make **trial period** customizable (#98)
 -  Set **auto_Sync to True** by default (#99)
