@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 See for sample https://raw.githubusercontent.com/favoloso/conventional-changelog-emoji/master/CHANGELOG.md
 -->
 
+## [1.5.1] - 2024-02-04
+### 🐛 Bug Fixes
+-  Check **email syntax** on update request (#17)
+
 ## [1.5.0] - 2024-01-02
 ### ✨ Feature
 -  Make **trial period** customizable (#98)
