@@ -45,8 +45,8 @@ if not SECRET_KEY:
     errors.append("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'false').lower() == 'true'
-MAINTENANCE = os.environ.get('MAINTENANCE', 'false').lower() == 'true'
+DEBUG = os.environ.get('DEBUG', 'false').lower() in ('true', '1')
+MAINTENANCE = os.environ.get('MAINTENANCE', 'false').lower() in ('true', '1')
 
 # Allow public account creation
 ALLOW_ACCOUNT_CREATION = \
