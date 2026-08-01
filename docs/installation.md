@@ -16,10 +16,10 @@ git clone git@github.com:sebastienbarbier/seven23_server.git
 
 ## Virtual environment
 
-Create a virtual environment and activate it:
+Requires **Python 3.12**. Create a virtual environment and activate it:
 
 ```shell
-python3 -m venv apps
+python3.12 -m venv apps
 source apps/bin/activate
 ```
 
