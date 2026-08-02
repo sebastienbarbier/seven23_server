@@ -1,41 +1,20 @@
-import datetime
-from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth import get_user_model
 from django.conf import settings
-from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
-# from django.contrib.auth.tokens import default_token_generator
-from django.utils.http import urlsafe_base64_decode as uid_decoder
-from django.utils.translation import gettext_lazy as _
-from django.utils.encoding import force_str
+from django.contrib.auth.forms import PasswordResetForm
+from django.utils.http import int_to_base36
 
-from rest_framework import serializers, exceptions
-from rest_framework.exceptions import ValidationError
+from rest_framework import serializers
 from allauth.account.models import EmailAddress
-
 from allauth.account.forms import default_token_generator
 
-try:
-    from allauth.account import app_settings as allauth_settings
-    from allauth.utils import (email_address_exists,
-                               get_username_max_length)
-    from allauth.account.adapter import get_adapter
-    from allauth.account.utils import setup_user_email
-except ImportError:
-    raise ImportError("allauth needs to be added to INSTALLED_APPS.")
+from drf_writable_nested import WritableNestedModelSerializer
+
+from seven23.models.currency.models import Currency
+from seven23.models.profile.serializers import DatetimeSerializer, ProfileSerializer
 
 # Get the UserModel
 UserModel = get_user_model()
 
-from seven23.models.currency.models import Currency
-from seven23.models.currency.serializers import CurrencySerializer
-from seven23.models.profile.serializers import DatetimeSerializer, ProfileSerializer
-
-from rest_framework import serializers
-
-from drf_writable_nested import WritableNestedModelSerializer
-
-from allauth.account.utils import user_pk_to_url_str
-
-from django.utils.http import base36_to_int, int_to_base36, urlencode
 
 class UserSerializer(WritableNestedModelSerializer):
     """

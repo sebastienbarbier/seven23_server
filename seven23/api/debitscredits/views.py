@@ -23,7 +23,7 @@ class ApiDebitscredits(BulkModelViewSet):
     serializer_class = DebitsCreditsSerializer
     permission_classes = (permissions.IsAuthenticated, CanWriteAccount, IsPaid)
     filter_backends = (DjangoFilterBackend,)
-    filter_class = DebitscreditsFilter
+    filterset_class = DebitscreditsFilter
 
     def get_queryset(self):
         if self.request.user.is_anonymous:

@@ -29,7 +29,7 @@ class ApiChange(BulkModelViewSet):
     serializer_class = ChangeSerializer
     permission_classes = (permissions.IsAuthenticated, CanWriteAccount, IsPaid)
     filter_backends = (DjangoFilterBackend,)
-    filter_class = ChangesFilter
+    filterset_class = ChangesFilter
 
     def get_queryset(self):
         if self.request.user.is_anonymous:

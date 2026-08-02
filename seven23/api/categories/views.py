@@ -26,7 +26,7 @@ class ApiCategories(BulkModelViewSet):
     serializer_class = CategorySerializer
     permission_classes = (permissions.IsAuthenticated, CanWriteAccount, IsPaid)
     filter_backends = (DjangoFilterBackend,)
-    filter_class = CategoriesFilter
+    filterset_class = CategoriesFilter
 
     def get_queryset(self):
 
