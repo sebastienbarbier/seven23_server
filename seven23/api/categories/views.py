@@ -7,7 +7,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework_bulk import BulkModelViewSet
+from seven23.bulk import BulkModelViewSet
 
 from seven23.models.categories.models import Category
 from seven23.models.categories.serializers import CategorySerializer

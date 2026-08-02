@@ -188,7 +188,6 @@ INSTALLED_APPS = (
     'colorfield',
     'sass_processor',
     'compressor',
-    'reset_migrations',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -198,7 +197,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'rest_framework',
     'rest_framework.authtoken', # Token Authentification
-    'drf_yasg',
+    'drf_spectacular',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -239,8 +238,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
-    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 REST_AUTH = {
@@ -253,13 +252,29 @@ ACCOUNT_LOGIN_METHODS = {'username', 'email'}
 ACCOUNT_SIGNUP_FIELDS = ['username*', 'email*', 'password1*', 'password2*']
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
 
-SWAGGER_SETTINGS = {
-    'USE_SESSION_AUTH': False,
-    'SECURITY_DEFINITIONS': {
-        'api_key': {
-            'type': 'apiKey',
-            'in': 'header',
-            'name': 'Authorization'
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Seven23 API',
+    'DESCRIPTION': (
+        '<strong>To use authentication</strong>, click on the authorize button and set value '
+        '<code>Token ADD_YOUR_TOKEN_HERE</code>.<br />Key can be found calling '
+        '<code>/api-token-auth</code> or in-app at the <em>setting server</em> section.'
+    ),
+    'VERSION': 'v1',
+    'CONTACT': {'email': 'seven23@sebastienbarbier.com'},
+    'LICENSE': {'name': 'MIT License'},
+    'SERVE_INCLUDE_SCHEMA': False,
+    'PREPROCESSING_HOOKS': [
+        'seven23.schema.clean_caret_router_paths',
+    ],
+    'SECURITY': [{'TokenAuth': []}],
+    'APPEND_COMPONENTS': {
+        'securitySchemes': {
+            'TokenAuth': {
+                'type': 'apiKey',
+                'in': 'header',
+                'name': 'Authorization',
+                'description': 'Token-based authentication. Example: "Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b"',
+            }
         }
     },
 }

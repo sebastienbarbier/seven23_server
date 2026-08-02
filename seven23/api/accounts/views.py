@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate
 # Default user model may get swapped out of the system and hence.
 from django.contrib.auth.models import User
 from rest_framework import viewsets, generics, permissions
-from rest_framework_bulk import BulkModelViewSet
+from seven23.bulk import BulkModelViewSet
 
 from seven23.api.permissions import IsPaid
 from seven23.models.accounts.models import Account

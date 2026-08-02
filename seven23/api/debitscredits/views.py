@@ -6,7 +6,7 @@ import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework import permissions
-from rest_framework_bulk import BulkModelViewSet
+from seven23.bulk import BulkModelViewSet
 
 from seven23.models.transactions.models import DebitsCredits
 from seven23.models.transactions.serializers import DebitsCreditsSerializer
