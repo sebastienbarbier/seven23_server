@@ -19,7 +19,7 @@ RUN apt-get update && \
  apt-get install -y --no-install-recommends \
    libpq5 libjpeg62-turbo zlib1g libffi8 && \
  apt-get install -y --no-install-recommends \
-   gcc libpq-dev libjpeg-dev zlib1g-dev libffi-dev && \
+   gcc g++ libpq-dev libjpeg-dev zlib1g-dev libffi-dev && \
  rm -rf /var/lib/apt/lists/*
 
 COPY --chown=seven23 pyproject.toml uv.lock ./
@@ -29,7 +29,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 COPY --chown=seven23 . .
 
 RUN apt-get update && \
- apt-get purge -y --auto-remove gcc libpq-dev libjpeg-dev zlib1g-dev libffi-dev && \
+ apt-get purge -y --auto-remove gcc g++ libpq-dev libjpeg-dev zlib1g-dev libffi-dev && \
  rm -rf /var/lib/apt/lists/*
 
 USER seven23
