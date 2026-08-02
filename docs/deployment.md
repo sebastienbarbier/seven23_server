@@ -17,19 +17,13 @@ It will use by default a locally stored sqlite instance. and exposing directly t
 
 ## Command tools
 
-If for any reason you do not want to use our docker instance, code can run directly on any servuer and initialised using command tools direclty. A one command build is available as a Makefile.
+If for any reason you do not want to use our docker instance, code can run directly on any server with [uv](https://docs.astral.sh/uv/). After `uv sync`, initialise the instance with:
 
 ```shell
-make build
-```
-
-This is a set of instruction which can be runned manually:
-
-```shell
-python manage.py test --settings seven23.settings_tests
-python manage.py migrate
-python manage.py collectstatic --no-input
-python manage.py loaddata seven23/models/currency/fixtures/initial_data.json
+uv run python manage.py test --settings seven23.settings_tests
+uv run python manage.py migrate
+uv run python manage.py collectstatic --no-input
+uv run python manage.py loaddata seven23/models/currency/fixtures/initial_data.json
 ```
 
 ## Configuration

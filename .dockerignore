@@ -9,4 +9,8 @@ docker-compose.yml
 .editorconfig
 .travis.yml
 .dockerignore
+.venv
+apps
 *.db
+*.sqlite
+*.sqlite3
