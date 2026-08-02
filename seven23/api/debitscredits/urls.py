@@ -2,11 +2,8 @@
     Define urls for api/v1
 """
 
-from django.urls import include
+from seven23.bulk import BulkRouter
 
-from rest_framework_bulk.routes import BulkRouter
-
-from seven23 import settings
 from seven23.api.debitscredits.views import ApiDebitscredits
 
 ROUTER = BulkRouter(trailing_slash=False)

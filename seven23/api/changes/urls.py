@@ -2,9 +2,7 @@
     Define urls for api/v1
 """
 
-from django.urls import include
-
-from rest_framework_bulk.routes import BulkRouter
+from seven23.bulk import BulkRouter
 
 from seven23.api.changes.views import ApiChange
 

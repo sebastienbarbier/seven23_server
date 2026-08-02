@@ -8,10 +8,7 @@ from seven23.models.currency.models import Currency
 from seven23.models.categories.models import Category
 from seven23.models.transactions.models import DebitsCredits, Change
 
-from rest_framework_bulk import (
-    BulkListSerializer,
-    BulkSerializerMixin,
-)
+from seven23.bulk import BulkListSerializer, BulkSerializerMixin
 
 class DebitsCreditsSerializer(BulkSerializerMixin, serializers.HyperlinkedModelSerializer):
     """

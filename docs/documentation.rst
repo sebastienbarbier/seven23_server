@@ -5,6 +5,6 @@ This official documentation is maintained in GitHub. The docs folder contains th
 
 .. code:: shell
 
-    make docs
+    uv run sphinx-autobuild docs/ docs/_build/html
 
 Output is written at ``docs/_build/html/index.html``.

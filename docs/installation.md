@@ -1,5 +1,3 @@
-(installation)=
-
 # Installation
 
 This section describes how to install and run locally on your machine a developer instance of seven23_server.
@@ -12,31 +10,60 @@ The code repository is hosted as public [github instance](https://github.com/seb
 
 ```shell
 git clone git@github.com:sebastienbarbier/seven23_server.git
+cd seven23_server
 ```
 
-## Virtual environment
+## Install uv
 
-Create a virtual environment and activate it:
+This project is managed with [uv](https://docs.astral.sh/uv/). Requires **Python 3.12**.
+
+Install uv if needed:
 
 ```shell
-python3 -m venv apps
-source apps/bin/activate
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
+
+See the [uv installation docs](https://docs.astral.sh/uv/getting-started/installation/) for alternative methods (Homebrew, pipx, etc.).
 
 ## Dependencies
 
-Install dependencies:
+Create the virtual environment and install locked dependencies (uv will fetch Python 3.12 if needed):
 
 ```shell
-pip install -r requirements.txt
-pip install -r requirements-dev.txt
+uv sync
+```
+
+This reads `pyproject.toml` and `uv.lock`, creates `.venv`, and installs the exact pinned versions.
+
+SCSS is compiled with [Dart Sass](https://sass-lang.com/install/) (libsass is no longer used). Install the `sass` binary on your PATH:
+
+```shell
+# Standalone binary (recommended) — pick the archive for your OS/arch:
+# https://github.com/sass/dart-sass/releases
+# Extract and ensure `sass` is on your PATH.
+
+# macOS with Homebrew (requires the dart-lang/dart tap):
+brew tap dart-lang/dart
+brew install sass/sass/sass
+```
+
+To run any project command without activating the environment manually:
+
+```shell
+uv run python manage.py <command>
+```
+
+Or activate the environment:
+
+```shell
+source .venv/bin/activate
 ```
 
 ## Initialise your database
 
 ```shell
-python manage.py migrate
-python manage.py loaddata seven23/models/currency/fixtures/initial_data.json
+uv run python manage.py migrate
+uv run python manage.py loaddata seven23/models/currency/fixtures/initial_data.json
 ```
 
 :::{note}
@@ -48,7 +75,7 @@ Default settings run a local sqlite database. You can change the database settin
 Django provide a command to create a super user. This user will have access to the admin interface.
 
 ```shell
-python manage.py createsuperuser
+uv run python manage.py createsuperuser
 ```
 
 ## Runserver
@@ -56,7 +83,7 @@ python manage.py createsuperuser
 Run the server in development mode. This will also run hot reload of the code.
 
 ```shell
-python manage.py runserver 0.0.0.0:8000
+uv run python manage.py runserver 0.0.0.0:8000
 ```
 
 You should be able to access the homepage at [http://localhost:8000](http://localhost:8000).

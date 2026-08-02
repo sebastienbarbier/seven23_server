@@ -1,0 +1,43 @@
+[project]
+name = "seven23-server"
+version = "1.6.0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "django==6.0.7",
+    "djangorestframework==3.17.1",
+    "django-filter==26.1",
+    "django-cors-headers==4.9.0",
+    "django-allauth==65.18.0",
+    "dj-rest-auth==7.2.0",
+    "drf-spectacular==0.30.0",
+    "drf-writable-nested==0.7.2",
+    "django-mptt==0.18.0",
+    "django-colorfield==0.14.0",
+    "django-sass-processor==1.4.2",
+    "django-sass-processor-dart-sass==0.1.0",
+    "django-compressor==4.6.0",
+    "django-storages==1.14.6",
+    "boto3==1.43.62",
+    "dj-database-url==3.1.2",
+    "gunicorn==26.0.0",
+    "psycopg[binary]==3.3.4",
+    "python-dotenv==1.2.2",
+    "sentry-sdk==2.66.1",
+    "stripe==15.4.0",
+    "whitenoise==6.12.0",
+    "markdown2==2.5.5",
+]
+
+[dependency-groups]
+dev = [
+    "sphinx==9.1.0",
+    "sphinx-rtd-theme==3.1.0",
+    "sphinx-autobuild==2025.8.25",
+    "myst-parser==5.1.0",
+    "pylint==4.0.6",
+    "pylint-django==2.8.0",
+]
+
+[tool.uv]
+package = false
+default-groups = ["dev"]

@@ -14,16 +14,37 @@ Fully manual budget app to track your expenses. Completely opensource, with priv
 Seven23 server instance is powered by [django](https://www.djangoproject.com/) and [django-rest-framework](https://www.django-rest-framework.org/) to manage and expose a restful API.
 **It does not include a user interface**, which is managed as a totally independant project like [seven23_webapp](https://github.com/sebastienbarbier/seven23_webapp).
 
+## Quick start
+
+Requires [uv](https://docs.astral.sh/uv/), **Python 3.12**, and [Dart Sass](https://sass-lang.com/install/) on your PATH (for SCSS; replaces libsass).
+
+Install uv if needed:
+
+```shell
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Install Dart Sass from the [standalone releases](https://github.com/sass/dart-sass/releases) (or see the [installation docs](https://seven23-server.readthedocs.io/en/latest/installation.html)).
+
+See the [uv installation docs](https://docs.astral.sh/uv/getting-started/installation/) for alternative methods (Homebrew, pipx, etc.).
+
+```shell
+uv sync
+uv run python manage.py migrate
+uv run python manage.py loaddata seven23/models/currency/fixtures/initial_data.json
+uv run python manage.py runserver 0.0.0.0:8000
+```
+
+See the [installation docs](https://seven23-server.readthedocs.io/en/latest/installation.html) for details.
+
 ## Commands
 
 ```shell
-make serve
-make build
-make test
-make docs
-make clean
-make docker-build
-make docker-run
-make docker-shell
-make docker-stop
+uv sync
+uv run python manage.py runserver 0.0.0.0:8000
+uv run python manage.py test seven23 --settings seven23.settings_tests --parallel auto
+uv run python manage.py test seven23.tests.contracts --settings seven23.settings_tests --parallel auto
+uv run sphinx-autobuild docs/ docs/_build/html
+docker build --pull -t seven23 .
+docker run -p 8000:8000 --name seven23 -ti seven23
 ```

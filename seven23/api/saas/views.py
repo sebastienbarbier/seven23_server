@@ -6,7 +6,7 @@ import json
 import os
 import markdown2
 from django.utils import timezone
-from datetime import datetime
+from datetime import datetime, timedelta, timezone as dt_timezone
 import urllib.parse
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -26,6 +26,9 @@ from seven23.models.terms.models import TermsAndConditions
 from seven23.models.saas.models import Price, StripeSubscription
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
+
+def _from_timestamp(value):
+    return datetime.fromtimestamp(value, tz=dt_timezone.utc)
 
 @api_view(['GET'])
 def StripeGenerateSession(request):
@@ -68,8 +71,8 @@ def StripeGenerateSession(request):
             trial_end_date = request.user.profile.valid_until
             # Make sure trial_end_date is at least two days in the future
             # (Stripe requirement)
-            if trial_end_date < timezone.now() + timezone.timedelta(days=2, hours=1):
-                trial_end_date = timezone.now() + timezone.timedelta(days=2, hours=1)
+            if trial_end_date < timezone.now() + timedelta(days=2, hours=1):
+                trial_end_date = timezone.now() + timedelta(days=2, hours=1)
 
         session = stripe.checkout.Session.create(
           customer=stripe_customer_id,
@@ -117,17 +120,17 @@ def StripeWebhook(request):
         )
 
         if subscription.trial_end:
-            stripeCustomer.trial_end = timezone.make_aware(datetime.utcfromtimestamp(subscription.trial_end), timezone=timezone.utc)
+            stripeCustomer.trial_end = _from_timestamp(subscription.trial_end)
         else:
             stripeCustomer.trial_end = None
 
         if subscription.current_period_end:
-            stripeCustomer.current_period_end = timezone.make_aware(datetime.utcfromtimestamp(subscription.current_period_end), timezone=timezone.utc)
+            stripeCustomer.current_period_end = _from_timestamp(subscription.current_period_end)
         else:
             stripeCustomer.current_period_end = None
 
         if subscription.cancel_at:
-            stripeCustomer.cancel_at = timezone.make_aware(datetime.utcfromtimestamp(subscription.cancel_at), timezone=timezone.utc)
+            stripeCustomer.cancel_at = _from_timestamp(subscription.cancel_at)
         else:
             stripeCustomer.cancel_at = None
 

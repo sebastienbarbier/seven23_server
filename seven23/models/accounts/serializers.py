@@ -7,10 +7,7 @@ from rest_framework import serializers
 from seven23.models.accounts.models import Account, AccountGuests
 from seven23.models.currency.models import Currency
 
-from rest_framework_bulk import (
-    BulkListSerializer,
-    BulkSerializerMixin
-)
+from seven23.bulk import BulkListSerializer, BulkSerializerMixin
 
 class AccountSerializer(BulkSerializerMixin, serializers.HyperlinkedModelSerializer):
     """

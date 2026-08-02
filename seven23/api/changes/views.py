@@ -6,7 +6,7 @@ import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions
 from rest_framework.decorators import permission_classes
-from rest_framework_bulk import BulkModelViewSet
+from seven23.bulk import BulkModelViewSet
 
 from seven23.models.transactions.models import Change
 from seven23.models.transactions.serializers import ChangeSerializer
@@ -29,7 +29,7 @@ class ApiChange(BulkModelViewSet):
     serializer_class = ChangeSerializer
     permission_classes = (permissions.IsAuthenticated, CanWriteAccount, IsPaid)
     filter_backends = (DjangoFilterBackend,)
-    filter_class = ChangesFilter
+    filterset_class = ChangesFilter
 
     def get_queryset(self):
         if self.request.user.is_anonymous:

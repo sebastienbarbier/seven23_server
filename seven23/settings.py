@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import tomllib
 import dj_database_url
 
 from django.core.management.utils import get_random_secret_key
@@ -30,10 +31,12 @@ if os.environ.get('SENTRY_DSN'):
         integrations=[DjangoIntegration()]
     )
 
-VERSION = [1, 5, 1]
-API_VERSION = [1, 1, 0]
-
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+with open(os.path.join(BASE_DIR, 'pyproject.toml'), 'rb') as pyproject:
+    VERSION = [int(part) for part in tomllib.load(pyproject)['project']['version'].split('.')]
+
+API_VERSION = [1, 1, 0]
 
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
@@ -45,8 +48,8 @@ if not SECRET_KEY:
     errors.append("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'false').lower() == 'true'
-MAINTENANCE = os.environ.get('MAINTENANCE', 'false').lower() == 'true'
+DEBUG = os.environ.get('DEBUG', 'false').lower() in ('true', '1')
+MAINTENANCE = os.environ.get('MAINTENANCE', 'false').lower() in ('true', '1')
 
 # Allow public account creation
 ALLOW_ACCOUNT_CREATION = \
@@ -111,10 +114,24 @@ if os.environ.get('STORAGE', 'false').lower() == 's3':
     # s3 static settings
     AWS_LOCATION = 'static'
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        },
+    }
     STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
 elif not DEBUG or os.environ.get('STORAGE', '').lower() == 'whitenoise':
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        },
+    }
     MIDDLEWARE = MIDDLEWARE + ('whitenoise.middleware.WhiteNoiseMiddleware',)
 
 STATICFILES_DIRS = (
@@ -142,6 +159,9 @@ STATICFILES_FINDERS = [
     'sass_processor.finders.CssFinder',
 ]
 
+# Dart Sass supports expanded|compressed (libsass's "nested" is not valid).
+SASS_OUTPUT_STYLE = 'compressed'
+
 
 TEMPLATES = [
     {
@@ -167,7 +187,7 @@ INSTALLED_APPS = (
     'mptt',
     'colorfield',
     'sass_processor',
-    'reset_migrations',
+    'compressor',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -177,7 +197,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'rest_framework',
     'rest_framework.authtoken', # Token Authentification
-    'drf_yasg',
+    'drf_spectacular',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -204,6 +224,7 @@ MIDDLEWARE = MIDDLEWARE + (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'seven23.middleware.maintenance_middleware',
     'seven23.middleware.active_user_middleware',
 )
@@ -217,8 +238,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
-    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 REST_AUTH = {
@@ -227,17 +248,33 @@ REST_AUTH = {
     'PASSWORD_RESET_SERIALIZER': 'seven23.models.rest_auth.serializers.PasswordResetSerializer',
 }
 
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
-ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_LOGIN_METHODS = {'username', 'email'}
+ACCOUNT_SIGNUP_FIELDS = ['username*', 'email*', 'password1*', 'password2*']
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
 
-SWAGGER_SETTINGS = {
-    'USE_SESSION_AUTH': False,
-    'SECURITY_DEFINITIONS': {
-        'api_key': {
-            'type': 'apiKey',
-            'in': 'header',
-            'name': 'Authorization'
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Seven23 API',
+    'DESCRIPTION': (
+        '<strong>To use authentication</strong>, click on the authorize button and set value '
+        '<code>Token ADD_YOUR_TOKEN_HERE</code>.<br />Key can be found calling '
+        '<code>/api-token-auth</code> or in-app at the <em>setting server</em> section.'
+    ),
+    'VERSION': 'v1',
+    'CONTACT': {'email': 'seven23@sebastienbarbier.com'},
+    'LICENSE': {'name': 'MIT License'},
+    'SERVE_INCLUDE_SCHEMA': False,
+    'PREPROCESSING_HOOKS': [
+        'seven23.schema.clean_caret_router_paths',
+    ],
+    'SECURITY': [{'TokenAuth': []}],
+    'APPEND_COMPONENTS': {
+        'securitySchemes': {
+            'TokenAuth': {
+                'type': 'apiKey',
+                'in': 'header',
+                'name': 'Authorization',
+                'description': 'Token-based authentication. Example: "Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b"',
+            }
         }
     },
 }
@@ -248,7 +285,7 @@ ROOT_URLCONF = 'seven23.urls'
 
 WSGI_APPLICATION = 'seven23.wsgi.application'
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL')
 DEFAULT_FROM_EMAIL = CONTACT_EMAIL
@@ -273,7 +310,5 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
-USE_L10N = True
 
 USE_TZ = True

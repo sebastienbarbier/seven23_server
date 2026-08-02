@@ -5,10 +5,7 @@ from rest_framework import serializers
 from seven23.models.accounts.models import Account
 from seven23.models.categories.models import Category
 
-from rest_framework_bulk import (
-    BulkListSerializer,
-    BulkSerializerMixin,
-)
+from seven23.bulk import BulkListSerializer, BulkSerializerMixin
 
 class CategorySerializer(BulkSerializerMixin, serializers.HyperlinkedModelSerializer):
     """

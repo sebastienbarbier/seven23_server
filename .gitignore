@@ -7,6 +7,7 @@ docs/_static
 docs/_templates
 collectstatic
 apps
+.venv
 .env
 .clever.json
 .DS_Store
@@ -15,3 +16,7 @@ seven23_server.sublime-workspace
 *.db
 *.sqlite
 *.sqlite3
+
+# CSS generated next to SCSS by django-sass-processor-dart-sass
+seven23/static/css/*.css
+seven23/static/css/*.css.map

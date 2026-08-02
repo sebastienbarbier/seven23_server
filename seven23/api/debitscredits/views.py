@@ -6,7 +6,7 @@ import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework import permissions
-from rest_framework_bulk import BulkModelViewSet
+from seven23.bulk import BulkModelViewSet
 
 from seven23.models.transactions.models import DebitsCredits
 from seven23.models.transactions.serializers import DebitsCreditsSerializer
@@ -23,7 +23,7 @@ class ApiDebitscredits(BulkModelViewSet):
     serializer_class = DebitsCreditsSerializer
     permission_classes = (permissions.IsAuthenticated, CanWriteAccount, IsPaid)
     filter_backends = (DjangoFilterBackend,)
-    filter_class = DebitscreditsFilter
+    filterset_class = DebitscreditsFilter
 
     def get_queryset(self):
         if self.request.user.is_anonymous:
