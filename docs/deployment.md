@@ -20,7 +20,7 @@ It will use by default a locally stored sqlite instance. and exposing directly t
 If for any reason you do not want to use our docker instance, code can run directly on any server with [uv](https://docs.astral.sh/uv/). After `uv sync`, initialise the instance with:
 
 ```shell
-uv run python manage.py test --settings seven23.settings_tests
+uv run python manage.py test seven23 --settings seven23.settings_tests --parallel auto
 uv run python manage.py migrate
 uv run python manage.py collectstatic --no-input
 uv run python manage.py loaddata seven23/models/currency/fixtures/initial_data.json

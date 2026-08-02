@@ -30,4 +30,4 @@ jobs:
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
         ALLOW_ACCOUNT_CREATION: True
-      run: uv run python manage.py test --settings seven23.settings_tests
+      run: uv run python manage.py test seven23 --settings seven23.settings_tests --parallel auto

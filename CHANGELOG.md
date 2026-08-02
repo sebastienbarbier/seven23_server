@@ -7,22 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### ✨ Feature
+
+- Add API **JSON contract tests** under `seven23/tests/contracts/v1/`, tied to `API_VERSION`
+
 ### 🛠 Improvements
 
-- Replace **libsass** with Dart Sass via `django-sass-processor-dart-sass` (libsass is EOL and required a heavy C++ toolchain)
-- Add **django-compressor** so offline `compilescss` works as documented by django-sass-processor
-- Replace abandoned **djangorestframework-bulk** with an in-repo compatible bulk module (`seven23.bulk`)
-- Migrate PostgreSQL driver from **psycopg2-binary** to **psycopg 3** (`psycopg[binary]`)
-- Replace **drf-yasg** with **drf-spectacular** for OpenAPI 3 docs (`/swagger/`, `/redoc/`)
-- Remove unused **NamespaceVersioning** setting that prevented OpenAPI path generation
-
-### 🗑 Removed
-
-- Remove unused **django-reset-migrations** dependency
+- Run the test suite with ``--parallel auto`` (local docs and GitHub Actions CI)
 
 <!---
 ## [Unreleased] - yyyy-mm-dd
-
+    10|
 ### ✨ Feature – for new features
 ### 🛠 Improvements – for general improvements
 ### 🚨 Changed – for changes in existing functionality

@@ -42,7 +42,8 @@ See the [installation docs](https://seven23-server.readthedocs.io/en/latest/inst
 ```shell
 uv sync
 uv run python manage.py runserver 0.0.0.0:8000
-uv run python manage.py test --settings seven23.settings_tests
+uv run python manage.py test seven23 --settings seven23.settings_tests --parallel auto
+uv run python manage.py test seven23.tests.contracts --settings seven23.settings_tests --parallel auto
 uv run sphinx-autobuild docs/ docs/_build/html
 docker build --pull -t seven23 .
 docker run -p 8000:8000 --name seven23 -ti seven23
