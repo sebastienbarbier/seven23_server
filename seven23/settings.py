@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import tomllib
 import dj_database_url
 
 from django.core.management.utils import get_random_secret_key
@@ -30,10 +31,12 @@ if os.environ.get('SENTRY_DSN'):
         integrations=[DjangoIntegration()]
     )
 
-VERSION = [1, 6, 0]
-API_VERSION = [1, 1, 0]
-
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+with open(os.path.join(BASE_DIR, 'pyproject.toml'), 'rb') as pyproject:
+    VERSION = [int(part) for part in tomllib.load(pyproject)['project']['version'].split('.')]
+
+API_VERSION = [1, 1, 0]
 
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
