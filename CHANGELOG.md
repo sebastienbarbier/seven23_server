@@ -5,7 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
- <!---
+## [Unreleased]
+
+### 🛠 Improvements
+
+- Replace **libsass** with Dart Sass via `django-sass-processor-dart-sass` (libsass is EOL and required a heavy C++ toolchain)
+- Add **django-compressor** so offline `compilescss` works as documented by django-sass-processor
+
+<!---
 ## [Unreleased] - yyyy-mm-dd
 
 ### ✨ Feature – for new features

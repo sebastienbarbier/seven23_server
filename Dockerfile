@@ -13,24 +13,28 @@ VOLUME /app/collectstatic
 ENV UV_COMPILE_BYTECODE=1 \
     UV_LINK_MODE=copy \
     UV_PROJECT_ENVIRONMENT=/opt/venv \
-    PATH="/opt/venv/bin:$PATH"
+    PATH="/opt/dart-sass:/opt/venv/bin:$PATH"
 
-RUN apt-get update && \
- apt-get install -y --no-install-recommends \
-   libpq5 libjpeg62-turbo zlib1g libffi8 && \
- apt-get install -y --no-install-recommends \
-   gcc g++ libpq-dev libjpeg-dev zlib1g-dev libffi-dev && \
- rm -rf /var/lib/apt/lists/*
+# Dart Sass standalone binary (replaces heavy libsass / C++ toolchain).
+ARG TARGETARCH
+ARG SASS_VERSION=1.102.0
+RUN case "$TARGETARCH" in \
+      amd64) SASS_ARCH=x64 ;; \
+      arm64) SASS_ARCH=arm64 ;; \
+      *) echo "Unsupported arch: $TARGETARCH" >&2; exit 1 ;; \
+    esac \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends ca-certificates curl libpq5 \
+ && curl -fsSL "https://github.com/sass/dart-sass/releases/download/${SASS_VERSION}/dart-sass-${SASS_VERSION}-linux-${SASS_ARCH}.tar.gz" \
+    | tar -xz -C /opt \
+ && apt-get purge -y --auto-remove curl \
+ && rm -rf /var/lib/apt/lists/*
 
 COPY --chown=seven23 pyproject.toml uv.lock ./
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev --no-install-project
 
 COPY --chown=seven23 . .
-
-RUN apt-get update && \
- apt-get purge -y --auto-remove gcc g++ libpq-dev libjpeg-dev zlib1g-dev libffi-dev && \
- rm -rf /var/lib/apt/lists/*
 
 USER seven23
 EXPOSE 8000

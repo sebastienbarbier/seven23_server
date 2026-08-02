@@ -159,6 +159,9 @@ STATICFILES_FINDERS = [
     'sass_processor.finders.CssFinder',
 ]
 
+# Dart Sass supports expanded|compressed (libsass's "nested" is not valid).
+SASS_OUTPUT_STYLE = 'compressed'
+
 
 TEMPLATES = [
     {
@@ -184,6 +187,7 @@ INSTALLED_APPS = (
     'mptt',
     'colorfield',
     'sass_processor',
+    'compressor',
     'reset_migrations',
     'django.contrib.admin',
     'django.contrib.auth',

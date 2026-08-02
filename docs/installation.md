@@ -35,6 +35,18 @@ uv sync
 
 This reads `pyproject.toml` and `uv.lock`, creates `.venv`, and installs the exact pinned versions.
 
+SCSS is compiled with [Dart Sass](https://sass-lang.com/install/) (libsass is no longer used). Install the `sass` binary on your PATH:
+
+```shell
+# Standalone binary (recommended) — pick the archive for your OS/arch:
+# https://github.com/sass/dart-sass/releases
+# Extract and ensure `sass` is on your PATH.
+
+# macOS with Homebrew (requires the dart-lang/dart tap):
+brew tap dart-lang/dart
+brew install sass/sass/sass
+```
+
 To run any project command without activating the environment manually:
 
 ```shell

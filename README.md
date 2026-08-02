@@ -16,13 +16,15 @@ Seven23 server instance is powered by [django](https://www.djangoproject.com/) a
 
 ## Quick start
 
-Requires [uv](https://docs.astral.sh/uv/) and **Python 3.12**.
+Requires [uv](https://docs.astral.sh/uv/), **Python 3.12**, and [Dart Sass](https://sass-lang.com/install/) on your PATH (for SCSS; replaces libsass).
 
 Install uv if needed:
 
 ```shell
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
+
+Install Dart Sass from the [standalone releases](https://github.com/sass/dart-sass/releases) (or see the [installation docs](https://seven23-server.readthedocs.io/en/latest/installation.html)).
 
 See the [uv installation docs](https://docs.astral.sh/uv/getting-started/installation/) for alternative methods (Homebrew, pipx, etc.).
 
